@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         files: [
           {
             src: [
-              'src/lib/lodash/dist/lodash.min.js',
+              'src/lib/lodash/**lodash.min.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
         files: [
           {
             src: [
-              'src/lib/lodash/dist/lodash.js',
+              'src/lib/lodash/**lodash.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
