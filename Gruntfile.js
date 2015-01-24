@@ -81,7 +81,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           compress: true,
-          wrap: true
+          wrap: false
         },
         files: [
           {
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
           compress: false,
           beautify: true,
           mangle: false,
-          wrap: true
+          wrap: false
         },
         files: [
           {
