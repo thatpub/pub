@@ -351,9 +351,14 @@
         method: 'POST'
       }
       var newReq = http.request(opts, function(resp) {
+<<<<<<< HEAD
         /*fs.appendFileSync(__dirname + "/query.txt", JSON.stringify(qBody(req.body.t, querySetup(req.body.t))) + "\n\n", {encoding: 'utf8'});
         fs.appendFileSync(__dirname + "/query.txt", JSON.stringify(pBody(req.body.t, querySetup(req.body.t))) + "\n\n", {encoding: 'utf8'});*/
         client.search( qBody(query, querySetup(query)), function ( error, content ) {
+=======
+
+        client.search( qBody(req.body.t, querySetup(req.body.t)), function ( error, content ) {
+>>>>>>> dbb0bfc42b8714772eb4e6ba77783ac7cfa4ff03
           if ( error ) {
             console.error(error);
             res.status(400).json(error);
