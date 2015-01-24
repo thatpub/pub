@@ -333,10 +333,6 @@
       }
       var newReq = http.request(opts, function(resp) {
 
-        if (argv[3] === 'dev') {
-          fs.appendFileSync(__dirname + "/query.txt", JSON.stringify(qBody(req.body.t, querySetup(req.body.t))) + "\n\n", {encoding: 'utf8'});
-          fs.appendFileSync(__dirname + "/query.txt", JSON.stringify(pBody(req.body.t, querySetup(req.body.t))) + "\n\n", {encoding: 'utf8'});
-        }
         client.search( qBody(req.body.t, querySetup(req.body.t)), function ( error, content ) {
           if ( error ) {
             console.error(error);
