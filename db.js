@@ -335,15 +335,15 @@
     }
   });
 
-  app.post('/content/search', function ( req, res ) {
-        var term = req.query.q || null;
+  app.post('/content/search/:q', function ( req, res ) {
+        var term = ( typeof req.params.q === 'string' ) ? req.params.q : null;
         var query = (term) ? {
           term: term,
           pubName: term.toPubName().extract,
           noPubName: term.toPubName().remove
         } : req.body.t || null;
     /* new search initiated, kill the old one */
-    if ( term || req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
+    if ( term && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
       var opts = {
         hostname: 'reset.that.pub',
         port: 80,
