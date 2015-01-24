@@ -1,20 +1,10 @@
 ;(function( undefined ) {
   'use strict';
-  /*String.prototype.toCamelCase = function() {
-    return this.toLowerCase().replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
-  };*/
   String.prototype.toTitle = function () {
     return this.replace(/(?:[^a-zA-Z<\/0-9]+?|^)(\w\S*)/gmi, function( full, txt ) {
       return ( full.charAt(0) === ' ' ) ? ' ' + txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() : txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   };
-
-  String.prototype.toSentence = function () {
-    return this.replace(/(?:\W?)\w\S*/g, function( full, txt ) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
-
   String.prototype.toPubName = function() {
     var removed = '',
         count = 0,
