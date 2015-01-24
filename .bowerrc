@@ -1,0 +1,5 @@
+{
+  "directory": "src/lib/",
+  "analytics": true,
+  "timeout": 90000
+}

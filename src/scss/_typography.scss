@@ -1,0 +1,32 @@
+h1, h2, h3, h4, h5, h6, label {
+  color: $heading-color;
+  cursor: default;
+}
+.page-title {
+  font: 1.75rem/1.125 Museo Cyrl, Quando, Quicksand, Georgia, Trebuchet MS, serif;
+  margin: 0 auto;
+  text-shadow: 0 1px 0 $text-color;
+  position: relative;
+  max-width: 18rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  a {
+    color: $heading-color;
+  }
+  .overlay.search > & div {
+    text-align: center;
+  }
+}
+#summary {
+  font-weight: 200;
+  text-align: center;
+  #term {
+    //font-size: 1.5rem;
+    color: $black;
+  }
+  #total {
+    color: $text-color;
+    font-weight: bold;
+  }
+}

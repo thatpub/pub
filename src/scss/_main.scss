@@ -1,0 +1,182 @@
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+button,
+select,
+input,
+textarea {
+  color: #959595;
+  outline: 0;
+  font-weight: 300;
+}
+
+html {
+  font-size: 100%;
+  height: 100%;
+}
+
+body {
+  line-height: 1.6;
+  font-family: $font;
+}
+
+/* .ie9 body,
+.ie8 body,
+.ie7 body {
+} */
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+q {
+  position: relative;
+  quotes: "“" "”" "‘" "’";
+}
+
+q:before {
+  content: open-quote;
+}
+
+q:after {
+  content: close-quote;
+}
+
+.text q:before {
+  position: absolute;
+  right: 100%;
+}
+
+.text q:after {
+  position: absolute;
+  left: 100%;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.browsehappy {
+  margin: 0.2rem 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2rem 0;
+}
+
+
+/* ===== Initializr Styles ==================================================
+   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
+   ========================================================================== */
+
+#page {
+  background-color: $white;
+  padding: 4rem 2rem 7rem;
+}
+
+/* body.cleek {
+  background: #26A65B;
+  color: $white;
+  #page {
+    background-color: transparent;
+    .related li a {
+      color: #FFFFC0;
+    }
+    .result{
+      color: #D9F7C5 !important;
+    }
+    .doc-name {
+      &:hover {
+        border-bottom-color: #C8F7C5;
+      }
+      color: #c3f1af;//#87D37C;
+      .title {
+        color: inherit;
+      }
+    }
+    .details {
+      color: #D0F7C5;
+    }
+    q:after, q:before {
+      color: $white;
+    }
+    em {
+      color: $action-color; //#8BADE1; //#ade18b;
+    }
+    hr {
+      background-image: -webkit-linear-gradient(left, rgba(255,255,255,.05), rgba(255,255,255,0.25), rgba(255,255,255,.05));
+      background-image:    -moz-linear-gradient(left, rgba(255,255,255,.05), rgba(255,255,255,0.25), rgba(255,255,255,.05));
+      background-image:     -ms-linear-gradient(left, rgba(255,255,255,.05), rgba(255,255,255,0.25), rgba(255,255,255,.05));
+      background-image:      -o-linear-gradient(left, rgba(255,255,255,.05), rgba(255,255,255,0.25), rgba(255,255,255,.05));
+    }
+  }
+} */
+
+a {
+  color: #1BA39C;//#828282;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+}
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    width: 90%;
+    margin: 0 5%;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+
+  .wrapper {
+    width: 1026px; /* 1140px - 10% for margins */
+    margin: 0 auto;
+  }
+
+  .overlay.wrapper {
+    width: 100%;
+    margin: 0;
+  }
+}

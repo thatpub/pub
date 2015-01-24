@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--[if IE 8]>     <html class="no-js ie8" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
+<!--[if IE 9]>     <html class="no-js ie9" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" itemscope itemtype="http://schema.org/SearchAction"> <!--<![endif]-->
+  <head>
+    <!--[if gt IE 9]><!--><meta http-equiv="content-type" content="text/html; charset=UTF-8"><!--<![endif]-->
+    <!--[if IE]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
+
+    <title>thatPub</title>
+
+    <meta name="keywords" content="air force,publications,forms,search,policy,regulations,laws,rules,dod,government">
+    <meta name="description" content="I'll find you something you didn't even know you needed.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="author" content="http://that.pub/humans.txt">
+
+    <link rel="shortcut icon" href="http://that.pub/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="http://that.pub/apple-touch-icon.png">
+
+    <!-- Facebook Metadata /-->
+    <meta property="fb:page_id" content="1" />
+    <meta property="og:image" content="http://that.pub/img/logo.png" />
+    <meta property="og:description" content="I'll find you something you didn't even know you needed."/>
+    <meta property="og:title" content="thatPub"/>
+
+    <!-- Google+ Metadata /-->
+    <meta itemprop="name" content="thatPub">
+    <meta itemprop="description" content="I find things you weren't even looking for.">
+    <meta itemprop="image" content="http://that.pub/img/logo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@thatPub">
+    <meta name="twitter:creator" content="@DeryckHenson">
+    <meta name="twitter:title" content="thatPub">
+    <meta name="twitter:description" content="I'll find you something you didn't even know you needed.">
+    <meta name="twitter:image:src" content="http://that.pub/img/logo.png">
+
+    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+
+  </head>
+  <body>
+
+    <!--[if gt IE 9]><!-->
+
+    <script type="text/template" id="related-template">
+      <li class="doc<%= gravitas %>">
+        <a data-score="<%= score %>" title="Score: <%= score %>" href="#<%= key %>" download="" target="_blank">
+          <%= key %>
+        </a>
+      </li>
+    </script>
+
+    <script type="text/template" id="result-template">
+      <article class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" title="<%= score %>">
+        <% if ( type === " content" ) { %>
+        <p class="details">
+          <% if ( details[0] && details[0].chapter && details[0].chapterTitle ) { %>
+            <span class="chapter">Chapter <%= details[0].chapter %> - <span class="title"><%= details[0].chapterTitle %></span></span><br/>
+          <% } if ( details[1] && details[1].section && details[1].sectionTitle ) { %>
+            <span class="section">Section <%= details[1].section %> - <span class="title"><%= details[1].sectionTitle %></span></span><br/>
+          <% } %>
+        </p>
+        <div class="number"><%= sub %></div>
+        <section class="text clearfix">
+          <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
+          <a href="#" class="reveal">more...</a>
+        </section>
+        <% } %>
+        <div class="meta">
+          <p class="info" title="<%= date %>">
+            <a class="doc-name" href="<%= url %>" download="<%= pub.toLowerCase() %>.pdf" target="_blank">
+              <%= pub/*.replace(/([A-Za-z])([0-9])/g, '$1 $2')*/ %><br/><span class="title"><%= title %></span>
+            </a>
+          </p>
+        </div>
+      </article>
+      <hr/>
+    </script>
+
+    <!--<![endif]-->
+
+    <!--[if lte IE 9]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="wrapper" id="page">
+      <!-- <h3 class="page-title">
+        <a href="/">thatPub</a>
+      </h3> -->
+      <div class="hidden" id="summary">
+        <h2 id="term"></h2>
+        <h3>produced <span id="total"></span> results</h3>
+      </div>
+      <hr/>
+
+      <button class="more meta hidden" id="more-meta">fetch »</button>
+      <div id="count"></div>
+      <div id="results"></div>
+      <button class="more content" id="more-content">more, please</button>
+      <!--
+          This loading animation courtesy of Hugo Wiledal
+          Author profile (codepen): http://codepen.io/wiledal/
+          Source: http://codepen.io/wiledal/pen/EcGnI
+              Thanks bro!
+        -->
+      <div id="loading">
+        <div class="spinner">
+          <div class="blob top"></div>
+          <div class="blob bottom"></div>
+          <div class="blob left"></div>
+          <div class="blob move-blob"></div>
+        </div>
+        <a id="no-results" href="/index.html">No results buddy.  Try it again.</a>
+      </div>
+    </div>
+    <div class="overlay search wrapper" id="search-wrap">
+      <a href="#" id="search-restore"></a>
+      <div id="search">
+        <header class="page-title">
+          <h1>Find the needle</h1>
+        </header>
+        <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
+        <button type="submit" id="send">go</button>
+      </div>
+    </div>
+  <!--[if gt IE 9]><!-->
+    <script type="text/javascript" src="/js/script.min.js"></script>
+  <!--<![endif]-->
+  <script type="text/javascript">
+    WebFontConfig = {
+      google: { families: [ 'Droid+Serif:400,700:latin', /*'Quando::latin',*/ 'Roboto:500,300:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+
+  <!--[if lte IE 9]>
+    <script type="text/javascript" src="/js/ie.min.js"></script>
+  <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-57324413-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  </body>
+</html>

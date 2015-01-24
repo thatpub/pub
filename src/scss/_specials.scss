@@ -1,0 +1,17 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+  /*  Why more?  Some weird bug on Samsung
+      Galaxy S4 Android 4.2 browsers.
+      Not exactly a high use-case so remove if desired.*/
+          border-left-top-radius: $radius;
+          border-right-top-radius: $radius;
+          border-right-bottom-radius: $radius;
+          border-left-bottom-radius: $radius;
+}
+@mixin transform($action) {
+  -ms-transform: $action;
+  -webkit-transform: $action;
+  transform: $action;
+}
