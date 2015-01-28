@@ -141,14 +141,14 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
     left: 50%; */
     /* bottom: auto;
     right: auto; */
-    background: $bg;/* #FF96DD; */
+    background: $action-color;/* #FF96DD; */
     //color: $bg;/* #FAFFFC; */
     /* transform: translate(-50%, -50%); */
     -webkit-transition: .075s all ease;
     -o-transition: .075s all ease;
     transition: .075s all ease;
     &:hover {
-      background: $action-color;/* #FAFFFC;#FF4CB2; */
+      background: $bg;/* #FAFFFC;#FF4CB2; */
       /* color: #B24590; */
       -webkit-transition: .1s background ease;
       -o-transition: .1s background ease;
