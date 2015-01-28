@@ -32,11 +32,11 @@
         app.scoresContent = _.pluck(content.hits.hits, '_score');
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h4 class='label'>Related Documents</h4><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, 'scoresRelatives') + "</ul>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, 'scoresContent');
+        app.results_.innerHTML = "<h4 class='label'>Related Documents</h4><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
-        app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, 'scoresContent');
+        app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       if ( content.hits.hits.length < 20 ) {
         app.moreContent_.className += ' hidden';
@@ -83,7 +83,7 @@
 
   addEvent(app.query_, 'keypress', function ( event ) {
     if ( event.which === 13 ) {
-      app.term = app.query_.value;
+      app.term = _.trim(app.query_.value);
       if ( !app.term ) { /* show notification/input validate here */
         return false;
       }
@@ -102,7 +102,7 @@
     }
   });
   addEvent(app.send_, 'click', function ( event ) {
-    app.term = app.query_.value;
+    app.term = _.trim(app.query_.value);
     if ( !app.term ) { /* show notification/input validate here */
       return false;
     }
