@@ -22,11 +22,11 @@ h1, h2, h3, h4, h5, h6, label {
   font-weight: 200;
   text-align: center;
   #term {
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     color: $black;
   }
   #total {
-    color: $text-color;
-    font-weight: bold;
+    color: $success-color;
+    /*font-weight: bold;*/
   }
 }

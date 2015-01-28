@@ -3,26 +3,27 @@
   font-weight: 400;
 }
 .related {
-  margin: 1.5rem auto;
-  border-bottom: 1px solid; /* #E6E6E6 */
-  padding: .5rem 1.5rem 5rem;
+  margin: 0 auto;
+  /*border-bottom: 1px solid;*/ /* #E6E6E6 */
+  padding: .5rem 1.5rem 2rem;
   font-family: $font;
   width: 100%;
   list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  border: none;
   li a {
     flex-grow: 1;
     color: $text-highlight-color;
-    margin: 0 1rem;
+    margin: 0 1rem 0 0;
     text-align: center;
   /*border: 1px solid #F22613;
     border-radius: 3px;*/
     border: none;
-    border-bottom: 1px solid $text-highlight-color;
-    border-radius: 0 0 4px 4px;
+    /*border-bottom: 1px solid $text-highlight-color;*/
+    /*border-radius: 0 0 4px 4px;*/
     padding: 3px 5px;
     font-size: 1.25rem;
     /*color: #FF6174; //awesome salmon color*/

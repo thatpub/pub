@@ -9,19 +9,19 @@ button,
 select,
 input,
 textarea {
-  color: #959595;
+  color: $text-color;
   outline: 0;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 html {
-  font-size: 100%;
   height: 100%;
 }
 
 body {
   line-height: 1.6;
   font-family: $font;
+  font-size: 100%;
 }
 
 /* .ie9 body,
