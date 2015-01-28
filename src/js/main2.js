@@ -152,6 +152,7 @@ var App = function ( _, undefined ) {
     addItem: function ( results, templateCode, allScores ) {
       var tmp = '',
           that = this;
+      console.log(allScores, that[allScores]);
       _.forEach(results, function ( result ) {
         tmp += _.template(templateCode, that.dataRender(result, that[allScores]));
       });
