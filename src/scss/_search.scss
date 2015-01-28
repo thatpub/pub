@@ -6,10 +6,6 @@
   width: 100%;
   position: fixed;
   bottom: 0;
-  @media (min-width: 1140px) {
-    bottom: auto;
-    top: 0;
-  }
   right: 0;
   margin: 0;
 }
@@ -46,10 +42,6 @@
   transition: .1s transform ease;
   position: absolute;
   bottom: 0;
-  @media (min-width: 1140px) {
-    bottom: auto;
-    top: 0;
-  }
   width: 100%;
 }
 
