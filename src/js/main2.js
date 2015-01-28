@@ -147,7 +147,7 @@ var App = function ( _, undefined ) {
       console.log(templateCode);
       console.log(allScores);
       _.forEach(results, function ( result ) {
-        tmp += _.template(templateCode, that.dataRender(result, allScores));
+        tmp += _.template(templateCode)(that.dataRender(result, allScores));
       });
       return tmp;
     }
