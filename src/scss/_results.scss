@@ -22,6 +22,7 @@
   /*border: 1px solid #F22613;
     border-radius: 3px;*/
     border: none;
+    border-bottom: 1px solid transparent;
     /*border-bottom: 1px solid $text-highlight-color;*/
     /*border-radius: 0 0 4px 4px;*/
     padding: 3px 5px;
@@ -31,6 +32,10 @@
     /*-webkit-box-sizing: padding-box;
     -moz-box-sizing: padding-box;
     box-sizing: padding-box;*/
+    &:hover {
+      border-bottom-color: $result-color;
+      color: $result-color;
+    }
   }
 }
 .no-flexbox, .ie9 {
@@ -108,7 +113,7 @@
 }
 
 .more {
-  color: $white;
+  color: $bg;
   /* text-shadow: 0 1px 0 #0A803B; //#1E824C; */
   position: relative;
   clear: both;
@@ -143,7 +148,11 @@
   &.doc {
     a {
       font-weight: 400;
-      color: $success;
+      color: $success-color;
+      &:hover {
+        border-bottom-color: $success-color;
+        color: $success-color;
+      }
     }
   }
   &.content {
@@ -171,7 +180,7 @@
 }
 .failed {
   &.overlay {
-    background: $white;
+    background: $bg;
   }
 }
 @media all and (min-width:480px) {

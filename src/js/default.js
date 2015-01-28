@@ -144,6 +144,7 @@
     }
   });
   addEvent(app.searchRestore_, 'click', function ( event ) {
+    app.query_.value = app.term||'';
     app.searchWrap_.className = app.searchWrap_.className.replace(/done(?=\b)/, ' mini ');
     app.query_.focus();
     if ( event.preventDefault ) {

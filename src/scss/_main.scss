@@ -22,6 +22,7 @@ body {
   line-height: 1.6;
   font-family: $font;
   font-size: 100%;
+  background-color: $bg;
 }
 
 /* .ie9 body,
@@ -95,19 +96,17 @@ textarea {
   padding: 0.2rem 0;
 }
 
-
-/* ===== Initializr Styles ==================================================
-   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
-   ========================================================================== */
-
 #page {
   background-color: $white;
   padding: 4rem 2rem 7rem;
+  border-right: 1px solid $bg;
+  border-left: 1px solid $bg;
+  box-shadow: 0 0 10px $shadow-color;
 }
 
 /* body.cleek {
   background: #26A65B;
-  color: $white;
+  color: $bg;
   #page {
     background-color: transparent;
     .related li a {
@@ -129,7 +128,7 @@ textarea {
       color: #D0F7C5;
     }
     q:after, q:before {
-      color: $white;
+      color: $bg;
     }
     em {
       color: $action-color; //#8BADE1; //#ade18b;

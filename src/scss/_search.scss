@@ -16,7 +16,7 @@
   z-index: 1;
   display: block;
   transition: background .25s ease;
-  background-color: $white;
+  background-color: $bg;
   #search {
     display: block;
   }
@@ -33,7 +33,7 @@
   width: 100%;
   height: 100%;
   font-size: 2.5rem;
-  color: $white;
+  color: $bg;
 }
 
 #search {
@@ -56,8 +56,8 @@
 }
 
 #query {
-  background-color: $white;/* #E0FAFC;#E6FFE2; */
-  border: 1px solid $black;/* #83D6DE;#A3FF96; */
+  background-color: $bg;/* #E0FAFC;#E6FFE2; */
+  border: 1px solid $black; /*#83D6DE;#A3FF96; */
   //color: #1F298C;//#1E824C
   //color: #87D37C;
   color: $black;//#737F71;
@@ -141,8 +141,8 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
     left: 50%; */
     /* bottom: auto;
     right: auto; */
-    background: $white;/* #FF96DD; */
-    //color: $white;/* #FAFFFC; */
+    background: $bg;/* #FF96DD; */
+    //color: $bg;/* #FAFFFC; */
     /* transform: translate(-50%, -50%); */
     -webkit-transition: .075s all ease;
     -o-transition: .075s all ease;
@@ -164,7 +164,7 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   bottom: 1rem;
   right: 1rem;
   display: block;
-  overflow: hidden;
+  overflow: visible;
   #search {
     transform: translateX(0);
     height: 100%;
@@ -180,6 +180,8 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   }
   #query {
     width: 75%;
+    background-color: $action-highlight-color;
+    color: $black;
   }
   #send {
     font-size: 1.75rem;

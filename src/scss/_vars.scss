@@ -2,18 +2,24 @@ $font: Roboto, Quando, Helvetica Neue, Trebuchet MS, Helvetica, Arial Condensed,
 $readable: Droid Serif, Times New Roman, Georgia, Times, serif;
 /* $success: #63B257; #4CBFCA; */
 /* #3C787E; */ /* #17bebb; */
-$result-color: #3E657E;
+
+$text-on-bg-color: #082642;
+$result-color: #205A8F; /*#3E657E;*/
+$result-highlight-color: #438ED1;
 $heading-color: #2e282a;
-$action-color: #CA8F3B;
-$action-highlight-color: #edb88b;
+$action-color: #FF9E00; /*#CA8F3B;*/
+$action-highlight-color: #FFFFCC; /*edb88b;*/
 $text-color: #666666;
 $text-highlight-color: #7F7F7F;
-$success-color: #4F9ACA;
-$success-highlight-color: #78AACA;
+$success-color: #63B257; /*#197ACA; #4F9ACA;*/
+$success-highlight-color: #418CCA; /*#78AACA;*/
 $black: #232323;
-$white: #F6FCF4;
+$white: #FEFEFE;
+$bg: #FAFAFA;
+$shadow-color: #888;
 
 $result: $result-color;
+$result-highlight: $result-highlight-color;
 $action: $action-color;
 $action-highlight: $action-highlight-color;
 $text: $text-color;
