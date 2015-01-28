@@ -1,12 +1,7 @@
-.label {
-  color: $text-highlight-color;
-  font-weight: 400;
-}
 .related {
   margin: 0 auto;
   /*border-bottom: 1px solid;*/ /* #E6E6E6 */
-  padding: .5rem 1.5rem 2rem;
-  font-family: $font;
+  padding: 1rem 0 2rem;
   width: 100%;
   list-style: none;
   display: flex;
@@ -201,11 +196,12 @@
   }*/
   .result.content,
   .result.content + hr {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    /*width: 80%;*/
     .text {
       font-size: 1.75rem;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
     .doc-name {
       //font-weight: 500;
