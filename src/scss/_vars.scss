@@ -8,7 +8,15 @@ $action-highlight-color: #edb88b;
 $text-color: #666666;
 $text-highlight-color: #7F7F7F;
 /* $success: #63B257; #4CBFCA; */
-$success: #4F9ACA;
-$success-highlight: #78AACA;
+$success-color: #4F9ACA;
+$success-highlight-color: #78AACA;
 $black: #232323;
 $white: #F6FCF4;
+
+$result: $result-color;
+$action: $action-color;
+$action-highlight: $action-highlight-color;
+$text: $text-color;
+$text-highlight: $text-highlight-color;
+$success: $success-color;
+$success-highlight: $success-highlight-color;
