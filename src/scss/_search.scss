@@ -197,8 +197,11 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   }
   #query {
     width: 75%;
-    background-color: $action-highlight-color;
+    background-color: $white;
     color: $black;
+    -webkit-box-shadow: 0 0 25px 15px $white;
+    -moz-box-shadow: 0 0 25px 15px $white;
+    box-shadow: 0 0 25px 15px $white;
   }
   #send {
     font-size: 1.75rem;
@@ -209,7 +212,7 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
     /* box-shadow: 0 0 20px 8px #FAFFFC; */
     /*display: inline-block;*/
     /* height: 3rem; */
-    margin: 0;
+    margin: 0 .125rem;
     clear: none;
     float: left;
     outline: none;
