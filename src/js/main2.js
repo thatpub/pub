@@ -108,11 +108,7 @@ var App = function ( _, undefined ) {
 
         output = {
           score: data._score,
-          gravitas: (
-          _.contains(
-            filterOutliers(allScores), data._score
-          ) || data._score >= 1
-          ) ? ' pretty' : ' boring',
+          gravitas: ( _.contains( filterOutliers(allScores), data._score ) || data._score >= 1 ) ? ' pretty' : ' boring',
           date: date,
           url: 'http://get.that.pub/' + data._source.productNo.toLowerCase() + fileFormat,
           pub: fullPub,
@@ -120,16 +116,12 @@ var App = function ( _, undefined ) {
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
           sub: ( full ) ? number : '',
-          details: [
-            {
-              chapter: data._source.chapter && data._source.chapter.number || null,
-              chapterTitle: data.highlight.chapter && data.highlight.chapter.title || data._source.chapter && data._source.chapter.title || null
-            },
-            {
-              section: data._source.section && data._source.section.number || null,
-              sectionTitle: data.highlight.section && data.highlight.section.title || data._source.section && data._source.section.title || null
-            }
-          ],
+          details: {
+            chapter: data._source.chapter && data._source.chapter.number || null,
+            chapterTitle: data.highlight.chapter && data.highlight.chapter.title || data._source.chapter && data._source.chapter.title || null,
+            section: data._source.section && data._source.section.number || null,
+            sectionTitle: data.highlight.section && data.highlight.section.title || data._source.section && data._source.section.title || null
+          },
           fullText: full,
           partText: full.longToShort().before,
           partText2: full.longToShort().after,

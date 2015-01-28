@@ -53,10 +53,10 @@
       <article class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" title="<%= score %>">
         <% if ( type === " content" ) { %>
         <p class="details">
-          <% if ( details[0] && details[0].chapter && details[0].chapterTitle ) { %>
-            <span class="chapter">Chapter <%= details[0].chapter %> - <span class="title"><%= details[0].chapterTitle %></span></span><br/>
-          <% } if ( details[1] && details[1].section && details[1].sectionTitle ) { %>
-            <span class="section">Section <%= details[1].section %> - <span class="title"><%= details[1].sectionTitle %></span></span><br/>
+          <% if ( details && details.chapter && details.chapterTitle ) { %>
+            <span class="chapter">Chapter <%= details.chapter %> - <span class="title"><%= details.chapterTitle %></span></span><br/>
+          <% } if ( details && details.section && details.sectionTitle ) { %>
+            <span class="section">Section <%= details.section %> - <span class="title"><%= details.sectionTitle %></span></span><br/>
           <% } %>
         </p>
         <div class="number"><%= sub %></div>
