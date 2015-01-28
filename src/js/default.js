@@ -31,12 +31,12 @@
         window.scroll(0, 0);
         app.scoresContent = _.pluck(content.hits.hits, '_score');
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
-        app.results_.innerHTML = '';
-        app.results_.innerHTML = '<h4 class="label">Related Documents</h4><ul class="related" id="related">' + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, "scoresRelatives") + '</ul>' + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, "scoresContent");
+        app.results_.innerHTML = "";
+        app.results_.innerHTML = "<h4 class='label'>Related Documents</h4><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, 'scoresRelatives') + "</ul>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, 'scoresContent');
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
-        app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, "scoresContent");
+        app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, 'scoresContent');
       }
       if ( content.hits.hits.length < 20 ) {
         app.moreContent_.className += ' hidden';
