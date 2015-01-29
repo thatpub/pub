@@ -38,6 +38,7 @@
     "console-polyfill": "~0.1.2",
     "reqwest": "~1.1.5",
     "backbone": ">=1.1.2",
-    "react-backbone": ">=0.16.0"
+    "react-backbone": ">=0.16.0",
+    "modernizr": "~2.8.3"
   }
 }

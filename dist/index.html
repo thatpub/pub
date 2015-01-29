@@ -52,7 +52,7 @@
     </script>
 
     <script type="text/template" id="result-template">
-      <article class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
+      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
         <% if ( type === " content" ) { %>
         <p class="details">
           <% if ( details && details.chapter && details.chapterTitle ) { %>
@@ -62,10 +62,10 @@
           <% } %>
         </p>
         <div class="number"><%= sub %></div>
-        <section class="text clearfix">
+        <div class="text clearfix">
           <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
           <a href="#" class="reveal">more...</a>
-        </section>
+        </div>
         <% } %>
         <div class="meta">
           <p class="info" title="<%= date %>">
@@ -74,7 +74,7 @@
             </a>
           </p>
         </div>
-      </article>
+      </div>
       <hr/>
     </script>
 

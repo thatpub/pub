@@ -87,6 +87,7 @@ module.exports = function(grunt) {
           {
             src: [
               'src/lib/lodash/**lodash.min.js',
+              'src/lib/modernizr/modernizr.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
@@ -106,6 +107,7 @@ module.exports = function(grunt) {
           {
             src: [
               'src/lib/lodash/**lodash.js',
+              'src/lib/modernizr/modernizr.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
