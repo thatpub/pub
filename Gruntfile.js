@@ -64,13 +64,13 @@ module.exports = function(grunt) {
         }
       }
     },
-    uncss: {
+   /* uncss: {
       dist: {
         files: {
           'dist/css/style.min.css': ['dist/index.html', 'src/test.html']
         }
       }
-    },
+    },*/
     react: {
       dynamic: {
         files: [
@@ -233,7 +233,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-uncss');
+/*  grunt.loadNpmTasks('grunt-uncss');*/
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-newer');
@@ -244,6 +244,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-tinypng');
   grunt.loadNpmTasks('grunt-react');
 
-  grunt.registerTask('default', ['sass:dist', 'autoprefixer:dist', 'cssmin', 'uncss:dist', 'newer:react', 'uglify:dist', 'newer:imagemin', 'tinypng']);
-  grunt.registerTask('build', ['sass:dist', 'autoprefixer:dist', 'cssmin', 'uncss:dist', 'react', 'uglify:dist', 'imagemin', 'tinypng']);
+  grunt.registerTask('default', ['sass:dist', 'autoprefixer:dist', 'cssmin', /*'uncss:dist',*/ 'newer:react', 'uglify:dist', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('build', ['sass:dist', 'autoprefixer:dist', 'cssmin', /*'uncss:dist',*/ 'react', 'uglify:dist', 'imagemin', 'tinypng']);
 };
