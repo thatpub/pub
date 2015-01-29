@@ -71,7 +71,7 @@
         app.scoresContent = _.pluck(content.hits.hits, '_score');
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h4 class='label'>Related Documents</h4><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><h4 class='label'>Results</h4>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.results_.innerHTML = "<h2 class='label'>Related Documents</h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><h2 class='label'>Results</h2>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
