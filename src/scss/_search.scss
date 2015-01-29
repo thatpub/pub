@@ -19,9 +19,47 @@
   background-color: $bg;
   #search {
     display: block;
+    @media all and (min-width: 768px) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   #search-restore {
     display: none;
+  }
+  #send {
+    @media all and (min-width: 768px) {
+      font-size: 2.25rem;
+    }
+  }
+  #query {
+    @media all and (min-width: 768px) {
+      background: transparent;
+      border: none;
+      width: 34rem;
+      border-bottom: 1px solid $text-color;
+    }
+    &::-moz-input-placeholder {
+      @media all and (min-width: 768px) {
+        font-size: 1.5rem;
+        opacity: .5;
+      }
+    }
+    &::-webkit-input-placeholder {
+      @media all and (min-width: 768px) {
+        font-size: inherit;
+        opacity: .5;
+      }
+    }
+    &:focus,
+    &:active {
+      @media all and (min-width: 768px) {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: 0;
+      }
+    }
   }
 }
 
@@ -87,13 +125,6 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   font-size: 2.25rem;
 }
 
-/* #send-old:active {
-  border-bottom-color: #89C4F4;
-  border-top-color: #2C3E50;
-  border-top-color: rgba(44, 62, 80, .5);
-  text-shadow: 0 -1px 2px rgba(34, 49, 63, .75), 0 0 1px rgba(34, 49, 63, .25);
-} */
-
 #send:active {
   border-bottom-color: transparent;
   border-top-color: rgba(44, 62, 80, .5);
@@ -123,7 +154,7 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   right: 1rem;
   top: auto;
   left: auto;
-  @media (min-width: 1140px) {
+  @media all and (min-width: 1140px) {
     bottom: auto;
     top: 1rem;
   }
@@ -140,6 +171,15 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
     height: 3.25rem;
     float: right;
     text-align: right;
+    @media all and (min-width: 480px) {
+      width: 28rem;
+    }
+    @media all and (min-width: 768px) {
+      width: 40rem;
+    }
+    @media all and (min-width: 1140px) {
+      width: 20rem;
+    }
   }
   #search-restore {
     text-align: center;
@@ -182,7 +222,14 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   left: auto;
   bottom: 1rem;
   right: 1rem;
-  @media (min-width: 1140px) {
+  @media all and (min-width: 480px) {
+    width: 28rem;
+  }
+  @media all and (min-width: 768px) {
+    width: 40rem;
+  }
+  @media all and (min-width: 1140px) {
+    width: 20rem;
     bottom: auto;
     top: 1rem;
   }
@@ -200,6 +247,16 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
       display: none;
     }
   }
+  #query,
+  #send {
+    /* box-shadow: 0 0 20px 8px #FAFFFC; */
+    /*display: inline-block;*/
+    /* height: 3rem; */
+    margin: 0;
+    clear: none;
+    float: left;
+    outline: none;
+  }
   #query {
     width: 75%;
     background-color: $white;
@@ -211,85 +268,5 @@ border-top: 1px solid #C8F7C5; //#87D37C; */
   #send {
     font-size: 1.75rem;
     width: 18.75%;
-  }
-  #query,
-  #send {
-    /* box-shadow: 0 0 20px 8px #FAFFFC; */
-    /*display: inline-block;*/
-    /* height: 3rem; */
-    margin: 0;
-    clear: none;
-    float: left;
-    outline: none;
-  }
-}
-
-@media all and (min-width: 480px) {
-  .done.search {
-    #search {
-      width: 28rem;
-    }
-  }
-  .mini.search {
-    width: 28rem;
-  }
-}
-
-@media all and (min-width: 768px) {
-
-  .overlay.search #search {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .overlay.search #send {
-    //padding: 1.5rem;
-    //max-width: 24rem;
-    font-size: 2.25rem;
-  }
-
-  .overlay.search #query {
-    //padding: .5rem;
-    background: transparent;
-    border: none;
-    width: 34rem;
-    border-bottom: 1px solid $text-color;
-  }
-
-  .overlay.search #query::-moz-input-placeholder {
-    font-size: 1.5rem;
-    opacity: .5;
-  }
-  .overlay.search #query::-webkit-input-placeholder {
-    font-size: inherit;
-    opacity: .5;
-  }
-
-  .overlay.search #query:focus,
-  .overlay.search #query:active {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    outline: 0;
-  }
-
-  .done.search {
-    #search {
-      width: 40rem;
-    }
-  }
-  .mini.search {
-    width: 40rem;
-  }
-}
-
-@media all and (min-width: 1140px) {
-  .done.search {
-    #search {
-      width: 20rem;
-    }
-  }
-  .mini.search {
-    width: 20rem;
   }
 }

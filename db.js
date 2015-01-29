@@ -1,19 +1,4 @@
 ;(function() {
-  String.prototype.toCamelCase = function() {
-    return this.toLowerCase().replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
-  };
-  String.prototype.toTitle = function () {
-    return this.replace(/(?:[^a-zA-Z<\/0-9]+?|^)(\w\S*)/gmi, function( full, txt ) {
-      return ( full.charAt(0) === " " ) ? " " + txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() : txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
-  String.prototype.toSentence = function () {
-    return this.replace(/(?:\W?)\w\S*/g, function( full, txt ) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
-})();
-(function() {
   var express = require("express"),
       es = require("elasticsearch"),
       fs = require("fs"),
@@ -21,7 +6,7 @@
         host: "localhost:9200",
         log: ""
       }),
-      _ = require("lodash-node"),
+      /*_ = require("lodash-node"),*/
       app = express(),
       bp = require("body-parser"),
       cp = require("cookie-parser"),
@@ -29,6 +14,19 @@
       http = require("http"),
       server;
 
+/*  String.prototype.toCamelCase = function() {
+    return this.toLowerCase().replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
+  };*/
+  String.prototype.toTitle = function () {
+    return this.replace(/(?:[^a-zA-Z<\/0-9]+?|^)(\w\S*)/gmi, function( full, txt ) {
+      return ( full.charAt(0) === " " ) ? " " + txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() : txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };
+/*  String.prototype.toSentence = function () {
+    return this.replace(/(?:\W?)\w\S*//*g, function( full, txt ) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };*/
   app.use(cors());
   app.use(bp.json());
   app.use(cp());
@@ -58,7 +56,7 @@
           "productNo.raw": term.pubName
         }
       });
-    };
+    }
 
     if( term.noPubName && term.noPubName.length > 3 ) {
       termArray.push({
@@ -71,7 +69,7 @@
           "category.exact": term.noPubName
         }
       });
-    };
+    }
 
     return termArray;
   }
@@ -178,14 +176,14 @@
             "significant_terms": {
               "field": "text.related",
               "min_doc_count": 75,
-              "size": 10
+              "size": 5
             }
           },
           "related_doc": {
             "significant_terms": {
               "field": "pubName.exact",
               "min_doc_count": 2,
-              "size": 10
+              "size": 5
             }
           },
           "related_category": {
@@ -261,14 +259,14 @@
             "significant_terms": {
               "field": "pubName.exact",
               "min_doc_count": 45,
-              "size": 10
+              "size": 5
             }
           },
           "related": {
             "significant_terms": {
               "field": "title.related",
               "min_doc_count": 75,
-              "size": 10
+              "size": 5
             }
           },
           "related_category": {
@@ -281,7 +279,7 @@
         }
       }
     };
-  };
+  }
 
 
   app.post('/content/more', function ( req, res ) {
@@ -330,8 +328,8 @@
         port: 80,
         path: '/',
         method: 'POST'
-      }
-      var newReq = http.request(opts, function(resp) {
+      };
+      var newReq = http.request(opts, function() {
 
         client.search( qBody(req.body.t, querySetup(req.body.t)), function ( error, content ) {
           if ( error ) {
@@ -379,10 +377,8 @@
   });
 
   server = app.listen(process.argv[2], function () {
-    var host = server.address().address;
-    var port = server.address().port
-
-    console.log('Pub/Form Searcher listening at http://%s:%s', host, port);
+    var port = server.address().port;
+    console.log('Pub/Form Searcher listening on port %s', port);
   });
 
 })();

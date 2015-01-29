@@ -1,4 +1,4 @@
-;(function ( _, app, undefined ) {
+;(function () {
   'use strict';
   app.resultTemplate = document.getElementById('result-template');
   app.relatedTemplate = document.getElementById('related-template');
@@ -6,6 +6,45 @@
   function addEvent ( element, evt, fnc ) {
     return ((element.attachEvent) ? element.attachEvent('on' + evt, fnc) : element.addEventListener(evt, fnc, false));
   }
+
+  function filterResults (event) {
+    var el = ( event ) ? event.currentTarget || event.sourceElement : null;
+    var filter = (el) ? el.getAttribute('id') : app.filterBy;
+    app.filterBy = filter;
+    if ( app.filterBy === '' ) {
+      app.filtered_ = null;
+      _.forEach(document.querySelectorAll('.doc a, .result'), function ( a ) {
+        a.className = a.className.replace('selected', '');
+      });
+      app.results_.className = app.results_.className.replace(/ ?filtered/gi, '');
+      return false;
+    }
+    try {
+      el = document.getElementById(filter);
+    } catch (error) {
+      console.error(error);
+    }
+    if ( app.filtered_ ) {
+      _.forEach(app.filtered_, function (found) {
+        found.className = found.className.replace('selected', '');
+      });
+      _.forEach(document.querySelectorAll('.doc a'), function ( a ) {
+        a.className = a.className.replace('selected', '');
+      });
+    }
+    else {
+      app.results_.className += ' filtered';
+    }
+    app.filtered_ = document.querySelectorAll('[data-pub="' + filter + '"]');
+    _.forEach(app.filtered_, function (found) {
+      found.className += ' selected';
+    });
+    if (el) {
+      el.className += ' selected';
+    }
+    return false;
+  }
+
   function dataResponse ( httpRequest, action ) {
     var response = JSON.parse(httpRequest.responseText);
     var content = response[0] || null;
@@ -44,6 +83,10 @@
       else {
         app.moreContent_.className = app.moreContent_.className.replace(/ ?hidden/g, ' ');
       }
+      _.forEach(document.querySelectorAll('.doc > a'), function (el) {
+        addEvent(el, 'click', filterResults);
+      });
+      filterResults();
     }
     if ( meta ) {
       app.placeMeta = meta._scroll_id;
@@ -88,6 +131,7 @@
         return false;
       }
       app.page_.className += ' loading';
+      app.filterBy = '';
       sendData(dataResponse, app.term, 'content', 'search', app.placeContent, app.placeMeta);
       return false;
     }
@@ -99,6 +143,10 @@
         app.query_.blur();
         return false;
       }
+      else {
+        app.filterBy = '';
+        filterResults();
+      }
     }
   });
   addEvent(app.send_, 'click', function ( event ) {
@@ -107,6 +155,7 @@
       return false;
     }
     app.page_.className += ' loading';
+    app.filterBy = '';
     sendData(dataResponse, app.term, 'content', 'search', app.placeContent, app.placeMeta);
     if ( event.preventDefault ) {
       event.preventDefault();
@@ -156,11 +205,26 @@
     return false;
   });
   addEvent(window, 'load', function ( event ) {
-    console.log(window.location.search, window.location.search.slice(3));
     if ( window.location.search !== '' ) {
       app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, '%20'));
       app.send_.click();
     }
   });
 
-})(_, new App(_));
+/*  addEvent(window, 'hashchange', function ( event ) {
+    var hash = event.newURL.slice(_.indexOf(event.newURL, '#') + 1);
+    if ( hash !== 'page' && hash !== '' ) {
+      if ( app.filtered_ !== null ) {
+        _.forEach(app.filtered_, function (found) {
+          found.className = found.className.replace(/ ?selected| ?filtered/gi, '');
+        });
+      }
+      app.results_.className += ' filtered';
+      app.filtered_ = document.querySelectorAll('[data-pub="' + hash + '"]');
+      _.forEach(app.filtered_, function (found) {
+        found.className += ' selected';
+      });
+    }
+  });*/
+
+})();

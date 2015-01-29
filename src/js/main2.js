@@ -1,4 +1,4 @@
-var App = function ( _, undefined ) {
+var app = (function () {
   'use strict';
   var regMini = / ?mini ?/g,
       months = {
@@ -148,6 +148,7 @@ var App = function ( _, undefined ) {
         tmp += _.template(templateCode)(that.dataRender(result, allScores));
       });
       return tmp;
-    }
+    },
+    filterBy: ''
   };
-};
+})();
