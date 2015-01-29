@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)http://dev.that.pub/ -->
+<html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths wf-droidserif-n4-active wf-droidserif-n7-active wf-roboto-n5-active wf-roboto-n3-active wf-active" itemscope="" itemtype="http://schema.org/SearchAction"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if gt IE 9]><!--><!--<![endif]-->
+    <!--[if IE]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
+
+    <title>thatPub</title>
+
+    <meta name="keywords" content="air force,publications,forms,search,policy,regulations,laws,rules,dod,government">
+    <meta name="description" content="I&#39;ll find you something you didn&#39;t even know you needed.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="author" content="http://that.pub/humans.txt">
+
+    <link rel="shortcut icon" href="http://that.pub/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="http://that.pub/apple-touch-icon.png">
+
+    <!-- Facebook Metadata /-->
+    <meta property="fb:page_id" content="1">
+    <meta property="og:image" content="http://that.pub/img/logo.png">
+    <meta property="og:description" content="I&#39;ll find you something you didn&#39;t even know you needed.">
+    <meta property="og:title" content="thatPub">
+
+    <!-- Google+ Metadata /-->
+    <meta itemprop="name" content="thatPub">
+    <meta itemprop="description" content="I find things you weren&#39;t even looking for.">
+    <meta itemprop="image" content="http://that.pub/img/logo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@thatPub">
+    <meta name="twitter:creator" content="@DeryckHenson">
+    <meta name="twitter:title" content="thatPub">
+    <meta name="twitter:description" content="I&#39;ll find you something you didn&#39;t even know you needed.">
+    <meta name="twitter:image:src" content="http://that.pub/img/logo.png">
+
+    <link rel="stylesheet" href="./test_files/style.min.css" type="text/css">
+
+    <script async="" src="./test_files/analytics.js"></script><script src="./test_files/webfont.js" type="text/javascript" async=""></script><script type="text/javascript" src="./test_files/takana.js"></script><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700%7CRoboto:500,300&subset=latin,latin">
+
+  </head>
+  <body style="zoom: 1;">
+
+    <!--[if gt IE 9]><!-->
+
+    <script type="text/template" id="related-template">
+      <li class="doc<%= gravitas %>">
+        <a data-score="<%= score %>" id="<%= key %>">
+          <%= key %>
+        </a>
+      </li>
+    </script>
+
+    <script type="text/template" id="result-template">
+      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
+        <% if ( type === " content" ) { %>
+        <p class="details">
+          <% if ( details && details.chapter && details.chapterTitle ) { %>
+            <span class="chapter">Chapter <%= details.chapter %> - <span class="title"><%= details.chapterTitle %></span></span><br/>
+          <% } if ( details && details.section && details.sectionTitle ) { %>
+            <span class="section">Section <%= details.section %> - <span class="title"><%= details.sectionTitle %></span></span><br/>
+          <% } %>
+        </p>
+        <div class="number"><%= sub %></div>
+        <div class="text clearfix">
+          <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
+          <a href="#" class="reveal">more...</a>
+        </div>
+        <% } %>
+        <div class="meta">
+          <p class="info" title="<%= date %>">
+            <a class="doc-name" href="<%= url %>" download="<%= pub.toLowerCase() %>.pdf" target="_blank">
+              <%= pub %><br/><span class="title"><%= title %></span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr/>
+    </script>
+
+    <!--<![endif]-->
+
+    <!--[if lte IE 9]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="wrapper " id="page">
+      <!-- <h3 class="page-title">
+        <a href="/">thatPub</a>
+      </h3> -->
+      <div class=" " id="summary">
+        <h2 id="term">dawg</h2>
+        <h3>produced <span id="total">137</span> results</h3>
+      </div>
+
+      <button class="more meta hidden" id="more-meta">fetch »</button>
+      <div id="count"></div>
+      <div id="results" class=""><h4 class="label">Related Documents</h4><ul class="related" id="related">
+      <li class="doc pretty">
+        <a data-score="239.7912752307099" id="AFI10-203" class="">
+          AFI10-203
+        </a>
+      </li>
+    
+      <li class="doc pretty">
+        <a data-score="4.924977128844404" id="AFI41-210" class="">
+          AFI41-210
+        </a>
+      </li>
+    
+      <li class="doc boring">
+        <a data-score="0.9373890013675029" id="AFI48-101" class="">
+          AFI48-101
+        </a>
+      </li>
+    
+      <li class="doc boring">
+        <a data-score="0.4677224021900163" id="AFI48-123" class="">
+          AFI48-123
+        </a>
+      </li>
+    
+      <li class="doc boring">
+        <a data-score="0.17332707546470164" id="AFI48-149" class="">
+          AFI48-149
+        </a>
+      </li>
+    </ul><h4 class="label">Results</h4>
+      <div class="result content pretty clearfix" data-score="0.34463078" data-pub="AFI48-101">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">FORCE HEALTH PROTECTION AND MEDICAL READINESS PROGRAM</span></span><br>
+          
+        </p>
+        <div class="number">4.5.1</div>
+        <div class="text clearfix">
+          <span class="tickle"><em>DAWG</em>.</span><span class="pickle hidden"><em>DAWG</em>.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="08 Dec 2014">
+            <a class="doc-name" href="http://get.that.pub/afi48-101.pdf" download="afi48-101.pdf" target="_blank">
+              AFI48-101<br><span class="title">AEROSPACE MEDICINE ENTERPRISE</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.18505171" data-pub="AFI48-149">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 3 - <span class="title">FLYING, OPERATIONAL, AND SPECIAL OPERATIONAL DUTY PROGRAM</span></span><br>
+          
+        </p>
+        <div class="number">3.7.2</div>
+        <div class="text clearfix">
+          <span class="tickle">Deployment Availability Working Group (<em>DAWG</em>). The <em>DAWG</em> will be conducted IAW AFI 10-203, Duty Limiting Conditions.</span><span class="pickle hidden">Deployment Availability Working Group (<em>DAWG</em>). The <em>DAWG</em> will be conducted IAW AFI 10-203, Duty Limiting Conditions.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="12 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi48-149.pdf" download="afi48-149.pdf" target="_blank">
+              AFI48-149<br><span class="title">FLIGHT AND OPERATIONAL MEDICINE PROGRAM (FOMP)</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.17231539" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 2 - <span class="title">ROLES AND RESPONSIBILITIES</span></span><br>
+          
+        </p>
+        <div class="number">2.8.2</div>
+        <div class="text clearfix">
+          <span class="tickle">Attend the <em>DAWG</em>. (T-2)</span><span class="pickle hidden">Attend the <em>DAWG</em>. (T-2)</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.17231539" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 2 - <span class="title">ROLES AND RESPONSIBILITIES</span></span><br>
+          
+        </p>
+        <div class="number">2.9.5</div>
+        <div class="text clearfix">
+          <span class="tickle">Attend the <em>DAWG</em>. (T-2)</span><span class="pickle hidden">Attend the <em>DAWG</em>. (T-2)</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.17231539" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+        </p>
+        <div class="number">Chapter 4</div>
+        <div class="text clearfix">
+          <span class="tickle"><em>DAWG</em> CASE MANAGEMENT REVIEW</span><span class="pickle hidden"><em>DAWG</em> CASE MANAGEMENT REVIEW</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.17231539" data-pub="AFI36-2629">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 2 - <span class="title">ROLES AND RESPONSIBILITIES</span></span><br>
+          
+        </p>
+        <div class="number">2.23.5</div>
+        <div class="text clearfix">
+          <span class="tickle">Include IRs during the <em>DAWG</em>.</span><span class="pickle hidden">Include IRs during the <em>DAWG</em>.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="13 Aug 2012">
+            <a class="doc-name" href="http://get.that.pub/afi36-2629.pdf" download="afi36-2629.pdf" target="_blank">
+              AFI36-2629<br><span class="title">INDIVIDUAL RESERVIST (IR) MANAGEMENT</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.2.2.2</div>
+        <div class="text clearfix">
+          <span class="tickle">Once the Initial RILO package is complete (to include all specialty consultations and special studies), the entire package must be reviewed by the <em>DAWG</em> and signed off by either the SGH or SGP to ensure that it is complete and accurate. (T-1) This step serves as a final quality review and will be completed no more than 30 days (one UTA for ARC) after the case was initially reviewed at the <em>DAWG</em>. (T-1) If the final review is delayed beyond 30 days, the reason for the delay will be documented in the <em>DAWG</em> minutes. (T-1)</span><span class="pickle hidden">Once the Initial RILO package is complete (to include all specialty consultations and special studies), the entire package must be reviewed by the <em>DAWG</em> and signed off by either the SGH or SGP to ensure that it is complete and accurate. (T-1) This step serves as a final quality review and will be completed no more than 30 days (one UTA for ARC) after the case was initially reviewed at the <em>DAWG</em>. (T-1) If the final review is delayed beyond 30 days, the reason for the delay will be documented in the <em>DAWG</em> minutes. (T-1)</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1</div>
+        <div class="text clearfix">
+          <span class="tickle">Routine <em>DAWG</em> Case Reviews.</span><span class="pickle hidden">Routine <em>DAWG</em> Case Reviews.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.1</div>
+        <div class="text clearfix">
+          <span class="tickle">Purpose. The <em>DAWG</em> will be established at each wing/base level and will meet at least monthly to review personnel with a DLC that affects mobility, retention, or long-term physical fitness. (T-1) The <em>DAWG</em> will identify personnel not deployment eligible (Not Mission Capable, NMC) and track progress of the medical condition through resolution or definitive disposition. (T-1) They will further identify cases exceeding prescribed time limits, review a representative sample of DLCs, and provide feedback to PCM teams, including providers, via the SGH. (T-1) The <em>DAWG</em> will produce and provide a report to the MTF executive committee via the Aerospace Medicine Council (AMC). (T-1) The <em>DAWG</em> will also review cases referred for potentially unfitting medical conditions. (T-1)</span><span class="pickle hidden">Purpose. The <em>DAWG</em> will be established at each wing/base level and will meet at least monthly to review personnel with a DLC that affects mobility, retention, or long-term physical fitness. (T-1) The <em>DAWG</em> will identify personnel not deployment eligible (Not Mission Capable, NMC) and track progress of the medical condition through resolution or definitive disposition. (T-1) They will further identify cases exceeding prescribed time limits, review a representative sample of DLCs, and provide feedback to PCM teams, including providers, via the SGH. (T-1) The <em>DAWG</em> will produce and provide a report to the MTF executive committee via the Aerospace Medicine Council (AMC). (T-1) The <em>DAWG</em> will also review cases referred for potentially unfitting medical conditions. (T-1)</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.1.1</div>
+        <div class="text clearfix">
+          <span class="tickle">The <em>DAWG</em> at ARC installations should meet monthly, but not less than quarterly. (T-2) At co-located bases, ARC representatives are highly encouraged to participate in the RegAF host base <em>DAWG</em> to ensure ARC Airmen requiring Initial RILOs and/or MEBs are managed appropriately (e.g. through RegAF channels for duty-related conditions or through ARC for non-duty related FFD/WWD conditions).</span><span class="pickle hidden">The <em>DAWG</em> at ARC installations should meet monthly, but not less than quarterly. (T-2) At co-located bases, ARC representatives are highly encouraged to participate in the RegAF host base <em>DAWG</em> to ensure ARC Airmen requiring Initial RILOs and/or MEBs are managed appropriately (e.g. through RegAF channels for duty-related conditions or through ARC for non-duty related FFD/WWD conditions).</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.1.2</div>
+        <div class="text clearfix">
+          <span class="tickle">In certain circumstances, disclosures of an Airman’s PHI by the <em>DAWG</em> are required by law and must be accounted for IAW AFI 41-210.</span><span class="pickle hidden">In certain circumstances, disclosures of an Airman’s PHI by the <em>DAWG</em> are required by law and must be accounted for IAW AFI 41-210.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2</div>
+        <div class="text clearfix">
+          <span class="tickle">Membership will consist of the SGP, SGH, SPO, all available POs, MSME, PEBLO (or ARC equivalent), a PCM representative, and, as appropriate, an ARC Wing Fitness Program Manager (WFPM). Others may be assigned or invited to attend as needed (e.g. DoD/Veterans Affairs (VA) military services coordinator). Any invitees must be authorized to receive the PHI being discussed, otherwise attendance would not be permitted IAW AFI 41-210.</span><span class="pickle hidden">Membership will consist of the SGP, SGH, SPO, all available POs, MSME, PEBLO (or ARC equivalent), a PCM representative, and, as appropriate, an ARC Wing Fitness Program Manager (WFPM). Others may be assigned or invited to attend as needed (e.g. DoD/Veterans Affairs (VA) military services coordinator). Any invitees must be authorized to receive the PHI being discussed, otherwise attendance would not be permitted IAW AFI 41-210.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2.1</div>
+        <div class="text clearfix">
+          <span class="tickle">A mental health representative may be invited or appointed to the <em>DAWG</em> depending on the number and complexity of mental health cases to be reviewed.</span><span class="pickle hidden">A mental health representative may be invited or appointed to the <em>DAWG</em> depending on the number and complexity of mental health cases to be reviewed.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2.2</div>
+        <div class="text clearfix">
+          <span class="tickle">Any member of the medical management team (Health Care Integrator, Case Manager, Utilization Manager, or Disease Manager) may be invited or appointed to provide clinical case management expertise, as desired. Similarly, a referral management specialist may be invited or included. (Note: Not applicable for ARC bases.) If this individual is not a nurse, the <em>DAWG</em> may consider including a clinical nurse to provide clinical case management input, support, and guidance to MSME.</span><span class="pickle hidden">Any member of the medical management team (Health Care Integrator, Case Manager, Utilization Manager, or Disease Manager) may be invited or appointed to provide clinical case management expertise, as desired. Similarly, a referral management specialist may be invited or included. (Note: Not applicable for ARC bases.) If this individual is not a nurse, the <em>DAWG</em> may consider including a clinical nurse to provide clinical case management input, support, and guidance to MSME.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2.3</div>
+        <div class="text clearfix">
+          <span class="tickle">A representative from the Women’s Health Clinic (or equivalent section managing pregnant Airmen) may be invited or included as a member of the <em>DAWG</em>, at the discretion of the Chair, if indicated for better management of AAC 81 cases.</span><span class="pickle hidden">A representative from the Women’s Health Clinic (or equivalent section managing pregnant Airmen) may be invited or included as a member of the <em>DAWG</em>, at the discretion of the Chair, if indicated for better management of AAC 81 cases.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2.4</div>
+        <div class="text clearfix">
+          <span class="tickle">Providers who have empanelled cases being considered at the <em>DAWG</em>, or who initially referred a case or are involved in the clinical management of the case, may be invited to attend the <em>DAWG</em> based on the discretion of the <em>DAWG</em> Chair and the availability of the provider.</span><span class="pickle hidden">Providers who have empanelled cases being considered at the <em>DAWG</em>, or who initially referred a case or are involved in the clinical management of the case, may be invited to attend the <em>DAWG</em> based on the discretion of the <em>DAWG</em> Chair and the availability of the provider.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.2.5</div>
+        <div class="text clearfix">
+          <span class="tickle">The <em>DAWG</em> Chair may invite attendees who are not assigned to the MTF staff, but only for those portions of the meeting that do not address individually identifiable health information. For PHI-related portions of the meeting, <em>DAWG</em> attendance by personnel not assigned to the MTF staff should be limited. If it is necessary for a unit commander/designees to attend, these personnel may only attend portions of the <em>DAWG</em> applicable to Airmen under their designated command structure.</span><span class="pickle hidden">The <em>DAWG</em> Chair may invite attendees who are not assigned to the MTF staff, but only for those portions of the meeting that do not address individually identifiable health information. For PHI-related portions of the meeting, <em>DAWG</em> attendance by personnel not assigned to the MTF staff should be limited. If it is necessary for a unit commander/designees to attend, these personnel may only attend portions of the <em>DAWG</em> applicable to Airmen under their designated command structure.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.3</div>
+        <div class="text clearfix">
+          <span class="tickle">The <em>DAWG</em> will review and provide oversight of the following processes: (T-1)</span><span class="pickle hidden">The <em>DAWG</em> will review and provide oversight of the following processes: (T-1)</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.3.1</div>
+        <div class="text clearfix">
+          <span class="tickle">Airmen with DLCs which do not affect mobility. For Airmen with DLCs ≥ 365 cumulative days in duration but who are still mobility qualified (to include DR, FR, and/or FAE), the MSME will review each case following the review by the PCM as part of the PHA process. (T-1) Medical conditions affecting the fitness assessment only and not impacting mobility, retention, or AFSC duties do not automatically require Initial RILO.</span><span class="pickle hidden">Airmen with DLCs which do not affect mobility. For Airmen with DLCs ≥ 365 cumulative days in duration but who are still mobility qualified (to include DR, FR, and/or FAE), the MSME will review each case following the review by the PCM as part of the PHA process. (T-1) Medical conditions affecting the fitness assessment only and not impacting mobility, retention, or AFSC duties do not automatically require Initial RILO.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="result content boring clearfix" data-score="0.15609759" data-pub="AFI10-203">
+        
+        <p class="details">
+          
+            <span class="chapter">Chapter 4 - <span class="title">DAWG CASE MANAGEMENT REVIEW</span></span><br>
+          
+        </p>
+        <div class="number">4.1.3.2</div>
+        <div class="text clearfix">
+          <span class="tickle">AAC 31 Review. An ASIMS generated list of all personnel with an AAC 31 will be reviewed by MSME prior to the <em>DAWG</em>. (T-1) For cases identified for <em>DAWG</em> review, MSME will review the medical records, in consultation with the provider as appropriate, and be prepared to present issues and potential solutions for these cases. (T-1) Providers may be required to attend the <em>DAWG</em> meeting, at the discretion of the <em>DAWG</em> Chair, if deemed appropriate to discuss cases.</span><span class="pickle hidden">AAC 31 Review. An ASIMS generated list of all personnel with an AAC 31 will be reviewed by MSME prior to the <em>DAWG</em>. (T-1) For cases identified for <em>DAWG</em> review, MSME will review the medical records, in consultation with the provider as appropriate, and be prepared to present issues and potential solutions for these cases. (T-1) Providers may be required to attend the <em>DAWG</em> meeting, at the discretion of the <em>DAWG</em> Chair, if deemed appropriate to discuss cases.</span><br>
+          <a href="http://dev.that.pub/#" class="reveal">more...</a>
+        </div>
+        
+        <div class="meta">
+          <p class="info" title="20 Nov 2014">
+            <a class="doc-name" href="http://get.that.pub/afi10-203.pdf" download="afi10-203.pdf" target="_blank">
+              AFI10-203<br><span class="title">DUTY LIMITING CONDITIONS</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    </div>
+      <button class="more content" id="more-content">more, please</button>
+      <!--
+          This loading animation courtesy of Hugo Wiledal
+          Author profile (codepen): http://codepen.io/wiledal/
+          Source: http://codepen.io/wiledal/pen/EcGnI
+              Thanks bro!
+        -->
+      <div id="loading">
+        <div class="spinner">
+          <div class="blob top"></div>
+          <div class="blob bottom"></div>
+          <div class="blob left"></div>
+          <div class="blob move-blob"></div>
+        </div>
+        <a id="no-results" href="http://dev.that.pub/index.html">No results buddy.  Try it again.</a>
+      </div>
+    </div>
+    <div class=" done  search wrapper" id="search-wrap">
+      <a href="http://dev.that.pub/#" id="search-restore"></a>
+      <div id="search">
+        <header class="page-title">
+          <h1>Find the needle</h1>
+        </header>
+        <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus="" tabindex="0" autocomplete="off">
+        <a href="http://dev.that.pub/#page" id="send">go</a>
+      </div>
+    </div>
+
+  <!--[if lte IE 9]>
+    <script type="text/javascript" src="js/ie.min.js"></script>
+  <![endif]-->
+  <!--[if gt IE 9]><!-->
+    <script type="text/javascript" src="./test_files/script.min.js"></script>
+  <!--<![endif]-->
+  <script type="text/javascript">
+    WebFontConfig = {
+      google: { families: [ 'Droid+Serif:400,700:latin', /*'Quando::latin',*/ 'Roboto:500,300:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-57324413-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+
+</body></html>
