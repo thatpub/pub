@@ -4,8 +4,11 @@ h1, h2, h3, h4, h5, h6, label {
 }
 .label {
   color: $text-color;
-  font-weight: 500;
+  font-weight: $med;
   text-align: center;
+  small {
+    color: $text-highlight-color;
+  }
 }
 .search-title {
   color: $action-color;
@@ -37,6 +40,7 @@ h1, h2, h3, h4, h5, h6, label {
     color: $heading-color;
   }
   #total {
-    color: $action-color;
+    /*color: $action-color;*/
+    color: $heading-color;
   }
 }

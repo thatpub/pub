@@ -15,6 +15,42 @@
     color: $result-color;
     font-style: normal;
   }
+  &.doc {
+    .related & {
+      flex-grow: 1;
+      color: $text-highlight-color;
+      margin: 0 1rem 0 0;
+      text-align: center;
+      border: none;
+      border-bottom: 1px solid transparent;
+      padding: 3px 5px;
+      font-size: 1.25rem;
+      &:hover {
+        border-bottom-color: $result-color;
+        color: $result-color;
+      }
+    }
+    &.pretty {
+      font-weight: 400;
+      color: $success-color;
+      &:hover {
+        border-bottom-color: $success-color;
+        color: $success-color;
+      }
+    }
+    .filtered & {
+      opacity: .35;
+      &.selected {
+        opacity: 1;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      &:hover {
+        opacity: .65;
+      }
+    }
+  }
   &.content {
     margin-bottom: 2rem;
     position: relative;
@@ -70,13 +106,13 @@
         font-size: 1.2rem;
       }
       @media all and (min-width:768px) {
-        font-size: 1.75rem;
+        font-size: 1.65rem;
         /*width: 80%;*/
         margin-left: auto;
         margin-right: auto;
       }
       @media all and (min-width:1140px) {
-        font-size: 1.65rem;
+        font-size: 1.5rem;
       }
     }
     .meta {
@@ -99,7 +135,7 @@
         .chapter, .section {
           font-size: .75rem;
           .title {
-            font-size: 1.2rem;
+            font-size: .875rem;
           }
         }
       }
@@ -120,10 +156,10 @@
           > {
             border-bottom: 1px solid transparent;
             .pub {
-              font-weight: 500;
+              font-weight: $bold;
             }
             .title {
-              font-weight: 300;
+              font-weight: $med;
             }
           }
         }
@@ -154,20 +190,22 @@
       em {
         color: $success-color;
       }
+      .number {
+        background: $success-color;
+      }
       .text {
         padding-left: 2rem;
         border-left: 3px solid $success;
       }
       &:hover {
         .doc-name {
-          color: inherit;
-          &:hover {
-            color: $success-color;
-          }
           .pub, .title {
-            border-bottom-color: inherit;
-            &:hover {
+            border-bottom-color: $text-highlight-color;
+          }
+          &:hover {
+            .pub, .title {
               border-bottom-color: $success-color;
+              color: $success-color;
             }
           }
         }
@@ -183,42 +221,6 @@
         .text, .details {
           display: block;
         }
-      }
-    }
-  }
-  &.doc {
-    .related & {
-      flex-grow: 1;
-      color: $text-highlight-color;
-      margin: 0 1rem 0 0;
-      text-align: center;
-      border: none;
-      border-bottom: 1px solid transparent;
-      padding: 3px 5px;
-      font-size: 1.25rem;
-      &:hover {
-        border-bottom-color: $result-color;
-        color: $result-color;
-      }
-    }
-    &.pretty {
-      font-weight: 400;
-      color: $success-color;
-      &:hover {
-        border-bottom-color: $success-color;
-        color: $success-color;
-      }
-    }
-    .filtered & {
-      opacity: .35;
-      &.selected {
-        opacity: 1;
-        &:hover {
-          opacity: 1;
-        }
-      }
-      &:hover {
-        opacity: .65;
       }
     }
   }

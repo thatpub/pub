@@ -53,8 +53,8 @@
       return false;
     }
 
-    app.searchWrap_.className = app.searchWrap_.className.replace(/ ?overlay|mini ?/g, ' done ');
-    app.page_.className = app.page_.className.replace(/ ?loading/, ' ');
+    app.searchWrap_.className = app.searchWrap_.className.replace(/ ?overlay| ?mini/g, ' done');
+    app.page_.className = app.page_.className.replace(/ ?loading/, '');
     expires = expires.toUTCString();
 
     if ( content ) {
@@ -62,8 +62,8 @@
       console.log(JSON.stringify(content.hits.hits[16].highlight));
       console.log(JSON.stringify(content.hits.hits[17].highlight));
       console.log(JSON.stringify(content.hits.hits[18].highlight));
-      app.summary_.className = app.summary_.className.replace(/hidden ?/g, ' ');
-      app.term_.innerHTML = app.term;
+      app.summary_.className = app.summary_.className.replace(/ ?hidden ?/g, '');
+      app.term_.innerHTML = '"' + app.term + '"';
       app.total_.innerHTML = content.hits.total;
       app.placeContent = content._scroll_id;
       document.cookie = 'placeContent=' + app.placeContent + '; expires=' + expires;
@@ -72,7 +72,7 @@
         app.scoresContent = _.pluck(content.hits.hits, '_score');
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h2 class='label'>Related Documents</h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><hr/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.results_.innerHTML = "<h2 class='label'>Related Documents<br/><small>(click to filter locally, press ESC to reset)</small></h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><hr/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
