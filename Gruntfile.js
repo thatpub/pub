@@ -8,7 +8,8 @@ module.exports = function(grunt) {
           trace: false
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss',
+          'src/css/ie.css': 'src/scss/ie.scss'
         }
       },
       dev: {
@@ -18,7 +19,8 @@ module.exports = function(grunt) {
           trace: true
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss',
+          'src/css/ie.css': 'src/scss/ie.scss'
         }
       }
     },
@@ -35,7 +37,8 @@ module.exports = function(grunt) {
           remove: true
         },
         files: {
-          'src/css/style.css': 'src/css/style.css'
+          'src/css/style.css': 'src/css/style.css',
+          'src/css/ie.css': 'src/css/ie.css'
         }
       },
       dev: {
@@ -50,7 +53,8 @@ module.exports = function(grunt) {
           remove: true
         },
         files: {
-          'dist/css/style.min.css': 'src/css/style.css'
+          'dist/css/style.min.css': 'src/css/style.css',
+          'dist/css/ie.min.css': 'src/css/ie.css'
         }
       }
     },
@@ -60,17 +64,11 @@ module.exports = function(grunt) {
           report: 'gzip'
         },
         files: {
-          'dist/css/style.min.css': 'src/css/style.css'
+          'dist/css/style.min.css': 'src/css/style.css',
+          'dist/css/ie.min.css': 'src/css/ie.css'
         }
       }
     },
-   /* uncss: {
-      dist: {
-        files: {
-          'dist/css/style.min.css': ['dist/index.html', 'src/test.html']
-        }
-      }
-    },*/
     react: {
       dynamic: {
         files: [

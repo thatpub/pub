@@ -50,37 +50,36 @@
     <script type="text/template" id="result-template">
       <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
         <% if ( type === " content" ) { %>
-        <p class="details">
-          <% if ( details && details.chapter && details.chapterTitle ) { %>
-            <span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>
-          <% } if ( details && details.section && details.sectionTitle ) { %>
-            <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
-          <% } %>
-        </p>
+        <h2 class="number"><%= sub %></h2>
         <div class="text clearfix">
           <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
           <a href="#" class="reveal">more...</a>
         </div>
         <div class="meta">
-          <p class="info" title="<%= date %>">
+          <div class="details">
+            <% if ( details && details.chapter && details.chapterTitle ) { %>
+            <span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>
+            <% } if ( details && details.section && details.sectionTitle ) { %>
+            <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
+            <% } %>
+          </div>
+          <div class="info" title="<%= date %>">
             <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
-              <span class="pub"><%= pub %></span><br/>
-              <span class="title"><%= title %></span>
+              <div class="pub"><%= pub %></div>
+              <div class="title"><%= title %></div>
             </a>
-          </p>
+          </div>
         </div>
-        <div class="number"><%= sub %></div>
         <% } else { %>
-        <div class="meta">
-          <p class="info" title="<%= date %>">
-            <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
-              <span class="pub"><%= pub %></span><br/>
-              <span class="title"><%= title %></span>
-            </a>
-          </p>
+        <div class="info" title="<%= date %>">
+          <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
+            <div class="pub"><%= pub %></div>
+            <div class="title"><%= title %></div>
+          </a>
         </div>
         <% } %>
       </div>
+      <hr/>
     </script>
 
     <!--<![endif]-->

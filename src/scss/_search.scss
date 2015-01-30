@@ -1,7 +1,4 @@
 #search-wrap {
-  /*-webkit-transition: .1s top ease, .1s left ease, .1s background ease;
-  -o-transition: .1s top ease, .1s left ease, .1s background ease;
-  transition: .1s top ease, .1s left ease, .1s background ease;*/
   display: none;
   width: 100%;
   position: fixed;
@@ -14,7 +11,7 @@
     z-index: 1;
     display: block;
     transition: background .25s ease;
-    background-color: $bg;
+    background-color: $bg-color;
     #search {
       display: block;
       @media all and (min-width: 768px) {
@@ -61,10 +58,6 @@
     }
   }
   &.done {
-    /*-webkit-transition: all .15s ease;
-    -moz-transition: all .15s ease;
-    -o-transition: all .15s ease;
-    transition: all .15s ease;*/
     bottom: 1rem;
     right: 1rem;
     top: auto;
@@ -81,10 +74,6 @@
     }
   }
   &.mini {
-    /*-webkit-transition: all .15s ease;
-    -moz-transition: all .15s ease;
-    -o-transition: all .15s ease;
-    transition: all .15s ease;*/
     width: 90%;
     height: 3.25rem;
     left: auto;
@@ -104,12 +93,12 @@
       top: 1rem;
     }
   }
+  .failed &.overlay {
+    background-color: $bg-color;
+  }
 }
 
 #search {
-  /*-webkit-transition: .1s transform ease;
-  -o-transition: .1s transform ease;
-  transition: .1s transform ease;*/
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -144,14 +133,11 @@
 }
 
 #search-restore {
-  /*-webkit-transition: .1s background ease;
-  -o-transition: .1s background ease;
-  transition: .1s background ease;*/
   position: relative;
   width: 100%;
   height: 100%;
   font-size: 2.5rem;
-  color: $bg;
+  color: $bg-color;
   background: url(../img/logo.svg) center center / cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -162,14 +148,8 @@
     width: 3.25rem;
     height: 3.25rem;
     background-color: $action-color;
-    /*-webkit-transition: .075s all ease;
-    -o-transition: .075s all ease;
-    transition: .075s all ease;*/
     &:hover {
-      background-color: $bg;
-      /*-webkit-transition: .1s background ease;
-      -o-transition: .1s background ease;
-      transition: .1s background ease;*/
+      background-color: $bg-color;
     }
   }
 }
@@ -195,7 +175,7 @@
 }
 
 #query {
-  background-color: $bg;
+  background-color: $bg-color;
   border: 1px solid $black;
   color: $black;
   font-size: 1.5rem;

@@ -1,0 +1,18 @@
+.no-flexbox, .ie9 {
+  .related {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    columns: 2;
+  }
+  &.no-csscolumns {
+    .related {
+      .doc {
+        margin: 1%;
+        float: left;
+        max-width: 47%;
+        width: 100%;
+      }
+    }
+  }
+}

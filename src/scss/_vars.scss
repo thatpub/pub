@@ -1,5 +1,5 @@
 $font: Roboto, Quando, Helvetica Neue, Helvetica, Trebuchet MS, Arial Condensed, Arial, sans-serif;
-$readable: Droid Serif, Georgia, Times New Roman, Times Roman, Times, serif;
+$readable: Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif;
 $heading: Montserrat, Quando, Quicksand, Georgia, Trebuchet MS, serif;
 
 $text-on-bg-color: #082642;
@@ -14,7 +14,7 @@ $success-color: #63B257;
 $success-highlight-color: #418CCA;
 $black: #232323;
 $white: #FEFEFE;
-$bg: #FAFAFA;
+$bg-color: #FAFAFA;
 $shadow-color: #AAAAAA;
 
 $result: $result-color;
@@ -25,3 +25,4 @@ $text: $text-color;
 $text-highlight: $text-highlight-color;
 $success: $success-color;
 $success-highlight: $success-highlight-color;
+$bg: $bg-color;

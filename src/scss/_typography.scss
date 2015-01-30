@@ -1,26 +1,18 @@
 h1, h2, h3, h4, h5, h6, label {
   cursor: default;
+  font-family: $heading;
 }
 .label {
-//  color: $text-highlight-color;
-  color: $heading-color;
   color: $text-color;
   font-weight: 500;
-//  border-bottom: 4px double;
   text-align: center;
 }
 .search-title {
-/*  color: $white;
-  text-shadow:  1px 1px 1px $action-color,
-  -1px -1px 1px $action-color,
-  -1px 1px 1px $action-color,
-  1px -1px 1px $action-color;*/
   color: $action-color;
+  text-shadow: 0 1px 0 $white;
   font: 1.75rem $heading;
   margin: 0 auto;
   position: relative;
-  /*max-width: 18rem;*/
-//  padding: 1rem;
   width: 100%;
   text-align: center;
   a {
@@ -39,13 +31,12 @@ h1, h2, h3, h4, h5, h6, label {
   color: $text-highlight-color;
   font-weight: 200;
   text-align: center;
-  margin: 2rem auto;
+  margin: 0 auto 2rem;
   #term {
     font-size: 2.25rem;
     color: $heading-color;
   }
   #total {
-    color: $success-color;
-    /*font-weight: bold;*/
+    color: $action-color;
   }
 }

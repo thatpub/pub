@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
 html,
 button,
 select,
@@ -22,26 +32,16 @@ body {
   line-height: 1.6;
   font-family: $font;
   font-size: 100%;
-  background: $bg url(../img/t-38_X1.png) right top;
+  background: $bg-color url(../img/t-38_X1.png) right top;
   background-repeat: repeat;
   background-attachment: fixed;
   zoom: 1;
-  *zoom: 1;
 }
 
-/* .ie9 body,
-.ie8 body,
-.ie7 body {
-} */
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
+a {
+  color: #1BA39C;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
 }
 
 q {
@@ -81,15 +81,9 @@ textarea {
   resize: vertical;
 }
 
-a {
-  color: #1BA39C;//#828282;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-
 .browsehappy {
   margin: 0.2rem 0;
-  background: #ccc;
+  background: #F5D76E;
   color: #000;
   padding: 0.2rem 0;
 }
@@ -98,30 +92,45 @@ a {
   background-color: $white;
   padding: 2rem 2rem 7rem;
   margin: 3rem auto;
-  border-right: 1px solid $bg;
-  border-left: 1px solid $bg;
-  box-shadow: 0 0 15px $shadow-color;
+  border-right: 1px solid $bg-color;
+  border-left: 1px solid $bg-color;
+  /*box-shadow: 0 0 15px 1px $shadow-color;*/
+  box-shadow: 0 0 3px rgba(0,0,0,.25);
+  position: relative;
+  &:before, &:after {
+    bottom: 26px;
+    box-shadow: 0 28px 8px rgba(0,0,0,.25);
+    content: "";
+    height: 28px;
+    position: absolute;
+    width: 48%;
+    z-index: -1;
+  }
+  &:before {
+    left: 2%;
+    transform: rotate(-3deg);
+  }
+  &:after {
+    right: 2%;
+    transform: rotate(3deg);
+  }
 }
 
 .wrapper {
   width: 90%;
   margin: 0 auto;
   &.overlay {
-    @media only screen and (min-width: 1140px) {
+    @media all and (min-width: 1140px) {
       width: 100%;
       margin: 0;
     }
   }
-  @media only screen and (min-width: 768px) {
+  @media all and (min-width: 768px) {
     width: 90%;
     margin: 0 5%;
   }
-  @media only screen and (min-width: 1140px) {
+  @media all and (min-width: 1140px) {
     width: 1026px; /* 1140px - 10% for margins */
     margin: 0 auto;
   }
 }
-
-
-
-
