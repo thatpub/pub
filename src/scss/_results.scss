@@ -5,10 +5,10 @@
   list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   border: none;
-  a {
+  .doc {
     flex-grow: 1;
     color: $text-highlight-color;
     margin: 0 1rem 0 0;
@@ -33,7 +33,7 @@
   }
   &.no-csscolumns {
     .related {
-      li {
+      .doc {
         margin: 1%;
         float: left;
         max-width: 47%;
@@ -44,22 +44,55 @@
 }
 
 .result {
+  em {
+    color: $result-color;
+    font-style: normal;
+  }
   &.content {
     margin-top: 2rem;
     position: relative;
     .details,
     .meta {
-      font-size: .875rem;
       color: $text-highlight-color;
       font-family: $font;
       margin: .125rem auto;
       @media all and (min-width:768px) {
-        font-size: 1.25rem;
         position: relative;
         width: 100%;
         top: 0;
         bottom: 0;
         margin: 0;
+      }
+    }
+    .details {
+      font-family: $readable;
+      font-size: .75em;
+      .title {
+        font-size: 1.35em;
+      }
+    }
+    .meta .info,
+    .number {
+      font-size: .875rem;
+      font-family: $font;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      text-align: right;
+      margin: .125rem auto;
+      clear: both;
+    }
+    .meta .doc-name {
+      color: inherit;
+      display: block;
+      .pub, .title {
+        border-bottom: 1px solid transparent;
+      }
+      .pub {
+        font-weight: 500;
+      }
+      .title {
+        font-weight: 300;
       }
     }
     .text {
@@ -68,8 +101,8 @@
       position: relative;
       font-size: 1.35rem;
       clear: both;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
       q {
         &:before {
           position: absolute;
@@ -97,60 +130,52 @@
         font-size: 1.65rem;
       }
     }
-  }
-  .info {
-    font-family: $font;
-    font-size: 1rem;
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    text-align: right;
-    margin: .125rem auto;
-    clear: both;
-    .doc-name {
-      font-weight: 500;
-      color: inherit;
-      .title {
-        font-weight: 300;
+    &:hover {
+      .doc-name {
+        .pub, .title {
+          border-bottom-color: $text-highlight-color;
+        }
+        &:hover {
+          .pub, .title {
+            border-bottom-color: $result-color;
+            color: $result-color;
+          }
+        }
+      }
+      /*em {
+        text-shadow: 1px 1px 0 $result-color,
+        -1px -1px 0 $result-color,
+        -1px 1px 0 $result-color,
+        1px -1px 0 $result-color;
+        color: $white;
+      }*/
+    }
+    .filtered &{
+      .text,
+      .details {
+        display: none;
       }
     }
-  }
-  em {
-    color: $result-color;
-    font-style: normal;
-  }
-  &:hover .doc-name {
-    border-bottom-color: inherit;
-    &:hover {
-      border-color: $result-color;
-      color: $result-color;
-    }
-  }
-}
-
-.filtered {
-  .result,
-  .doc a {
-    opacity: .35;
     &.selected {
-      opacity: 1;
-    }
-  }
-  .result {
-    .text {
-      display: none;
-    }
-    &.selected {
-      .text {
+      .text,
+      .details {
         display: block;
       }
     }
   }
-  .doc a {
-    &:hover {
-      opacity: .65;
+  &.doc {
+    .filtered & {
+      &:hover {
+        opacity: .65;
+      }
+      &.selected:hover {
+        opacity: 1;
+      }
     }
-    &.selected:hover {
+  }
+  .filtered & {
+    opacity: .35;
+    &.selected {
       opacity: 1;
     }
   }
@@ -187,8 +212,7 @@
 }
 
 .pretty {
-  &.doc {
-    a {
+  &.doc  {
       font-weight: 400;
       color: $success-color;
       &:hover {
@@ -196,22 +220,37 @@
         color: $success-color;
       }
     }
-  }
   &.content {
-    padding-left: 1rem;
-    border-left: 2px solid $success;
-    &:hover .doc-name:hover {
-      color: $success;
-      border-color: $success;
+    em {
+      color: $success-color;
+    }
+    .text {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      border-left: 3px solid $success;
+    }
+    &:hover {
+      .doc-name {
+        color: inherit;
+        &:hover {
+          color: $success-color;
+        }
+        span {
+          border-bottom-color: inherit;
+          &:hover {
+            border-bottom-color: $success-color;
+          }
+        }
+      }
+      /*em {
+        text-shadow: 1px 1px 0 $success-color,
+        -1px -1px 0 $success-color,
+        -1px 1px 0 $success-color,
+        1px -1px 0 $success-color;
+        color: $white;
+      }*/
     }
   }
-  em {
-    color: $success;
-  }
-}
-
-.boring {
-  font-size: .875rem;
 }
 
 .failed {

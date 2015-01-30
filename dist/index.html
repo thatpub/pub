@@ -42,10 +42,8 @@
     <!--[if gt IE 9]><!-->
 
     <script type="text/template" id="related-template">
-      <li class="doc<%= gravitas %>">
-        <a data-score="<%= score %>" id="<%= key %>">
-          <%= key %>
-        </a>
+      <li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
+        <%= key %>
       </li>
     </script>
 
@@ -54,26 +52,35 @@
         <% if ( type === " content" ) { %>
         <p class="details">
           <% if ( details && details.chapter && details.chapterTitle ) { %>
-            <span class="chapter">Chapter <%= details.chapter %> - <span class="title"><%= details.chapterTitle %></span></span><br/>
+            <span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>
           <% } if ( details && details.section && details.sectionTitle ) { %>
-            <span class="section">Section <%= details.section %> - <span class="title"><%= details.sectionTitle %></span></span><br/>
+            <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
           <% } %>
         </p>
-        <div class="number"><%= sub %></div>
         <div class="text clearfix">
           <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
           <a href="#" class="reveal">more...</a>
         </div>
-        <% } %>
         <div class="meta">
           <p class="info" title="<%= date %>">
-            <a class="doc-name" href="<%= url %>" download="<%= pub.toLowerCase() %>.pdf" target="_blank">
-              <%= pub %><br/><span class="title"><%= title %></span>
+            <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
+              <span class="pub"><%= pub %></span><br/>
+              <span class="title"><%= title %></span>
             </a>
           </p>
         </div>
+        <div class="number"><%= sub %></div>
+        <% } else { %>
+        <div class="meta">
+          <p class="info" title="<%= date %>">
+            <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
+              <span class="pub"><%= pub %></span><br/>
+              <span class="title"><%= title %></span>
+            </a>
+          </p>
+        </div>
+        <% } %>
       </div>
-      <hr/>
     </script>
 
     <!--<![endif]-->
@@ -114,7 +121,7 @@
     <div class="overlay search wrapper" id="search-wrap">
       <a href="#" id="search-restore"></a>
       <div id="search">
-        <header class="page-title">
+        <header class="search-title">
           <h1>Find the needle</h1>
         </header>
         <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
@@ -122,13 +129,13 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
   <!--[if lte IE 9]>
     <script type="text/javascript" src="js/ie.min.js"></script>
   <![endif]-->
   <!--[if gt IE 9]><!-->
     <script type="text/javascript" src="js/script.min.js"></script>
   <!--<![endif]-->
+    <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
   <script type="text/javascript">
     WebFontConfig = {
       google: { families: [ 'Droid+Serif:400,700:latin', /*'Quando::latin',*/ 'Roboto:500,300:latin' ] }

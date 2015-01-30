@@ -320,6 +320,10 @@
     }
   });
 
+  /*app.get('/grab*//*', function (req, res) {
+    var query = req.params.q;
+  });*/
+
   app.post('/content/search', function ( req, res ) {
     /* new search initiated, kill the old one */
     if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {

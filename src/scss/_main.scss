@@ -22,7 +22,11 @@ body {
   line-height: 1.6;
   font-family: $font;
   font-size: 100%;
-  background-color: $bg;
+  background: $bg url(../img/t-38_X1.png) right top;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  zoom: 1;
+  *zoom: 1;
 }
 
 /* .ie9 body,
@@ -92,7 +96,8 @@ a {
 
 #page {
   background-color: $white;
-  padding: 4rem 2rem 7rem;
+  padding: 2rem 2rem 7rem;
+  margin: 3rem auto;
   border-right: 1px solid $bg;
   border-left: 1px solid $bg;
   box-shadow: 0 0 15px $shadow-color;

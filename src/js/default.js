@@ -14,7 +14,7 @@
     if ( app.filterBy === '' ) {
       app.filtered_ = null;
       _.forEach(document.querySelectorAll('.doc a, .result'), function ( a ) {
-        a.className = a.className.replace('selected', '');
+        a.className = a.className.replace(/ ?selected/gi, '');
       });
       app.results_.className = app.results_.className.replace(/ ?filtered/gi, '');
       return false;
@@ -24,23 +24,20 @@
     } catch (error) {
       console.error(error);
     }
-    if ( app.filtered_ ) {
-      _.forEach(app.filtered_, function (found) {
-        found.className = found.className.replace('selected', '');
-      });
-      _.forEach(document.querySelectorAll('.doc a'), function ( a ) {
-        a.className = a.className.replace('selected', '');
-      });
-    }
-    else {
-      app.results_.className += ' filtered';
-    }
-    app.filtered_ = document.querySelectorAll('[data-pub="' + filter + '"]');
-    _.forEach(app.filtered_, function (found) {
-      found.className += ' selected';
+    _.forEach(document.querySelectorAll('.selected'), function ( a ) {
+      a.className = a.className.replace(/ ?selected/gi, '');
     });
-    if (el) {
-      el.className += ' selected';
+
+    app.results_.className = ( _.indexOf(app.results_.className, 'filtered') < 0 ) ? app.results_.className + ' filtered' : app.results_.className;
+
+    if ( app.filtered_ !== document.querySelectorAll('[data-pub="' + filter + '"]') ){
+      app.filtered_ = document.querySelectorAll('[data-pub="' + filter + '"]');
+      _.forEach(app.filtered_, function (found) {
+        found.className += ' selected';
+      });
+      if (el) {
+        el.className += ' selected';
+      }
     }
     return false;
   }
@@ -61,6 +58,10 @@
     expires = expires.toUTCString();
 
     if ( content ) {
+      console.log(JSON.stringify(content.hits.hits[0].highlight));
+      console.log(JSON.stringify(content.hits.hits[16].highlight));
+      console.log(JSON.stringify(content.hits.hits[17].highlight));
+      console.log(JSON.stringify(content.hits.hits[18].highlight));
       app.summary_.className = app.summary_.className.replace(/hidden ?/g, ' ');
       app.term_.innerHTML = app.term;
       app.total_.innerHTML = content.hits.total;
@@ -71,7 +72,7 @@
         app.scoresContent = _.pluck(content.hits.hits, '_score');
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h2 class='label'>Related Documents</h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><h2 class='label'>Results</h2>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.results_.innerHTML = "<h2 class='label'>Related Documents</h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><hr/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
@@ -83,7 +84,7 @@
       else {
         app.moreContent_.className = app.moreContent_.className.replace(/ ?hidden/g, ' ');
       }
-      _.forEach(document.querySelectorAll('.doc > a'), function (el) {
+      _.forEach(document.querySelectorAll('.doc'), function (el) {
         addEvent(el, 'click', filterResults);
       });
       filterResults();
