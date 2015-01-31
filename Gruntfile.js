@@ -93,6 +93,7 @@ module.exports = function(grunt) {
             src: [
               'src/lib/lodash/**lodash.min.js',
               'src/lib/modernizr/modernizr.js',
+              'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
@@ -113,6 +114,7 @@ module.exports = function(grunt) {
             src: [
               'src/lib/lodash/**lodash.js',
               'src/lib/modernizr/modernizr.js',
+              'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
               'src/js/default.js'
@@ -231,7 +233,6 @@ module.exports = function(grunt) {
     }
   });
 
-/*  grunt.loadNpmTasks('grunt-uncss');*/
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-newer');

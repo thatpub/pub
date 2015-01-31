@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <!--[if IE 8]>     <html class="no-js ie8" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
-<!--[if IE 9]>     <html class="no-js ie9" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
+<!--[if IE 9]>     <html class="no-js ie8 ie9" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" itemscope itemtype="http://schema.org/SearchAction"> <!--<![endif]-->
   <head>
     <!--[if gt IE 9]><!--><meta http-equiv="content-type" content="text/html; charset=UTF-8"><!--<![endif]-->
     <!--[if IE]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
 
     <title>thatPub</title>
+
+
+    <!--
+      @ATTRIBUTION
+
+      Credit given where credit is due.  In other words I stole this shit and am very
+      grateful to the author(s) for allowing it.
+     -->
+
+    <!--
+        The loading animation courtesy of Hugo Wiledal
+        Author profile (codepen): http://codepen.io/wiledal/
+            Thanks Hugo
+            http://codepen.io/wiledal/pen/EcGnI
+    -->
+
+    <!--
+        Snagged this outlier function from a StackOverflow question's answer.
+            Thanks jpau
+            http://stackoverflow.com/a/20811670/2780033
+    -->
+
+    <!--
+        This is more of a "thanks for reminding me to do this" but nonetheless, credit given.
+            Thanks Walsh.
+            http://davidwalsh.name/add-rules-stylesheets
+    -->
 
     <meta name="keywords" content="air force,publications,forms,search,policy,regulations,laws,rules,dod,government">
     <meta name="description" content="I'll find you something you didn't even know you needed.">
@@ -15,18 +42,13 @@
 
     <link rel="shortcut icon" href="http://that.pub/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="http://that.pub/apple-touch-icon.png">
-
-    <!-- Facebook Metadata /-->
     <meta property="fb:page_id" content="1" />
     <meta property="og:image" content="http://that.pub/img/logo.png" />
     <meta property="og:description" content="I'll find you something you didn't even know you needed."/>
     <meta property="og:title" content="thatPub"/>
-
-    <!-- Google+ Metadata /-->
     <meta itemprop="name" content="thatPub">
     <meta itemprop="description" content="I find things you weren't even looking for.">
     <meta itemprop="image" content="http://that.pub/img/logo.png">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@thatPub">
     <meta name="twitter:creator" content="@DeryckHenson">
@@ -34,35 +56,78 @@
     <meta name="twitter:description" content="I'll find you something you didn't even know you needed.">
     <meta name="twitter:image:src" content="http://that.pub/img/logo.png">
 
+    <noscript><link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700" rel="stylesheet" type="text/css"></noscript>
+
     <link rel="stylesheet" href="css/style.min.css" type="text/css">
 
+    <!--<script type="text/javascript" src="http://localhost:48626/takana.js"></script>-->
   </head>
   <body>
 
-  <div class="overlay search wrapper" id="search-wrap">
-    <div id="search">
+  <!--[if lte IE 9]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+<div class="wrapper" id="wrap">
+
+  <div class="wrapper" id="search-wrap">
+    <div class="search" id="search">
       <header class="search-title">
         <h1>Find the needle</h1>
       </header>
-      <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
-      <a href="#page" id="send">go</a>
+      <input type="text" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
+      <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
+      <a href="#page" id="send"><span class="action">go</span>
+        <div class="loader">
+          <div class="spinner">
+            <div class="blob top"></div>
+            <div class="blob bottom"></div>
+            <div class="blob left"></div>
+            <div class="blob move-blob"></div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
+
+  <div class="wrapper" id="page">
+    <div class="hidden" id="summary">
+      <h2 id="term"></h2>
+      <h3>produced <span id="total"></span> results</h3>
+    </div>
+    <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
+    <div id="count"></div>
+    <div id="results"></div>
+    <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
+      <div class="loader">
+        <div class="spinner">
+          <div class="blob top"></div>
+          <div class="blob bottom"></div>
+          <div class="blob left"></div>
+          <div class="blob move-blob"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <a href="#" id="search-restore"></a>
+
+  <a id="no-results" href="index.html">No results buddy.  Try it again.</a>
+
+</div>
     <!--[if gt IE 9]><!-->
 
     <script type="text/template" id="related-template">
-      <li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
+      <li class="result doc doc-<%= i %><%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
         <%= key %>
       </li>
     </script>
 
     <script type="text/template" id="result-template">
-      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
+      <div class="result<%= type %><%= type + '-' + index %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
         <% if ( type === " content" ) { %>
         <h2 class="number"><%= sub %></h2>
         <div class="text clearfix">
-          <span class="tickle"><%= fullText %></span><span class="pickle hidden"><%= fullText %></span><br/>
-          <a href="#" class="reveal">more...</a>
+          <span class="tickle"><%= startText %></span><% if ( fullText.length > startText.length ) { %><a href="#" class="reveal">...more</a><span class="pickle"><%= endText %></span><% } %>
         </div>
         <div class="meta">
           <div class="details">
@@ -84,46 +149,9 @@
         </a>
         <% } %>
       </div>
-      <hr/>
     </script>
 
     <!--<![endif]-->
-
-    <!--[if lte IE 9]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <div class="wrapper" id="page">
-      <!-- <h3 class="page-title">
-        <a href="/">thatPub</a>
-      </h3> -->
-      <div class="hidden" id="summary">
-        <h2 id="term"></h2>
-        <h3>produced <span id="total"></span> results</h3>
-      </div>
-
-      <button class="more meta hidden" id="more-meta">fetch »</button>
-      <div id="count"></div>
-      <div id="results"></div>
-      <button class="more content" id="more-content">more, please</button>
-      <!--
-          This loading animation courtesy of Hugo Wiledal
-          Author profile (codepen): http://codepen.io/wiledal/
-          Source: http://codepen.io/wiledal/pen/EcGnI
-              Thanks bro!
-        -->
-      <div id="loading">
-        <div class="spinner">
-          <div class="blob top"></div>
-          <div class="blob bottom"></div>
-          <div class="blob left"></div>
-          <div class="blob move-blob"></div>
-        </div>
-        <a id="no-results" href="index.html">No results buddy.  Try it again.</a>
-      </div>
-    </div>
-
-  <a href="#" id="search-restore"></a>
 
   <!--[if lte IE 9]>
     <script type="text/javascript" src="js/ie.min.js"></script>
@@ -131,10 +159,9 @@
   <!--[if gt IE 9]><!-->
     <script type="text/javascript" src="js/script.min.js"></script>
   <!--<![endif]-->
-    <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
   <script type="text/javascript">
     WebFontConfig = {
-      google: { families: [ 'Droid+Serif:400,700:latin', /*'Quando::latin', 'Roboto:500,300:latin' */ 'Montserrat:400,700:latin'] }
+      google: { families: [ 'Droid+Serif:400,700:latin', 'Montserrat:400,700:latin'] }
     };
     (function() {
       var wf = document.createElement('script');
@@ -147,13 +174,13 @@
     })();
   </script>
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  <script type="text/javascript">
+    /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-57324413-1', 'auto');
-    ga('send', 'pageview');
+    ga('send', 'pageview');*/
   </script>
   </body>
 </html>

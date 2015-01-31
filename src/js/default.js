@@ -1,22 +1,60 @@
 ;(function () {
-  'use strict';
-  app.resultTemplate = document.getElementById('result-template');
-  app.relatedTemplate = document.getElementById('related-template');
+  "use strict";
+
+  var regEmerge = / ?emerge/g,
+      regHidden = / ?hidden/g,
+      regLoad = / ?loading/g,
+      regSelected = / ?selected/g,
+      regFiltered = / ?filtered/g;
+
+  app.resultTemplate = document.getElementById("result-template");
+  app.relatedTemplate = document.getElementById("related-template");
 
   function addEvent ( element, evt, fnc ) {
-    return ((element.attachEvent) ? element.attachEvent('on' + evt, fnc) : element.addEventListener(evt, fnc, false));
+    return ((element.attachEvent) ? element.attachEvent("on" + evt, fnc) : element.addEventListener(evt, fnc, false));
   }
 
-  function filterResults (event) {
+  function colorize() {
+    var k = 0,
+        color = '';
+    var sheet = (function() {
+      var style = document.createElement("style");
+      style.appendChild(document.createTextNode(""));
+      document.head.appendChild(style);
+      return style.sheet;
+    })();
+    for (; k < 5; ++k) {
+      color = random();
+      sheet.addCSSRule(".result.doc.doc-" + k, "color: " + color + ";", 0);
+      sheet.addCSSRule(".result.doc.doc-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.content-" + k + " .number", "background-color: " + color + ";", 0);
+    }
+  }
+
+  function revealText ( event ) {
+    if ( event.preventDefault ) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+    this.parentNode.className += " opened";
+    return false;
+  }
+
+  addEvent(app.searchWrap_, 'transitionend', function ( event ) {
+
+  });
+
+  function filterResults ( event ) {
     var el = ( event ) ? event.currentTarget || event.sourceElement : null;
-    var filter = (el) ? el.getAttribute('id') : app.filterBy;
+    var filter = (el) ? el.getAttribute("id") : app.filterBy;
     app.filterBy = filter;
-    if ( app.filterBy === '' ) {
+    if ( app.filterBy === "" ) {
       app.filtered_ = null;
-      _.forEach(document.querySelectorAll('.doc a, .result'), function ( a ) {
-        a.className = a.className.replace(/ ?selected/gi, '');
+      _.forEach(document.querySelectorAll(".doc, .result"), function ( a ) {
+        a.className = a.className.replace(regSelected, "");
       });
-      app.results_.className = app.results_.className.replace(/ ?filtered/gi, '');
+      app.results_.className = app.results_.className.replace(regFiltered, "");
       return false;
     }
     try {
@@ -24,19 +62,19 @@
     } catch (error) {
       console.error(error);
     }
-    _.forEach(document.querySelectorAll('.selected'), function ( a ) {
-      a.className = a.className.replace(/ ?selected/gi, '');
+    _.forEach(document.querySelectorAll(".selected"), function ( sel ) {
+      sel.className = sel.className.replace(regSelected, "");
     });
 
-    app.results_.className = ( _.indexOf(app.results_.className, 'filtered') < 0 ) ? app.results_.className + ' filtered' : app.results_.className;
+    app.results_.className = ( _.indexOf(app.results_.className, "filtered") < 0 ) ? app.results_.className + " filtered" : app.results_.className;
 
-    if ( app.filtered_ !== document.querySelectorAll('[data-pub="' + filter + '"]') ){
-      app.filtered_ = document.querySelectorAll('[data-pub="' + filter + '"]');
+    if ( app.filtered_ !== document.querySelectorAll("[data-pub='" + filter + "']") ){
+      app.filtered_ = document.querySelectorAll("[data-pub='" + filter + "']");
       _.forEach(app.filtered_, function (found) {
-        found.className += ' selected';
+        found.className += " selected";
       });
       if (el) {
-        el.className += ' selected';
+        el.className += " selected";
       }
     }
     return false;
@@ -49,73 +87,67 @@
     var expires = new Date(Date.now() + 3600000);
 
     if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
-      app.page_.className += ' failed';
+      app.page_.className += " failed";
       return false;
     }
 
-    app.searchWrap_.className = app.searchWrap_.className.replace(/ ?overlay| ?mini/g, ' done');
-    app.page_.className = app.page_.className.replace(/ ?loading/, '');
+    app.searchWrap_.className = app.searchWrap_.className.replace(regEmerge, "");
+    document.body.className = document.body.className.replace(/ ?done|$/gm, ' done');
     expires = expires.toUTCString();
 
     if ( content ) {
-      console.log(JSON.stringify(content.hits.hits[0].highlight));
-      console.log(JSON.stringify(content.hits.hits[16].highlight));
-      console.log(JSON.stringify(content.hits.hits[17].highlight));
-      console.log(JSON.stringify(content.hits.hits[18].highlight));
-      app.summary_.className = app.summary_.className.replace(/ ?hidden ?/g, '');
-      app.term_.innerHTML = '"' + app.term + '"';
+      app.summary_.className = app.summary_.className.replace(regHidden, "");
+      app.term_.innerHTML = "\"" + app.term + "\"";
       app.total_.innerHTML = content.hits.total;
       app.placeContent = content._scroll_id;
-      document.cookie = 'placeContent=' + app.placeContent + '; expires=' + expires;
-      if ( action !== 'more' ) {
+      document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
+      if ( action !== "more" ) {
         window.scroll(0, 0);
-        app.scoresContent = _.pluck(content.hits.hits, '_score');
-        app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, 'score');
+        app.scoresContent = _.pluck(content.hits.hits, "_score");
+        app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
         app.results_.innerHTML = "";
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br/><small>(click to filter locally, press ESC to reset)</small></h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><hr/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
-        app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, '_score'));
+        app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, "_score"));
         app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       if ( content.hits.hits.length < 20 ) {
-        app.moreContent_.className += ' hidden';
+        app.moreContent_.className += " hidden";
       }
       else {
-        app.moreContent_.className = app.moreContent_.className.replace(/ ?hidden/g, ' ');
+        app.moreContent_.className = app.moreContent_.className.replace(regHidden, "");
       }
-      _.forEach(document.querySelectorAll('.doc'), function (el) {
-        addEvent(el, 'click', filterResults);
+      _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
+        addEvent(opener, "click", revealText);
+      });
+      _.forEach(document.querySelectorAll(".doc"), function (el) {
+        addEvent(el, "click", filterResults);
       });
       filterResults();
     }
     if ( meta ) {
       app.placeMeta = meta._scroll_id;
-      document.cookie = 'placeMeta=' + app.placeMeta + '; expires=' + expires;
+      document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
+
   }
 
-  function sendData ( responder, query, type, action, spot, dot ) {
-    var httpRequest = new XMLHttpRequest(),
-        url = 'http://find.that.pub/' + type + '/' + action,
-        urlHx = url + (action !== 'more' ?  '/' + encodeURIComponent(query).replace('%20', '+') : '');
+  function sendData ( responder, query, type, action, spot, dot, clbk ) {
+    var httpRequest = new XMLHttpRequest();
+    var url = "http://find.that.pub/" + type + "/" + action;
+    /*var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");*/
 
-    httpRequest.onreadystatechange = function(){
+    httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4) {
-
         if (httpRequest.status === 200) {
           responder(httpRequest, action);
-        }
-        else {
-          /*console.log(httpRequest);
-          console.log('what the hell you do');*/
+          clbk((action === "more") ? app.moreContent_ : app.send_);
         }
       }
     };
-    /*console.log(query);
-    console.log(app.querySetup(query));*/
-    httpRequest.open('POST', url, true);
-    httpRequest.setRequestHeader('Content-type', 'application/json');
+    httpRequest.open("POST", url, true);
+    httpRequest.setRequestHeader("Content-type", "application/json");
     httpRequest.send(
       JSON.stringify({
         t:app.querySetup(query),
@@ -125,39 +157,36 @@
     );
   }
 
-  addEvent(app.query_, 'keypress', function ( event ) {
+  function loader( el ) {
+    el.className = el.className.replace(regLoad, "");
+  }
+
+  addEvent(app.query_, "keypress", function ( event ) {
     if ( event.which === 13 ) {
       app.term = _.trim(app.query_.value);
       if ( !app.term ) { /* show notification/input validate here */
         return false;
       }
-      app.page_.className += ' loading';
-      app.filterBy = '';
-      sendData(dataResponse, app.term, 'content', 'search', app.placeContent, app.placeMeta);
+      app.send_.className += " loading";
+      app.filterBy = "";
+      sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);
       return false;
     }
   });
-  addEvent(document, 'keyup', function ( event ) {
+  addEvent(document, "keyup", function ( event ) {
     if ( event.which === 27 ) {
-      if ( app.regMini.test(app.searchWrap_.className) ) {
-        app.searchWrap_.className = app.searchWrap_.className.replace(app.regMini, ' done ');
-        app.query_.blur();
-        return false;
-      }
-      else {
-        app.filterBy = '';
-        filterResults();
-      }
+      app.filterBy = "";
+      filterResults();
     }
   });
-  addEvent(app.send_, 'click', function ( event ) {
+  addEvent(app.send_, "click", function ( event ) {
     app.term = _.trim(app.query_.value);
     if ( !app.term ) { /* show notification/input validate here */
       return false;
     }
-    app.page_.className += ' loading';
-    app.filterBy = '';
-    sendData(dataResponse, app.term, 'content', 'search', app.placeContent, app.placeMeta);
+    app.send_.className += " loading";
+    app.filterBy = "";
+    sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);
     if ( event.preventDefault ) {
       event.preventDefault();
     } else {
@@ -165,67 +194,42 @@
     }
     return false;
   });
-  addEvent(app.moreContent_, 'click', function ( event ) {
-    app.page_.className += ' loading';
-    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? '' : app.term, 'content', 'more', document.cookie.placeContent||app.placeContent, null);
+  addEvent(app.moreContent_, "click", function ( event ) {
+    app.moreContent_.className += " loading";
+    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, loader);
     if ( event.preventDefault ) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
   });
-  addEvent(app.moreMeta_, 'click', function ( event ) {
-    app.page_.className += ' loading';
-    sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? '' : app.term, 'meta', 'more', null, document.cookie.placeMeta||app.placeMeta);
+  addEvent(app.moreMeta_, "click", function ( event ) {
+    app.moreMeta_.className += " loading";
+    sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, loader);
     if ( event.preventDefault ) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
   });
-  addEvent(app.page_, 'click', function ( event ) {
-    if ( app.regMini.test(app.searchWrap_.className) ) {
-      app.searchWrap_.className = app.searchWrap_.className.replace(app.regMini, ' done ');
-      if ( event.preventDefault ) {
-        event.preventDefault();
-      } else {
-        event.returnValue = false;
-      }
-    }
-  });
-  addEvent(app.searchRestore_, 'click', function ( event ) {
-    app.query_.value = app.term||'';
-    app.searchWrap_.className = app.searchWrap_.className.replace(/done(?=\b)/, ' mini ');
+  addEvent(app.searchRestore_, "click", function ( event ) {
+    app.query_.value = app.term||"";
+    app.searchWrap_.className += " emerge";
     app.query_.focus();
     if ( event.preventDefault ) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
-    event.stopPropagation();
     return false;
   });
-  addEvent(window, 'load', function ( event ) {
-    if ( window.location.search !== '' ) {
-      app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, '%20'));
+  addEvent(window, "load", function () {
+    colorize();
+    app.query_.focus();
+    if ( window.location.search !== "" ) {
+      app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
+      app.term = _.trim(app.query_.value);
       app.send_.click();
     }
   });
-
-/*  addEvent(window, 'hashchange', function ( event ) {
-    var hash = event.newURL.slice(_.indexOf(event.newURL, '#') + 1);
-    if ( hash !== 'page' && hash !== '' ) {
-      if ( app.filtered_ !== null ) {
-        _.forEach(app.filtered_, function (found) {
-          found.className = found.className.replace(/ ?selected| ?filtered/gi, '');
-        });
-      }
-      app.results_.className += ' filtered';
-      app.filtered_ = document.querySelectorAll('[data-pub="' + hash + '"]');
-      _.forEach(app.filtered_, function (found) {
-        found.className += ' selected';
-      });
-    }
-  });*/
-
 })();

@@ -25,13 +25,14 @@ textarea {
 }
 
 html {
-  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 body {
-  line-height: 1.6;
   font-family: $font;
-  font-size: 100%;
+  font-size: 16px;
+  line-height: 1.6;
   background: $bg-color url(../img/t-38_X1.png) right top;
   background-repeat: repeat;
   background-attachment: fixed;
@@ -39,7 +40,7 @@ body {
 }
 
 a {
-  color: #1BA39C;
+  color: $action-color;
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
@@ -83,54 +84,37 @@ textarea {
 
 .browsehappy {
   margin: 0.2rem 0;
-  background: #F5D76E;
-  color: #000;
+  background: $action-highlight-color;
+  color: $black;
   padding: 0.2rem 0;
 }
 
 #page {
+  @include paperShadow;
+  top: 0;
   background-color: $white;
   padding: 2rem 2rem 7rem;
   margin: 3rem auto;
   border-right: 1px solid $bg-color;
   border-left: 1px solid $bg-color;
-  /*box-shadow: 0 0 15px 1px $shadow-color;*/
-  box-shadow: 0 0 3px rgba(0,0,0,.25);
   position: relative;
-  &:before, &:after {
-    bottom: 26px;
-    box-shadow: 0 28px 8px rgba(0,0,0,.25);
-    content: "";
-    height: 28px;
-    position: absolute;
-    width: 48%;
-    z-index: -1;
-  }
-  &:before {
-    left: 2%;
-    transform: rotate(-3deg);
-  }
-  &:after {
-    right: 2%;
-    transform: rotate(3deg);
-  }
+  /*@include transform(translateY(100%));
+  .done & {
+    @include transform(translateY(0));
+  }*/
 }
 
 .wrapper {
-  width: 90%;
-  margin: 0 auto;
-  &.overlay {
-    @media all and (min-width: 1140px) {
-      width: 100%;
-      margin: 0;
-    }
-  }
+  width: 100%;
+  height: 100%;
+  margin: 0;
   @media all and (min-width: 768px) {
+    max-width: 864px;
     width: 90%;
     margin: 0 5%;
   }
   @media all and (min-width: 1140px) {
-    width: 1026px; /* 1140px - 10% for margins */
+    width: 864px; /* 1140px - 10% for margins */
     margin: 0 auto;
   }
 }

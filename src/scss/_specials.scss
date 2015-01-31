@@ -1,10 +1,15 @@
+@mixin box-sizing($method) {
+  -webkit-box-sizing: $method;
+  -moz-box-sizing: $method;
+  box-sizing: $method;
+}
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
           border-radius: $radius;
-  /*  Why more?  Some weird bug on Samsung
-      Galaxy S4 Android 4.2 browsers.
-      Not exactly a high use-case so remove if desired.*/
+  /* WTF Why more?!  Some weird bug on Samsung
+     Galaxy S4 Android 4.2 browsers.
+       Not exactly a high use-case so remove if desired.*/
           border-left-top-radius: $radius;
           border-right-top-radius: $radius;
           border-right-bottom-radius: $radius;
@@ -14,4 +19,58 @@
   -ms-transform: $action;
   -webkit-transform: $action;
   transform: $action;
+}
+@mixin transition($property, $duration, $easing, $delay...) {
+  -webkit-transition: $property $duration $easing $delay;
+  -moz-transition: $property $duration $easing $delay;
+  -o-transition: $property $duration $easing $delay;
+  transition: $property $duration $easing $delay;
+}
+@mixin button($color) {
+  display: block;
+  color: $bg-color;
+  position: relative;
+  clear: both;
+  text-align: center;
+  background-color: $color;
+  border: none;
+  font-size: 2.5rem;
+  margin: 1rem auto 0;
+  padding: 1.25rem;
+  border-bottom: 1px solid darken($color, 80%); /*#22313F*/
+  border-top: 1px solid lighten($color, 80%); /*#C8F7C5*/
+  @include border-radius(8px);
+  &.content {
+    width: 90%;
+  }
+  &:active {
+    border-bottom-color: transparent;
+    border-top-color: darken($color, 85%);
+    text-shadow: 0 -1px 0 darken($color, 90%), 0 0 1px darken($color, 95%);
+  }
+  &.loading {
+    background: none;
+    border: none;
+  }
+}
+
+@mixin paperShadow {
+  &:before, &:after {
+    bottom: 26px;
+    box-shadow: 0 28px 8px rgba(0,0,0,.25);
+    content: "";
+    height: 28px;
+    position: absolute;
+    width: 48%;
+    z-index: -1;
+  }
+  &:before {
+    left: 2%;
+    transform: rotate(-3deg);
+  }
+  &:after {
+    right: 2%;
+    transform: rotate(3deg);
+  }
+  box-shadow: 0 0 3px rgba(0,0,0,.25);
 }

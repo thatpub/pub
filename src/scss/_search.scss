@@ -1,237 +1,136 @@
 #search-wrap {
-  display: none;
-  width: 100%;
+  @include transition(transform, .3s, ease);
+  @include transform(translateY(0));
+  background-color: $bg-color;
   position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 0;
-  &.overlay {
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    transition: background .25s ease;
-    background-color: $bg-color;
-    #search {
-      display: block;
-      @media all and (min-width: 768px) {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-    #search-restore {
-      display: none;
-    }
-    #send {
-      @media all and (min-width: 768px) {
-        font-size: 2.25rem;
-      }
-    }
-    #query {
-      @media all and (min-width: 768px) {
-        background: transparent;
-        border: none;
-        width: 34rem;
-        border-bottom: 1px solid $text-color;
-      }
-      &::-moz-input-placeholder {
-        @media all and (min-width: 768px) {
-          font-size: 1.5rem;
-          opacity: .5;
-        }
-      }
-      &::-webkit-input-placeholder {
-        @media all and (min-width: 768px) {
-          font-size: inherit;
-          opacity: .5;
-        }
-      }
-      &:focus,
-      &:active {
-        @media all and (min-width: 768px) {
-          border-top: none;
-          border-left: none;
-          border-right: none;
-          outline: 0;
-        }
-      }
-    }
-  }
-  &.done {
-    bottom: 1rem;
-    right: 1rem;
-    top: auto;
-    left: auto;
-    width: 3.25rem;
-    height: 3.25rem;
-    display: block;
-    border: 3px solid $action-color;
-    border-radius: 350px;
-    overflow: hidden;
-    @media all and (min-width: 1140px) {
-      bottom: auto;
-      top: 1rem;
-    }
-  }
-  &.mini {
-    width: 90%;
-    height: 3.25rem;
-    left: auto;
-    bottom: 1rem;
-    right: 1rem;
-    display: block;
-    overflow: visible;
-    @media all and (min-width: 480px) {
-      width: 28rem;
-    }
-    @media all and (min-width: 768px) {
-      width: 40rem;
-    }
-    @media all and (min-width: 1140px) {
-      width: 20rem;
-      bottom: auto;
-      top: 1rem;
-    }
-  }
-  .failed &.overlay {
-    background-color: $bg-color;
-  }
-}
-
-#search {
-  position: absolute;
-  bottom: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  .done & {
-    display: none;
-    width: 16rem;
-    height: 3.25rem;
-    float: right;
-    text-align: right;
+  height: 100%;
+  #search {
+    position: absolute;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     @media all and (min-width: 480px) {
       width: 28rem;
     }
     @media all and (min-width: 768px) {
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%));
       width: 40rem;
     }
     @media all and (min-width: 1140px) {
-      width: 20rem;
+//      width: 20rem;
     }
   }
-  .mini & {
-    height: 100%;
-    width: 100%;
-    float: right;
-    text-align: right;
-    .search-title {
-      display: none;
+  .done & {
+    z-index: 0;
+    @include transition(transform, .3s, ease);
+    @include transform(translateY(-100%));
+    /*bottom: 100%;
+    top: auto;*/
+    display: block;
+    overflow: hidden;
+    &.emerge {
+      @media all and (min-width: 1140px) {
+        @include transform(translateY(0));
+        width: 100%;
+        margin: 0;
+        z-index: 2;
+      }
     }
   }
 }
 
-#search-restore {
-  position: relative;
-  /*width: 100%;
-  height: 100%;
-  font-size: 2.5rem;
-  color: $bg-color;*/
-  background: url(../img/logo.png) center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  .done & {
-    display: block;
-    position: relative;
-    width: 3.25rem;
-    height: 3.25rem;
-    background-color: $action-color;
-    &:hover {
-      background-color: $bg-color;
-    }
-  }
-  .mini & {
-    #search-restore {
-      display: none;
-    }
-  }
-}
 
 #query, #send {
-  margin: 1rem auto;
   position: relative;
   display: block;
   float: none;
   clear: both;
+  margin: 1rem auto;
   outline: 0;
-  .done & {
-    clear: none;
-    float: left;
-    margin: 0;
-  }
-  .mini & {
-    margin: 0;
-    clear: none;
-    float: left;
-    outline: none;
-  }
 }
 
 #query {
+  @include box-sizing(border-box);
+  @include paperShadow;
+  padding: .75rem;
+  max-width: 100%;
+  outline: 0;
+  border: 1px solid;
+  border-radius: .75rem;
   background-color: $bg-color;
-  border: 1px solid $black;
   color: $black;
   font-size: 1.5rem;
-  outline: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border-radius: .75rem;
-  padding: .75rem;
-  width: 75%;
+  &:focus,
+  &:active {
+    @media all and (min-width: 768px) {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      outline: 0;
+    }
+  }
   &::-webkit-input-placeholder {
-    opacity: .5;
-    width: 100%;
     display: inline;
+    width: 100%;
     white-space: normal;
+    opacity: .5;
+    @media all and (min-width: 768px) {
+      font-size: inherit;
+    }
   }
   &::-moz-input-placeholder {
-    opacity: .5;
-    width: 100%;
     display: inline;
+    width: 100%;
     white-space: normal;
+    opacity: .5;
+    @media all and (min-width: 768px) {
+//      font-size: 1.5rem;
+      font-size: inherit;
+    }
   }
   @media all and (min-width: 768px) {
     border-radius: 0;
     border-color: $text-color;
-  }
-  .mini & {
-    width: 75%;
-    background-color: $white;
-    color: $black;
-    -webkit-box-shadow: 0 0 15px 15px $white;
-    -moz-box-shadow: 0 0 15px 15px $white;
-    box-shadow: 0 0 15px 15px $white;
+    background: transparent;
+    border: none;
+    width: 34rem;
+    border-bottom: 1px solid $text-color;
   }
 }
 
 #send {
-  background-color: $action-color;
-  color: #F6FCF4;
-  display: block;
-  text-align: center;
-  border-radius: 16px;
-  white-space: normal;
-  padding: .25rem;
-  max-width: 18rem;
+  @include button($action-color);
   width: 100%;
-  font-size: 2.25rem;
-  &:active {
-    border-bottom-color: transparent;
-    border-top-color: rgba(44, 62, 80, .5);
-    text-shadow: 0 -1px 0 rgba(34, 49, 63, .5), 0 0 1px rgba(34, 49, 63, .125);
-  }
-  .mini & {
-    font-size: 1.75rem;
-    width: 18.75%;
+  max-width: 18rem;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  @include transform(translateX(-50%));
+}
+
+#search-restore {
+  @include iconSearch;
+  width: 3rem;
+  height: 3rem;
+  .done & {
+    position: fixed;
+    display: block;
+    bottom: 1rem;
+    right: 1rem;
+    box-shadow: 0 0 2px $white;
+    &:hover {
+      opacity: .5;
+    }
+    @media all and (min-width: 768px) {
+      box-shadow: none;
+      top: 1rem;
+      bottom: auto;
+    }
   }
 }

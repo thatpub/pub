@@ -56,9 +56,9 @@
     position: relative;
 
     .number {
-      background: $result-highlight-color; //#08b;
+      background-color: $result-highlight-color; //#08b;
       background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
-      color: #fff;
+      color: $white;
       font-size: 18px;
       font-weight: bold;
       text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
@@ -100,14 +100,29 @@
         }
       }
       .reveal {
+        display: inline-block;
+        font-size: .75rem;
+        margin: 0 0 .25rem 1rem;
+        border: 1px solid;
+        padding: .25rem .375rem;
+        @include border-radius(4px);
+      }
+      .pickle {
         display: none;
+      }
+      &.opened {
+        .reveal {
+          display: none;
+        }
+        .pickle {
+          display: inline;
+        }
       }
       @media all and (min-width:480px) {
         font-size: 1.2rem;
       }
       @media all and (min-width:768px) {
         font-size: 1.65rem;
-        /*width: 80%;*/
         margin-left: auto;
         margin-right: auto;
       }
@@ -122,7 +137,6 @@
       color: $text-highlight-color;
       font-family: $font;
       font-size: 1rem;
-//      margin: .125rem auto;
       .details {
         float: left;
         /*position: absolute;
@@ -160,11 +174,6 @@
           }
         }
       }
-      /*@media all and (min-width:768px) {
-        top: 0;
-        bottom: 0;
-        margin: 0;
-      }*/
     }
 
     &:hover {
@@ -207,39 +216,37 @@
     }
     .filtered & {
       opacity: .35;
+      .number {
+        display: none;
+      }
       .text, .details {
         display: none;
       }
+      .info {
+        pointer-events: none;
+      }
       &.selected {
         opacity: 1;
+        .number {
+          display: block;
+        }
         .text, .details {
           display: block;
         }
+        .info {
+          pointer-events: all;
+        }
       }
+    }
+    @media all and (min-width: 768px) {
+      padding-left: 3rem;
+      padding-right: 3rem;
     }
   }
 }
 
 .more {
-  color: $bg-color;
-  position: relative;
-  clear: both;
-  background-color: $result-color;
-  border: none;
-  border-radius: 8px;
-  &.content {
-    border-bottom: 1px solid #22313F;
-    border-top: 1px solid #C8F7C5;
-    display: block;
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 1rem auto 0;
-    padding: 1.25rem;
-    width: 90%;
-  }
-  &:active {
-    border-bottom-color: transparent;
-    border-top-color: rgba(44, 62, 80, .5);
-    text-shadow: 0 -1px 0 rgba(34, 49, 63, .5), 0 0 1px rgba(34, 49, 63, .125);
-  }
+  @include button($result-color);
+  position: absolute;
+  bottom: 2rem;
 }

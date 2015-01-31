@@ -6,7 +6,7 @@
         host: "localhost:9200",
         log: ""
       }),
-      /*_ = require("lodash-node"),*/
+      _ = require("lodash-node"),
       app = express(),
       bp = require("body-parser"),
       cp = require("cookie-parser"),
@@ -14,23 +14,10 @@
       http = require("http"),
       server;
 
-/*  String.prototype.toCamelCase = function() {
-    return this.toLowerCase().replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
-  };*/
-  String.prototype.toTitle = function () {
-    return this.replace(/(?:[^a-zA-Z<\/0-9]+?|^)(\w\S*)/gmi, function( full, txt ) {
-      return ( full.charAt(0) === " " ) ? " " + txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() : txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
-/*  String.prototype.toSentence = function () {
-    return this.replace(/(?:\W?)\w\S*//*g, function( full, txt ) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };*/
   app.use(cors());
   app.use(bp.json());
   app.use(cp());
-  app.enable('trust proxy');
+  app.enable("trust proxy");
 
   function querySetup ( term ) {
     var termArray = [];
@@ -282,7 +269,7 @@
   }
 
 
-  app.post('/content/more', function ( req, res ) {
+  app.post("/content/more", function ( req, res ) {
     if ( req.body.g || req.cookies && req.cookies.placeContent ) {
       var qObj = {
         scroll: "3600s",
@@ -301,7 +288,7 @@
     }
   });
 
-  app.post('/meta/more', function ( req, res ) {
+  app.post("/meta/more", function ( req, res ) {
     if ( req.body.s || req.cookies && req.cookies.placeMeta ) {
       var qObj = {
         scroll: "3600s",
@@ -320,18 +307,18 @@
     }
   });
 
-  /*app.get('/grab*//*', function (req, res) {
+  /*app.get("/grab*//*", function (req, res) {
     var query = req.params.q;
   });*/
 
-  app.post('/content/search', function ( req, res ) {
+  app.post("/content/search", function ( req, res ) {
     /* new search initiated, kill the old one */
     if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
       var opts = {
-        hostname: 'reset.that.pub',
+        hostname: "reset.that.pub",
         port: 80,
-        path: '/',
-        method: 'POST'
+        path: "/",
+        method: "POST"
       };
       var newReq = http.request(opts, function() {
 
@@ -382,7 +369,7 @@
 
   server = app.listen(process.argv[2], function () {
     var port = server.address().port;
-    console.log('Pub/Form Searcher listening on port %s', port);
+    console.log("Pub/Form Searcher listening on port %s", port);
   });
 
 })();

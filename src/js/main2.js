@@ -1,25 +1,34 @@
+/**
+  * If you don't use block-style comments and strict-mode, you, sir, are wrong.
+  */
+
 var app = (function () {
-  'use strict';
-  var regMini = / ?mini ?/g,
-      months = {
-        '01': 'Jan',
-        '02': 'Feb',
-        '03': 'Mar',
-        '04': 'Apr',
-        '05': 'May',
-        '06': 'Jun',
-        '07': 'Jul',
-        '08': 'Aug',
-        '09': 'Sep',
-        '10': 'Oct',
-        '11': 'Nov',
-        '12': 'Dec'
-      };
+  "use strict";
+  var months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec"
+  };
+
+  CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
+    if ( "insertRule" in this ) {
+      this.insertRule(selector + "{" + rules + "}", index);
+    }
+    else if ( "addRule" in this ) {
+      this.addRule(selector, rules, index);
+    }
+  };
 
   function filterOutliers ( someArray ) {
-    /* Thanks to jpau for the outlier function
-     * http://stackoverflow.com/a/20811670/2780033
-     */
     var values = someArray.concat();
     values.sort( function ( a, b ) {
       return a - b;
@@ -35,47 +44,53 @@ var app = (function () {
   }
 
   return {
-    searchWrap_: document.getElementById('search-wrap'),
-    searchRestore_: document.getElementById('search-restore'),
-    page_: document.getElementById('page'),
-    results_: document.getElementById('results'),
-    summary_: document.getElementById('summary'),
-    term_: document.getElementById('term'),
-    total_: document.getElementById('total'),
-    query_: document.getElementById('query'),
-    send_: document.getElementById('send'),
-    moreMeta_: document.getElementById('more-meta'),
-    moreContent_: document.getElementById('more-content'),
-    related_: document.getElementById('related'),
-    placeContent: document.cookie.placeContent||'',
-    placeMeta: document.cookie.placeMeta||'',
+    searchWrap_: document.getElementById("search-wrap"),
+    searchRestore_: document.getElementById("search-restore"),
+    page_: document.getElementById("page"),
+    results_: document.getElementById("results"),
+    summary_: document.getElementById("summary"),
+    term_: document.getElementById("term"),
+    total_: document.getElementById("total"),
+    query_: document.getElementById("query"),
+    send_: document.getElementById("send"),
+    moreMeta_: document.getElementById("more-meta"),
+    moreContent_: document.getElementById("more-content"),
+    related_: document.getElementById("related"),
+    placeContent: document.cookie.placeContent||"",
+    placeMeta: document.cookie.placeMeta||"",
     traveling: false,
-    regMini: regMini,
-    term: '',
+    term: "",
     scoresContent: [],
     scoresRelatives: [],
+    colors: {},
     dataRender: function ( data, allScores ) {
       var output = {},
           regType = /chapter|section/,
           number,
           full,
+          partialText,
           fullPub,
           text,
           date,
           highlights,
           fileFormat;
       if ( !data._source && data.key && data.score ) {
-          /* This won't work without more fields in the aggregation to give me
-              info to use.  Filetype is unknown, date, URL, etc. */
+          /**
+           *  This won't work without more fields in the aggregation to give me
+           *  info to use.  File type is unknown, date, URL, etc.
+           */
+        var index = _.indexOf(allScores, data.score);
+        app.colors[data.key] = index;
         output = {
-          url: 'http://get.that.pub/' + data.key.toLowerCase() + '.pdf',
+          url: "http://get.that.pub/" + data.key.toLowerCase() + ".pdf",
           key: data.key,
           score: data.score,
+          i: index,
           gravitas: (
             _.contains(
               filterOutliers(allScores), data.score
             ) || data.score >= 1
-          ) ? ' pretty' : ' boring'
+          ) ? " pretty" : " boring"
         };
       }
       else if ( data._source.text ) {
@@ -84,38 +99,45 @@ var app = (function () {
         full = data._source.text;
         fullPub = data._source.productNo;
         highlights = Object.keys(data.highlight);
-        fileFormat = ( data._type !== 'form' ) ? '.pdf' : '.xfdl';
+        fileFormat = ( data._type !== "form" ) ? ".pdf" : ".xfdl";
 
-        if ( /productNo(?:\.exact|\.raw)?(?=\:|$)/.test(highlights.join(':')) ) {
-          fullPub = data.highlight['productNo.exact'] || data.highlight['productNo.raw'] || data.highlight.productNo;
+        if ( /productNo(?:\.exact|\.raw)?(?=\:|$)/.test(highlights.join(":")) ) {
+          fullPub = data.highlight["productNo.exact"] || data.highlight["productNo.raw"] || data.highlight.productNo;
           fullPub = fullPub.shift();
         }
-        /* This is for when I have the results split up by XX characters each.*/
-        /*full = "<span>" + (data.highlight.text||data._source.text||"") + "</span>";*/
+        /**
+         *  This is for when I have the results split up by XX characters each.
+         */
+        /* full = "<span>" + (data.highlight.text||data._source.text||"") + "</span>"; */
         try {
-          full = text[0]||full||null;
+          full = text&&text[0]||text||full||null;
         } catch (badz) {
-          full = full||null; /* This only happens if it's just the meta info */
+          console.trace(badz);
         }
-
+        partialText = _.trunc(full, {
+          "length": 100,
+          "omission": "",
+          "separator": /(<em>.*<\/em>)/gmi
+        });
           date = ( data._source.releaseDate ) ?
-                 data._source.releaseDate.substring(6, 8) + ' ' + months[data._source.releaseDate.substring(4, 6)] + ' ' + data._source.releaseDate.substring(0, 4) :
-                 data._source.publishedDate.substring(0, 2) + ' ' + months[data._source.publishedDate.substring(2, 4)] + ' ' + data._source.publishedDate.substring(4, 8);
+                 data._source.releaseDate.substring(6, 8) + " " + months[data._source.releaseDate.substring(4, 6)] + " " + data._source.releaseDate.substring(0, 4) :
+                 data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
 
         if ( regType.test(data._type) && data._type.length === 7 ) {
-          number = data._type.toTitle() + ' ' + data._source.number;
+          number = _.capitalize(data._type) + " " + data._source.number;
         }
 
         output = {
+          index: app.colors[data._source.productNo||data._source.pubName],
           score: data._score,
-          gravitas: ( _.contains( filterOutliers(allScores), data._score ) || data._score >= 1 ) ? ' pretty' : ' boring',
+          gravitas: ( _.contains( filterOutliers(allScores), data._score ) || data._score >= 1 ) ? " pretty" : " boring",
           date: date,
-          url: 'http://get.that.pub/' + data._source.productNo.toLowerCase() + fileFormat,
+          url: "http://get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
           pub: fullPub,
-          rawPub: data._source.productNo,
+          /*rawPub: data._source.productNo,*/
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
-          sub: ( full ) ? number : '',
+          sub: ( full ) ? number : "",
           details: {
             chapter: data._source.chapter && data._source.chapter.number || null,
             chapterTitle: data.highlight["chapter.title"] || data._source.chapter && data._source.chapter.title || null,
@@ -123,10 +145,10 @@ var app = (function () {
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
           fullText: full,
-          partText: full.longToShort().before,
-          partText2: full.longToShort().after,
+          startText: partialText,
+          endText: full.replace(partialText, ""),
           fileFormat: fileFormat,
-          type: ( full ) ? ' content' : ' doc'
+          type: ( full ) ? " content" : " doc"
         };
 
       }
@@ -142,13 +164,13 @@ var app = (function () {
       })(term.toPubName());
     },
     addItem: function ( results, templateCode, allScores ) {
-      var tmp = '',
+      var tmp = "",
           that = this;
       _.forEach(results, function ( result ) {
         tmp += _.template(templateCode)(that.dataRender(result, allScores));
       });
       return tmp;
     },
-    filterBy: ''
+    filterBy: ""
   };
 })();
