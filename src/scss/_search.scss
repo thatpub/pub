@@ -126,23 +126,20 @@
     .search-title {
       display: none;
     }
-    #search-restore {
-      display: none;
-    }
   }
 }
 
 #search-restore {
   position: relative;
-  width: 100%;
+  /*width: 100%;
   height: 100%;
   font-size: 2.5rem;
-  color: $bg-color;
-  background: url(../img/logo.svg) center center / cover;
+  color: $bg-color;*/
+  background: url(../img/logo.png) center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
   .done & {
-    text-align: center;
     display: block;
     position: relative;
     width: 3.25rem;
@@ -150,6 +147,11 @@
     background-color: $action-color;
     &:hover {
       background-color: $bg-color;
+    }
+  }
+  .mini & {
+    #search-restore {
+      display: none;
     }
   }
 }

@@ -39,6 +39,15 @@
   </head>
   <body>
 
+  <div class="overlay search wrapper" id="search-wrap">
+    <div id="search">
+      <header class="search-title">
+        <h1>Find the needle</h1>
+      </header>
+      <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
+      <a href="#page" id="send">go</a>
+    </div>
+  </div>
     <!--[if gt IE 9]><!-->
 
     <script type="text/template" id="related-template">
@@ -63,20 +72,16 @@
             <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
             <% } %>
           </div>
-          <div class="info" title="<%= date %>">
-            <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
-              <div class="pub"><%= pub %></div>
-              <div class="title"><%= title %></div>
-            </a>
-          </div>
-        </div>
-        <% } else { %>
-        <div class="info" title="<%= date %>">
-          <a class="doc-name" href="<%= url %>" download="<%= pub %>.pdf" target="_blank">
-            <div class="pub"><%= pub %></div>
-            <div class="title"><%= title %></div>
+          <a class="info" href="<%= url %>" title="<%= date %>" download="<%= pub %>.pdf" target="_blank">
+            <span class="pub"><%= pub %></span><br/>
+            <span class="title"><%= title %></span>
           </a>
         </div>
+        <% } else { %>
+        <a class="info" href="<%= url %>" title="<%= date %>" download="<%= pub %>.pdf" target="_blank">
+          <div class="pub"><%= pub %></div>
+          <div class="title"><%= title %></div>
+        </a>
         <% } %>
       </div>
       <hr/>
@@ -117,16 +122,8 @@
         <a id="no-results" href="index.html">No results buddy.  Try it again.</a>
       </div>
     </div>
-    <div class="overlay search wrapper" id="search-wrap">
-      <a href="#" id="search-restore"></a>
-      <div id="search">
-        <header class="search-title">
-          <h1>Find the needle</h1>
-        </header>
-        <input type="search" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
-        <a href="#page" id="send">go</a>
-      </div>
-    </div>
+
+  <a href="#" id="search-restore"></a>
 
   <!--[if lte IE 9]>
     <script type="text/javascript" src="js/ie.min.js"></script>
