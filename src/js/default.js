@@ -24,7 +24,7 @@
       return style.sheet;
     })();
     for (; k < 5; ++k) {
-      color = random();
+      color = randomColor();
       sheet.addCSSRule(".result.doc.doc-" + k, "color: " + color + ";", 0);
       sheet.addCSSRule(".result.doc.doc-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.content-" + k + " .number", "background-color: " + color + ";", 0);
