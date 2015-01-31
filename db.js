@@ -51,11 +51,11 @@
           "title.exact": term.noPubName
         }
       });
-      termArray.push({
+      /*termArray.push({
         "term": {
           "category.exact": term.noPubName
         }
-      });
+      });*/
     }
 
     return termArray;
@@ -73,7 +73,7 @@
           "chapter.title.exact": term.noPubName
         }
       });
-      termArray.push({
+      /*termArray.push({
         "multi_match": {
           "query": term.noPubName,
           "type": "most_fields",
@@ -83,7 +83,7 @@
             "category.english2"
           ]
         }
-      });
+      });*/
     }
     return {
       index: "dept",
@@ -117,10 +117,10 @@
         },
         "highlight": {
           "fields": {
-            "text.english2": {
-              /*"matched_fields": [
+            "text": {
+              "matched_fields": [
                 "text.english2"
-              ],*/
+              ],
               "type": "fvh",
               /*"number_of_fragments": 0*/
               "fragment_size": 150

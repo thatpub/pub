@@ -103,7 +103,7 @@
 }
 
 #send {
-  @include button($action-color);
+  @include button($action-color, .75rem);
   @include transform(translateX(-50%));
   width: 100%;
   max-width: 18rem;
