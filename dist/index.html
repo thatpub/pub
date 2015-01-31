@@ -19,13 +19,13 @@
     <!--
         The loading animation courtesy of Hugo Wiledal
         Author profile (codepen): http://codepen.io/wiledal/
-            Thanks Hugo
+            Thanks Hugo.
             http://codepen.io/wiledal/pen/EcGnI
     -->
 
     <!--
         Snagged this outlier function from a StackOverflow question's answer.
-            Thanks jpau
+            Thanks jpau.
             http://stackoverflow.com/a/20811670/2780033
     -->
 
@@ -33,6 +33,12 @@
         This is more of a "thanks for reminding me to do this" but nonetheless, credit given.
             Thanks Walsh.
             http://davidwalsh.name/add-rules-stylesheets
+    -->
+
+    <!--
+        Handy little find here for getting element position.  Gotta love S.O.
+            Thanks Andy E.
+            http://stackoverflow.com/a/11396681/2780033
     -->
 
     <meta name="keywords" content="air force,publications,forms,search,policy,regulations,laws,rules,dod,government">
@@ -67,16 +73,37 @@
   <!--[if lte IE 9]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-<div class="wrapper" id="wrap">
+  <div class="wrapper" id="wrap">
 
-  <div class="wrapper" id="search-wrap">
-    <div class="search" id="search">
-      <header class="search-title">
-        <h1>Find the needle</h1>
-      </header>
-      <input type="text" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
-      <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
-      <a href="#page" id="send"><span class="action">go</span>
+    <div class="wrapper emerge" id="search-wrap">
+      <div class="search" id="search">
+        <header class="search-title">
+          <h1>Find the needle</h1>
+        </header>
+        <input type="text" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
+        <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
+        <a href="#page" id="send"><span class="action">go</span>
+          <div class="loader">
+            <div class="spinner">
+              <div class="blob top"></div>
+              <div class="blob bottom"></div>
+              <div class="blob left"></div>
+              <div class="blob move-blob"></div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="wrapper" id="page">
+      <div class="hidden" id="summary">
+        <h2 id="term"></h2>
+        <h3>produced <span id="total"></span> results</h3>
+        <a href="index.html" id="no-results">No results buddy.  Try it again.</a>
+      </div>
+      <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
+      <div id="results"></div>
+      <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
         <div class="loader">
           <div class="spinner">
             <div class="blob top"></div>
@@ -87,47 +114,34 @@
         </div>
       </a>
     </div>
-  </div>
 
-  <div class="wrapper" id="page">
-    <div class="hidden" id="summary">
-      <h2 id="term"></h2>
-      <h3>produced <span id="total"></span> results</h3>
-    </div>
-    <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
-    <div id="count"></div>
-    <div id="results"></div>
-    <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
-      <div class="loader">
-        <div class="spinner">
-          <div class="blob top"></div>
-          <div class="blob bottom"></div>
-          <div class="blob left"></div>
-          <div class="blob move-blob"></div>
-        </div>
-      </div>
+    <a href="#" id="search-restore">
+      <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
     </a>
+
+    <input type="checkbox" id="infini-scroll" name="infini-scroll" checked/>
+    <label for="infini-scroll">Infinite scrolling <span id="inf-status">enabled</span></label>
+
   </div>
-
-  <a href="#" id="search-restore"></a>
-
-  <a id="no-results" href="index.html">No results buddy.  Try it again.</a>
-
-</div>
     <!--[if gt IE 9]><!-->
 
     <script type="text/template" id="related-template">
-      <li class="result doc doc-<%= i %><%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
+      <li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
         <%= key %>
       </li>
     </script>
 
     <script type="text/template" id="result-template">
-      <div class="result<%= type %><%= type + '-' + index %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
+      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
         <% if ( type === " content" ) { %>
         <h2 class="number"><%= sub %></h2>
         <div class="text clearfix">
-          <span class="tickle"><%= startText %></span><% if ( fullText.length > startText.length ) { %><a href="#" class="reveal">...more</a><span class="pickle"><%= endText %></span><% } %>
+          <% if ( fullText.length > startText.length ) { %>
+          <span class="tickle"><%= startText %></span><span class="pickle"><%= endText %></span>
+          <a href="#" class="reveal">...</a>
+          <% } else { %>
+          <%= fullText %>
+          <% } %>
         </div>
         <div class="meta">
           <div class="details">
@@ -144,8 +158,8 @@
         </div>
         <% } else { %>
         <a class="info" href="<%= url %>" title="<%= date %>" download="<%= pub %>.pdf" target="_blank">
-          <div class="pub"><%= pub %></div>
-          <div class="title"><%= title %></div>
+          <span class="pub"><%= pub %></span><br/>
+          <span class="title"><%= title %></span>
         </a>
         <% } %>
       </div>

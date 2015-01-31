@@ -5,3 +5,8 @@
     position: relative;
   }
 }
+@mixin iconSearchSVG {
+  #ico {
+    outline: 0;
+  }
+}

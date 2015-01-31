@@ -1,5 +1,5 @@
 #search-wrap {
-  @include transition(transform, .3s, ease);
+  @include transition(transform, .3s, ease-in);
   @include transform(translateY(0));
   background-color: $bg-color;
   position: fixed;
@@ -17,31 +17,31 @@
       width: 28rem;
     }
     @media all and (min-width: 768px) {
-      top: 50%;
+      @include transform(translate(-50%, -25%));
+      top: 25%;
       left: 50%;
-      @include transform(translate(-50%, -50%));
       width: 40rem;
     }
+  }
+  &.emerge {
+    z-index: 3;
     @media all and (min-width: 1140px) {
-//      width: 20rem;
+      @include transition(transform, .3s, ease-in);
+      @include transform(translateY(0));
+      width: 100%;
+      margin: 0;
     }
   }
   .done & {
-    z-index: 0;
-    @include transition(transform, .3s, ease);
+    @include transition(transform, .3s, ease-out);
     @include transform(translateY(-100%));
-    /*bottom: 100%;
-    top: auto;*/
     display: block;
     overflow: hidden;
-    &.emerge {
-      @media all and (min-width: 1140px) {
-        @include transform(translateY(0));
-        width: 100%;
-        margin: 0;
-        z-index: 2;
-      }
-    }
+  }
+  @media all and (min-width: 1140px) {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
   }
 }
 
@@ -57,7 +57,6 @@
 
 #query {
   @include box-sizing(border-box);
-  @include paperShadow;
   padding: .75rem;
   max-width: 100%;
   outline: 0;
@@ -90,7 +89,6 @@
     white-space: normal;
     opacity: .5;
     @media all and (min-width: 768px) {
-//      font-size: 1.5rem;
       font-size: inherit;
     }
   }
@@ -106,16 +104,20 @@
 
 #send {
   @include button($action-color);
+  @include transform(translateX(-50%));
   width: 100%;
   max-width: 18rem;
   position: absolute;
   top: 100%;
   left: 50%;
-  @include transform(translateX(-50%));
 }
 
 #search-restore {
-  @include iconSearch;
+  @include iconSearchSVG;
+  .no-svg & {
+    @include iconSearch;
+  }
+  z-index: 2;
   width: 3rem;
   height: 3rem;
   .done & {

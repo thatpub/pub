@@ -17,7 +17,28 @@ var app = (function () {
     "10": "Oct",
     "11": "Nov",
     "12": "Dec"
-  };
+  },
+    wrap_ = document.getElementById("wrap"),
+    searchWrap_ = document.getElementById("search-wrap"),
+    searchRestore_ = document.getElementById("search-restore"),
+    page_ = document.getElementById("page"),
+    results_ = document.getElementById("results"),
+    summary_ = document.getElementById("summary"),
+    term_ = document.getElementById("term"),
+    total_ = document.getElementById("total"),
+    query_ = document.getElementById("query"),
+    send_ = document.getElementById("send"),
+    moreMeta_ = document.getElementById("more-meta"),
+    moreContent_ = document.getElementById("more-content"),
+    related_ = document.getElementById("related"),
+    infiniScroll_ = document.getElementById("infini-scroll"),
+    placeContent = document.cookie.placeContent||"",
+    placeMeta = document.cookie.placeMeta||"",
+    bodyRect,
+    relatedRect,
+    resultsRect,
+    relatedOffsetTop,
+    stickyBarPosition;
 
   CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
     if ( "insertRule" in this ) {
@@ -36,7 +57,7 @@ var app = (function () {
     var q1 = values[Math.floor((values.length / 4))];
     var q3 = values[Math.ceil((values.length * (3 / 4)))];
     var iqr = q3 - q1;
-    var maxValue = q3 + iqr*1.5;
+    var maxValue = q3 + (iqr * 1.5);
     var filteredValues = values.filter( function ( x ) {
         return (x > maxValue);
     });
@@ -44,21 +65,35 @@ var app = (function () {
   }
 
   return {
-    searchWrap_: document.getElementById("search-wrap"),
-    searchRestore_: document.getElementById("search-restore"),
-    page_: document.getElementById("page"),
-    results_: document.getElementById("results"),
-    summary_: document.getElementById("summary"),
-    term_: document.getElementById("term"),
-    total_: document.getElementById("total"),
-    query_: document.getElementById("query"),
-    send_: document.getElementById("send"),
-    moreMeta_: document.getElementById("more-meta"),
-    moreContent_: document.getElementById("more-content"),
-    related_: document.getElementById("related"),
-    placeContent: document.cookie.placeContent||"",
-    placeMeta: document.cookie.placeMeta||"",
+    wrap_: wrap_,
+    searchWrap_: searchWrap_,
+    searchRestore_: searchRestore_,
+    page_: page_,
+    results_: results_,
+    summary_: summary_,
+    term_: term_,
+    total_: total_,
+    query_: query_,
+    send_: send_,
+    moreMeta_: moreMeta_,
+    moreContent_: moreContent_,
+    related_: related_,
+    placeContent: placeContent,
+    placeMeta: placeMeta,
+    infiniScroll_: infiniScroll_,
+    infiniScroll: true,
+    loading: {
+      now: false,
+      stillMore: false,
+      currentHeight: 0
+    },
+    bodyRect: bodyRect,
+    relatedRect: relatedRect,
+    resultsRect: resultsRect,
+    relatedOffsetTop: relatedOffsetTop,
+    stickyBarPosition: stickyBarPosition,
     traveling: false,
+    pos: 0,
     term: "",
     scoresContent: [],
     scoresRelatives: [],
@@ -66,6 +101,8 @@ var app = (function () {
     dataRender: function ( data, allScores ) {
       var output = {},
           regType = /chapter|section/,
+          index,
+          group,
           number,
           full,
           partialText,
@@ -79,18 +116,18 @@ var app = (function () {
            *  This won't work without more fields in the aggregation to give me
            *  info to use.  File type is unknown, date, URL, etc.
            */
-        var index = _.indexOf(allScores, data.score);
+        index = _.indexOf(allScores, data.score);
+        group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
         output = {
           url: "http://get.that.pub/" + data.key.toLowerCase() + ".pdf",
           key: data.key,
           score: data.score,
-          i: index,
           gravitas: (
             _.contains(
               filterOutliers(allScores), data.score
             ) || data.score >= 1
-          ) ? " pretty" : " boring"
+          ) ? " pretty" + group : " boring" + group
         };
       }
       else if ( data._source.text ) {
@@ -126,11 +163,15 @@ var app = (function () {
         if ( regType.test(data._type) && data._type.length === 7 ) {
           number = _.capitalize(data._type) + " " + data._source.number;
         }
-
+        index = app.colors[data._source.productNo||data._source.pubName];
+        group = ( _.isNumber(index) && (index >= 0 || index < 5)) ? " match-" + index : "";
         output = {
-          index: app.colors[data._source.productNo||data._source.pubName],
           score: data._score,
-          gravitas: ( _.contains( filterOutliers(allScores), data._score ) || data._score >= 1 ) ? " pretty" : " boring",
+          gravitas: (
+            _.contains(
+              filterOutliers(allScores), data._score
+              ) || data._score >= 1
+            ) ? " pretty" + group : " boring" + group,
           date: date,
           url: "http://get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
           pub: fullPub,

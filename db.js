@@ -122,7 +122,8 @@
                 "text.english2"
               ],
               "type": "fvh",
-              "number_of_fragments": 0
+              /*"number_of_fragments": 0*/
+              "fragment_size": 150
             },
             "chapter.title": {
               "matched_fields": [

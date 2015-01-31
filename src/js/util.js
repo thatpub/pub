@@ -1,7 +1,7 @@
 ;(function( undefined ) {
   "use strict";
   String.prototype.toPubName = function() {
-    var removed = "",
+    var removed,
         count = 0,
         extraction = [],
         regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,

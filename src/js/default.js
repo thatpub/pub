@@ -14,21 +14,41 @@
     return ((element.attachEvent) ? element.attachEvent("on" + evt, fnc) : element.addEventListener(evt, fnc, false));
   }
 
+  function removeEvent ( element, evt, fnc ) {
+    return ((element.detachEvent) ? element.detachEvent("on" + evt, fnc) : element.removeEventListener(evt, fnc, false));
+  }
+
   function colorize() {
     var k = 0,
-        color = '';
+        /*b = 0,*/
+        c = ['blue', 'green', 'purple', 'pink', 'orange'],
+        color = '',
+        /*pretty = '',*/
+        head = document.head || document.getElementsByTagName("head")[0];
     var sheet = (function() {
+      if ( document.getElementById("color-stylez") ) {
+        head.removeChild(document.getElementById("color-stylez"));
+      }
       var style = document.createElement("style");
       style.appendChild(document.createTextNode(""));
-      document.head.appendChild(style);
+      style.setAttribute("id", "color-stylez");
+      head.appendChild(style);
       return style.sheet;
     })();
     for (; k < 5; ++k) {
-      color = randomColor();
-      sheet.addCSSRule(".result.doc.doc-" + k, "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.doc.doc-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.content-" + k + " .number", "background-color: " + color + ";", 0);
+      color = randomColor({hue: c[k], luminosity: "dark"});
+      /*pretty = randomColor({hue: c[k], luminosity: "dark"});*/
+      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
+      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: "+ color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: "+ color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " em", "color: "+ color + ";", 0);
+      /*sheet.addCSSRule(".pretty.result.doc.match-" + k, "color: " + pretty + ";", 0);
+      sheet.addCSSRule(".pretty.result.doc.match-" + k + ":hover", "border-bottom-color: " + pretty + ";", 0);*/
     }
+    /*for (; b < 5; ++b) {
+    }*/
   }
 
   function revealText ( event ) {
@@ -42,7 +62,9 @@
   }
 
   addEvent(app.searchWrap_, 'transitionend', function ( event ) {
-
+    if ( _.indexOf(this.className, "emerge") > -1 ) {
+      app.query_.focus();
+    }
   });
 
   function filterResults ( event ) {
@@ -87,12 +109,12 @@
     var expires = new Date(Date.now() + 3600000);
 
     if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
-      app.page_.className += " failed";
+      app.wrap_.className += " failed";
       return false;
     }
 
     app.searchWrap_.className = app.searchWrap_.className.replace(regEmerge, "");
-    document.body.className = document.body.className.replace(/ ?done|$/gm, ' done');
+    app.wrap_.className = app.wrap_.className.replace(/ ?done|$/gm, ' done');
     expires = expires.toUTCString();
 
     if ( content ) {
@@ -102,22 +124,32 @@
       app.placeContent = content._scroll_id;
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
-        window.scroll(0, 0);
+        colorize();
+        if ( window.scroll ) {
+          window.scroll(0, 0);
+        }
+        else if ( window.scrollY ) {
+          window.scrollY(0);
+        }
         app.scoresContent = _.pluck(content.hits.hits, "_score");
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h2 class='label'>Related Documents<br/><small>(click to filter locally, press ESC to reset)</small></h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "</ul><hr/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, "_score"));
         app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
       }
+
       if ( content.hits.hits.length < 20 ) {
         app.moreContent_.className += " hidden";
+        app.loading.stillMore = false;
       }
       else {
         app.moreContent_.className = app.moreContent_.className.replace(regHidden, "");
+        app.loading.stillMore = true;
       }
+
       _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
         addEvent(opener, "click", revealText);
       });
@@ -130,7 +162,40 @@
       app.placeMeta = meta._scroll_id;
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
+    app.related_ = document.getElementById("related");
+    //app.results_ = document.getElementById("results");
+    app.bodyRect = document.body.getBoundingClientRect();
+    app.relatedRect = app.related_.getBoundingClientRect();
+    app.resultsRect = document.getElementById("results").getBoundingClientRect();
+    app.relatedOffsetTop = app.relatedRect.top - app.bodyRect.top;
+    app.stickyBarPosition = Math.abs(app.relatedRect.height - app.relatedOffsetTop);
+    app.loading.currentHeight = Math.abs(app.resultsRect.height - app.resultsRect.top);
+    addEvent(window, "scroll", scrollWheeler);
+    addEvent(window, 'DOMMouseScroll', scrollWheeler);
+  }
 
+  function scrollWheeler () {
+    var t = document.documentElement||document.body.parentNode,
+      pos = (t && typeof t.ScrollTop === "number" ? t : document.body).ScrollTop || window.scrollY || window.pageYOffset,
+      delta = pos - app.pos;
+
+    if ( app.infiniScroll === true && !app.loading.now && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
+      app.loading.now = true;
+      console.log(app.loading);
+      console.log("launching more()");
+      more();
+    }
+    app.pos = pos;
+    if ( !app.traveling && delta > 0 && pos > app.stickyBarPosition ) {
+      console.log("sticky here");
+      app.related_.className += " sticky";
+      app.traveling = true;
+    }
+    if ( app.traveling && delta < 0 && pos <= app.stickyBarPosition ) {
+      console.log("remove sticky");
+      app.related_.className = app.related_.className.replace(/ ?sticky/g, "");
+      app.traveling = false;
+    }
   }
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
@@ -157,8 +222,22 @@
     );
   }
 
+  function more ( event ) {
+    if ( event ) {
+      this.className += " loading";
+      if ( event.preventDefault ) {
+        event.preventDefault();
+      } else {
+        event.returnValue = false;
+      }
+    }
+    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, loader);
+    return false;
+  }
+
   function loader( el ) {
     el.className = el.className.replace(regLoad, "");
+    app.loading.now = false;
   }
 
   addEvent(app.query_, "keypress", function ( event ) {
@@ -194,17 +273,9 @@
     }
     return false;
   });
-  addEvent(app.moreContent_, "click", function ( event ) {
-    app.moreContent_.className += " loading";
-    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, loader);
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-  });
+  addEvent(app.moreContent_, "click", more);
   addEvent(app.moreMeta_, "click", function ( event ) {
-    app.moreMeta_.className += " loading";
+    this.className += " loading";
     sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, loader);
     if ( event.preventDefault ) {
       event.preventDefault();
@@ -213,15 +284,26 @@
     }
   });
   addEvent(app.searchRestore_, "click", function ( event ) {
-    app.query_.value = app.term||"";
-    app.searchWrap_.className += " emerge";
-    app.query_.focus();
     if ( event.preventDefault ) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
+    if ( / ?emerge/gi.test(app.searchWrap_.className) ) {
+      app.searchWrap_.className = app.searchWrap_.className.replace(/ ?emerge/gmi, "");
+      return false;
+    }
+    else {
+      app.query_.value = app.term||"";
+      app.searchWrap_.className += " emerge";
+    }
     return false;
+  });
+  addEvent(app.infiniScroll_, "change", function () {
+    app.infiniScroll = this.checked||!!this.checked;
+    console.log("changed infiniScroll to (direct, app storage): ", app.infiniScroll, ", ", this.checked, !!this.checked);
+    console.log("auto-launching event handler to see if infinite scroll is allowed at scroll location");
+    scrollWheeler();
   });
   addEvent(window, "load", function () {
     colorize();

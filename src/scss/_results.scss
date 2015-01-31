@@ -1,3 +1,6 @@
+#results {
+  position: relative;
+}
 .related {
   margin: 0 auto;
   padding: 1rem 0;
@@ -8,9 +11,20 @@
   justify-content: center;
   flex-wrap: wrap;
   border: none;
+  &.sticky {
+    @include box-shadow(0, 2px, 5px, 0, $shadow-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $bg-color;
+//    height: 3rem;
+    z-index: 2;
+  }
 }
 
 .result {
+  color: $text-highlight-color;
   em {
     color: $result-color;
     font-style: normal;
@@ -18,24 +32,16 @@
   &.doc {
     .related & {
       flex-grow: 1;
-      color: $text-highlight-color;
       margin: 0 1rem 0 0;
       text-align: center;
       border: none;
       border-bottom: 1px solid transparent;
       padding: 3px 5px;
       font-size: 1.25rem;
-      &:hover {
-        border-bottom-color: $result-color;
-        color: $result-color;
-      }
-    }
-    &.pretty {
-      font-weight: 400;
-      color: $success-color;
-      &:hover {
-        border-bottom-color: $success-color;
-        color: $success-color;
+      font-weight: 200;
+      &.pretty {
+        /*@include transform(scale(1.25));*/
+        font-weight: 700;
       }
     }
     .filtered & {
@@ -73,7 +79,7 @@
       &:after {
         border-width: 7px;
         border-style: solid;
-        border-color: #134 transparent transparent #134;
+        border-color: $text-highlight-color transparent transparent $text-highlight-color;
         bottom: -15px;
         content: "";
         position: absolute;
@@ -100,12 +106,13 @@
         }
       }
       .reveal {
-        display: inline-block;
+        @include border-radius(4px);
+        background-color: $bg-color;
+        display: inline;
         font-size: .75rem;
         margin: 0 0 .25rem 1rem;
         border: 1px solid;
         padding: .25rem .375rem;
-        @include border-radius(4px);
       }
       .pickle {
         display: none;
@@ -190,15 +197,11 @@
       }
     }
     &.pretty {
-      em {
-        color: $success-color;
-      }
       .number {
-        background: $success-color;
       }
       .text {
         padding-left: 2rem;
-        border-left: 3px solid $success;
+        border-left: 3px solid;
       }
       &:hover {
         .info {
@@ -207,8 +210,6 @@
           }
           &:hover {
             .pub, .title {
-              border-bottom-color: $success-color;
-              color: $success-color;
             }
           }
         }

@@ -43,16 +43,14 @@
   visibility: hidden;
 }
 
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
 .clearfix {
   *zoom: 1;
+  &:after {
+    clear: both;
+  }
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
 }
