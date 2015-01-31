@@ -7,36 +7,36 @@
   left: 0;
   width: 100%;
   height: 100%;
-  #search {
-    position: absolute;
+  z-index: 3;
+  .search {
+    position: relative;
     width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     @media all and (min-width: 480px) {
       width: 28rem;
+      bottom: 0;
+      top: auto;
     }
     @media all and (min-width: 768px) {
-      @include transform(translate(-50%, -25%));
-      top: 25%;
-      left: 50%;
       width: 40rem;
-    }
-  }
-  &.emerge {
-    z-index: 3;
-    @media all and (min-width: 1140px) {
-      @include transition(transform, .3s, ease-in);
-      @include transform(translateY(0));
-      width: 100%;
-      margin: 0;
+      margin-top: 10rem;
     }
   }
   .done & {
-    @include transition(transform, .3s, ease-out);
     @include transform(translateY(-100%));
     display: block;
     overflow: hidden;
+    &.emerge {
+      z-index: 3;
+      @media all and (min-width: 1140px) {
+        @include transition(transform, .3s, ease-in);
+        @include transform(translateY(50%));
+        width: 70%;
+        height: 50%;
+      }
+    }
   }
   @media all and (min-width: 1140px) {
     max-width: 100%;

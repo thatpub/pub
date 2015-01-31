@@ -39,6 +39,7 @@
       padding: 3px 5px;
       font-size: 1.25rem;
       font-weight: 200;
+      cursor: pointer;
       &.pretty {
         /*@include transform(scale(1.25));*/
         font-weight: 700;

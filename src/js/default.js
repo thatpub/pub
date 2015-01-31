@@ -5,6 +5,7 @@
       regHidden = / ?hidden/g,
       regLoad = / ?loading/g,
       regSelected = / ?selected/g,
+      regSticky = / ?sticky/g,
       regFiltered = / ?filtered/g;
 
   app.resultTemplate = document.getElementById("result-template");
@@ -162,6 +163,7 @@
       app.placeMeta = meta._scroll_id;
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
+    window.onscroll = null;
     app.related_ = document.getElementById("related");
     //app.results_ = document.getElementById("results");
     app.bodyRect = document.body.getBoundingClientRect();
@@ -176,7 +178,7 @@
 
   function scrollWheeler () {
     var t = document.documentElement||document.body.parentNode,
-      pos = (t && typeof t.ScrollTop === "number" ? t : document.body).ScrollTop || window.scrollY || window.pageYOffset,
+      pos = (t && typeof t.ScrollTop === "number" ? t : document.body).ScrollTop || window.pageYOffset,
       delta = pos - app.pos;
 
     if ( app.infiniScroll === true && !app.loading.now && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
@@ -185,17 +187,16 @@
       console.log("launching more()");
       more();
     }
-    app.pos = pos;
-    if ( !app.traveling && delta > 0 && pos > app.stickyBarPosition ) {
-      console.log("sticky here");
-      app.related_.className += " sticky";
-      app.traveling = true;
-    }
-    if ( app.traveling && delta < 0 && pos <= app.stickyBarPosition ) {
-      console.log("remove sticky");
-      app.related_.className = app.related_.className.replace(/ ?sticky/g, "");
-      app.traveling = false;
-    }
+      app.pos = pos;
+
+      if ( !app.traveling && delta > 0 && pos > app.stickyBarPosition ) {
+        app.related_.className += " sticky";
+        app.traveling = true;
+      }
+      if ( app.traveling && delta < 0 && pos <= app.stickyBarPosition ) {
+        app.related_.className = app.related_.className.replace(regSticky, "");
+        app.traveling = false;
+      }
   }
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
@@ -300,7 +301,11 @@
     return false;
   });
   addEvent(app.infiniScroll_, "change", function () {
+    var status;
     app.infiniScroll = this.checked||!!this.checked;
+    status = (app.infiniScroll) ? "enabled" : "disabled";
+    document.getElementById("inf-status").innerHTML = status;
+    document.getElementById("inf-status").className = status;
     console.log("changed infiniScroll to (direct, app storage): ", app.infiniScroll, ", ", this.checked, !!this.checked);
     console.log("auto-launching event handler to see if infinite scroll is allowed at scroll location");
     scrollWheeler();

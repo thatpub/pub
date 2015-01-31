@@ -117,10 +117,10 @@
         },
         "highlight": {
           "fields": {
-            "text": {
-              "matched_fields": [
+            "text.english2": {
+              /*"matched_fields": [
                 "text.english2"
-              ],
+              ],*/
               "type": "fvh",
               /*"number_of_fragments": 0*/
               "fragment_size": 150
