@@ -32,9 +32,9 @@
       z-index: 3;
       @media all and (min-width: 1140px) {
         @include transition(transform, .3s, ease-in);
-        @include transform(translateY(50%));
-        width: 70%;
-        height: 50%;
+        @include transform(translateY(0));
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -117,7 +117,7 @@
   .no-svg & {
     @include iconSearch;
   }
-  z-index: 2;
+  z-index: 3;
   width: 3rem;
   height: 3rem;
   .done & {

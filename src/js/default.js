@@ -129,6 +129,8 @@
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
         app.results_.innerHTML = "";
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.related_ = document.querySelector("#related");
+        app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
       }
       else {
         app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, "_score"));
@@ -142,6 +144,9 @@
       else {
         app.moreContent_.className = app.moreContent_.className.replace(regHidden, "");
         app.loading.stillMore = true;
+        app.bodyRect = document.body.getBoundingClientRect();
+        app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+        app.relatedOffsetTop = Math.abs(app.bodyRect.height) + Math.abs(app.bodyRect.top);
       }
 
       _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
@@ -157,13 +162,15 @@
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
     window.onscroll = null;
-    app.related_ = document.querySelector("#related");
+    /*app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+    app.resultsRect = document.querySelector("#results").getBoundingClientRect();*/
+
+    /* This is probably stupid.  I'm too tired to care. */
+
+      console.log(app.relatedRect.top, app.bodyRect.top, app.relatedRect.height, app.relatedOffsetTop, app.bodyRect.height);
+
     app.results_ = document.querySelector("#results");
-    app.bodyRect = document.body.getBoundingClientRect();
-    app.relatedRect = document.querySelector("#related").getBoundingClientRect();
     app.resultsRect = document.querySelector("#results").getBoundingClientRect();
-    app.relatedOffsetTop = app.relatedRect.top - app.bodyRect.top;
-    app.stickyBarPosition = Math.abs(app.relatedRect.height - app.relatedOffsetTop);
     app.loading.currentHeight = Math.abs(app.resultsRect.height - app.resultsRect.top);
     addEvent(window, "scroll", scrollWheeler);
     addEvent(window, 'DOMMouseScroll', scrollWheeler);

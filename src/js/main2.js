@@ -133,7 +133,7 @@ var app = (function () {
       }
       else if ( data._source.text ) {
         number = data._source.number;
-        text = data.highlight["text"];
+        text = data.highlight["text.english2"];
         full = data._source.text;
         fullText = "<span class='parts'>";
         fullPub = data._source.productNo;
@@ -151,7 +151,7 @@ var app = (function () {
           var i = 0,
             count = text.length;
           for (; i < count; ++i) {
-            fullText += (Array.isArray(text) ) ? "<q>" + text[i] + "<\/q><br\/>" :
+            fullText += (Array.isArray(text) ) ? "<q>..." + text[i] + "...<\/q><br\/>" :
               ( typeof text == "string" ) ? text : full;
           }
           fullText += "<\/span><a href='#' class='reveal'>expand full text<\/a>";
@@ -195,8 +195,9 @@ var app = (function () {
             section: data._source.section && data._source.section.number || null,
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
+          combinedText: data.highlight["text"],
+          text: fullText,
           rawText: full,
-          fullText: fullText,
           fileFormat: fileFormat,
           type: ( full ) ? " content" : " doc"
         };
