@@ -56,7 +56,7 @@
   }
 
   addEvent(app.searchWrap_, 'transitionend', function ( event ) {
-    if ( _.indexOf(this.className, "emerge") > -1 ) {
+    if ( _.indexOf(app.searchWrap_.className, "emerge") > -1 ) {
       app.query_.focus();
     }
   });
@@ -130,6 +130,8 @@
         app.results_.innerHTML = "";
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.related_ = document.querySelector("#related");
+        app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+        app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
       }
       else {
@@ -146,7 +148,7 @@
         app.loading.stillMore = true;
         app.bodyRect = document.body.getBoundingClientRect();
         app.relatedRect = document.querySelector("#related").getBoundingClientRect();
-        app.relatedOffsetTop = Math.abs(app.bodyRect.height) + Math.abs(app.bodyRect.top);
+        app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
 
       _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
@@ -161,17 +163,8 @@
       app.placeMeta = meta._scroll_id;
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
-    window.onscroll = null;
-    /*app.relatedRect = document.querySelector("#related").getBoundingClientRect();
-    app.resultsRect = document.querySelector("#results").getBoundingClientRect();*/
-
-    /* This is probably stupid.  I'm too tired to care. */
-
-      console.log(app.relatedRect.top, app.bodyRect.top, app.relatedRect.height, app.relatedOffsetTop, app.bodyRect.height);
-
-    app.results_ = document.querySelector("#results");
-    app.resultsRect = document.querySelector("#results").getBoundingClientRect();
-    app.loading.currentHeight = Math.abs(app.resultsRect.height - app.resultsRect.top);
+    app.resultsRect = app.results_.getBoundingClientRect();
+    app.loading.currentHeight = Math.abs(app.resultsRect.height);
     addEvent(window, "scroll", scrollWheeler);
     addEvent(window, 'DOMMouseScroll', scrollWheeler);
   }
@@ -181,22 +174,22 @@
       pos = (t && typeof t.ScrollTop === "number" ? t : document.body).ScrollTop || window.pageYOffset,
       delta = pos - app.pos;
 
-    if ( app.infiniScroll === true && !app.loading.now && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
+    if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
       app.loading.now = true;
       console.log(app.loading);
       console.log("launching more()");
       more();
     }
-      app.pos = pos;
 
-      if ( !app.traveling && delta > 0 && pos > app.stickyBarPosition ) {
+      if ( !app.traveling && pos > app.stickyBarPosition ) {
         app.related_.className += " sticky";
         app.traveling = true;
       }
-      if ( app.traveling && delta < 0 && pos <= app.stickyBarPosition ) {
+      if ( app.traveling && pos <= app.stickyBarPosition ) {
         app.related_.className = app.related_.className.replace(regSticky, "");
         app.traveling = false;
       }
+    app.pos = pos;
   }
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
@@ -225,7 +218,7 @@
 
   function more ( event ) {
     if ( event ) {
-      this.className += " loading";
+      app.moreContent_.className += " loading";
       if ( event.preventDefault ) {
         event.preventDefault();
       } else {

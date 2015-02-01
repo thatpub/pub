@@ -135,7 +135,7 @@ var app = (function () {
         number = data._source.number;
         text = data.highlight["text.english2"];
         full = data._source.text;
-        fullText = "<span class='parts'>";
+        fullText = "";
         fullPub = data._source.productNo;
         highlights = Object.keys(data.highlight);
         fileFormat = ( data._type !== "form" ) ? ".pdf" : ".xfdl";
@@ -154,7 +154,6 @@ var app = (function () {
             fullText += (Array.isArray(text) ) ? "<q>..." + text[i] + "...<\/q><br\/>" :
               ( typeof text == "string" ) ? text : full;
           }
-          fullText += "<\/span><a href='#' class='reveal'>expand full text<\/a>";
         }
 
         /*try {
@@ -195,8 +194,8 @@ var app = (function () {
             section: data._source.section && data._source.section.number || null,
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
-          combinedText: data.highlight["text"],
-          text: fullText,
+          concatText: data.highlight["text"] || null,
+          text: (fullText) ? "<span class='parts'>" + fullText + "<\/span><a href='#' class='reveal'>expand full text<\/a>" : data.highlight["text"] || full,
           rawText: full,
           fileFormat: fileFormat,
           type: ( full ) ? " content" : " doc"

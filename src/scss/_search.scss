@@ -30,12 +30,10 @@
     overflow: hidden;
     &.emerge {
       z-index: 3;
-      @media all and (min-width: 1140px) {
-        @include transition(transform, .3s, ease-in);
-        @include transform(translateY(0));
-        width: 100%;
-        height: 100%;
-      }
+      @include transition(transform, .3s, ease-in);
+      @include transform(translateY(0));
+      width: 100%;
+      height: 100%;
     }
   }
   @media all and (min-width: 1140px) {
@@ -44,7 +42,6 @@
     margin: 0;
   }
 }
-
 
 #query, #send {
   position: relative;

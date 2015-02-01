@@ -50,6 +50,8 @@
         <a href="index.html" id="no-results">No results buddy.  Try it again.</a>
       </div>
       <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
+      <input type="checkbox" id="infini-scroll" name="infini-scroll" checked/>
+      <label for="infini-scroll">Infinite scrolling <span id="inf-status">enabled</span></label>
       <div id="results"></div>
       <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
         <div class="loader">
@@ -67,9 +69,6 @@
       <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
     </a>
 
-    <input type="checkbox" id="infini-scroll" name="infini-scroll" checked/>
-    <label for="infini-scroll">Infinite scrolling <span id="inf-status">enabled</span></label>
-
   </div>
 
     <script type="text/template" id="related-template">
@@ -84,7 +83,7 @@
         <h2 class="number"><%= sub %></h2>
         <div class="text clearfix">
           <%= text %>
-          <span class="combined"><%= combinedText %></span><br/>
+          <span class="combined"><%= concatText %></span><br/>
         </div>
         <div class="meta">
           <div class="details">
