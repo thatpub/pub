@@ -117,13 +117,16 @@
         },
         "highlight": {
           "fields": {
+            "text.english2": {
+              "type": "fvh",
+              "fragment_size": 70
+            },
             "text": {
               "matched_fields": [
                 "text.english2"
               ],
               "type": "fvh",
-              /*"number_of_fragments": 0*/
-              "fragment_size": 150
+              "number_of_fragments": 0
             },
             "chapter.title": {
               "matched_fields": [

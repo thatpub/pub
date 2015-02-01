@@ -12,19 +12,17 @@
   app.relatedTemplate = document.getElementById("related-template");
 
   function addEvent ( element, evt, fnc ) {
-    return ((element.attachEvent) ? element.attachEvent("on" + evt, fnc) : element.addEventListener(evt, fnc, false));
+    return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
   }
 
   function removeEvent ( element, evt, fnc ) {
-    return ((element.detachEvent) ? element.detachEvent("on" + evt, fnc) : element.removeEventListener(evt, fnc, false));
+    return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
   }
 
   function colorize() {
     var k = 0,
-        /*b = 0,*/
         c = ['blue', 'green', 'purple', 'pink', 'orange'],
         color = '',
-        /*pretty = '',*/
         head = document.head || document.getElementsByTagName("head")[0];
     var sheet = (function() {
       if ( document.getElementById("color-stylez") ) {
@@ -38,18 +36,13 @@
     })();
     for (; k < 5; ++k) {
       color = randomColor({hue: c[k], luminosity: "dark"});
-      /*pretty = randomColor({hue: c[k], luminosity: "dark"});*/
       sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
       sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: "+ color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: "+ color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " em", "color: "+ color + ";", 0);
-      /*sheet.addCSSRule(".pretty.result.doc.match-" + k, "color: " + pretty + ";", 0);
-      sheet.addCSSRule(".pretty.result.doc.match-" + k + ":hover", "border-bottom-color: " + pretty + ";", 0);*/
     }
-    /*for (; b < 5; ++b) {
-    }*/
   }
 
   function revealText ( event ) {
@@ -164,11 +157,11 @@
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
     }
     window.onscroll = null;
-    app.related_ = document.getElementById("related");
-    //app.results_ = document.getElementById("results");
+    app.related_ = document.querySelector("#related");
+    app.results_ = document.querySelector("#results");
     app.bodyRect = document.body.getBoundingClientRect();
-    app.relatedRect = app.related_.getBoundingClientRect();
-    app.resultsRect = document.getElementById("results").getBoundingClientRect();
+    app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+    app.resultsRect = document.querySelector("#results").getBoundingClientRect();
     app.relatedOffsetTop = app.relatedRect.top - app.bodyRect.top;
     app.stickyBarPosition = Math.abs(app.relatedRect.height - app.relatedOffsetTop);
     app.loading.currentHeight = Math.abs(app.resultsRect.height - app.resultsRect.top);
@@ -243,10 +236,10 @@
 
   addEvent(app.query_, "keypress", function ( event ) {
     if ( event.which === 13 ) {
-      app.term = _.trim(app.query_.value);
-      if ( !app.term ) { /* show notification/input validate here */
+      if ( !app.query_.value ) { /* show notification/input validate here */
         return false;
       }
+      app.term = _.trim(app.query_.value);
       app.send_.className += " loading";
       app.filterBy = "";
       sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);
@@ -260,10 +253,10 @@
     }
   });
   addEvent(app.send_, "click", function ( event ) {
-    app.term = _.trim(app.query_.value);
-    if ( !app.term ) { /* show notification/input validate here */
+    if ( !app.query_.value ) { /* show notification/input validate here */
       return false;
     }
+    app.term = _.trim(app.query_.value);
     app.send_.className += " loading";
     app.filterBy = "";
     sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);

@@ -105,7 +105,8 @@ var app = (function () {
           group,
           number,
           full,
-          partialText,
+          fullText,
+          /*partialText,*/
           fullPub,
           text,
           date,
@@ -132,8 +133,9 @@ var app = (function () {
       }
       else if ( data._source.text ) {
         number = data._source.number;
-        text = data.highlight.text;
+        text = data.highlight["text"];
         full = data._source.text;
+        fullText = "<span class='parts'>";
         fullPub = data._source.productNo;
         highlights = Object.keys(data.highlight);
         fileFormat = ( data._type !== "form" ) ? ".pdf" : ".xfdl";
@@ -145,17 +147,26 @@ var app = (function () {
         /**
          *  This is for when I have the results split up by XX characters each.
          */
-        /* full = "<span>" + (data.highlight.text||data._source.text||"") + "</span>"; */
-        try {
-          full = text&&text[0]||text||full||null;
+        if ( text && text.length > 0 ) {
+          var i = 0,
+            count = text.length;
+          for (; i < count; ++i) {
+            fullText += (Array.isArray(text) ) ? "<q>" + text[i] + "<\/q><br\/>" :
+              ( typeof text == "string" ) ? text : full;
+          }
+          fullText += "<\/span><a href='#' class='reveal'>expand full text<\/a>";
+        }
+
+        /*try {
+          full = text||full||null;
         } catch (badz) {
           console.trace(badz);
-        }
-        partialText = _.trunc(full, {
+        }*/
+        /*partialText = _.trunc(full, {
           "length": 100,
           "omission": "",
           "separator": /(<em>.*<\/em>)/gmi
-        });
+        });*/
           date = ( data._source.releaseDate ) ?
                  data._source.releaseDate.substring(6, 8) + " " + months[data._source.releaseDate.substring(4, 6)] + " " + data._source.releaseDate.substring(0, 4) :
                  data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
@@ -175,7 +186,6 @@ var app = (function () {
           date: date,
           url: "http://get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
           pub: fullPub,
-          /*rawPub: data._source.productNo,*/
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
           sub: ( full ) ? number : "",
@@ -185,9 +195,8 @@ var app = (function () {
             section: data._source.section && data._source.section.number || null,
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
-          fullText: full,
-          startText: partialText,
-          endText: full.replace(partialText, ""),
+          rawText: full,
+          fullText: fullText,
           fileFormat: fileFormat,
           type: ( full ) ? " content" : " doc"
         };

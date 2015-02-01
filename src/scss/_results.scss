@@ -115,14 +115,14 @@
         border: 1px solid;
         padding: .25rem .375rem;
       }
-      .pickle {
+      .full {
         display: none;
       }
       &.opened {
-        .reveal {
+        .reveal, .parts {
           display: none;
         }
-        .pickle {
+        .full {
           display: inline;
         }
       }
