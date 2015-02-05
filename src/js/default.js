@@ -130,8 +130,8 @@
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
         app.results_.innerHTML = "";
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
-        app.related_ = document.querySelector("#related");
-        app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+        app.related_ = app.related_ || document.getElementById("related");
+        app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
       }
@@ -148,6 +148,7 @@
         app.moreContent_.className = app.moreContent_.className.replace(regHidden, "");
         app.loading.stillMore = true;
         app.bodyRect = document.body.getBoundingClientRect();
+        app.related_ = document.querySelector("#related")||document.getElementById("related");
         app.relatedRect = document.querySelector("#related").getBoundingClientRect();
         app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
@@ -177,18 +178,18 @@
 
     if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
       app.loading.now = true;
-      console.log(app.loading);
-      console.log("launching more()");
       more();
     }
 
       if ( !app.traveling && pos > app.stickyBarPosition ) {
         app.related_.className += " sticky";
         app.traveling = true;
+        console.log("ADD sticky to: ", app.related_);
       }
       if ( app.traveling && pos <= app.stickyBarPosition ) {
         app.related_.className = app.related_.className.replace(regSticky, "");
         app.traveling = false;
+        console.log("remove sticky from: ", app.related_);
       }
     app.pos = pos;
   }
@@ -227,7 +228,6 @@
       }
     }
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, loader);
-    return false;
   }
 
   function loader( el ) {
@@ -300,7 +300,7 @@
   });
   addEvent(app.infiniScroll_, "change", function () {
     var status;
-    app.infiniScroll = this.checked||!!this.checked;
+    app.infiniScroll = this.checked || (!!this.checked);
     status = (app.infiniScroll) ? "enabled" : "disabled";
     document.getElementById("inf-status").innerHTML = status;
     document.getElementById("inf-status").className = status;

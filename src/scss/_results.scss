@@ -193,7 +193,7 @@
       }
     }
     &:hover {
-      .info {
+      .info:hover {
         .pub, .title {
           border-bottom-color: $result-color;
           .filtered & {
