@@ -20,6 +20,9 @@
     background-color: $bg-color;
 //    height: 3rem;
     z-index: 2;
+    @media all and (min-width: 768px) {
+      padding-right: 5rem;
+    }
   }
 }
 
@@ -100,7 +103,6 @@
           position: absolute;
           right: 100%;
         }
-
         &:after {
           position: absolute;
           left: 100%;
@@ -172,48 +174,41 @@
         text-align: right;
         color: inherit;
         display: block;
-        > {
+        .pub, .title {
           border-bottom: 1px solid transparent;
-          .pub {
-            font-size: .75rem;
+          color: $result-color;
+          .filtered & {
+            color: inherit;
+            .selected & {
+              color: $result-color;
+            }
           }
-          .title {
-            font-size: .875rem;
-          }
+        }
+        .pub {
+          font-size: .75rem;
+        }
+        .title {
+          font-size: .875rem;
         }
       }
     }
-
     &:hover {
       .info {
         .pub, .title {
-          border-bottom-color: $text-highlight-color;
-        }
-        &:hover {
-          .pub, .title {
-            border-bottom-color: $result-color;
-            color: $result-color;
+          border-bottom-color: $result-color;
+          .filtered & {
+            border-bottom-color: transparent;
+            .selected & {
+              border-bottom-color: $result-color;
+            }
           }
         }
       }
     }
     &.pretty {
-      .number {
-      }
       .text {
         padding-left: 2rem;
         border-left: 3px solid;
-      }
-      &:hover {
-        .info {
-          .pub, .title {
-            border-bottom-color: $text-highlight-color;
-          }
-          &:hover {
-            .pub, .title {
-            }
-          }
-        }
       }
     }
     .filtered & {

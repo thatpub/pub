@@ -100,20 +100,19 @@
 }
 
 #send {
-  @include button($action-color, .75rem);
+  @include button($action-color, .5rem);
   @include transform(translateX(-50%));
   width: 100%;
   max-width: 18rem;
   position: absolute;
   top: 100%;
   left: 50%;
+  text-shadow: 0 1px 0 $black;
 }
 
 #search-restore {
-  @include iconSearchSVG;
-  .no-svg & {
-    @include iconSearch;
-  }
+  @include iconSearch;
+
   z-index: 3;
   width: 3rem;
   height: 3rem;

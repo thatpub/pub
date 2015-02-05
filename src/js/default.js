@@ -15,9 +15,9 @@
     return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
   }
 
-  function removeEvent ( element, evt, fnc ) {
+/*  function removeEvent ( element, evt, fnc ) {
     return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
-  }
+  }*/
 
   function colorize() {
     var k = 0,
@@ -40,7 +40,7 @@
       sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: "+ color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: "+ color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);
+      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);*/
       sheet.addCSSRule(".result.content.match-" + k + " em", "color: "+ color + ";", 0);
     }
   }
@@ -58,6 +58,7 @@
   addEvent(app.searchWrap_, 'transitionend', function ( event ) {
     if ( _.indexOf(app.searchWrap_.className, "emerge") > -1 ) {
       app.query_.focus();
+      alert("wtf");
     }
   });
 
@@ -248,12 +249,16 @@
   });
   addEvent(document, "keyup", function ( event ) {
     if ( event.which === 27 ) {
+      if (/emerge/g.test(app.searchWrap_.className)) {
+        app.searchWrap_.className = app.searchWrap_.className.replace(regEmerge, "");
+      }
       app.filterBy = "";
       filterResults();
     }
   });
   addEvent(app.send_, "click", function ( event ) {
     if ( !app.query_.value ) { /* show notification/input validate here */
+      app.query_.focus();
       return false;
     }
     app.term = _.trim(app.query_.value);

@@ -48,14 +48,17 @@
   &.content {
     width: 90%;
   }
+  &.loading {
+    background: none;
+    border: none;
+  }
   &:active {
     border-bottom-color: transparent;
     border-top-color: darken($color, 85%);
     text-shadow: 0 -1px 0 darken($color, 90%), 0 0 1px darken($color, 95%);
   }
-  &.loading {
-    background: none;
-    border: none;
+  &:hover {
+    opacity: .8;
   }
 }
 
