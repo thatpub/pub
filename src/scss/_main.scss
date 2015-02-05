@@ -90,13 +90,14 @@ textarea {
 }
 
 .wrapper {
+  opacity: 1;
   width: 100%;
   height: 100%;
   margin: 0;
   @media all and (min-width: 768px) {
     max-width: 864px;
     width: 90%;
-    margin: 0 5%;
+    margin: 0 auto;
   }
   @media all and (min-width: 1140px) {
     width: 864px; /* 1140px - 10% for margins */

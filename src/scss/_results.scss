@@ -12,7 +12,7 @@
   flex-wrap: wrap;
   border: none;
   &.sticky {
-    @include box-shadow(0, 2px, 5px, 0, $shadow-color);
+    @include box-shadow(0, 1px, 6px, 0, $shadow-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +22,28 @@
     z-index: 2;
     @media all and (min-width: 768px) {
       padding-right: 5rem;
+    }
+  }
+  .show-all {
+    display: none;
+  }
+  .filtered & {
+    .show-all {
+      @include border-radius(4px);
+      display: block;
+      flex-grow: 1;
+      background-color: $text-highlight-color;
+      color: $bg-color;
+      border: 1px solid $text-highlight-color;
+      /*width: 10rem;*/
+      /*margin: 3px auto;*/
+      text-align: center;
+      cursor: pointer;
+      padding: 5px 8px;
+      &:hover {
+        background-color: transparent;
+        color: $text-highlight-color;
+      }
     }
   }
 }
@@ -34,17 +56,16 @@
   }
   &.doc {
     .related & {
+      @include border-radius(4px);
       flex-grow: 1;
       margin: 0 1rem 0 0;
       text-align: center;
-      border: none;
-      border-bottom: 1px solid transparent;
+      border: 1px solid transparent;
       padding: 3px 5px;
       font-size: 1.25rem;
       font-weight: 200;
       cursor: pointer;
       &.pretty {
-        /*@include transform(scale(1.25));*/
         font-weight: 700;
       }
     }

@@ -31,7 +31,7 @@ var app = (function () {
     moreMeta_ = document.getElementById("more-meta"),
     moreContent_ = document.getElementById("more-content"),
     related_ = document.getElementById("related"),
-    infiniScroll_ = document.getElementById("infini-scroll"),
+    infiniScroll_,
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect,
@@ -147,7 +147,7 @@ var app = (function () {
         /**
          *  This is for when I have the results split up by XX characters each.
          */
-        if ( text && text.length > 0 ) {
+        if ( text && text.length > 1 ) {
           var i = 0,
             count = text.length;
           for (; i < count; ++i) {
@@ -170,7 +170,7 @@ var app = (function () {
                  data._source.releaseDate.substring(6, 8) + " " + months[data._source.releaseDate.substring(4, 6)] + " " + data._source.releaseDate.substring(0, 4) :
                  data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
 
-        if ( regType.test(data._type) && data._type.length === 7 ) {
+        if ( regType.test(data._type) && data._type.length == 7 ) {
           number = _.capitalize(data._type) + " " + data._source.number;
         }
         index = app.colors[data._source.productNo||data._source.pubName];

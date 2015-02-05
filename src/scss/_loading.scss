@@ -64,6 +64,9 @@
   display: none;
 }
 .failed #no-results {
+  @include transform(translate(-50%, -50%));
+  @include border-radius(8px);
+  z-index: 4;
   font-size: 2rem;
   line-height: 1;
   padding: 2rem;
@@ -72,10 +75,8 @@
   width: 75%;
   top: 50%;
   left: 50%;
-  @include transform(translate(-50%, -50%));
   text-align: center;
   border: 1px solid;
-  @include border-radius(8px);
 }
 
 @keyframes blob-bottom {

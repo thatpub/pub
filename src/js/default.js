@@ -37,7 +37,8 @@
     for (; k < 5; ++k) {
       color = randomColor({hue: c[k], luminosity: "dark"});
       sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-bottom-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);
+      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "border-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: "+ color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: "+ color + ";", 0);
       /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);*/
@@ -66,7 +67,7 @@
     var el = ( event ) ? event.currentTarget || event.sourceElement : null;
     var filter = (el) ? el.getAttribute("id") : app.filterBy;
     app.filterBy = filter;
-    if ( app.filterBy === "" ) {
+    if ( app.filterBy === "" || app.filterBy === "show-all" ) {
       app.filtered_ = null;
       _.forEach(document.querySelectorAll(".doc, .result"), function ( a ) {
         a.className = a.className.replace(regSelected, "");
@@ -95,6 +96,19 @@
       }
     }
     return false;
+  }
+
+  function infini () {
+    console.log(this);
+    var status;
+    app.infiniScroll = this.checked || (!!this.checked);
+    status = (app.infiniScroll) ? "enabled" : "disabled";
+    document.getElementById("inf-status").innerHTML = status;
+    document.getElementById("inf-status").className = status;
+    if ( !status ) {
+      this.removeAttribute("checked");
+    }
+    scrollWheeler();
   }
 
   function dataResponse ( httpRequest, action ) {
@@ -129,8 +143,9 @@
         app.scoresContent = _.pluck(content.hits.hits, "_score");
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
         app.results_.innerHTML = "";
-        app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+        app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<li class='show-all doc' id='show-all'>Show all<\/li><\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.related_ = app.related_ || document.getElementById("related");
+        app.infiniScroll_ = app.infiniScroll_ || document.getElementById("infini-scroll");
         app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
@@ -152,7 +167,8 @@
         app.relatedRect = document.querySelector("#related").getBoundingClientRect();
         app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
-
+      addEvent(document.querySelector("#show-all"), filterResults);
+      addEvent(document.querySelector("#infini-scroll"), "change", infini);
       _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
         addEvent(opener, "click", revealText);
       });
@@ -298,23 +314,19 @@
     }
     return false;
   });
-  addEvent(app.infiniScroll_, "change", function () {
-    var status;
-    app.infiniScroll = this.checked || (!!this.checked);
-    status = (app.infiniScroll) ? "enabled" : "disabled";
-    document.getElementById("inf-status").innerHTML = status;
-    document.getElementById("inf-status").className = status;
-    console.log("changed infiniScroll to (direct, app storage): ", app.infiniScroll, ", ", this.checked, !!this.checked);
-    console.log("auto-launching event handler to see if infinite scroll is allowed at scroll location");
-    scrollWheeler();
-  });
   addEvent(window, "load", function () {
-    colorize();
+    var cb = function() {
+      var l = document.createElement('link'); l.rel = 'stylesheet';
+      l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700';
+      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+    };
     app.query_.focus();
     if ( window.location.search !== "" ) {
       app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
       app.term = _.trim(app.query_.value);
       app.send_.click();
     }
+    cb();
+    colorize();
   });
 })();
