@@ -1,5 +1,9 @@
-;(function() {
+"use strict";
+(function() {
   var express = require("express"),
+    /**
+     * TODO: remove this stupid dependency on the elasticsearch JS api and just use the HTTP module.
+     */
       es = require("elasticsearch"),
       fs = require("fs"),
       client = new es.Client({

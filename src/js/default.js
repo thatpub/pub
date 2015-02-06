@@ -1,5 +1,5 @@
-;(function () {
-  "use strict";
+"use strict";
+(function () {
 
   var regEmerge = / ?emerge/g,
       regHidden = / ?hidden/g,
@@ -200,12 +200,10 @@
       if ( !app.traveling && pos > app.stickyBarPosition ) {
         app.related_.className += " sticky";
         app.traveling = true;
-        console.log("ADD sticky to: ", app.related_);
       }
       if ( app.traveling && pos <= app.stickyBarPosition ) {
         app.related_.className = app.related_.className.replace(regSticky, "");
         app.traveling = false;
-        console.log("remove sticky from: ", app.related_);
       }
     app.pos = pos;
   }

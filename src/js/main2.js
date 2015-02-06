@@ -1,9 +1,10 @@
+"use strict";
+
 /**
   * If you don't use block-style comments and strict-mode, you, sir, are wrong.
   */
 
 var app = (function () {
-  "use strict";
   var months = {
     "01": "Jan",
     "02": "Feb",

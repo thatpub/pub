@@ -1,5 +1,5 @@
-;(function( undefined ) {
-  "use strict";
+"use strict";
+(function() {
   String.prototype.toPubName = function() {
     var removed,
         count = 0,
