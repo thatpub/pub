@@ -8,8 +8,8 @@ module.exports = function(grunt) {
           trace: false
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss',
-          'src/css/ie.css': 'src/scss/ie.scss'
+          'src/css/style.css': 'src/scss/style.scss'
+          /*'src/css/ie.css': 'src/scss/ie.scss'*/
         }
       },
       dev: {
@@ -19,8 +19,8 @@ module.exports = function(grunt) {
           trace: true
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss',
-          'src/css/ie.css': 'src/scss/ie.scss'
+          'src/css/style.css': 'src/scss/style.scss'
+          /*'src/css/ie.css': 'src/scss/ie.scss'*/
         }
       }
     },
@@ -37,8 +37,8 @@ module.exports = function(grunt) {
           remove: true
         },
         files: {
-          'src/css/style.css': 'src/css/style.css',
-          'src/css/ie.css': 'src/css/ie.css'
+          'src/css/style.css': 'src/css/style.css'
+          /*'src/css/ie.css': 'src/css/ie.css'*/
         }
       },
       dev: {
@@ -53,8 +53,8 @@ module.exports = function(grunt) {
           remove: true
         },
         files: {
-          'dist/css/style.min.css': 'src/css/style.css',
-          'dist/css/ie.min.css': 'src/css/ie.css'
+          'dist/css/style.min.css': 'src/css/style.css'
+          /*'dist/css/ie.min.css': 'src/css/ie.css'*/
         }
       }
     },
@@ -64,8 +64,8 @@ module.exports = function(grunt) {
           report: 'gzip'
         },
         files: {
-          'dist/css/style.min.css': 'src/css/style.css',
-          'dist/css/ie.min.css': 'src/css/ie.css'
+          'dist/css/style.min.css': 'src/css/style.css'
+          /*'dist/css/ie.min.css': 'src/css/ie.css'*/
         }
       }
     },
@@ -92,11 +92,14 @@ module.exports = function(grunt) {
           {
             src: [
               'src/lib/lodash/**lodash.min.js',
+              'src/lib/backbone/backbone.js',
+              'src/lib/snabbt.js/snabbt.min.js',
               /*'src/lib/modernizr/modernizr.js',*/
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
-              'src/js/default.js'
+              'src/js/default.js',
+              'src/js/events.js'
             ],
             dest: 'dist/js/script.min.js'
           }
@@ -113,11 +116,14 @@ module.exports = function(grunt) {
           {
             src: [
               'src/lib/lodash/**lodash.js',
+              'src/lib/backbone/backbone.js',
+              'src/lib/snabbt.js/snabbt.js',
               /*'src/lib/modernizr/modernizr.js',*/
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
-              'src/js/default.js'
+              'src/js/default.js',
+              'src/js/events.js'
             ],
             dest: 'dist/js/script.min.js'
           }
@@ -226,6 +232,7 @@ module.exports = function(grunt) {
           'src/js/main2x.js',
           'src/js/main2.js',
           'src/js/default.js',
+          'src/js/events.js',
           'src/lib/**/*.js'
         ],
         tasks: ['uglify:dev']

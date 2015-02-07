@@ -3,7 +3,7 @@
 }
 .related {
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1rem;
   width: 100%;
   list-style: none;
   display: flex;
@@ -86,7 +86,6 @@
   &.content {
     margin-bottom: 2rem;
     position: relative;
-
     .number {
       @include ribbon();
       @include leftRibbon;
@@ -95,7 +94,7 @@
       }
       &:hover {
         .climb-up, .look-inside, .do-both {
-          display: inline;
+          @include miniButton($black);
         }
       }
     }
@@ -118,17 +117,11 @@
         }
       }
       .reveal {
-        @include border-radius(4px);
-        background-color: $bg-color;
-        display: inline;
-        font-size: .75rem;
-        margin: 0;
-        border: 1px solid;
-        padding: .25rem .375rem;
-        &:hover {
-          background-color: $action-color;
-          color: $white;
-        }
+        @include miniButton($result-color);
+        /*&:hover {
+          background-color: transparent;
+          color: $action-color;
+        }*/
       }
       .combined {
         display: none;
@@ -143,17 +136,25 @@
         .combined {
           display: inline;
         }
+        .reveal {
+          color: $result-color;
+          background-color: transparent;
+          /*&:hover {
+            color: $white;
+            background-color: $action-color;
+          }*/
+        }
       }
       @media all and (min-width:480px) {
         font-size: 1.2rem;
       }
       @media all and (min-width:768px) {
-        font-size: 1.65rem;
+        font-size: 1.6rem;
         margin-left: auto;
         margin-right: auto;
       }
       @media all and (min-width:1140px) {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
     }
     .meta {
@@ -201,7 +202,7 @@
           }
         }
         .pub {
-          font-size: .75rem;
+          font-size: 75%;
         }
         .title {
           font-size: .875rem;
@@ -262,4 +263,31 @@
   @include button($result-color);
   position: absolute;
   bottom: 2rem;
+}
+
+.summary {
+  color: $text-highlight-color;
+  font-weight: 200;
+  text-align: center;
+  margin: 2rem auto;
+  .term {
+    font-size: 2.5rem;
+    color: $heading-color;
+  }
+  .total {
+    /*color: $action-color;*/
+    color: $heading-color;
+  }
+}
+
+.infini-check {
+  .infini-scroll {
+    display: none;
+    &:after {
+      @include iconInfini;
+      position: fixed;
+      top: 4rem;
+      right: 1rem;
+    }
+  }
 }

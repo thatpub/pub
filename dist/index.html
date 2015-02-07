@@ -19,47 +19,34 @@
   <!--[if lte IE 9]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-  <div class="wrapper" id="wrap">
+  <div class="wrapper full-wrap" id="wrap">
 
-    <div class="wrapper" id="search-wrap">
+    <div class="wrapper search-wrap" id="search-wrap">
       <div class="search" id="search">
         <header class="search-title">
           <h1>Find the needle</h1>
         </header>
         <input type="text" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
         <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
-        <a href="#page" id="send"><span class="action">go</span>
-          <div class="loader">
-            <div class="spinner">
-              <div class="blob top"></div>
-              <div class="blob bottom"></div>
-              <div class="blob left"></div>
-              <div class="blob move-blob"></div>
-            </div>
-          </div>
-        </a>
+        <a href="#page" id="send"><span class="action">go</span></a>
       </div>
     </div>
 
-    <div class="wrapper" id="page">
+    <div class="summary" id="summary">
+      <h2 class="term" id="term"><q></q></h2>
+      <h3>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</h3>
+    </div>
+    <div class="infini-check">
+      <label for='infini-scroll'>
+        <input type='checkbox' id='infini-scroll' name='infini-scroll' checked />
+        Infinite scrolling <span id='infini-status'>enabled</span>
+      </label>
+    </div>
+    <div class="wrapper page-wrap" id="page">
       <a href="index.html" id="no-results">No results buddy.  Try it again.</a>
-      <div class="hidden" id="summary">
-        <h2 id="term"><q></q></h2>
-        <h3>produced <span id="total"></span> results</h3>
-      </div>
-      <input type='checkbox' id='infini-scroll' name='infini-scroll' checked /><label for='infini-scroll'>Infinite scrolling <span id='inf-status'>enabled</span></label>
       <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
       <div id="results"></div>
-      <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
-        <div class="loader">
-          <div class="spinner">
-            <div class="blob top"></div>
-            <div class="blob bottom"></div>
-            <div class="blob left"></div>
-            <div class="blob move-blob"></div>
-          </div>
-        </div>
-      </a>
+      <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
     </div>
 
     <a href="#" id="search-restore">
@@ -83,7 +70,6 @@
           <span class="look-inside reveal">look inside</span>
           <span class="do-both reveal">do both</span>
         </h2>
-
         <div class="text clearfix">
           <% if ( parts && concatText ) { %>
             <span class="combined"><%= concatText %><br/></span>
@@ -102,7 +88,6 @@
             <a href='#' class='reveal'>expand full text</a>
           <% } %>
         </div>
-
         <div class="meta">
           <div class="details">
             <% if ( details && details.chapter && details.chapterTitle ) { %>

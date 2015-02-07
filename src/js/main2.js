@@ -4,7 +4,7 @@
   * If you don't use block-style comments and strict-mode, you, sir, are wrong.
   */
 
-var app = (function () {
+var App = function () {
   var months = {
     "01": "Jan",
     "02": "Feb",
@@ -19,6 +19,9 @@ var app = (function () {
     "11": "Nov",
     "12": "Dec"
   },
+    regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
+    Result = Backbone.Model.extend({}),
+    ResultStore = Backbone.Collection.extend({ model: Result }),
     wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
@@ -32,7 +35,8 @@ var app = (function () {
     moreMeta_ = document.getElementById("more-meta"),
     moreContent_ = document.getElementById("more-content"),
     related_ = document.getElementById("related"),
-    infiniScroll_,
+    infiniScroll_ = document.getElementById("infini-scroll"),
+    infiniStatus_ = document.getElementById("infini-status"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect,
@@ -65,7 +69,40 @@ var app = (function () {
     return filteredValues;
   }
 
+  function colorize() {
+    var k = 0,
+      c = ['blue', 'green', 'purple', 'pink', 'orange'],
+      color = '',
+      head = document.head || document.getElementsByTagName("head")[0];
+    var sheet = (function() {
+      if ( document.getElementById("color-stylez") ) {
+        head.removeChild(document.getElementById("color-stylez"));
+      }
+      var style = document.createElement("style");
+      style.appendChild(document.createTextNode(""));
+      style.setAttribute("id", "color-stylez");
+      head.appendChild(style);
+      return style.sheet;
+    })();
+    for (; k < 5; ++k) {
+      color = randomColor({hue: c[k], luminosity: "dark"});
+      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
+      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);
+      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "border-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "background-color: " + color + "; color: #FEFEFE;", 0);
+      /*sheet.addCSSRule(".result.content.match-" + k + " .text .reveal:hover", "color: " + color + "; background-color: transparent;", 0);*/
+      sheet.addCSSRule(".result.content.match-" + k + " .text.opened .reveal", "color: " + color + "; background-color: transparent;", 0);
+      /*sheet.addCSSRule(".result.content.match-" + k + " .text.opened .reveal:hover", "background-color: " + color + "; color: #FEFEFE;", 0);*/
+      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: " + color + "; color: " + color + ";", 0);*/
+      sheet.addCSSRule(".result.content.match-" + k + " em", "color: " + color + ";", 0);
+    }
+  }
+
   return {
+    result: new Result(),
+    resultStore: new ResultStore(),
     wrap_: wrap_,
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
@@ -82,6 +119,7 @@ var app = (function () {
     placeContent: placeContent,
     placeMeta: placeMeta,
     infiniScroll_: infiniScroll_,
+    infiniStatus_: infiniStatus_,
     infiniScroll: true,
     loading: {
       now: false,
@@ -98,6 +136,7 @@ var app = (function () {
     term: "",
     scoresContent: [],
     scoresRelatives: [],
+    colorize: colorize,
     colors: {},
     dataRender: function ( data, allScores ) {
       var output = {},
@@ -105,9 +144,6 @@ var app = (function () {
           index,
           group,
           number,
-          full,
-          fullText,
-          /*partialText,*/
           fullPub,
           rawText,
           text,
@@ -137,12 +173,11 @@ var app = (function () {
         number = data._source.number;
         text = data.highlight["text.english2"];
         rawText = data._source.text;
-        fullText = "";
         fullPub = data._source.productNo;
         highlights = Object.keys(data.highlight);
         fileFormat = ( data._type !== "form" ) ? ".pdf" : ".xfdl";
 
-        if ( /productNo(?:\.exact|\.raw)?(?=\:|$)/.test(highlights.join(":")) ) {
+        if ( regPubMatch.test(highlights.join(":")) ) {
           fullPub = data.highlight["productNo.exact"] || data.highlight["productNo.raw"] || data.highlight.productNo;
           fullPub = fullPub.shift();
         }
@@ -202,6 +237,35 @@ var app = (function () {
       });
       return tmp;
     },
+    loader: function ( parent ) {
+      if ( parent ) {
+        var loader = document.createElement("div"),
+          spinner = document.createElement("div"),
+          blobTop = document.createElement("div"),
+          blobBottom = document.createElement("div"),
+          blobLeft = document.createElement("div"),
+          blobMove = document.createElement("div");
+
+        loader.className = "loader";
+        spinner.className = "spinner";
+        blobTop.className = "blob top";
+        blobBottom.className = "blob bottom";
+        blobLeft.className = "blob left";
+        blobMove.className = "blob move-blob";
+
+        spinner.appendChild(blobTop);
+        spinner.appendChild(blobBottom);
+        spinner.appendChild(blobLeft);
+        spinner.appendChild(blobMove);
+
+        loader.appendChild(spinner);
+
+        return parent.appendChild(loader);
+      }
+      else {
+        console.error("Parent object doesn't exist or it's not a DOM node.");
+      }
+    },
     filterBy: ""
   };
-})();
+};

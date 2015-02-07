@@ -31,17 +31,3 @@ h1, h2, h3, h4, h5, h6, label {
     color: $action-highlight-color;
   }
 }
-#summary {
-  color: $text-highlight-color;
-  font-weight: 200;
-  text-align: center;
-  margin: 0 auto 2rem;
-  #term {
-    font-size: 2.25rem;
-    color: $heading-color;
-  }
-  #total {
-    /*color: $action-color;*/
-    color: $heading-color;
-  }
-}

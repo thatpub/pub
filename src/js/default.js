@@ -1,5 +1,4 @@
 "use strict";
-(function () {
 
   var regEmerge = / ?emerge/g,
       regHidden = / ?hidden/g,
@@ -7,47 +6,11 @@
       regSelected = / ?selected/g,
       regSticky = / ?sticky/g,
       regFiltered = / ?filtered/g,
-      regOpened = / ?opened/g;
+      regOpened = / ?opened/g,
+      app = App();
 
   app.resultTemplate = document.getElementById("result-template");
   app.relatedTemplate = document.getElementById("related-template");
-
-  function addEvent ( element, evt, fnc ) {
-    return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
-  }
-
-/*  function removeEvent ( element, evt, fnc ) {
-    return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
-  }*/
-
-  function colorize() {
-    var k = 0,
-        c = ['blue', 'green', 'purple', 'pink', 'orange'],
-        color = '',
-        head = document.head || document.getElementsByTagName("head")[0];
-    var sheet = (function() {
-      if ( document.getElementById("color-stylez") ) {
-        head.removeChild(document.getElementById("color-stylez"));
-      }
-      var style = document.createElement("style");
-      style.appendChild(document.createTextNode(""));
-      style.setAttribute("id", "color-stylez");
-      head.appendChild(style);
-      return style.sheet;
-    })();
-    for (; k < 5; ++k) {
-      color = randomColor({hue: c[k], luminosity: "dark"});
-      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);
-      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "border-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "border-color: " + color + "; color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal:hover", "background-color: " + color + "; color: #FEFEFE;", 0);
-      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: " + color + "; color: " + color + ";", 0);*/
-      sheet.addCSSRule(".result.content.match-" + k + " em", "color: " + color + ";", 0);
-    }
-  }
 
   function revealText ( event ) {
     if ( event.preventDefault ) {
@@ -107,43 +70,13 @@
     var status;
     app.infiniScroll = this.checked || (!!this.checked);
     status = (app.infiniScroll) ? "enabled" : "disabled";
-    document.getElementById("inf-status").innerHTML = status;
-    document.getElementById("inf-status").className = status;
+    app.infiniStatus_.innerHTML = status;
+    app.infiniStatus_.className = status;
     if ( !status ) {
       this.removeAttribute("checked");
     }
     scrollWheeler();
   }
-
-  /**
-   * Yup, I am just this lazy.
-   */
-  /*var d = {
-    el: function(data) {
-      return document.createElement(data);
-    },
-    txt: function(data) {
-      return document.createTextNode(data);
-    }
-  };
-
-  function newResult(parent, data) {
-    var _result, _number, _meta, _info, _details, _pub, _pubTitle, _chapter, _chapterTitle, _section, _sectionTitle, _text, _fullText;
-    parent = parent || document.getElementById("results") || app.results_ || null;
-    if ( data && parent ) {
-      _result = d.el("div");
-      _number = d.el("h2");
-      parent.appendChild(
-        _result.appendChild(
-          _number.appendChild(
-            d.txt("Result Test")
-          )
-        )
-      );
-    }
-  }
-
-  app.newResult = newResult;*/
 
   function dataResponse ( httpRequest, action ) {
     var response = JSON.parse(httpRequest.responseText);
@@ -167,7 +100,7 @@
       app.placeContent = content._scroll_id;
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
-        colorize();
+        app.colorize();
         if ( window.scroll ) {
           window.scroll(0, 0);
         }
@@ -179,7 +112,6 @@
         app.results_.innerHTML = null;
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<li class='show-all doc' id='show-all'>Show all<\/li><\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.related_ = app.related_ || document.getElementById("related");
-        app.infiniScroll_ = app.infiniScroll_ || document.getElementById("infini-scroll");
         app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
@@ -202,7 +134,6 @@
         app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
       addEvent(document.querySelector("#show-all"), filterResults);
-      addEvent(document.querySelector("#infini-scroll"), "change", infini);
       _.forEach(document.querySelectorAll(".text > .reveal"), function ( opener ) {
         addEvent(opener, "click", revealText);
       });
@@ -268,102 +199,21 @@
 
   function more ( event ) {
     if ( event ) {
-      app.moreContent_.className += " loading";
+      var el = event.currentTarget || event.sourceElement || this;
+      /*app.moreContent_.className += " loading";*/
+      el.className += " loading";
+      app.loader_ = app.loader(el);
       if ( event.preventDefault ) {
         event.preventDefault();
       } else {
         event.returnValue = false;
       }
     }
-    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, loader);
+    sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
   }
 
-  function loader( el ) {
+  function endLoading ( el ) {
     el.className = el.className.replace(regLoad, "");
+    app.loader_ = null;
     app.loading.now = false;
   }
-
-  addEvent(app.query_, "keypress", function ( event ) {
-    if ( event.which === 13 ) {
-      if ( !app.query_.value ) { /* show notification/input validate here */
-        return false;
-      }
-      app.term = _.trim(app.query_.value);
-      app.send_.className += " loading";
-      app.filterBy = "";
-      sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);
-      return false;
-    }
-  });
-  addEvent(document, "keyup", function ( event ) {
-    if ( event.which === 27 ) {
-      if (/emerge/g.test(app.searchWrap_.className)) {
-        app.searchWrap_.className = app.searchWrap_.className.replace(regEmerge, "");
-      }
-      app.filterBy = "";
-      filterResults();
-    }
-  });
-  addEvent(app.send_, "click", function ( event ) {
-    if ( !app.query_.value ) { /* show notification/input validate here */
-      app.query_.focus();
-      return false;
-    }
-    app.term = _.trim(app.query_.value);
-    app.send_.className += " loading";
-    app.filterBy = "";
-    sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, loader);
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-    return false;
-  });
-  addEvent(app.moreContent_, "click", more);
-  addEvent(app.moreMeta_, "click", function ( event ) {
-    this.className += " loading";
-    sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, loader);
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-  });
-  addEvent(app.searchRestore_, "click", function ( event ) {
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-    if ( / ?emerge/gi.test(app.searchWrap_.className) ) {
-      app.searchWrap_.className = app.searchWrap_.className.replace(/ ?emerge/gmi, "");
-      return false;
-    }
-    else {
-      app.query_.value = app.term||"";
-      app.searchWrap_.className += " emerge";
-    }
-    return false;
-  });
-  addEvent(app.searchWrap_, 'webkitTransitionEnd', function () {
-    if ( regEmerge.test(app.searchWrap_.className) ) {
-      app.query_.focus();
-    }
-  });
-  addEvent(window, "load", function () {
-    var cb = function() {
-      var l = document.createElement('link'); l.rel = 'stylesheet';
-      l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700';
-      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-    };
-    app.query_.focus();
-    if ( window.location.search !== "" ) {
-      app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
-      app.term = _.trim(app.query_.value);
-      app.send_.click();
-    }
-    cb();
-    colorize();
-  });
-})();

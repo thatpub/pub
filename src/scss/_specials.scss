@@ -26,10 +26,22 @@
   transform: $action;
 }
 @mixin transition($property, $duration, $easing, $delay...) {
-  -webkit-transition: $property $duration $easing $delay;
-  -moz-transition: $property $duration $easing $delay;
-  -o-transition: $property $duration $easing $delay;
-  transition: $property $duration $easing $delay;
+  .no-js & {
+    -webkit-transition: $property $duration $easing $delay;
+    -moz-transition: $property $duration $easing $delay;
+    -o-transition: $property $duration $easing $delay;
+    transition: $property $duration $easing $delay;
+  }
+}
+@mixin miniButton($bg, $color: $white) {
+  @include border-radius(4px);
+  display: inline;
+  font-size: 75%;
+  margin: 0;
+  border: 1px solid;
+  padding: .25rem .375rem;
+  background-color: $bg;
+  color: $color;
 }
 @mixin button($color, $padding: 1.25rem, $font-size: 2.5rem) {
   @include border-radius(8px);
@@ -61,7 +73,29 @@
     opacity: .8;
   }
 }
-
+@mixin ribbon($bg: $result-highlight-color) {
+  background-color: $bg;
+  background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
+  color: $white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
+  border-width: 1px 1px 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  margin: 0;
+  padding: .25rem 2.5rem;
+  position: absolute;
+  top: .75rem;
+  &:after {
+    border-width: 7px;
+    border-style: solid;
+    border-top-color: $text-highlight-color;
+    border-bottom-color: transparent;
+    bottom: -15px;
+    content: "";
+    position: absolute;
+  }
+}
 @mixin paperShadow {
   &:before, &:after {
     bottom: 26px;
@@ -80,7 +114,7 @@
     right: 2%;
     transform: rotate(3deg);
   }
-  box-shadow: 0 3px 3px rgba(0,0,0,.25);
+  box-shadow: 0 0 3px rgba(0,0,0,.25);
 }
 @mixin rightRibbon {
   right: -14px;
@@ -98,28 +132,5 @@
     left: -1px;
     border-right-color: $text-highlight-color;
     border-left-color: transparent;
-  }
-}
-@mixin ribbon($bg: $result-highlight-color) {
-  background-color: $bg;
-  background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
-  color: $white;
-  font-size: 18px;
-  font-weight: bold;
-  text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
-  border-width: 1px 1px 2px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  margin: 0;
-  padding: 4px 40px;
-  position: absolute;
-  top: 12px;
-  &:after {
-    border-width: 7px;
-    border-style: solid;
-    border-top-color: $text-highlight-color;
-    border-bottom-color: transparent;
-    bottom: -15px;
-    content: "";
-    position: absolute;
   }
 }
