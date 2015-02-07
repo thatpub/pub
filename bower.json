@@ -40,6 +40,7 @@
     "backbone": ">=1.1.2",
     "react-backbone": ">=0.16.0",
     "modernizr": "~2.8.3",
-    "randomColor": "~0.2.0"
+    "randomColor": "~0.2.0",
+    "snabbt.js": "~0.3.0"
   }
 }
