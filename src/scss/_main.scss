@@ -107,6 +107,7 @@ textarea {
 
 #page {
   @include paperShadow;
+  @include border-radius(4px);
   top: 0;
   background-color: $white;
   padding: 2rem 2rem 8rem;

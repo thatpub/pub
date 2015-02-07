@@ -40,6 +40,7 @@
       text-align: center;
       cursor: pointer;
       padding: 5px 8px;
+      margin: 5px auto;
       &:hover {
         background-color: transparent;
         color: $text-highlight-color;
@@ -58,7 +59,7 @@
     .related & {
       @include border-radius(4px);
       flex-grow: 1;
-      margin: 0 1rem 0 0;
+      margin: 5px 1rem 5px 0;
       text-align: center;
       border: 1px solid transparent;
       padding: 3px 5px;
@@ -89,6 +90,14 @@
     .number {
       @include ribbon();
       @include leftRibbon;
+      .climb-up, .look-inside, .do-both {
+        display: none;
+      }
+      &:hover {
+        .climb-up, .look-inside, .do-both {
+          display: inline;
+        }
+      }
     }
     .text {
       color: $text-color;
@@ -113,15 +122,22 @@
         background-color: $bg-color;
         display: inline;
         font-size: .75rem;
-        margin: 0 0 .25rem 1rem;
+        margin: 0;
         border: 1px solid;
         padding: .25rem .375rem;
+        &:hover {
+          background-color: $action-color;
+          color: $white;
+        }
       }
       .combined {
         display: none;
       }
+      .parts {
+        display: block;
+      }
       &.opened {
-        .reveal, .parts {
+        .parts {
           display: none;
         }
         .combined {
@@ -212,7 +228,7 @@
       }
     }
     .filtered & {
-      opacity: .35;
+      display: none;
       .number {
         display: none;
       }
@@ -223,7 +239,7 @@
         pointer-events: none;
       }
       &.selected {
-        opacity: 1;
+        display: block;
         .number {
           display: block;
         }

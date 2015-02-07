@@ -6,7 +6,8 @@
       regLoad = / ?loading/g,
       regSelected = / ?selected/g,
       regSticky = / ?sticky/g,
-      regFiltered = / ?filtered/g;
+      regFiltered = / ?filtered/g,
+      regOpened = / ?opened/g;
 
   app.resultTemplate = document.getElementById("result-template");
   app.relatedTemplate = document.getElementById("related-template");
@@ -39,10 +40,12 @@
       sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
       sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);
       sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "border-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: "+ color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: "+ color + ";", 0);
-      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: "+ color + "; color: "+ color + ";", 0);*/
-      sheet.addCSSRule(".result.content.match-" + k + " em", "color: "+ color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "border-color: " + color + "; color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal:hover", "background-color: " + color + "; color: #FEFEFE;", 0);
+      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: " + color + "; color: " + color + ";", 0);*/
+      sheet.addCSSRule(".result.content.match-" + k + " em", "color: " + color + ";", 0);
     }
   }
 
@@ -52,16 +55,18 @@
     } else {
       event.returnValue = false;
     }
-    this.parentNode.className += " opened";
+    var open = regOpened.test(this.parentNode.className);
+
+    this.innerHTML = null;
+    this.parentNode.className = (!open) ?
+      this.parentNode.className + " opened" :
+      this.parentNode.className.replace(regOpened, "");
+    this.appendChild((!open) ?
+      document.createTextNode("make it smaller") :
+      document.createTextNode("show me more"));
+
     return false;
   }
-
-  addEvent(app.searchWrap_, 'transitionend', function () {
-    if ( _.indexOf(app.searchWrap_.className, "emerge") > -1 ) {
-      app.query_.focus();
-      alert("wtf");
-    }
-  });
 
   function filterResults ( event ) {
     var el = ( event ) ? event.currentTarget || event.sourceElement : null;
@@ -99,7 +104,6 @@
   }
 
   function infini () {
-    console.log(this);
     var status;
     app.infiniScroll = this.checked || (!!this.checked);
     status = (app.infiniScroll) ? "enabled" : "disabled";
@@ -110,6 +114,36 @@
     }
     scrollWheeler();
   }
+
+  /**
+   * Yup, I am just this lazy.
+   */
+  /*var d = {
+    el: function(data) {
+      return document.createElement(data);
+    },
+    txt: function(data) {
+      return document.createTextNode(data);
+    }
+  };
+
+  function newResult(parent, data) {
+    var _result, _number, _meta, _info, _details, _pub, _pubTitle, _chapter, _chapterTitle, _section, _sectionTitle, _text, _fullText;
+    parent = parent || document.getElementById("results") || app.results_ || null;
+    if ( data && parent ) {
+      _result = d.el("div");
+      _number = d.el("h2");
+      parent.appendChild(
+        _result.appendChild(
+          _number.appendChild(
+            d.txt("Result Test")
+          )
+        )
+      );
+    }
+  }
+
+  app.newResult = newResult;*/
 
   function dataResponse ( httpRequest, action ) {
     var response = JSON.parse(httpRequest.responseText);
@@ -169,7 +203,7 @@
       }
       addEvent(document.querySelector("#show-all"), filterResults);
       addEvent(document.querySelector("#infini-scroll"), "change", infini);
-      _.forEach(document.querySelectorAll(".reveal"), function ( opener ) {
+      _.forEach(document.querySelectorAll(".text > .reveal"), function ( opener ) {
         addEvent(opener, "click", revealText);
       });
       _.forEach(document.querySelectorAll(".doc"), function (el) {
@@ -311,6 +345,11 @@
       app.searchWrap_.className += " emerge";
     }
     return false;
+  });
+  addEvent(app.searchWrap_, 'webkitTransitionEnd', function () {
+    if ( regEmerge.test(app.searchWrap_.className) ) {
+      app.query_.focus();
+    }
   });
   addEvent(window, "load", function () {
     var cb = function() {

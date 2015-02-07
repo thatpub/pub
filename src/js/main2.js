@@ -109,6 +109,7 @@ var app = (function () {
           fullText,
           /*partialText,*/
           fullPub,
+          rawText,
           text,
           date,
           highlights,
@@ -135,7 +136,7 @@ var app = (function () {
       else if ( data._source.text ) {
         number = data._source.number;
         text = data.highlight["text.english2"];
-        full = data._source.text;
+        rawText = data._source.text;
         fullText = "";
         fullPub = data._source.productNo;
         highlights = Object.keys(data.highlight);
@@ -145,29 +146,8 @@ var app = (function () {
           fullPub = data.highlight["productNo.exact"] || data.highlight["productNo.raw"] || data.highlight.productNo;
           fullPub = fullPub.shift();
         }
-        /**
-         *  This is for when I have the results split up by XX characters each.
-         */
-        if ( text && text.length > 1 ) {
-          var i = 0,
-            count = text.length;
-          for (; i < count; ++i) {
-            fullText += (Array.isArray(text) ) ? "<q>..." + text[i] + "...<\/q><br\/>" :
-              ( typeof text == "string" ) ? text : full;
-          }
-        }
 
-        /*try {
-          full = text||full||null;
-        } catch (badz) {
-          console.trace(badz);
-        }*/
-        /*partialText = _.trunc(full, {
-          "length": 100,
-          "omission": "",
-          "separator": /(<em>.*<\/em>)/gmi
-        });*/
-          date = ( data._source.releaseDate ) ?
+        date = ( data._source.releaseDate ) ?
                  data._source.releaseDate.substring(6, 8) + " " + months[data._source.releaseDate.substring(4, 6)] + " " + data._source.releaseDate.substring(0, 4) :
                  data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
 
@@ -185,21 +165,21 @@ var app = (function () {
             ) ? " pretty" + group : " boring" + group,
           date: date,
           url: "http://get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
-          pub: fullPub,
+          fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
-          sub: ( full ) ? number : "",
+          sub: ( rawText ) ? number : "",
           details: {
             chapter: data._source.chapter && data._source.chapter.number || null,
             chapterTitle: data.highlight["chapter.title"] || data._source.chapter && data._source.chapter.title || null,
             section: data._source.section && data._source.section.number || null,
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
-          concatText: data.highlight["text"] || null,
-          text: (fullText) ? "<span class='parts'>" + fullText + "<\/span><a href='#' class='reveal'>expand full text<\/a>" : data.highlight["text"] || full,
-          rawText: full,
+          rawText: rawText,
+          concatText: (data.highlight["text"] && data.highlight["text"][0]) || null,
+          parts: (Array.isArray(text)) ? text : null,
           fileFormat: fileFormat,
-          type: ( full ) ? " content" : " doc"
+          type: ( rawText ) ? " content" : " doc"
         };
 
       }

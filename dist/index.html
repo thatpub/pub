@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!--[if IE 8]>     <html class="no-js ie8" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
-<!--[if IE 9]>     <html class="no-js ie8 ie9" itemscope itemtype="http://schema.org/SearchAction"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" itemscope itemtype="http://schema.org/SearchAction"> <!--<![endif]-->
+<html class="no-js" itemscope itemtype="http://schema.org/SearchAction">
   <head>
-    <!--[if gt IE 9]><!--><meta http-equiv="content-type" content="text/html; charset=UTF-8"><!--<![endif]-->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>thatPub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,16 +12,13 @@
 
     <link rel="stylesheet" href="css/style.min.css" type="text/css">
     <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
-    <script type="text/javascript">
-      /*takanaClient.run({host: 'localhost:48626'});*/
-    </script>
 
   </head>
   <body>
 
-  <!--[if lte IE 9]>-->
-  <!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>-->
-  <!--<![endif]-->
+  <!--[if lte IE 9]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
   <div class="wrapper" id="wrap">
 
     <div class="wrapper" id="search-wrap">
@@ -49,7 +44,7 @@
     <div class="wrapper" id="page">
       <a href="index.html" id="no-results">No results buddy.  Try it again.</a>
       <div class="hidden" id="summary">
-        <h2 id="term"></h2>
+        <h2 id="term"><q></q></h2>
         <h3>produced <span id="total"></span> results</h3>
       </div>
       <input type='checkbox' id='infini-scroll' name='infini-scroll' checked /><label for='infini-scroll'>Infinite scrolling <span id='inf-status'>enabled</span></label>
@@ -80,13 +75,34 @@
     </script>
 
     <script type="text/template" id="result-template">
-      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= pub %>">
+      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
         <% if ( type === " content" ) { %>
-        <h2 class="number"><%= sub %></h2>
+        <h2 class="number">
+          <%= sub %>
+          <span class="climb-up reveal">climb up</span>
+          <span class="look-inside reveal">look inside</span>
+          <span class="do-both reveal">do both</span>
+        </h2>
+
         <div class="text clearfix">
-          <%= text %>
-          <span class="combined"><%= concatText %></span><br/>
+          <% if ( parts && concatText ) { %>
+            <span class="combined"><%= concatText %><br/></span>
+            <span class="parts"><%  var i = 0, count = parts.length;
+                for (; i < count; ++i) {
+                  if ( count > 1 || concatText.length > parts[0].length ) { %>
+                    <q>...<%= parts[i] %>...</q><br/>
+                  <% } else { %>
+                    <%= parts[0] %><br/>
+                  <% } %>
+                <% } %></span>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href='#' class='reveal'>show me more</a><% } %>
+          <% } else { %>
+            <span class="combined"><%= rawText %></span>
+            <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
+            <a href='#' class='reveal'>expand full text</a>
+          <% } %>
         </div>
+
         <div class="meta">
           <div class="details">
             <% if ( details && details.chapter && details.chapterTitle ) { %>
@@ -95,26 +111,20 @@
             <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
             <% } %>
           </div>
-          <a class="info" href="<%= url %>" title="<%= date %>" download="<%= pub %>.pdf" target="_blank">
-            <span class="pub"><%= pub %></span><br/>
+          <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+            <span class="pub"><%= fullPub %></span><br/>
             <span class="title"><%= title %></span>
           </a>
         </div>
         <% } else { %>
-        <a class="info" href="<%= url %>" title="<%= date %>" download="<%= pub %>.pdf" target="_blank">
-          <span class="pub"><%= pub %></span><br/>
+        <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+          <span class="pub"><%= fullPub %></span><br/>
           <span class="title"><%= title %></span>
         </a>
         <% } %>
       </div>
     </script>
-
-  <!--[if lte IE 9]>
-    <!--<script type="text/javascript" src="js/ie.min.js" defer></script>-->
-  <![endif]-->
-  <!--[if gt IE 9]><!-->
-    <script type="text/javascript" src="js/script.min.js"></script>
-  <!--<![endif]-->
+    <script src="js/script.min.js"></script>
   <!--<script type="text/javascript" defer>
     WebFontConfig = {
       google: { families: [ 'Droid+Serif:400,700:latin', 'Montserrat:400,700:latin'] }

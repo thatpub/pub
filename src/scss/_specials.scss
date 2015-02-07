@@ -80,7 +80,7 @@
     right: 2%;
     transform: rotate(3deg);
   }
-  box-shadow: 0 0 3px rgba(0,0,0,.25);
+  box-shadow: 0 3px 3px rgba(0,0,0,.25);
 }
 @mixin rightRibbon {
   right: -14px;
