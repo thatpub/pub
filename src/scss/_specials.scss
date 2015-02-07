@@ -25,7 +25,7 @@
   -webkit-transform: $action;
   transform: $action;
 }
-@mixin transition($property: all, $duration: .15s, $easing: ease, $delay...) {
+@mixin transition($property, $duration, $easing, $delay...) {
   -webkit-transition: $property $duration $easing $delay;
   -moz-transition: $property $duration $easing $delay;
   -o-transition: $property $duration $easing $delay;
@@ -81,4 +81,45 @@
     transform: rotate(3deg);
   }
   box-shadow: 0 0 3px rgba(0,0,0,.25);
+}
+@mixin rightRibbon {
+  right: -14px;
+  margin-right: -2rem;
+  &:after {
+    right: -1px;
+    border-left-color: $text-highlight-color;
+    border-right-color: transparent;
+  }
+}
+@mixin leftRibbon {
+  left: -14px;
+  margin-left: -2rem;
+  &:after {
+    left: -1px;
+    border-right-color: $text-highlight-color;
+    border-left-color: transparent;
+  }
+}
+@mixin ribbon($bg: $result-highlight-color) {
+  background-color: $bg;
+  background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
+  color: $white;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
+  border-width: 1px 1px 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  margin: 0;
+  padding: 4px 40px;
+  position: absolute;
+  top: 12px;
+  &:after {
+    border-width: 7px;
+    border-style: solid;
+    border-top-color: $text-highlight-color;
+    border-bottom-color: transparent;
+    bottom: -15px;
+    content: "";
+    position: absolute;
+  }
 }

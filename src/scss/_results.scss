@@ -87,29 +87,8 @@
     position: relative;
 
     .number {
-      background-color: $result-highlight-color; //#08b;
-      background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
-      color: $white;
-      font-size: 18px;
-      font-weight: bold;
-      text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
-      border-width: 1px 1px 2px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      margin: 0;
-      margin-right: -2rem;
-      padding: 4px 40px;
-      position: absolute;
-      right: -14px;
-      top: 12px;
-      &:after {
-        border-width: 7px;
-        border-style: solid;
-        border-color: $text-highlight-color transparent transparent $text-highlight-color;
-        bottom: -15px;
-        content: "";
-        position: absolute;
-        right: -1px;
-      }
+      @include ribbon();
+      @include leftRibbon;
     }
     .text {
       color: $text-color;

@@ -56,7 +56,7 @@
     return false;
   }
 
-  addEvent(app.searchWrap_, 'transitionend', function ( event ) {
+  addEvent(app.searchWrap_, 'transitionend', function () {
     if ( _.indexOf(app.searchWrap_.className, "emerge") > -1 ) {
       app.query_.focus();
       alert("wtf");
@@ -142,7 +142,7 @@
         }
         app.scoresContent = _.pluck(content.hits.hits, "_score");
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
-        app.results_.innerHTML = "";
+        app.results_.innerHTML = null;
         app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<li class='show-all doc' id='show-all'>Show all<\/li><\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.related_ = app.related_ || document.getElementById("related");
         app.infiniScroll_ = app.infiniScroll_ || document.getElementById("infini-scroll");
