@@ -16,7 +16,8 @@
   }
 }
 @mixin iconInfini {
-  display: inline;
-  position: relative;
-  content: url(../img/refresh.png);
+  &:after {
+    display: block;
+    content: url(../img/refresh.png);
+  }
 }

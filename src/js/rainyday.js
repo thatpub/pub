@@ -28,3 +28,25 @@
   }
 
   app.newResult = newResult;*/
+
+  /**
+   * For IE8 obviously
+   */
+
+  var el = event.currentTarget || event.sourceElement || this;
+  if ( event.preventDefault ) {
+    event.preventDefault();
+  } else {
+    event.returnValue = false;
+  }
+
+  /*addEvent(app.searchWrap_, 'webkitTransitionEnd', function () {
+   if ( regEmerge.test(app.searchWrap_.className) ) {
+   app.query_.focus();
+   }
+   });*/
+  /*addEvent(app.searchWrap_, 'transitionend', function () {
+   if ( regEmerge.test(app.searchWrap_.className) ) {
+   app.query_.focus();
+   }
+   });*/

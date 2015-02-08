@@ -21,13 +21,14 @@ var App = function () {
   },
     regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
     Result = Backbone.Model.extend({}),
-    ResultStore = Backbone.Collection.extend({ model: Result }),
+    Results = Backbone.Collection.extend({ model: Result }),
     wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
     page_ = document.getElementById("page"),
     results_ = document.getElementById("results"),
     summary_ = document.getElementById("summary"),
+    count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
     total_ = document.getElementById("total"),
     query_ = document.getElementById("query"),
@@ -63,10 +64,9 @@ var App = function () {
     var q3 = values[Math.ceil((values.length * (3 / 4)))];
     var iqr = q3 - q1;
     var maxValue = q3 + (iqr * 1.5);
-    var filteredValues = values.filter( function ( x ) {
+    return values.filter( function ( x ) {
         return (x > maxValue);
     });
-    return filteredValues;
   }
 
   function colorize() {
@@ -86,9 +86,9 @@ var App = function () {
     })();
     for (; k < 5; ++k) {
       color = randomColor({hue: c[k], luminosity: "dark"});
-      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);
-      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "border-color: " + color + ";", 0);
+      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + "; border-color: " + color + "; background-color: transparent;", 0);
+      /*sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);*/
+      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "color: #FEFEFE; background-color: " + color + "; border-color: #FEFEFE;", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "background-color: " + color + "; color: #FEFEFE;", 0);
@@ -97,18 +97,21 @@ var App = function () {
       /*sheet.addCSSRule(".result.content.match-" + k + " .text.opened .reveal:hover", "background-color: " + color + "; color: #FEFEFE;", 0);*/
       /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: " + color + "; color: " + color + ";", 0);*/
       sheet.addCSSRule(".result.content.match-" + k + " em", "color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .meta .info .pub, .result.content.match-" + k + " .meta .info .title", "color: " + color + ";", 0);
+      sheet.addCSSRule(".result.content.match-" + k + " .meta .info:hover .pub, .result.content.match-" + k + " .meta .info:hover .title", "border-bottom-color: " + color + ";", 0);
     }
   }
 
   return {
     result: new Result(),
-    resultStore: new ResultStore(),
+    results: new Results(),
     wrap_: wrap_,
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
     page_: page_,
     results_: results_,
     summary_: summary_,
+    count_: count_,
     term_: term_,
     total_: total_,
     query_: query_,
@@ -136,6 +139,8 @@ var App = function () {
     term: "",
     scoresContent: [],
     scoresRelatives: [],
+    selectedResults: [],
+    selectedTotal: 0,
     colorize: colorize,
     colors: {},
     dataRender: function ( data, allScores ) {
@@ -187,7 +192,7 @@ var App = function () {
                  data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
 
         if ( regType.test(data._type) && data._type.length == 7 ) {
-          number = _.capitalize(data._type) + " " + data._source.number;
+          number = data._type.toTitle() + " " + data._source.number;
         }
         index = app.colors[data._source.productNo||data._source.pubName];
         group = ( _.isNumber(index) && (index >= 0 || index < 5)) ? " match-" + index : "";
@@ -231,41 +236,13 @@ var App = function () {
     },
     addItem: function ( results, templateCode, allScores ) {
       var tmp = "",
-          that = this;
-      _.forEach(results, function ( result ) {
-        tmp += _.template(templateCode)(that.dataRender(result, allScores));
-      });
+        that = this,
+        rl = results.length,
+        a = 0;
+      for (; a < rl; ++a) {
+        tmp += _.template(templateCode)(that.dataRender(results[a], allScores));
+      }
       return tmp;
-    },
-    loader: function ( parent ) {
-      if ( parent ) {
-        var loader = document.createElement("div"),
-          spinner = document.createElement("div"),
-          blobTop = document.createElement("div"),
-          blobBottom = document.createElement("div"),
-          blobLeft = document.createElement("div"),
-          blobMove = document.createElement("div");
-
-        loader.className = "loader";
-        spinner.className = "spinner";
-        blobTop.className = "blob top";
-        blobBottom.className = "blob bottom";
-        blobLeft.className = "blob left";
-        blobMove.className = "blob move-blob";
-
-        spinner.appendChild(blobTop);
-        spinner.appendChild(blobBottom);
-        spinner.appendChild(blobLeft);
-        spinner.appendChild(blobMove);
-
-        loader.appendChild(spinner);
-
-        return parent.appendChild(loader);
-      }
-      else {
-        console.error("Parent object doesn't exist or it's not a DOM node.");
-      }
-    },
-    filterBy: ""
+    }
   };
 };

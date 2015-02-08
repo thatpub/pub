@@ -1,4 +1,4 @@
-#results {
+.results {
   position: relative;
 }
 .related {
@@ -74,6 +74,7 @@
       opacity: .35;
       &.selected {
         opacity: 1;
+
         &:hover {
           opacity: 1;
         }
@@ -89,12 +90,17 @@
     .number {
       @include ribbon();
       @include leftRibbon;
+      overflow: hidden;
       .climb-up, .look-inside, .do-both {
         display: none;
       }
       &:hover {
         .climb-up, .look-inside, .do-both {
-          @include miniButton($black);
+          @include miniButton($black, .125rem .375rem);
+          float: right;
+          clear: none;
+          margin: auto 0 auto 2rem;
+          cursor: pointer;
         }
       }
     }
@@ -281,13 +287,14 @@
 }
 
 .infini-check {
-  .infini-scroll {
+  label[for="infini-scroll"] {
+    @include iconInfini;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+  }
+  input {
     display: none;
-    &:after {
-      @include iconInfini;
-      position: fixed;
-      top: 4rem;
-      right: 1rem;
-    }
   }
 }

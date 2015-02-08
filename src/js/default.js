@@ -7,61 +7,79 @@
       regSticky = / ?sticky/g,
       regFiltered = / ?filtered/g,
       regOpened = / ?opened/g,
+      regDone = / ?done|$/gm,
       app = App();
 
   app.resultTemplate = document.getElementById("result-template");
   app.relatedTemplate = document.getElementById("related-template");
 
-  function revealText ( event ) {
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
+  function revealText () {
     var open = regOpened.test(this.parentNode.className);
-
     this.innerHTML = null;
-    this.parentNode.className = (!open) ?
-      this.parentNode.className + " opened" :
-      this.parentNode.className.replace(regOpened, "");
-    this.appendChild((!open) ?
-      document.createTextNode("make it smaller") :
-      document.createTextNode("show me more"));
-
+    classAdd(this.parentNode, "opened", regOpened);
+    this.appendChild(document.createTextNode((!open) ? "make it smaller" : "show me more"));
     return false;
   }
 
   function filterResults ( event ) {
+    var reset, o, rl, h, i, j, exists, group, count;
     var el = ( event ) ? event.currentTarget || event.sourceElement : null;
-    var filter = (el) ? el.getAttribute("id") : app.filterBy;
-    app.filterBy = filter;
-    if ( app.filterBy === "" || app.filterBy === "show-all" ) {
-      app.filtered_ = null;
-      _.forEach(document.querySelectorAll(".doc, .result"), function ( a ) {
-        a.className = a.className.replace(regSelected, "");
-      });
+    var filter = ( event === null && el === null ) ?
+      false : ( event === "" ) ?
+      true : el.getAttribute("id") || this.id;
+    if ( filter === true ) {
+      console.log("this better not show up");
+      app.selectedResults = [];
+      app.selectedTotal = 0;
+      reset = document.querySelectorAll(".selected");
+      o = 0,
+      rl = reset.length;
+      for (; o < rl; ++o) {
+        reset[o].className = reset[o].className.replace(regSelected, "");
+      }
       app.results_.className = app.results_.className.replace(regFiltered, "");
+      app.count_.innerHTML = app.scoresContent.length;
       return false;
     }
-    try {
-      el = document.getElementById(filter);
-    } catch (error) {
-      console.error(error);
+
+    group = document.querySelectorAll("[data-pub='" + filter + "']");
+    count = group.length;
+    i = 0;
+    j = 0;
+    h = 0;
+    for (; j < app.selectedResults.length; ++j) {
+      if ( app.selectedResults[j] == filter ) {
+        exists = j;
+        break;
+      }
     }
-    _.forEach(document.querySelectorAll(".selected"), function ( sel ) {
-      sel.className = sel.className.replace(regSelected, "");
-    });
-
-    app.results_.className = ( _.indexOf(app.results_.className, "filtered") < 0 ) ? app.results_.className + " filtered" : app.results_.className;
-
-    if ( app.filtered_ !== document.querySelectorAll("[data-pub='" + filter + "']") ){
-      app.filtered_ = document.querySelectorAll("[data-pub='" + filter + "']");
-      _.forEach(app.filtered_, function (found) {
-        found.className += " selected";
-      });
+    if ( exists > -1 ) {
+      for (; i < count; ++i) {
+        group[i].className = group[i].className.replace(regSelected, "");
+      }
+      app.selectedResults.splice(exists, 1);
+      app.selectedTotal = app.selectedTotal - count;
+      if (el) {
+        el.className = el.className.replace(regSelected, "");
+      }
+    }
+    else {
+      for (; h < count; ++h) {
+        group[h].className += " selected";
+      }
+      app.selectedResults.push(filter);
+      app.selectedTotal = app.selectedTotal + count;
       if (el) {
         el.className += " selected";
       }
+    }
+    app.count_.innerHTML = (app.selectedResults.length > 0) ?
+      app.selectedTotal : app.scoresContent.length;
+
+    if ( app.selectedResults.length > 0 ) {
+      classAdd(app.results_, "filtered", regFiltered);
+    } else {
+      app.results_.className = app.results_.className.replace(regFiltered, "");
     }
     return false;
   }
@@ -85,32 +103,26 @@
     var expires = new Date(Date.now() + 3600000);
 
     if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
-      app.wrap_.className += " failed";
+      classAdd(app.wrap_, "failed", / ?failed/g);
       return false;
     }
 
-    app.searchWrap_.className = app.searchWrap_.className.replace(regEmerge, "");
-    app.wrap_.className = app.wrap_.className.replace(/ ?done|$/gm, ' done');
+    classAdd(app.searchWrap_, "emerge", regEmerge);
+    classAdd(app.wrap_, "done", regDone);
     expires = expires.toUTCString();
 
     if ( content ) {
-      app.summary_.className = app.summary_.className.replace(regHidden, "");
-      app.term_.innerHTML = "\"" + app.term + "\"";
+      app.term_.innerHTML = app.term;
       app.total_.innerHTML = content.hits.total;
       app.placeContent = content._scroll_id;
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
         app.colorize();
-        if ( window.scroll ) {
-          window.scroll(0, 0);
-        }
-        else if ( window.scrollY ) {
-          window.scrollY(0);
-        }
+        window.scroll(0, 0);
         app.scoresContent = _.pluck(content.hits.hits, "_score");
         app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
-        app.results_.innerHTML = null;
-        app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<li class='show-all doc' id='show-all'>Show all<\/li><\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+
+        app.results_.innerHTML = "<h2 class='label'>Related Documents<br\/><small>(click to filter locally, press ESC to reset)<\/small><\/h2><ul class='related' id='related'>" + app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives) + "<\/ul><hr\/>" + app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.related_ = app.related_ || document.getElementById("related");
         app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
@@ -122,7 +134,7 @@
       }
 
       if ( content.hits.hits.length < 20 ) {
-        app.moreContent_.className += " hidden";
+        classAdd(app.moreContent_, "hidden", regHidden);
         app.loading.stillMore = false;
       }
       else {
@@ -133,15 +145,23 @@
         app.relatedRect = document.querySelector("#related").getBoundingClientRect();
         app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
-      addEvent(document.querySelector("#show-all"), filterResults);
-      _.forEach(document.querySelectorAll(".text > .reveal"), function ( opener ) {
-        addEvent(opener, "click", revealText);
-      });
-      _.forEach(document.querySelectorAll(".doc"), function (el) {
-        addEvent(el, "click", filterResults);
-      });
-      filterResults();
+
+      var reveals = document.querySelectorAll(".text > .reveal"),
+        docs = document.querySelectorAll(".doc"),
+        a = 0,
+        b = 0,
+        rl = reveals.length,
+        dl = docs.length;
+
+      for (; a < rl; ++a) {
+        addEvent(reveals[a], "click", revealText);
+      }
+      for (; b < dl; ++b) {
+        addEvent(docs[b], "click", filterResults);
+      }
+      filterResults( (action !== "more") ? "" : null );
     }
+
     if ( meta ) {
       app.placeMeta = meta._scroll_id;
       document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
@@ -163,7 +183,7 @@
     }
 
       if ( !app.traveling && pos > app.stickyBarPosition ) {
-        app.related_.className += " sticky";
+        classAdd(app.related_, "sticky", regSticky);
         app.traveling = true;
       }
       if ( app.traveling && pos <= app.stickyBarPosition ) {
@@ -182,7 +202,7 @@
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
           responder(httpRequest, action);
-          clbk((action === "more") ? app.moreContent_ : app.send_);
+          clbk((action === "more") ? null : "");
         }
       }
     };
@@ -198,22 +218,18 @@
   }
 
   function more ( event ) {
-    if ( event ) {
-      var el = event.currentTarget || event.sourceElement || this;
-      /*app.moreContent_.className += " loading";*/
-      el.className += " loading";
-      app.loader_ = app.loader(el);
-      if ( event.preventDefault ) {
-        event.preventDefault();
-      } else {
-        event.returnValue = false;
-      }
-    }
+    event.preventDefault();
+    classAdd(app.moreContent_, "loading", regLoad);
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
+    return false;
   }
 
   function endLoading ( el ) {
+    el = ( el === null ) ? app.moreContent_ :
+          ( el === "" ) ? app.send_ : null;
     el.className = el.className.replace(regLoad, "");
-    app.loader_ = null;
     app.loading.now = false;
+    if ( el == app.send_ && !regEmerge.test(app.searchWrap_.className) ) {
+      app.searchRestore_.click();
+    }
   }

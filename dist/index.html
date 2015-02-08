@@ -11,7 +11,6 @@
     <link rel="apple-touch-icon" href="http://that.pub/apple-touch-icon.png">
 
     <link rel="stylesheet" href="css/style.min.css" type="text/css">
-    <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
 
   </head>
   <body>
@@ -26,9 +25,17 @@
         <header class="search-title">
           <h1>Find the needle</h1>
         </header>
-        <input type="text" name="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" />
+        <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
         <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
-        <a href="#page" id="send"><span class="action">go</span></a>
+        <a href="#page" class="send" id="send"><span class="action">go</span>
+          <div class="loader">
+            <div class="spinner">
+              <div class="blob top"></div>
+              <div class="blob bottom"></div>
+              <div class="blob left"></div>
+              <div class="blob move-blob"></div>
+            </div>
+          </div></a>
       </div>
     </div>
 
@@ -36,20 +43,30 @@
       <h2 class="term" id="term"><q></q></h2>
       <h3>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</h3>
     </div>
+
     <div class="infini-check">
       <label for='infini-scroll'>
-        <input type='checkbox' id='infini-scroll' name='infini-scroll' checked />
+        <input type='checkbox' id='infini-scroll' name='infini-scroll' checked data-control="setting" />
         Infinite scrolling <span id='infini-status'>enabled</span>
       </label>
     </div>
+
     <div class="wrapper page-wrap" id="page">
-      <a href="index.html" id="no-results">No results buddy.  Try it again.</a>
-      <a href="#" class="more meta hidden" id="more-meta">fetch »</a>
-      <div id="results"></div>
-      <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
+      <a href="index.html" id="no-results" data-control="button">No results buddy.  Try it again.</a>
+      <a href="#" class="more meta hidden" id="more-meta" data-control="button">fetch »</a>
+      <div class="results" id="results"></div>
+      <a href="#" class="more content" id="more-content"><span class="action">more, please</span>
+        <div class="loader">
+          <div class="spinner">
+            <div class="blob top"></div>
+            <div class="blob bottom"></div>
+            <div class="blob left"></div>
+            <div class="blob move-blob"></div>
+          </div>
+        </div></a>
     </div>
 
-    <a href="#" id="search-restore">
+    <a href="#" id="search-restore" class="search-restore" data-control="button">
       <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
     </a>
 

@@ -24,12 +24,12 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "src/lib",
     "test",
     "tests"
   ],
   "dependencies": {
-    "lodash": ">=2.4.1",
+    "lodash": ">=3.0.4",
     "normalize-scss": "~3.0.2",
     "html5shiv": "~3.7.2",
     "es5-shim": "~4.0.5",
@@ -41,6 +41,7 @@
     "react-backbone": ">=0.16.0",
     "modernizr": "~2.8.3",
     "randomColor": "~0.2.0",
-    "snabbt.js": "~0.3.0"
+    "snabbt.js": "~0.3.0",
+    "backbone-router": "~0.2.0"
   }
 }

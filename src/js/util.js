@@ -1,5 +1,11 @@
 "use strict";
 
+String.prototype.toTitle = function () {
+  return this.replace(/(?:\W?)\w\S*/g, function( txt ) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+};
+
 String.prototype.toPubName = function() {
   var removed,
       count = 0,
@@ -40,6 +46,12 @@ window.downloader = function ( el ) {
 
 function addEvent ( element, evt, fnc ) {
   return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
+}
+
+function classAdd ( element, string, regex ) {
+  element.className = (regex.test(element.className)) ?
+  element.className.replace(regex, "") + " " + string :
+  element.className + " " + string;
 }
 /*
 function removeEvent ( element, evt, fnc ) {

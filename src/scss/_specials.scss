@@ -26,22 +26,21 @@
   transform: $action;
 }
 @mixin transition($property, $duration, $easing, $delay...) {
-  .no-js & {
-    -webkit-transition: $property $duration $easing $delay;
-    -moz-transition: $property $duration $easing $delay;
-    -o-transition: $property $duration $easing $delay;
-    transition: $property $duration $easing $delay;
-  }
+  -webkit-transition: $property $duration $easing $delay;
+  -moz-transition: $property $duration $easing $delay;
+  -o-transition: $property $duration $easing $delay;
+  transition: $property $duration $easing $delay;
 }
-@mixin miniButton($bg, $color: $white) {
+@mixin miniButton($bg, $padding: .25rem .375rem, $color: $white) {
   @include border-radius(4px);
   display: inline;
   font-size: 75%;
   margin: 0;
   border: 1px solid;
-  padding: .25rem .375rem;
+  padding: $padding;
   background-color: $bg;
   color: $color;
+  position: relative;
 }
 @mixin button($color, $padding: 1.25rem, $font-size: 2.5rem) {
   @include border-radius(8px);
