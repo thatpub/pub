@@ -88,7 +88,7 @@ var App = function () {
       color = randomColor({hue: c[k], luminosity: "dark"});
       sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + "; border-color: " + color + "; background-color: transparent;", 0);
       /*sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);*/
-      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "color: #FEFEFE; background-color: " + color + "; border-color: #FEFEFE;", 0);
+      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "color: #FEFEFE; background-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
       sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "background-color: " + color + "; color: #FEFEFE;", 0);
@@ -243,6 +243,42 @@ var App = function () {
         tmp += _.template(templateCode)(that.dataRender(results[a], allScores));
       }
       return tmp;
+    },
+    searchToggle: function ( state ) {
+      var screenHeight = window.innerHeight;
+      if ( state === "hidden" ) {
+        snabbt(app.searchWrap_, {
+          position: [0, -screenHeight, 0],
+          easing: 'spring',
+          springConstant: 0.3,
+          springDeacceleration: 0.8,
+          duration: 150
+        });
+        snabbt(app.wrap_, {
+          opacity: 1,
+          fromOpacity: 0.5,
+          easing: 'spring',
+          springConstant: 0.3,
+          delay: 150
+        });
+        app.wrap_.className = app.wrap_.className.replace(regEmerge, "");
+      }
+      else if ( state === "visible" ) {
+        snabbt(app.wrap_, {
+          opacity: 0.5,
+          fromOpacity: 1,
+          easing: 'spring',
+          springConstant: 0.3
+        });
+        snabbt(app.searchWrap_, {
+          position: [0, 0, 0],
+          easing: 'spring',
+          springConstant: 0.3,
+          springDeacceleration: 0.8,
+          duration: 150
+        });
+        swapClass(app.wrap_, "emerge", regEmerge);
+      }
     }
   };
 };

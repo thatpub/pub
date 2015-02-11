@@ -48,11 +48,12 @@ function addEvent ( element, evt, fnc ) {
   return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
 }
 
-function classAdd ( element, string, regex ) {
+function swapClass ( element, string, regex ) {
   element.className = (regex.test(element.className)) ?
   element.className.replace(regex, "") + " " + string :
   element.className + " " + string;
 }
+
 /*
 function removeEvent ( element, evt, fnc ) {
   return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));

@@ -45,7 +45,7 @@
 @mixin button($color, $padding: 1.25rem, $font-size: 2.5rem) {
   @include border-radius(8px);
   display: block;
-  color: $bg-color;
+  color: $white;
   position: relative;
   clear: both;
   text-align: center;
@@ -54,8 +54,8 @@
   font-size: $font-size;
   margin: 1rem auto 0;
   padding: $padding;
-  border-bottom: 1px solid darken($color, 80%); /*#22313F*/
-  border-top: 1px solid lighten($color, 80%); /*#C8F7C5*/
+  border-bottom: 1px solid darken($color, 30%); /*#22313F*/
+  border-top: 1px solid lighten($color, 50%); /*#C8F7C5*/
   &.content {
     width: 90%;
   }
@@ -65,8 +65,8 @@
   }
   &:active {
     border-bottom-color: transparent;
-    border-top-color: darken($color, 85%);
-    text-shadow: 0 -1px 0 darken($color, 90%), 0 0 1px darken($color, 95%);
+    border-top-color: darken($color, 35%);
+    text-shadow: 0 -1px 0 darken($color, 50%), 0 0 1px darken($color, 50%);
   }
   &:hover {
     opacity: .8;

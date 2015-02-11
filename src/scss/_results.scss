@@ -1,6 +1,7 @@
 .results {
   position: relative;
 }
+
 .related {
   margin: 0 auto;
   padding: 1rem;
@@ -17,34 +18,12 @@
     top: 0;
     left: 0;
     right: 0;
+    height: 3rem;
     background-color: $bg-color;
-//    height: 3rem;
+    //    height: 3rem;
     z-index: 2;
     @media all and (min-width: 768px) {
       padding-right: 5rem;
-    }
-  }
-  .show-all {
-    display: none;
-  }
-  .filtered & {
-    .show-all {
-      @include border-radius(4px);
-      display: block;
-      flex-grow: 1;
-      background-color: $text-highlight-color;
-      color: $bg-color;
-      border: 1px solid $text-highlight-color;
-      /*width: 10rem;*/
-      /*margin: 3px auto;*/
-      text-align: center;
-      cursor: pointer;
-      padding: 5px 8px;
-      margin: 5px auto;
-      &:hover {
-        background-color: transparent;
-        color: $text-highlight-color;
-      }
     }
   }
 }
@@ -68,6 +47,7 @@
       cursor: pointer;
       &.pretty {
         font-weight: 700;
+        border-width: 3px;
       }
     }
     .filtered & {
@@ -269,6 +249,13 @@
   @include button($result-color);
   position: absolute;
   bottom: 2rem;
+  display: none;
+  .done & {
+    display: block;
+  }
+  .failed & {
+    display: none;
+  }
 }
 
 .summary {
@@ -280,9 +267,16 @@
     font-size: 2.5rem;
     color: $heading-color;
   }
-  .total {
+  .total, .count {
     /*color: $action-color;*/
     color: $heading-color;
+  }
+  display: none;
+  .done & {
+    display: block;
+  }
+  .failed & {
+    display: none;
   }
 }
 
@@ -292,9 +286,16 @@
     position: fixed;
     bottom: 1rem;
     left: 1rem;
-    z-index: 2;
+    z-index: 3;
   }
   input {
+    display: none;
+  }
+  display: none;
+  .done & {
+    display: block;
+  }
+  .failed & {
     display: none;
   }
 }

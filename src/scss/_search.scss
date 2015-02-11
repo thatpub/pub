@@ -3,7 +3,6 @@
     @include transition(transform, .3s, ease-in);
     @include transform(translateY(0));
   }*/
-  background-color: $bg-color;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,10 +12,9 @@
   height: 100%;
   z-index: 3;
   .search {
-    .failed & {
-      display: none;
-    }
-    width: 100%;
+    background-color: $bg-color;
+    padding: 1rem;
+//    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -24,18 +22,24 @@
     @media all and (min-width: 480px) {
       width: 28rem;
       bottom: 0;
-      top: auto;
+//      top: auto;
     }
     @media all and (min-width: 768px) {
       width: 40rem;
-      margin-top: 18rem;
+      margin-top: 12rem;
+//      margin-top: 50%;
+    }
+    @include paperShadow;
+    @include border-radius(4px);
+    .failed & {
+      display: none;
     }
   }
   .done & {
-    @include transform(translateY(-100%));
+    /*@include transform(translateY(-100%));*/
     display: block;
-    overflow: hidden;
-    &.emerge {
+//    overflow: hidden;
+    .emerge & {
       /*.no-js & {
         @include transition(transform, .3s, ease-in);
         @include transform(translateY(0));
@@ -44,6 +48,9 @@
       width: 100%;
       height: 100%;
     }
+  }
+  .failed & {
+    display: none;
   }
 }
 
@@ -58,23 +65,26 @@
 
 .query {
   @include box-sizing(border-box);
+  @include border-radius(.75rem);
   padding: .75rem;
   max-width: 100%;
   outline: 0;
-  border: 1px solid;
-  border-radius: .75rem;
-  background-color: $bg-color;
+  border: 1px solid $action-color;
+  background: transparent;
   color: $black;
   font-size: 1.5rem;
   &:focus,
   &:active {
-    @media all and (min-width: 768px) {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      outline: 0;
-    }
+    outline: 0;
   }
+  @media all and (min-width: 768px) {
+    @include border-radius(0);
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    width: 34rem;
+  }
+
   &::-webkit-input-placeholder {
     display: inline;
     width: 100%;
@@ -93,38 +103,31 @@
       font-size: inherit;
     }
   }
-  @media all and (min-width: 768px) {
-    border-radius: 0;
-    border-color: $text-color;
-    background: transparent;
-    border: none;
-    width: 34rem;
-    border-bottom: 1px solid $text-color;
-  }
 }
 
 .send {
   @include button($action-color, .5rem);
-  /*@include transform(translateX(-50%));
+  @include transform(translateX(-50%));
   position: absolute;
   top: 100%;
-  left: 50%;*/
-  text-shadow: 0 1px 0 $black;
+  left: 50%;
+  text-shadow: 0 1px 0 $shadow-color;
   width: 100%;
   max-width: 18rem;
 }
 
 .search-restore {
   @include iconSearch;
-  z-index: 3;
-  width: 3rem;
-  height: 3rem;
+  display: none;
   .done & {
     position: fixed;
     display: block;
+    width: 3rem;
+    height: 3rem;
     bottom: 1rem;
     right: 1rem;
     box-shadow: 0 0 2px $white;
+    z-index: 3;
     &:hover {
       opacity: .5;
     }
