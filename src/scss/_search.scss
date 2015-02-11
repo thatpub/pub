@@ -132,6 +132,10 @@
     &:hover {
       opacity: .5;
     }
+    &:focus,
+    &:active {
+      outline: 0;
+    }
     @media all and (min-width: 768px) {
       box-shadow: none;
       top: 1rem;

@@ -247,37 +247,39 @@ var App = function () {
     searchToggle: function ( state ) {
       var screenHeight = window.innerHeight;
       if ( state === "hidden" ) {
-        snabbt(app.searchWrap_, {
+        snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
           duration: 150
         });
-        snabbt(app.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'spring',
           springConstant: 0.3,
           delay: 150
         });
-        app.wrap_.className = app.wrap_.className.replace(regEmerge, "");
+        this.wrap_.className = this.wrap_.className.replace(regEmerge, "");
+        this.infiniScroll = this.infiniScroll_.checked || (!!this.infiniScroll_.checked);
       }
       else if ( state === "visible" ) {
-        snabbt(app.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
           easing: 'spring',
           springConstant: 0.3
         });
-        snabbt(app.searchWrap_, {
+        snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
           duration: 150
         });
-        swapClass(app.wrap_, "emerge", regEmerge);
+        swapClass(this.wrap_, "emerge", regEmerge);
+        this.infiniScroll = false;
       }
     }
   };

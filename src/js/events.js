@@ -69,11 +69,10 @@ addEvent(app.searchRestore_, "click", function ( event ) {
   }
   if ( regEmerge.test(app.wrap_.className) ) {
     app.searchToggle("hidden");
-    app.infiniScroll = app.infiniScrollTemp;
+    app.infiniScroll = app.infiniScroll_.checked || (!!app.infiniScroll_.checked);
   }
   else {
     app.searchToggle("visible");
-    app.infiniScrollTemp = app.infiniScroll;
     app.infiniScroll = false;
     app.query_.value = app.term||"";
   }
