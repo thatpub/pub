@@ -270,5 +270,6 @@
     app.loading.now = false;
     if ( el == app.send_ && regEmerge.test(app.wrap_.className) ) {
       app.searchToggle("hidden");
+      app.infiniScroll = app.infiniScrollTemp||app.infiniScroll;
     }
   }
