@@ -3,12 +3,12 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         options: {
-          /*sourcemap: 'none',*/
+          sourcemap: 'none',
           style: 'compressed',
           trace: false
         },
         files: {
-          'dist/css/style.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss'
         }
       },
       dev: {
@@ -18,26 +18,79 @@ module.exports = function(grunt) {
           trace: true
         },
         files: {
-          'dist/css/style.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss'
         }
+      }
+    },
+    autoprefixer: {
+      dist: {
+        options: {
+          browsers: [
+            'last 3 versions',
+            'ie 8',
+            'ie 9',
+            'ie 10',
+            'ie 11'
+          ],
+          remove: true
+        },
+        files: {
+          'src/css/style.css': 'src/css/style.css'
+        }
+      },
+      dev: {
+        options: {
+          browsers: [
+            'last 3 versions',
+            'ie 8',
+            'ie 9',
+            'ie 10',
+            'ie 11'
+          ],
+          remove: true
+        },
+        files: {
+          'dist/css/style.min.css': 'src/css/style.css'
+        }
+      }
+    },
+    cssmin: {
+      target: {
+        options: {
+          report: 'gzip'
+        },
+        files: {
+          'dist/css/style.min.css': 'src/css/style.css'
+        }
+      }
+    },
+    react: {
+      dynamic: {
+        files: [
+          {
+            expand: true,
+            cwd: 'src/js',
+            src: ['**/*.jsx'],
+            dest: 'src/js',
+            ext: '.js'
+          }
+        ]
       }
     },
     uglify: {
       dist: {
         options: {
           compress: true,
-          wrap: false,
-          mangle: false
+          wrap: false
         },
         files: [
           {
             src: [
-              'src/lib/lodash/**lodash.js',
-              /*'src/js/lodash.custom.min.js',*/
-              /*'src/lib/backbone/backbone.js',*/
+              'src/lib/lodash/**lodash.min.js',
+              'src/lib/backbone/backbone.js',
+              'src/lib/snabbt.js/snabbt.min.js',
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
-              'src/lib/snabbt.js/snabbt.min.js',
               'src/js/main2.js',
               'src/js/default.js',
               'src/js/events.js'
@@ -57,11 +110,10 @@ module.exports = function(grunt) {
           {
             src: [
               'src/lib/lodash/**lodash.js',
-              /*'src/js/lodash.custom.min.js',*/
-              /*'src/lib/backbone/backbone.js',*/
+              'src/lib/backbone/backbone.js',
+              'src/lib/snabbt.js/snabbt.js',
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
-              'src/lib/snabbt.js/snabbt.js',
               'src/js/main2.js',
               'src/js/default.js',
               'src/js/events.js'
@@ -127,7 +179,18 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/**/*'],
-        tasks: ['sass:dev']
+        tasks: ['sass:dev', 'autoprefixer:dev']
+      },
+      jsx: {
+        options: {
+          debounceDelay: 25,
+          spawn: false,
+          atBegin: true
+        },
+        files: [
+          'src/js/*.jsx'
+        ],
+        tasks: ['newer:react', 'uglify:dev']
       },
       gifsvg: {
         options: {
@@ -159,6 +222,7 @@ module.exports = function(grunt) {
         },
         files: [
           'src/js/util.js',
+          'src/js/main2x.js',
           'src/js/main2.js',
           'src/js/default.js',
           'src/js/events.js',

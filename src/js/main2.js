@@ -19,8 +19,8 @@ var App = function () {
     "11": "Nov",
     "12": "Dec"
     },
-    Result = Backbone.Model.extend({}),
-    Results = Backbone.Collection.extend({ model: Result }),
+    /*Result = Backbone.Model.extend({}),
+    Results = Backbone.Collection.extend({ model: Result }),*/
     wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
@@ -102,8 +102,8 @@ var App = function () {
   }
 
   return {
-    result: new Result(),
-    results: new Results(),
+    /*result: new Result(),
+    results: new Results(),*/
     wrap_: wrap_,
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
@@ -245,52 +245,42 @@ var App = function () {
       return tmp;
     },
     searchToggle: function ( visibility ) {
-      var screenHeight = window.innerHeight,
-        that = this;
+      var screenHeight = window.innerHeight;
       if ( visibility === "hidden" ) {
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150,
-          callback: function () {
-          }
+          duration: 150
         });
-        swapClass(document.body, "", regEmerge);
-        that.infiniScroll = that.infiniScroll_.checked || (!!that.infiniScroll_.checked);
-        /*snabbt(this.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'spring',
           springConstant: 0.3,
-          delay: 150,
-          callback: function () {
-            this.style = "";
-          }
-        });*/
+          delay: 150
+        });
+        swapClass(document.body, "", regEmerge);
+        this.infiniScroll = (this.infiniScroll_) ?
+          this.infiniScroll_.checked || (!!this.infiniScroll_.checked) : true;
       }
       else if ( visibility === "visible" ) {
-        /*snabbt(this.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
           easing: 'spring',
-          springConstant: 0.3,
-          callback: function () {
-            this.style = "";
-          }
-        });*/
+          springConstant: 0.3
+        });
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150,
-          callback: function () {
-          }
+          duration: 150
         });
         swapClass(document.body, "emerge", regEmerge);
-        that.infiniScroll = false;
+        this.infiniScroll = false;
       }
     },
     isDone: function ( done ) {
