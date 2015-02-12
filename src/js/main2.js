@@ -18,8 +18,7 @@ var App = function () {
     "10": "Oct",
     "11": "Nov",
     "12": "Dec"
-  },
-    regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
+    },
     Result = Backbone.Model.extend({}),
     Results = Backbone.Collection.extend({ model: Result }),
     wrap_ = document.getElementById("wrap"),
@@ -124,6 +123,7 @@ var App = function () {
     infiniScroll_: infiniScroll_,
     infiniStatus_: infiniStatus_,
     infiniScroll: true,
+    done: false,
     loading: {
       now: false,
       stillMore: false,
@@ -244,43 +244,74 @@ var App = function () {
       }
       return tmp;
     },
-    searchToggle: function ( state ) {
-      var screenHeight = window.innerHeight;
-      if ( state === "hidden" ) {
+    searchToggle: function ( visibility ) {
+      var screenHeight = window.innerHeight,
+        that = this;
+      if ( visibility === "hidden" ) {
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150
+          duration: 150,
+          callback: function () {
+          }
         });
-        snabbt(this.wrap_, {
+        swapClass(document.body, "", regEmerge);
+        that.infiniScroll = that.infiniScroll_.checked || (!!that.infiniScroll_.checked);
+        /*snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'spring',
           springConstant: 0.3,
-          delay: 150
-        });
-        this.wrap_.className = this.wrap_.className.replace(regEmerge, "");
-        this.infiniScroll = this.infiniScroll_.checked || (!!this.infiniScroll_.checked);
+          delay: 150,
+          callback: function () {
+            this.style = "";
+          }
+        });*/
       }
-      else if ( state === "visible" ) {
-        snabbt(this.wrap_, {
+      else if ( visibility === "visible" ) {
+        /*snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
           easing: 'spring',
-          springConstant: 0.3
-        });
+          springConstant: 0.3,
+          callback: function () {
+            this.style = "";
+          }
+        });*/
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150
+          duration: 150,
+          callback: function () {
+          }
         });
-        swapClass(this.wrap_, "emerge", regEmerge);
-        this.infiniScroll = false;
+        swapClass(document.body, "emerge", regEmerge);
+        that.infiniScroll = false;
       }
+    },
+    isDone: function ( done ) {
+      var answer;
+      if ( typeof done === "undefined" ) {
+        /**
+         * Just wants the current state.  So let's give it to em.
+         */
+        answer = this.done;
+      }
+      else if ( done === true ) {
+        swapClass(document.body, "done", regDone);
+        this.done = done;
+        answer = done;
+      }
+      else if ( done === false ) {
+        swapClass(document.body, "failed", regFail);
+        this.done = done;
+        answer = done;
+      }
+      return answer;
     }
   };
 };

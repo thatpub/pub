@@ -4,12 +4,11 @@ module.exports = function(grunt) {
       dist: {
         options: {
           sourcemap: 'none',
-          style: 'expanded',
+          style: 'compressed',
           trace: false
         },
         files: {
           'src/css/style.css': 'src/scss/style.scss'
-          /*'src/css/ie.css': 'src/scss/ie.scss'*/
         }
       },
       dev: {
@@ -20,7 +19,6 @@ module.exports = function(grunt) {
         },
         files: {
           'src/css/style.css': 'src/scss/style.scss'
-          /*'src/css/ie.css': 'src/scss/ie.scss'*/
         }
       }
     },
@@ -38,7 +36,6 @@ module.exports = function(grunt) {
         },
         files: {
           'src/css/style.css': 'src/css/style.css'
-          /*'src/css/ie.css': 'src/css/ie.css'*/
         }
       },
       dev: {
@@ -54,7 +51,6 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/css/style.min.css': 'src/css/style.css'
-          /*'dist/css/ie.min.css': 'src/css/ie.css'*/
         }
       }
     },
@@ -65,7 +61,6 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/css/style.min.css': 'src/css/style.css'
-          /*'dist/css/ie.min.css': 'src/css/ie.css'*/
         }
       }
     },
@@ -94,7 +89,6 @@ module.exports = function(grunt) {
               'src/lib/lodash/**lodash.min.js',
               'src/lib/backbone/backbone.js',
               'src/lib/snabbt.js/snabbt.min.js',
-              /*'src/lib/modernizr/modernizr.js',*/
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
@@ -118,7 +112,6 @@ module.exports = function(grunt) {
               'src/lib/lodash/**lodash.js',
               'src/lib/backbone/backbone.js',
               'src/lib/snabbt.js/snabbt.js',
-              /*'src/lib/modernizr/modernizr.js',*/
               'src/lib/randomColor/randomColor.js',
               'src/js/util.js',
               'src/js/main2.js',
@@ -174,14 +167,14 @@ module.exports = function(grunt) {
     watch: {
       configFiles: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           reload: true
         },
         files: ['Gruntfile.js']
       },
       sass: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           spawn: false,
           atBegin: true
         },
@@ -190,7 +183,7 @@ module.exports = function(grunt) {
       },
       jsx: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           spawn: false,
           atBegin: true
         },
@@ -201,7 +194,7 @@ module.exports = function(grunt) {
       },
       gifsvg: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           spawn: false,
           atBegin: true
         },
@@ -212,7 +205,7 @@ module.exports = function(grunt) {
       },
       pngjpg: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           spawn: false,
           atBegin: true
         },
@@ -223,7 +216,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         options: {
-          debounceDelay: 50,
+          debounceDelay: 25,
           spawn: false,
           atBegin: true
         },

@@ -1,5 +1,35 @@
 "use strict";
 
+var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
+  regEmerge = / ?emerge/g,
+  regHidden = / ?hidden/g,
+  regLoad = / ?loading/g,
+  regSelected = / ?selected/g,
+  regSticky = / ?sticky/g,
+  regFiltered = / ?filtered/g,
+  regOpened = / ?opened/g,
+  regDone = / ?done|$/gm,
+  regFail = / ?failed/g;
+
+function addEvent ( element, evt, fnc ) {
+  return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
+}
+
+function swapClass ( element, string, regex ) {
+  if ( string !== "" ) {
+    element.className = (regex.test(element.className)) ?
+    element.className.replace(regex, "") + " " + string :
+    element.className + " " + string;
+  }
+  else {
+    element.className = element.className.replace(regex, "");
+  }
+}
+
+function removeEvent ( element, evt, fnc ) {
+  return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
+}
+
 String.prototype.toTitle = function () {
   return this.replace(/(?:\W?)\w\S*/g, function( txt ) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -27,6 +57,7 @@ String.prototype.toPubName = function() {
     remove: removed
   };
 };
+
 window.downloader = function ( el ) {
   var link = document.createElement("a"),
       file = el.href||el.getAttribute("href")||"";
@@ -44,18 +75,3 @@ window.downloader = function ( el ) {
   return false;
 };
 
-function addEvent ( element, evt, fnc ) {
-  return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
-}
-
-function swapClass ( element, string, regex ) {
-  element.className = (regex.test(element.className)) ?
-  element.className.replace(regex, "") + " " + string :
-  element.className + " " + string;
-}
-
-/*
-function removeEvent ( element, evt, fnc ) {
-  return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
-}
- */

@@ -90,7 +90,6 @@ textarea {
 }
 
 .wrapper {
-  opacity: 1;
   display: block;
 /*  width: 100%;
   height: 100%;*/
@@ -115,8 +114,16 @@ textarea {
     }
   }
   &.full-wrap {
+    @include transition(opacity, .15s, "linear", 0);
     opacity: .5;
-    position: relative;
+    .done & {
+      @include transition(opacity, .15s, "linear", 0);
+      opacity: 1;
+    }
+    .done.emerge & {
+      @include transition(opacity, .15s, "linear", 0);
+      opacity: .5;
+    }
   }
   @media all and (min-width: 768px) {
     max-width: 864px;

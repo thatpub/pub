@@ -22,20 +22,24 @@
   justify-content: center;
   flex-wrap: wrap;
   border: none;
-  &.sticky {
+  /**
+   * Turn this off until we can handle
+   * the filter on huge amounts of results.
+   */
+  /*&.sticky {
     @include box-shadow(0, 1px, 6px, 0, $shadow-color);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 3rem;
+//    height: 3rem;
     background-color: $bg-color;
     //    height: 3rem;
     z-index: 2;
     @media all and (min-width: 768px) {
       padding-right: 5rem;
     }
-  }
+  }*/
   display: none;
   .done & {
     display: flex;
@@ -61,7 +65,11 @@
       padding: 3px 5px;
       font-size: 1.25rem;
       font-weight: 200;
-      cursor: pointer;
+      /**
+       * Turn this off until we can handle
+       * the filter on huge amounts of results.
+       */
+      /*cursor: pointer;*/
       &.pretty {
         font-weight: 700;
         border-width: 3px;

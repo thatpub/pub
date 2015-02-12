@@ -2,7 +2,6 @@
 .sass-cache
 query.txt
 node_modules
-src/lib
 src/css
 dist/css
 dist/js

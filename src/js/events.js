@@ -1,17 +1,17 @@
 "use strict";
 
 addEvent(app.send_, "click", function ( event ) {
-  if ( event.preventDefault ) {
+  if ( event && event.preventDefault ) {
     event.preventDefault();
   } else {
     event.returnValue = false;
   }
-  if ( !app.query_.value ) { /* show notification/input validate here */
+  if ( !_.trim(app.query_.value) ) { /* show notification/input validate here */
     app.query_.focus();
     snabbt(app.query_, 'attention', {
       rotation: [0, 0, Math.PI/2],
       springConstant: 1.9,
-      springDeacceleration: 0.9,
+      springDeacceleration: 0.9
     });
     return false;
   }
@@ -23,12 +23,7 @@ addEvent(app.send_, "click", function ( event ) {
 
 addEvent(app.query_, "keypress", function ( event ) {
   if ( event.which === 13 ) {
-    if ( this.value ) { /* show notification/input validate here */
-      app.send_.click();
-    }
-    /*app.term = _.trim(app.query_.value);
-    app.send_.className += " loading";
-    sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, endLoading);*/
+    app.send_.click();
     return false;
   }
 });
@@ -40,11 +35,17 @@ addEvent(document, "keyup", function ( event ) {
     } else {
       event.returnValue = false;
     }
-    if (regEmerge.test(app.wrap_.className)) {
+    if (regEmerge.test(document.body.className)) {
       app.searchToggle("hidden");
     }
-    filterResults(false);
-    return false;
+    else {
+      /**
+       * DISABLED
+       *
+       * Until we can handle huge amounts of results, turn this shit off.
+       */
+      /*filterResults(false);*/
+    }
   }
 });
 
@@ -67,13 +68,11 @@ addEvent(app.searchRestore_, "click", function ( event ) {
   } else {
     event.returnValue = false;
   }
-  if ( regEmerge.test(app.wrap_.className) ) {
+  if ( regEmerge.test(document.body.className) ) {
     app.searchToggle("hidden");
-    app.infiniScroll = app.infiniScroll_.checked || (!!app.infiniScroll_.checked);
   }
   else {
     app.searchToggle("visible");
-    app.infiniScroll = false;
     app.query_.value = app.term||"";
   }
   return false;
@@ -81,3 +80,4 @@ addEvent(app.searchRestore_, "click", function ( event ) {
 
 addEvent(app.infiniScroll_, "change", infini);
 
+addEvent(window, "scroll", scrollWheeler);
