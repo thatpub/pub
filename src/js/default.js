@@ -20,7 +20,7 @@
 
   function revealText ( event ) {
     var open = regOpened.test(this.parentNode.className);
-    this.innerHTML = null;
+    this.innerHTML = "";
     if (!open) {
       swapClass(this.parentNode, "opened", regOpened);
       this.appendChild(document.createTextNode("make it smaller"));
