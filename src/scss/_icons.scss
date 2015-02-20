@@ -14,6 +14,12 @@
       position: relative;
     }
   }
+  #ico {
+    @include border-radius(4px);
+    border: 2px solid $black;
+    padding: 8px;
+  }
+
 }
 @mixin iconInfini {
   &:after {

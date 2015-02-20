@@ -5,7 +5,7 @@ var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   regHidden = / ?hidden/g,
   regLoad = / ?loading/g,
   regSelected = / ?selected/g,
-  regSticky = / ?sticky/g,
+  /*regSticky = / ?sticky/g,*/
   regFiltered = / ?filtered/g,
   regOpened = / ?opened/g,
   regDone = / ?done|$/gm,

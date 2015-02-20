@@ -26,11 +26,10 @@
     "node_modules"
   ],
   "dependencies": {
-    "lodash": ">=3.0.4",
+    "lodash": ">=3.2.0",
     "normalize-scss": "~3.0.2",
     "reqwest": "~1.1.5",
-    "backbone": ">=1.1.2",
     "randomColor": "~0.2.0",
-    "snabbt.js": "~0.3.0"
+    "snabbt.js": "~0.4.0"
   }
 }

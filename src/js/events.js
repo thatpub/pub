@@ -21,6 +21,10 @@ addEvent(app.send_, "click", function ( event ) {
   return false;
 });
 
+addEvent(app.query_, "focus", function () {
+  return false;
+});
+
 addEvent(app.query_, "keypress", function ( event ) {
   if ( event.which === 13 ) {
     app.send_.click();
@@ -81,3 +85,16 @@ addEvent(app.searchRestore_, "click", function ( event ) {
 addEvent(app.infiniScroll_, "change", infini);
 
 addEvent(window, "scroll", scrollWheeler);
+
+addEvent(window, "load", function () {
+  app.query_.focus();
+  if ( window.location.search !== "" ) {
+    app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
+    app.term = _.trim(app.query_.value);
+    app.send_.click();
+  }
+  var l = document.createElement('link'); l.rel = 'stylesheet';
+  l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700';
+  var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+  /*app.colorize();*/
+});

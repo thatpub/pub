@@ -5,19 +5,6 @@
   app.resultTemplate = document.getElementById("result-template");
   app.relatedTemplate = document.getElementById("related-template");
 
-  addEvent(window, "load", function () {
-    app.query_.focus();
-    if ( window.location.search !== "" ) {
-      app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
-      app.term = _.trim(app.query_.value);
-      app.send_.click();
-    }
-    var l = document.createElement('link'); l.rel = 'stylesheet';
-    l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700';
-    var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-    app.colorize();
-  });
-
   function revealText ( event ) {
     var open = regOpened.test(this.parentNode.className);
     this.innerHTML = "";
@@ -37,103 +24,16 @@
     return false;
   }
 
-  function filterResults ( event ) {
-    /**
-     * DISABLED
-     *
-     * Until we can handle huge amounts of results, turn this shit off.
-     */
-    return false;
-
-    var filter, reset, group, count,
-      rl = app.selectedResults.length,
-      i = 0,
-      j = 0,
-      exists = -1,
-      el = ( event ) ? event.currentTarget || event.sourceElement || null : this;
-    if ( event && event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-    if ( event && event !== false && event !== true ) {
-      filter = el.getAttribute("id") || el.id;
-      /**
-       * Grab all the elements matching the filter and put in `group`
-       * with the total number stored in `count`
-       */
-      group = document.querySelectorAll("[data-pub='" + filter + "']");
-      count = group.length;
-      /**
-       * Test the filter value against any others that may have been
-       * stored for future reference in `app.selectedResults`
-       */
-      for (; j < rl; ++j) {
-        if ( app.selectedResults[j] == filter ) {
-          exists = j;
-          break;
-        }
-      }
-      /**
-       * REMOVE FILTER
-       *
-       * If the filter has already been selected, then this is the time
-       * to remove it from the list and reset the elements to non-selectedness.
-       */
-      if ( exists > -1 ) {
-        for (; i < count; ++i) {
-          swapClass(group[i], "", regSelected);
-        }
-        app.selectedResults.splice(exists, 1);
-        app.selectedTotal = ( (app.selectedTotal - count) > 0 ) ?
-          app.selectedTotal - count : 0;
-        if ( el ) {
-          swapClass(el, "", regSelected);
-        }
-      }
-      else {
-        for (; i < count; ++i) {
-          swapClass(group[i], "selected", regSelected);
-        }
-        app.selectedResults.splice(app.selectedResults.length, 0, filter);
-        app.selectedTotal = app.selectedTotal + count;
-        if ( el ) {
-          swapClass(el, "selected", regSelected);
-        }
-      }
-      app.count_.innerHTML = app.selectedTotal;
-      swapClass(app.wrap_, "filtered", regFiltered);
-    }
-    else if ( event === false ) {
-      /**
-       * Least likely to run.
-       *
-       * This happens when a brand new search runs and everything
-       * needs to be reset from the old one.
-       *
-       * Housekeeping, basically.
-       */
-      app.selectedResults = [];
-      app.selectedTotal = 0;
-      /*reset = document.querySelectorAll(".selected");
-      rl = reset.length;
-      for (; i < rl; ++i) {
-        swapClass(reset[i], "", regSelected);
-      }*/
-      swapClass(app.wrap_, "", regFiltered);
-      app.count_.innerHTML = app.scoresContent.length;
-      return false;
-    }
-    return false;
-  }
+/**
+ * Placeholder for filterResults() definition.
+ */
 
   function dataResponse ( httpRequest, action ) {
     var response = JSON.parse(httpRequest.responseText);
     var content = response[0] || null;
     var meta = response[1] || null;
     var expires = new Date(Date.now() + 3600000);
-    var docs, dl,
-      a = 0,
+    var a = 0,
       b = 0,
       reveals,
       rl;
@@ -146,16 +46,21 @@
     expires = expires.toUTCString();
 
     if ( content ) {
+      var currentContent = content.hits.hits.length;
+      var currentRelatives = content.aggregations.related_doc.buckets.length;
       app.term_.innerHTML = app.term;
       app.total_.innerHTML = content.hits.total;
       app.placeContent = content._scroll_id;
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
-        app.colorize();
+        /*app.colorize();*/
         window.scroll(0, 0);
-        app.scoresContent = _.pluck(content.hits.hits, "_score");
-        app.scoresRelatives = _.pluck(content.aggregations.related_doc.buckets, "score");
-
+        for (; b < currentContent; ++b) {
+          app.scoresContent[b] = content.hits.hits[b]["_score"];
+        }
+        for (b = 0; b < currentRelatives; ++b) {
+          app.scoresContent[b] = content.aggregations.related_doc.buckets[b]["score"];
+        }
         app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives);
         app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.count_.innerHTML = app.scoresContent.length;
@@ -165,17 +70,26 @@
          *
          * Until we can handle huge amounts of results, turn this shit off.
          */
-        /*docs = document.querySelectorAll("#related .doc");
-        dl = docs.length;
+        /*
+        var docs = document.querySelectorAll("#related .doc");
+        var dl = docs.length;
         for (; b < dl; ++b) {
           addEvent(docs[b], "click", filterResults);
-        }*/
+        }
+        */
         app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
       }
       else {
-        app.scoresContent = app.scoresContent.concat(_.pluck(content.hits.hits, "_score"));
+        /**
+         * Need to append the scores we just grabbed to the scores we already had.
+         * First get the total available at the time, then use that + loop index to determine real index.
+         */
+        var contentGathered = app.scoresContent.length;
+        for (b = 0; b < currentContent; ++b) {
+          app.scoresContent[(b + contentGathered)] = content.hits.hits[b]["_score"];
+        }
         app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.count_.innerHTML = app.scoresContent.length;
       }

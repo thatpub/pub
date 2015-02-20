@@ -3,12 +3,12 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         options: {
-          /*sourcemap: 'none',*/
+          sourcemap: 'none',
           style: 'compressed',
           trace: false
         },
         files: {
-          'dist/css/style.css': 'src/scss/style.scss'
+          'dist/css/style.min.css': 'src/scss/style.scss'
         }
       },
       dev: {
@@ -18,57 +18,54 @@ module.exports = function(grunt) {
           trace: true
         },
         files: {
-          'dist/css/style.css': 'src/scss/style.scss'
+          'dist/css/style.min.css': 'src/scss/style.scss'
         }
       }
     },
     uglify: {
       dist: {
         options: {
-          compress: true,
+          compress: {
+            unsafe: true,
+            drop_console: true,
+            keep_fargs: true
+          },
+          screwIE8: true,
           wrap: false,
           mangle: false
         },
-        files: [
-          {
-            src: [
-              'src/lib/lodash/**lodash.js',
-              /*'src/js/lodash.custom.min.js',*/
-              /*'src/lib/backbone/backbone.js',*/
-              'src/lib/randomColor/randomColor.js',
-              'src/js/util.js',
-              'src/lib/snabbt.js/snabbt.min.js',
-              'src/js/main2.js',
-              'src/js/default.js',
-              'src/js/events.js'
-            ],
-            dest: 'dist/js/script.min.js'
-          }
-        ]
+        files: {
+          'dist/js/script.min.js': [
+            'src/lib/snabbt.js/snabbt.js',
+            'src/js/lodash.custom.js',
+            'src/lib/randomColor/randomColor.js',
+            'src/js/util.js',
+            'src/js/main2.js',
+            'src/js/default.js',
+            'src/js/events.js'
+          ]
+        }
       },
       dev: {
         options: {
           compress: false,
+          screwIE8: true,
           beautify: true,
           mangle: false,
-          wrap: false
+          wrap: false,
+          sourceMap: true
         },
-        files: [
-          {
-            src: [
-              'src/lib/lodash/**lodash.js',
-              /*'src/js/lodash.custom.min.js',*/
-              /*'src/lib/backbone/backbone.js',*/
-              'src/lib/randomColor/randomColor.js',
-              'src/js/util.js',
-              'src/lib/snabbt.js/snabbt.js',
-              'src/js/main2.js',
-              'src/js/default.js',
-              'src/js/events.js'
-            ],
-            dest: 'dist/js/script.min.js'
-          }
-        ]
+        files: {
+          'dist/js/script.min.js': [
+            'src/lib/snabbt.js/snabbt.js',
+            'src/js/lodash.custom.js',
+            'src/lib/randomColor/randomColor.js',
+            'src/js/util.js',
+            'src/js/main2.js',
+            'src/js/default.js',
+            'src/js/events.js'
+          ]
+        }
       }
     },
     imagemin: {
