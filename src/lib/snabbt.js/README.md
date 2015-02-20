@@ -11,12 +11,28 @@ Fast animations with Javascript and CSS transforms(Work in progress)
 - [Card formations](http://daniel-lundin.github.io/snabbt.js/cards.html)
 - [Crazy sticks](http://daniel-lundin.github.io/snabbt.js/sticks.html)
 
-## Relases
+## Releases
 The initial release is out. Would love some feedback on things that can be improved. The release(and future ones) can be found in the release section
 
-- **0.1.0** - Initial beta release
+- **0.3.0** - Memory optimizations, improved Matrix API, better UMD wrappers
 - **0.2.0** - Added support for RequireJS and browserify. Published to npm and bower
+- **0.1.0** - Initial beta release
 
+## Get it
+snabbt is available with AMD-support, CommonJS-support and as a global module.
+
+### Package managers
+```
+bower install snabbt.js
+npm install snabbt.js
+```
+
+### CDNs
+
+```
+https://cdnjs.com/libraries/snabbt.js
+http://www.jsdelivr.com/#!snabbt
+```
 ## Browser Support
 
 <table>
@@ -41,9 +57,16 @@ The initial release is out. Would love some feedback on things that can be impro
 
 Note: IE does not support the transform-style: preserve-3d property. This prevents nesting 3D transformed elements.
 
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+
 ## TODOS
 
  - Improve documentation
- - Optimize memory usage by reusing matrices
 
 [MIT License](LICENSE.txt) © 2015 Daniel Lundin (http://twitter.com/danielundin).
