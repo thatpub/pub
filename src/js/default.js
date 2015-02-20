@@ -47,12 +47,12 @@
 
     if ( content ) {
       var currentContent = content.hits.hits.length;
-      var currentRelatives = content.aggregations.related_doc.buckets.length;
       app.term_.innerHTML = app.term;
       app.total_.innerHTML = content.hits.total;
       app.placeContent = content._scroll_id;
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
+        var currentRelatives = content.aggregations.related_doc.buckets.length;
         /*app.colorize();*/
         window.scroll(0, 0);
         for (; b < currentContent; ++b) {
