@@ -55,217 +55,220 @@
     color: $result-color;
     font-style: normal;
   }
-  &.doc {
-    .related & {
-      @include border-radius(4px);
-      flex-grow: 1;
-      margin: 5px 1rem 5px 0;
-      text-align: center;
-      border: 1px solid transparent;
-      padding: 3px 5px;
-      font-size: 1.25rem;
-      font-weight: 200;
-      /**
-       * Turn this off until we can handle
-       * the filter on huge amounts of results.
-       */
-      /*cursor: pointer;*/
-      &.pretty {
-        font-weight: 700;
-        border-width: 3px;
-      }
-    }
-    .filtered & {
-      opacity: .35;
-      &.selected {
-        opacity: 1;
-        &:hover {
-          opacity: 1;
-        }
-      }
-      &:hover {
-        opacity: .65;
-      }
-    }
+}
+
+.related .doc {
+  @include border-radius(4px);
+  flex-grow: 1;
+  margin: 5px 1rem 5px 0;
+  text-align: center;
+  border: 1px solid transparent;
+  padding: 3px 5px;
+  font-size: 1.25rem;
+  font-weight: 200;
+  /**
+   * Turn this off until we can handle
+   * the filter on huge amounts of results.
+   */
+  /*cursor: pointer;*/
+  &.pretty {
+    font-weight: 700;
+    border-width: 3px;
   }
-  &.content {
-    margin-bottom: 2rem;
-    position: relative;
-    .number {
-      @include ribbon();
-      @include leftRibbon;
-      overflow: hidden;
-      .climb-up, .look-inside, .do-both {
-        display: none;
-      }
+}
+
+.filtered {
+  .doc {
+    opacity: .35;
+    &.selected {
+      opacity: 1;
       &:hover {
-        .climb-up, .look-inside, .do-both {
-          @include miniButton($black, .125rem .375rem);
-          float: right;
-          clear: none;
-          margin: auto 0 auto 2rem;
-          cursor: pointer;
-        }
-      }
-    }
-    .text {
-      color: $text-color;
-      font-family: $readable;
-      position: relative;
-      font-size: 1.2rem;
-      clear: both;
-      margin-top: 4rem;
-      margin-bottom: 1rem;
-      q {
-        &:before {
-          position: absolute;
-          right: 100%;
-        }
-        &:after {
-          position: absolute;
-          left: 100%;
-        }
-      }
-      .reveal {
-        @include miniButton($result-color);
-        /*&:hover {
-          background-color: transparent;
-          color: $action-color;
-        }*/
-      }
-      .combined {
-        display: none;
-      }
-      .parts {
-        display: block;
-      }
-      &.opened {
-        .parts {
-          display: none;
-        }
-        .combined {
-          display: inline;
-        }
-        .reveal {
-          color: $result-color;
-          background-color: transparent;
-          /*&:hover {
-            color: $white;
-            background-color: $action-color;
-          }*/
-        }
-      }
-      @media all and (min-width:480px) {
-        font-size: 1.2rem;
-      }
-      @media all and (min-width:768px) {
-        font-size: 1.6rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      @media all and (min-width:1140px) {
-        font-size: 1.4rem;
-      }
-    }
-    .meta {
-      max-width: 100%;
-      width: 100%;
-      position: relative;
-      color: $text-highlight-color;
-      font-family: $font;
-      font-size: 1rem;
-      .details {
-        float: left;
-        /*position: absolute;
-        bottom: 0;
-        left: 0;*/
-        max-width: 50%;
-        overflow: hidden;
-        margin-left: 0;
-        margin-right: 0;
-        text-align: left;
-        .chapter, .section {
-          font-size: .75rem;
-          .title {
-            font-size: .875rem;
-          }
-        }
-      }
-      .info {
-        float: right;
-        position: relative;
-        max-width: 50%;
-        overflow: hidden;
-        margin-left: 0;
-        margin-right: 0;
-        text-align: right;
-        color: inherit;
-        display: block;
-        .pub, .title {
-          border-bottom: 1px solid transparent;
-          color: $result-color;
-          .filtered & {
-            color: inherit;
-            .selected & {
-              color: $result-color;
-            }
-          }
-        }
-        .pub {
-          font-size: 75%;
-        }
-        .title {
-          font-size: .875rem;
-        }
+        opacity: 1;
       }
     }
     &:hover {
-      .info:hover {
-        .pub, .title {
-          border-bottom-color: $result-color;
-          .filtered & {
-            border-bottom-color: transparent;
-            .selected & {
-              border-bottom-color: $result-color;
-            }
+      opacity: .65;
+    }
+  }
+  .content {
+    display: none;
+    .number {
+      display: none;
+    }
+    .text, .details {
+      display: none;
+    }
+    .info {
+      pointer-events: none;
+    }
+    &.selected {
+      display: block;
+      .number {
+        display: block;
+      }
+      .text, .details {
+        display: block;
+      }
+      .info {
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.content {
+  margin-bottom: 2rem;
+  position: relative;
+  &:hover {
+    .info:hover {
+      .pub, .title {
+        border-bottom-color: $result-color;
+        .filtered & {
+          border-bottom-color: transparent;
+          .selected & {
+            border-bottom-color: $result-color;
           }
         }
       }
     }
-    &.pretty {
-      .text {
-        padding-left: 2rem;
-        border-left: 3px solid;
-      }
+  }
+  &.pretty .text {
+    padding-left: 2rem;
+    border-left: 3px solid;
+  }
+  @media all and (min-width: 768px) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.number {
+  @include ribbon();
+  @include rightRibbon;
+  overflow: hidden;
+  .climb-up, .look-inside, .do-both {
+    display: none;
+  }
+  &:hover {
+    .climb-up, .look-inside, .do-both {
+      @include miniButton($black, .125rem .375rem);
+      float: left;
+      clear: none;
+      margin: auto 2rem auto 0;
+      cursor: pointer;
     }
-    .filtered & {
+  }
+}
+
+.text {
+  color: $text-color;
+  font-family: $readable;
+  position: relative;
+  font-size: 1.2rem;
+  clear: both;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  q {
+    &:before {
+      position: absolute;
+      right: 100%;
+    }
+    &:after {
+      position: absolute;
+      left: 100%;
+    }
+  }
+  .reveal {
+    @include miniButton($result-color);
+    /*&:hover {
+      background-color: transparent;
+      color: $action-color;
+    }*/
+  }
+  .combined {
+    display: none;
+  }
+  .parts {
+    display: block;
+  }
+  &.opened {
+    .parts {
       display: none;
-      .number {
-        display: none;
-      }
-      .text, .details {
-        display: none;
-      }
-      .info {
-        pointer-events: none;
-      }
-      &.selected {
-        display: block;
-        .number {
-          display: block;
-        }
-        .text, .details {
-          display: block;
-        }
-        .info {
-          pointer-events: all;
-        }
+    }
+    .combined {
+      display: inline;
+    }
+    .reveal {
+      color: $result-color;
+      background-color: transparent;
+      /*&:hover {
+        color: $white;
+        background-color: $action-color;
+      }*/
+    }
+  }
+  @media all and (min-width:480px) {
+    font-size: 1.2rem;
+  }
+  @media all and (min-width:768px) {
+    font-size: 1.6rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media all and (min-width:1140px) {
+    font-size: 1.4rem;
+  }
+}
+
+.meta {
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  color: $text-highlight-color;
+  font-family: $font;
+  font-size: 1rem;
+}
+
+.details {
+  float: left;
+  max-width: 50%;
+  overflow: hidden;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+  .chapter, .section {
+    font-size: .75rem;
+    .title {
+      font-size: .875rem;
+    }
+  }
+}
+
+.info {
+  float: right;
+  position: relative;
+  max-width: 50%;
+  overflow: hidden;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  color: inherit;
+  display: block;
+  .pub, .title {
+    border-bottom: 1px solid transparent;
+    color: $result-color;
+    .filtered & {
+      color: inherit;
+      .selected & {
+        color: $result-color;
       }
     }
-    @media all and (min-width: 768px) {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
+  }
+  .pub {
+    font-size: 75%;
+  }
+  .title {
+    font-size: .875rem;
   }
 }
 
@@ -287,14 +290,6 @@
   font-weight: 200;
   text-align: center;
   margin: 2rem auto;
-  .term {
-    font-size: 2.5rem;
-    color: $heading-color;
-  }
-  .total, .count {
-    /*color: $action-color;*/
-    color: $heading-color;
-  }
   display: none;
   .done & {
     display: block;
@@ -304,14 +299,17 @@
   }
 }
 
+.term {
+  font-size: 2.5rem;
+  color: $heading-color;
+}
+
+.total, .count {
+  /*color: $action-color;*/
+  color: $heading-color;
+}
+
 .infini-check {
-  label[for="infini-scroll"] {
-    @include iconInfini;
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
-    z-index: 3;
-  }
   input {
     display: none;
   }
@@ -322,4 +320,12 @@
   .failed & {
     display: none;
   }
+}
+
+label[for="infini-scroll"] {
+  @include iconInfini;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 3;
 }

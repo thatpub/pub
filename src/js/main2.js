@@ -19,8 +19,8 @@ var App = function () {
     "11": "Nov",
     "12": "Dec"
     },
-    Result = Backbone.Model.extend({}),
-    Results = Backbone.Collection.extend({ model: Result }),
+    /*Result = Backbone.Model.extend({}),
+    Results = Backbone.Collection.extend({ model: Result }),*/
     wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
@@ -68,42 +68,13 @@ var App = function () {
     });
   }
 
-  function colorize() {
-    var k = 0,
-      c = ['blue', 'green', 'purple', 'pink', 'orange'],
-      color = '',
-      head = document.head || document.getElementsByTagName("head")[0];
-    var sheet = (function() {
-      if ( document.getElementById("color-stylez") ) {
-        head.removeChild(document.getElementById("color-stylez"));
-      }
-      var style = document.createElement("style");
-      style.appendChild(document.createTextNode(""));
-      style.setAttribute("id", "color-stylez");
-      head.appendChild(style);
-      return style.sheet;
-    })();
-    for (; k < 5; ++k) {
-      color = randomColor({hue: c[k], luminosity: "dark"});
-      sheet.addCSSRule(".result.doc.match-" + k, "color: " + color + "; border-color: " + color + "; background-color: transparent;", 0);
-      /*sheet.addCSSRule(".result.doc.match-" + k + ":hover", "border-color: " + color + ";", 0);*/
-      sheet.addCSSRule(".filtered .result.doc.selected.match-" + k, "color: #FEFEFE; background-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .number", "background-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text", "border-left-color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .text .reveal", "background-color: " + color + "; color: #FEFEFE;", 0);
-      /*sheet.addCSSRule(".result.content.match-" + k + " .text .reveal:hover", "color: " + color + "; background-color: transparent;", 0);*/
-      sheet.addCSSRule(".result.content.match-" + k + " .text.opened .reveal", "color: " + color + "; background-color: transparent;", 0);
-      /*sheet.addCSSRule(".result.content.match-" + k + " .text.opened .reveal:hover", "background-color: " + color + "; color: #FEFEFE;", 0);*/
-      /*sheet.addCSSRule(".result.content.match-" + k + " .info:hover span", "border-bottom-color: " + color + "; color: " + color + ";", 0);*/
-      sheet.addCSSRule(".result.content.match-" + k + " em", "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .meta .info .pub, .result.content.match-" + k + " .meta .info .title", "color: " + color + ";", 0);
-      sheet.addCSSRule(".result.content.match-" + k + " .meta .info:hover .pub, .result.content.match-" + k + " .meta .info:hover .title", "border-bottom-color: " + color + ";", 0);
-    }
-  }
+  /**
+   * Placeholder for colorize();
+   */
 
   return {
-    result: new Result(),
-    results: new Results(),
+    /*result: new Result(),
+    results: new Results(),*/
     wrap_: wrap_,
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
@@ -141,7 +112,7 @@ var App = function () {
     scoresRelatives: [],
     selectedResults: [],
     selectedTotal: 0,
-    colorize: colorize,
+    /*colorize: colorize,*/
     colors: {},
     dataRender: function ( data, allScores ) {
       var output = {},
@@ -245,52 +216,42 @@ var App = function () {
       return tmp;
     },
     searchToggle: function ( visibility ) {
-      var screenHeight = window.innerHeight,
-        that = this;
+      var screenHeight = window.innerHeight;
       if ( visibility === "hidden" ) {
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150,
-          callback: function () {
-          }
+          duration: 150
         });
-        swapClass(document.body, "", regEmerge);
-        that.infiniScroll = that.infiniScroll_.checked || (!!that.infiniScroll_.checked);
-        /*snabbt(this.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'spring',
           springConstant: 0.3,
-          delay: 150,
-          callback: function () {
-            this.style = "";
-          }
-        });*/
+          delay: 150
+        });
+        swapClass(document.body, "", regEmerge);
+        this.infiniScroll = (this.infiniScroll_) ?
+          this.infiniScroll_.checked || (!!this.infiniScroll_.checked) : true;
       }
       else if ( visibility === "visible" ) {
-        /*snabbt(this.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
           easing: 'spring',
-          springConstant: 0.3,
-          callback: function () {
-            this.style = "";
-          }
-        });*/
+          springConstant: 0.3
+        });
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
-          duration: 150,
-          callback: function () {
-          }
+          duration: 150
         });
         swapClass(document.body, "emerge", regEmerge);
-        that.infiniScroll = false;
+        this.infiniScroll = false;
       }
     },
     isDone: function ( done ) {

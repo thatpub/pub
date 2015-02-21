@@ -1,8 +1,7 @@
 .search-wrap {
-  /*.no-js & {
-    @include transition(transform, .3s, ease-in);
+  .no-js & {
     @include transform(translateY(0));
-  }*/
+  }
   position: fixed;
   top: 0;
   left: 0;
@@ -36,14 +35,13 @@
     }
   }
   .done & {
-    /*@include transform(translateY(-100%));*/
+    @include transform(translateY(-100%));
     display: block;
 //    overflow: hidden;
     .emerge & {
-      /*.no-js & {
-        @include transition(transform, .3s, ease-in);
+      .no-js & {
         @include transform(translateY(0));
-      }*/
+      }
       z-index: 3;
       width: 100%;
       height: 100%;
@@ -123,8 +121,8 @@
   .done & {
     position: fixed;
     display: block;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     bottom: 1rem;
     right: 1rem;
     box-shadow: 0 0 2px $white;

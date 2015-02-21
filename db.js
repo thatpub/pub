@@ -29,12 +29,12 @@
     if( term.pubName && term.pubName.length > 0 ) {
       termArray.push({
         "terms": {
-          "pubName.exact": term.pubName
+          "pubName.exact^2": term.pubName
         }
       });
       termArray.push({
         "terms": {
-          "productNo.exact": term.pubName
+          "productNo.exact^2": term.pubName
         }
       });
       termArray.push({
@@ -52,14 +52,14 @@
     if( term.noPubName && term.noPubName.length > 3 ) {
       termArray.push({
         "term": {
-          "title.exact": term.noPubName
+          "title.english2": term.noPubName
         }
       });
-      /*termArray.push({
+      termArray.push({
         "term": {
-          "category.exact": term.noPubName
+          "category.english2": term.noPubName
         }
-      });*/
+      });
     }
 
     return termArray;
@@ -77,17 +77,6 @@
           "chapter.title.exact": term.noPubName
         }
       });
-      /*termArray.push({
-        "multi_match": {
-          "query": term.noPubName,
-          "type": "most_fields",
-          "use_dis_max": true,
-          "fields": [
-            "category.raw",
-            "category.english2"
-          ]
-        }
-      });*/
     }
     return {
       index: "dept",
@@ -108,8 +97,7 @@
                       "fields": [
                         "text.english2",
                         "chapter.title.english2",
-                        "section.title.english2",
-                        "title.english2"
+                        "section.title.english2"
                       ]
                     }
                   }
@@ -212,8 +200,8 @@
                       "use_dis_max": true,
                       "fields": [
                         "title.english2",
-                        "pubName.raw",
-                        "productNo.raw",
+                        "pubName.raw^2",
+                        "productNo.raw^2",
                         "category.english2"
                       ]
                     }

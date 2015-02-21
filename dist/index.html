@@ -92,12 +92,6 @@
     <script type="text/template" id="result-template">
       <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
         <% if ( type === " content" ) { %>
-        <h2 class="number">
-          <%= sub %>
-          <span class="climb-up reveal">climb up</span>
-          <span class="look-inside reveal">look inside</span>
-          <span class="do-both reveal">do both</span>
-        </h2>
         <div class="text clearfix">
           <% if ( parts && concatText ) { %>
             <span class="combined"><%= concatText %><br/></span>
@@ -116,6 +110,12 @@
             <a href='#' class='reveal'>tell me more</a>
           <% } %>
         </div>
+        <h2 class="number">
+          <%= sub %>
+          <span class="climb-up reveal">climb up</span>
+          <span class="look-inside reveal">look inside</span>
+          <span class="do-both reveal">do both</span>
+        </h2>
         <div class="meta">
           <div class="details">
             <% if ( details && details.chapter && details.chapterTitle ) { %>
