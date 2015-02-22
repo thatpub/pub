@@ -94,7 +94,7 @@ addEvent(window, "load", function () {
     app.send_.click();
   }
   var l = document.createElement('link'); l.rel = 'stylesheet';
-  l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Montserrat:400,700';
+  l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Ubuntu:300,400,700';
   var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
   /*app.colorize();*/
 });

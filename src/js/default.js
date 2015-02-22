@@ -63,7 +63,7 @@
         }
         app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives);
         app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
-        app.count_.innerHTML = app.scoresContent.length;
+        app.count_.innerHTML = currentContent;
 
         /**
          * DISABLED
