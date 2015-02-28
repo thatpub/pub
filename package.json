@@ -5,7 +5,7 @@
   "main": "db.js",
   "scripts": {
     "setup": "npm install && bower install && grunt build",
-    "dev": "sh dbinit.sh",
+    "db": "sh dbinit.sh",
     "watch": "screen -dmS pub-watch grunt watch"
   },
   "keywords": [
