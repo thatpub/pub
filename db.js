@@ -100,7 +100,7 @@
               "bool": {
                 "must": [
                   {
-                    "match_phrase": {
+                    "match": {
                       "text.english2": term.term
                     }
                     /*"multi_match": {
