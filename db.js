@@ -4,19 +4,19 @@
     /**
      * TODO: remove this stupid dependency on the elasticsearch JS api and just use the HTTP module.
      */
-      es = require("elasticsearch"),
-      fs = require("fs"),
-      client = new es.Client({
-        host: "localhost:9200",
-        log: ""
-      }),
-      _ = require("lodash-node"),
-      app = express(),
-      bp = require("body-parser"),
-      cp = require("cookie-parser"),
-      cors = require("cors"),
-      http = require("http"),
-      server;
+    es = require("elasticsearch"),
+    fs = require("fs"),
+    client = new es.Client({
+      host: "localhost:9200",
+      log: ""
+    }),
+    _ = require("lodash-node"),
+    app = express(),
+    bp = require("body-parser"),
+    cp = require("cookie-parser"),
+    cors = require("cors"),
+    http = require("http"),
+    server;
 
   app.use(cors());
   app.use(bp.json());
@@ -69,14 +69,24 @@
     if( term.noPubName && term.noPubName.length > 3 ) {
       termArray.push({
         "term": {
-          "section.title.exact": term.noPubName
+          "section.title.english2": term.noPubName
         }
       });
       termArray.push({
         "term": {
-          "chapter.title.exact": term.noPubName
+          "chapter.title.english2": term.noPubName
         }
       });
+      /*termArray.push({
+       "term": {
+       "section.title.exact^2": term.noPubName
+       }
+       });
+       termArray.push({
+       "term": {
+       "chapter.title.exact^2": term.noPubName
+       }
+       });*/
     }
     return {
       index: "dept",
@@ -90,16 +100,19 @@
               "bool": {
                 "must": [
                   {
-                    "multi_match": {
-                      "query": term.term,
-                      "type": "cross_fields",
-                      "use_dis_max": true,
-                      "fields": [
-                        "text.english2",
-                        "chapter.title.english2",
-                        "section.title.english2"
-                      ]
+                    "match_phrase": {
+                      "text.english2": term.term
                     }
+                    /*"multi_match": {
+                     "query": term.term,
+                     "type": "cross_fields",
+                     "use_dis_max": true,
+                     "fields": [
+                     "text.english2",
+                     "chapter.title.english2",
+                     "section.title.english2"
+                     ]
+                     }*/
                   }
                 ],
                 "should": termArray
@@ -304,8 +317,8 @@
   });
 
   /*app.get("/grab*//*", function (req, res) {
-    var query = req.params.q;
-  });*/
+   var query = req.params.q;
+   });*/
 
   app.post("/content/search", function ( req, res ) {
     /* new search initiated, kill the old one */
