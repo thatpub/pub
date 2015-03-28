@@ -135,7 +135,7 @@ var App = function () {
         group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
         output = {
-          url: "http://get.that.pub/" + data.key.toLowerCase() + ".pdf",
+          url: ("https:" == document.location.protocol ? "https://that.pub/get/" : "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
           key: data.key,
           score: data.score,
           gravitas: (
@@ -175,7 +175,7 @@ var App = function () {
               ) || data._score >= 1
             ) ? " pretty" + group : " boring" + group,
           date: date,
-          url: "http://get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
+          url: ("https:" == document.location.protocol ? "https://that.pub/get/" : "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
           fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,

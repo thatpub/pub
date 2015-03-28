@@ -63,7 +63,7 @@
         }
         app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives);
         app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
-        app.count_.innerHTML = app.scoresContent.length;
+        app.count_.innerHTML = currentContent;
 
         /**
          * DISABLED
@@ -132,7 +132,7 @@
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
     var httpRequest = new XMLHttpRequest();
-    var url = "http://find.that.pub/" + type + "/" + action;
+    var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
     /*var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");*/
 
     httpRequest.onreadystatechange = function() {
