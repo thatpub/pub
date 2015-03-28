@@ -278,7 +278,7 @@
   }
 
 
-  app.post("/content/more", function ( req, res ) {
+  app.post("/find/content/more", function ( req, res ) {
     if ( req.body.g || req.cookies && req.cookies.placeContent ) {
       var qObj = {
         scroll: "3600s",
@@ -297,7 +297,7 @@
     }
   });
 
-  app.post("/meta/more", function ( req, res ) {
+  app.post("/find/meta/more", function ( req, res ) {
     if ( req.body.s || req.cookies && req.cookies.placeMeta ) {
       var qObj = {
         scroll: "3600s",
@@ -320,7 +320,7 @@
    var query = req.params.q;
    });*/
 
-  app.post("/content/search", function ( req, res ) {
+  app.post("/find/content/search", function ( req, res ) {
     /* new search initiated, kill the old one */
     if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
       var opts = {
