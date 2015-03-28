@@ -132,7 +132,7 @@
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
     var httpRequest = new XMLHttpRequest();
-    var url = "http://find.that.pub/" + type + "/" + action;
+    var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
     /*var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");*/
 
     httpRequest.onreadystatechange = function() {
