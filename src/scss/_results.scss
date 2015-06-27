@@ -150,17 +150,18 @@
     display: none;
   }
   &:hover {
-    .climb-up, .look-inside, .do-both {
+    /*.climb-up, .look-inside, .do-both {
       @include miniButton($black, .125rem .375rem);
       float: left;
       clear: none;
       margin: auto 2rem auto 0;
       cursor: pointer;
-    }
+    }*/
   }
 }
 
 .text {
+  text-rendering: optimizeLegibility;
   color: $text-color;
   font-family: $readable;
   position: relative;
