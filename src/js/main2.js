@@ -224,26 +224,26 @@ var App = function () {
           springConstant: 0.3,
           springDeacceleration: 0.8,
           duration: 150
-        });
+        });*/
         snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'spring',
           springConstant: 0.3,
           delay: 150
-        });*/
+        });
         swapClass(document.body, "", regEmerge);
         this.infiniScroll = (this.infiniScroll_) ?
           this.infiniScroll_.checked || (!!this.infiniScroll_.checked) : true;
       }
       else if ( visibility === "visible" ) {
-        /*snabbt(this.wrap_, {
+        snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
           easing: 'spring',
           springConstant: 0.3
         });
-        snabbt(this.searchWrap_, {
+        /*snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
