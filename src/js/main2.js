@@ -218,13 +218,13 @@ var App = function () {
     searchToggle: function ( visibility ) {
       var screenHeight = window.innerHeight;
       if ( visibility === "hidden" ) {
-        /*snabbt(this.searchWrap_, {
+        snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
           duration: 150
-        });*/
+        });
         snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
@@ -243,13 +243,13 @@ var App = function () {
           easing: 'spring',
           springConstant: 0.3
         });
-        /*snabbt(this.searchWrap_, {
+        snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           easing: 'spring',
           springConstant: 0.3,
           springDeacceleration: 0.8,
           duration: 150
-        });*/
+        });
         swapClass(document.body, "emerge", regEmerge);
         this.infiniScroll = false;
       }
