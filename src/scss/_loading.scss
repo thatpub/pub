@@ -1,12 +1,31 @@
-.loader {
+/* .loader {
   @include transform(translate(-50%, 50%));
   display: none;
   position: relative;
+  top: 70%;
   left: 50%;
-/*  top: 70%;
-  left: 50%;*/
   width: 80%;
   height: 80%;
+} */
+#loader {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -10;
+  .spinner {
+    display: none;
+  }
+}
+#loader.loading {
+  z-index: 4;
+  opacity: 1;
+  background: $bg-color;
+  .spinner {
+    display: block;
+  }
 }
 .spinner {
   @include transform(translate(-50%, -50%));
@@ -47,19 +66,6 @@
     animation: blob-spinner-mover 1s infinite ease-in;
   }
 }
-
-.loading {
-  .action {
-    display: none;
-  }
-  .loader {
-    display: block;
-  }
-}
-.loading.failed .loader .spinner {
-  display: none;
-}
-
 
 #no-results {
   display: none;

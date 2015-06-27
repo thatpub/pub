@@ -15,8 +15,9 @@ addEvent(app.send_, "click", function ( event ) {
     });
     return false;
   }
+  swapClass(app.loader_, "loading", regLoad);
+  /*swapClass(this, "loading", regLoad);*/
   app.term = _.trim(app.query_.value);
-  swapClass(this, "loading", regLoad);
   sendData(dataResponse, app.term, "content", "search", app.placeContent, app.placeMeta, endLoading);
   return false;
 });
@@ -61,7 +62,7 @@ addEvent(app.moreMeta_, "click", function ( event ) {
   } else {
     event.returnValue = false;
   }
-  swapClass(this, "loading", regLoad);
+  swapClass(app.loader_, "loading", regLoad);
   sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, endLoading);
   return false;
 });
@@ -78,6 +79,7 @@ addEvent(app.searchRestore_, "click", function ( event ) {
   else {
     app.searchToggle("visible");
     app.query_.value = app.term||"";
+    app.query_.focus();
   }
   return false;
 });

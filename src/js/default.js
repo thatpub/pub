@@ -162,9 +162,15 @@
         event.returnValue = false;
       }
     }
-    swapClass(app.moreContent_, "loading", regLoad);
+    swapClass(app.loader_, "loading", regLoad);
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
     return false;
+  }
+
+  function modalClose ( event ) {
+    if ( event.target === event.currentTarget ) {
+      app.searchToggle("hidden");
+    }
   }
 
   function scrollWheeler () {
@@ -208,7 +214,7 @@
     el = ( el === null ) ? app.moreContent_ :
       ( el === "" ) ? app.send_ : null;
 
-    swapClass(el, "", regLoad);
+    swapClass(app.loader_, "", regLoad);
     app.loading.now = false;
     if ( el == app.send_ ) {
       app.searchToggle("hidden");

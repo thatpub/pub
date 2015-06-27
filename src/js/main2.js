@@ -37,6 +37,7 @@ var App = function () {
     related_ = document.getElementById("related"),
     infiniScroll_ = document.getElementById("infini-scroll"),
     infiniStatus_ = document.getElementById("infini-status"),
+    loader_ = document.getElementById("loader"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect,
@@ -93,6 +94,7 @@ var App = function () {
     placeMeta: placeMeta,
     infiniScroll_: infiniScroll_,
     infiniStatus_: infiniStatus_,
+    loader_: loader_,
     infiniScroll: true,
     done: false,
     loading: {
@@ -233,6 +235,7 @@ var App = function () {
           delay: 150
         });
         swapClass(document.body, "", regEmerge);
+        removeEvent(this.searchWrap_, "click", modalClose);
         this.infiniScroll = (this.infiniScroll_) ?
           this.infiniScroll_.checked || (!!this.infiniScroll_.checked) : true;
       }
@@ -251,6 +254,7 @@ var App = function () {
           duration: 150
         });
         swapClass(document.body, "emerge", regEmerge);
+        addEvent(this.searchWrap_, "click", modalClose);
         this.infiniScroll = false;
       }
     },

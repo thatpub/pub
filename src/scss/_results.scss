@@ -3,6 +3,7 @@
 }
 
 .related-label {
+  padding: 1rem;
   display: none;
   .done & {
     display: block;
@@ -72,12 +73,12 @@
    */
   /*cursor: pointer;*/
   &.pretty {
-    font-weight: 700;
+    font-weight: $bold;
     border-width: 3px;
   }
 }
 
-.filtered {
+/* .filtered {
   .doc {
     opacity: .35;
     &.selected {
@@ -114,7 +115,7 @@
       }
     }
   }
-}
+} */
 
 .content {
   margin-bottom: 2rem;
@@ -123,12 +124,12 @@
     .info:hover {
       .pub, .title {
         border-bottom-color: $result-color;
-        .filtered & {
+        /* .filtered & {
           border-bottom-color: transparent;
           .selected & {
             border-bottom-color: $result-color;
           }
-        }
+        } */
       }
     }
   }
@@ -287,6 +288,7 @@
 }
 
 .summary {
+  text-rendering: optimizeLegibility;
   color: $text-highlight-color;
   font-weight: 200;
   text-align: center;
