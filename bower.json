@@ -19,7 +19,7 @@
     "regulations"
   ],
   "license": "",
-  "homepage": "http://that.pub",
+  "homepage": "https://that.pub",
   "private": true,
   "ignore": [
     "**/.*",
@@ -30,6 +30,6 @@
     "normalize-scss": "~3.0.2",
     "reqwest": "~1.1.5",
     "randomColor": "~0.2.0",
-    "snabbt.js": "~0.4.0"
+    "snabbt.js": "~0.5.4"
   }
 }

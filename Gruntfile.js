@@ -8,17 +8,31 @@ module.exports = function(grunt) {
           trace: false
         },
         files: {
-          'dist/css/style.min.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss'
         }
       },
       dev: {
         options: {
-          sourcemap: 'inline',
+          sourcemap: 'none',
           style: 'expanded',
           trace: true
         },
         files: {
-          'dist/css/style.min.css': 'src/scss/style.scss'
+          'src/css/style.css': 'src/scss/style.scss'
+        }
+      }
+    },
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: 3,
+        sourceMap: false,
+        compatibility: false,
+        processImport: true
+      },
+      dist: {
+        files: {
+          'dist/css/style.css': 'src/css/style.pure.css'
         }
       }
     },
@@ -26,46 +40,91 @@ module.exports = function(grunt) {
       dist: {
         options: {
           compress: {
-            unsafe: true,
+            /*unsafe: true,*/
             drop_console: true,
             keep_fargs: true
           },
           screwIE8: true,
           wrap: false,
-          mangle: false
+          mangle: false,
+          sourceMap: false
         },
         files: {
-          'dist/js/script.min.js': [
-            'src/lib/snabbt.js/snabbt.js',
+          'src/js/script.js': [
             'src/js/lodash.custom.js',
             'src/lib/randomColor/randomColor.js',
             'src/js/util.js',
             'src/js/main2.js',
             'src/js/default.js',
             'src/js/events.js'
-          ]
+          ],
+          'dist/js/script.js': ['src/js/script.js']
         }
       },
       dev: {
         options: {
           compress: false,
-          screwIE8: true,
-          beautify: true,
+          beautify: {
+            beautify: true,
+            indent_level: 2
+          },
           mangle: false,
           wrap: false,
-          sourceMap: true
+          sourceMap: false
         },
         files: {
-          'dist/js/script.min.js': [
-            'src/lib/snabbt.js/snabbt.js',
+          'src/js/script.js': [
             'src/js/lodash.custom.js',
             'src/lib/randomColor/randomColor.js',
             'src/js/util.js',
             'src/js/main2.js',
             'src/js/default.js',
             'src/js/events.js'
-          ]
+          ],
+          'dist/js/script.js': ['src/js/script.js']
         }
+      }
+    },
+    inline: {
+      dist: {
+        options: {
+          /*inlineTagAttributes: {
+            js: 'data-inlined="true"',
+            css: 'data-inlined="true"'
+          }*/
+          tag: ''
+        },
+        src: 'src/index.html',
+        dest: 'src/index.full.html'
+      },
+      dev: {
+        options: {
+          tag: ''
+        },
+        src: 'src/index.html',
+        dest: 'src/index.full.html'
+      }
+    },
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          keepClosingSlash: true,
+          removeRedundantAttributes: true,
+          removeEmptyElements: true
+        },
+        files: {
+          'dist/index.html': 'src/index.full.html'
+        }
+      }
+    },
+    purifycss: {
+      options: {},
+      target: {
+        src: ['src/index.html', 'src/js/script.js'],
+        css: ['src/css/style.css'],
+        dest: 'src/css/style.pure.css'
       }
     },
     imagemin: {
@@ -124,7 +183,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/**/*'],
-        tasks: ['sass:dev']
+        tasks: ['sass:dev', 'purifycss', 'inline:dev', 'htmlmin:dist']
       },
       gifsvg: {
         options: {
@@ -144,7 +203,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: [
-          'src/img/*.{png,jpg}'
+          'src/img/!*.{png,jpg}'
         ],
         tasks: ['tinypng']
       },
@@ -161,22 +220,23 @@ module.exports = function(grunt) {
           'src/js/events.js',
           'src/lib/**/*.js'
         ],
-        tasks: ['uglify:dev']
+        tasks: ['uglify:dev', 'inline:dev', 'htmlmin:dist']
       }
     }
   });
 
-  /*grunt.loadNpmTasks('grunt-contrib-cssmin');*/
-  /*grunt.loadNpmTasks('grunt-autoprefixer');*/
-  grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-purifycss');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-inline');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
-  /*grunt.loadNpmTasks('grunt-react');*/
 
-  grunt.registerTask('default', ['sass:dist', /*'autoprefixer:dist', 'cssmin', 'uncss:dist',*/ 'uglify:dist', 'newer:imagemin', 'tinypng']);
-  grunt.registerTask('build', ['sass:dist', /*'autoprefixer:dist', 'cssmin', 'uncss:dist',*/ 'uglify:dist', 'imagemin', 'tinypng']);
-  grunt.registerTask('dev', ['sass:dev', /*'autoprefixer:dev', 'uncss:dist',*/ 'uglify:dev', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin:dist', 'inline:dist', 'htmlmin:dist', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('build', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin:dist', 'inline:dist', 'htmlmin:dist', 'imagemin', 'tinypng']);
+  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'inline:dev', 'htmlmin:dist']);
 };
