@@ -1,6 +1,6 @@
 h1, h2, h3, h4, h5, h6, label {
   cursor: default;
-  font-family: $heading;
+  font-family: $readable;
 }
 .label {
   color: $text-color;
@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6, label {
 .search-title {
   color: $action-color;
   text-shadow: 0 1px 0 $white;
-  font: 1.75rem $heading;
+  font: 1.75rem $readable;
   margin: 0 auto;
   position: relative;
   width: 100%;
