@@ -22,7 +22,7 @@
 
 }
 @mixin iconInfini {
-  &:after {
+  &:before {
     display: block;
     content: url(../img/refresh.png);
   }

@@ -1,43 +1,41 @@
 .search-wrap {
-  .no-js & {
-    @include transform(translateY(0));
-  }
+  @include transform(translateY(0));
   position: fixed;
-  top: 0;
+  top: 30%;
   left: 0;
   max-width: 100%;
   margin: 0;
   width: 100%;
   height: 100%;
   z-index: 3;
+  @media all and (min-width: 540px) {
+    top: 0;
+  }
   .done & {
-    // @include transform(translateY(-100%));
+    @include transform(translateY(-100%));
     display: block;
-//    overflow: hidden;
     .emerge & {
-      .no-js & {
-        @include transform(translateY(0));
-      }
       z-index: 3;
       width: 100%;
       height: 100%;
+      @include transform(translateY(0));
     }
   }
   .failed & {
     display: none;
   }
 }
+
 .search {
-  @include paperShadow;
-  @include border-radius(4px);
   background-color: $bg-color;
   padding: 1rem;
-  //    width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   @media all and (min-width: 480px) {
+    @include paperShadow;
+    @include border-radius(4px);
     width: 28rem;
     bottom: 0;
   }
@@ -59,8 +57,7 @@
 }
 
 .query {
-  @include box-sizing(border-box);
-  @include border-radius(.75rem);
+  @include border-radius(.2rem);
   padding: .75rem;
   max-width: 100%;
   outline: 0;
@@ -84,31 +81,30 @@
      width: 100%;
      white-space: normal;
      opacity: .5;
-     @media all and (min-width: 768px) {
-       font-size: inherit;
-     }
+    font-size: inherit;
+     /* @media all and (min-width: 768px) {
+     } */
    }
   &::-moz-input-placeholder {
     display: inline;
     width: 100%;
     white-space: normal;
     opacity: .5;
-    @media all and (min-width: 768px) {
-      font-size: inherit;
-    }
+    font-size: inherit;
+    /* @media all and (min-width: 768px) {
+    } */
   }
 }
 
 .send {
-  @include button($action-color, .5rem);
+  @include pushButton($action-color, .5rem);
   @include transform(translateX(-50%));
   position: absolute;
   top: 100%;
   left: 50%;
-  text-shadow: 0 1px 0 $shadow-color;
+  /* text-shadow: 0 1px 0 $shadow-color; */
   width: 100%;
-  opacity: 1;
-  max-width: 18rem;
+  max-width: 14rem; /* 18rem before */
 }
 
 .search-restore {
@@ -119,21 +115,19 @@
     display: block;
     width: 3.5rem;
     height: 3.5rem;
-    bottom: 1rem;
+    top: 1rem;
     right: 1rem;
-    box-shadow: 0 0 2px $white;
     z-index: 3;
-    &:hover {
-      opacity: .5;
+    svg {
+      fill: $white;
+      background-color: $text-on-bg-color;
+    }
+    &:hover svg {
+      background-color: $result-highlight-color;
     }
     &:focus,
     &:active {
       outline: 0;
-    }
-    @media all and (min-width: 768px) {
-      box-shadow: none;
-      top: 1rem;
-      bottom: auto;
     }
   }
 }

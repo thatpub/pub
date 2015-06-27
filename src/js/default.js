@@ -10,11 +10,11 @@
     this.innerHTML = "";
     if (!open) {
       swapClass(this.parentNode, "opened", regOpened);
-      this.appendChild(document.createTextNode("make it smaller"));
+      this.appendChild(document.createTextNode("consolidate results"));
     }
     else {
       this.parentNode.className = this.parentNode.className.replace(regOpened, "");
-      this.appendChild(document.createTextNode("tell me more"));
+      this.appendChild(document.createTextNode("expand to full paragraph"));
     }
     if ( event.preventDefault ) {
       event.preventDefault();
@@ -155,13 +155,7 @@
   }
 
   function more ( event ) {
-    if (event) {
-      if ( event.preventDefault ) {
-        event.preventDefault();
-      } else {
-        event.returnValue = false;
-      }
-    }
+    event.preventDefault();
     swapClass(app.loader_, "loading", regLoad);
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
     return false;
@@ -201,10 +195,19 @@
 
   function infini () {
     var status;
+    /*if (app.infiniNotify) {
+      app.infiniStatus_.innerHTML = "";
+      clearTimeout(app.infiniNotify);
+    }*/
     app.infiniScroll = this.checked || (!!this.checked);
     status = (app.infiniScroll) ? "enabled" : "disabled";
-    app.infiniStatus_.innerHTML = status;
-    app.infiniStatus_.className = status;
+    /*app.infiniStatus_.innerHTML = status;*/
+    app.infiniLabel_.className = status;
+    app.infiniLabel_.setAttribute("title", "Infinite scroll " + status);
+
+    /*app.infiniNotify = setTimeout(function() {
+      app.infiniStatus_.innerHTML = "";
+    }, 1500);*/
     if ( !status ) {
       this.removeAttribute("checked");
     }

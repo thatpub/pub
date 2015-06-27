@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="48" height="48" id="svg4408" version="1.1" inkscape:version="0.48.4 r9939" sodipodi:docname="refreshBox4.svg">
+  <defs id="defs4410" />
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="5.657" inkscape:cx="-1.397" inkscape:cy="21.74" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" width="48px" inkscape:snap-page="true" inkscape:window-width="2560" inkscape:window-height="984" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1">
+    <inkscape:grid type="xygrid" id="grid4427" empspacing="4" visible="true" enabled="true" snapvisiblegridlinesonly="true" spacingx="4px" spacingy="4px" />
+  </sodipodi:namedview>
+  <metadata id="metadata4413">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-1004)">
+    <g id="g5109">
+      <path sodipodi:nodetypes="csscccccsscccccsscccscccsc" inkscape:connector-curvature="0" id="path5107" d="m 27.17,1045 c 2.19,-3 3.83,-7 3.83,-11 0,-1 -0.42,-1 -2.81,-1 -3.37,0 -3.57,-1 -0.7,-4 0,0 0,0 2.4,-3 0,0 1.43,-2 2.53,-3 1.82,-2 1.82,-2 3.63,0 1.59,2 3.74,5 4.93,6 2.87,3 2.67,4 -0.7,4 -2.36,0 -2.82,0 -2.82,1 0,5 -5.34,10 -10.11,13 -2.35,1 -2.35,1 -0.18,-2 z M 12.8,1034 c -1.44,-2 -1.54,-2 -1.54,-2 -1.24,-2 -3.112,-4 -3.112,-4 -2.871,-3 -2.671,-4 0.697,-4 2.365,0 2.825,0 2.825,-1 0,-5 4.09,-10 10.68,-13 4.35,-1 2.83,-1 -0.39,2 -1.81,3 -3.83,7 -3.84,11 0,1 0.43,1 2.82,1 3.37,0 3.57,1 0.7,4 0,0 0,0 -3.12,4 -0.62,1 0,0 -1.53,2 -0.85,1 -1.79,2 -2.1,2 -0.31,0 -1.25,-1 -2.09,-2 z" style="fill:#333333;fill-opacity:1" />
+    </g>
+    <rect style="fill:none;stroke:#000000;stroke-width:1.9222;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" id="rect4429" width="46.2" height="46.06" x="0.9588" y="1005" ry="1.894" />
+  </g>
+</svg>

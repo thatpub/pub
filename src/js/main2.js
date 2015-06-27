@@ -35,6 +35,7 @@ var App = function () {
     moreMeta_ = document.getElementById("more-meta"),
     moreContent_ = document.getElementById("more-content"),
     related_ = document.getElementById("related"),
+    infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
     infiniStatus_ = document.getElementById("infini-status"),
     loader_ = document.getElementById("loader"),
@@ -92,6 +93,7 @@ var App = function () {
     related_: related_,
     placeContent: placeContent,
     placeMeta: placeMeta,
+    infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
     infiniStatus_: infiniStatus_,
     loader_: loader_,
@@ -222,16 +224,13 @@ var App = function () {
       if ( visibility === "hidden" ) {
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
-          easing: 'spring',
-          springConstant: 0.3,
-          springDeacceleration: 0.8,
+          easing: 'easeOut',
           duration: 150
         });
         snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
-          easing: 'spring',
-          springConstant: 0.3,
+          easing: 'easeOut',
           delay: 150
         });
         swapClass(document.body, "", regEmerge);
@@ -243,14 +242,11 @@ var App = function () {
         snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
-          easing: 'spring',
-          springConstant: 0.3
+          easing: 'easeOut',
         });
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
-          easing: 'spring',
-          springConstant: 0.3,
-          springDeacceleration: 0.8,
+          easing: 'easeOut',
           duration: 150
         });
         swapClass(document.body, "emerge", regEmerge);

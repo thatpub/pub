@@ -17,7 +17,7 @@
   position: relative;
   margin: 0 auto;
   padding: 1rem;
-  width: 100%;
+  width: 90%;
   list-style: none;
   flex-direction: row;
   justify-content: center;
@@ -170,6 +170,7 @@
   clear: both;
   margin-top: 4rem;
   margin-bottom: 1rem;
+  padding-top: 2rem;
   q {
     &:before {
       position: absolute;
@@ -275,7 +276,7 @@
 }
 
 .more {
-  @include button($result-color);
+  @include pushButton($result-color);
   position: absolute;
   bottom: 2rem;
   display: none;
@@ -325,10 +326,110 @@
   }
 }
 
-label[for="infini-scroll"] {
-  @include iconInfini;
+#infini-status {
+  @include transition(opacity, .075s, ease-out);
+  max-width: 8rem;
+  max-height: 3.2rem;
+  width: 100%;
+  height: 100%;
+  display: table;
+  color: $success-color;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  @media all and (min-width: 480px) {
+    pointer-events: auto;
+    z-index: 3;
+    opacity: 1;
+  }
+  &:after {
+    display: table-cell;
+    position: absolute;
+    content:'Infinite Scroll';
+    background-color: $white;
+    word-wrap: normal;
+    border: 2px solid;
+    border-left: none;
+    top: 0;
+    left: calc(100% - 2px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+.disabled #infini-status {
+  color: $shadow-color;
+}
+
+#infini-label {
+  /* @include iconInfini; */
+  cursor: pointer;
   position: fixed;
-  bottom: 1rem;
+  top: 1rem;
   left: 1rem;
   z-index: 3;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: table;
+  svg {
+    @include transition(all, .075s, ease-out);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $success-color;
+    path {
+      fill: $white;
+    }
+    rect {
+      stroke: $success-color!important;
+    }
+  }
+  &:hover {
+    svg {
+      background-color: $white;
+      path {
+        fill: $shadow-color;
+      }
+      rect {
+        stroke: $shadow-color!important;
+      }
+    }
+    #infini-status {
+      color: $shadow-color;
+      opacity: 1;
+      &:after {
+        border-color: $shadow-color;
+      }
+    }
+  }
+  &.disabled {
+    svg {
+      background-color: $white;
+      path {
+        fill: $text-highlight-color;
+      }
+      rect {
+        stroke: transparent!important;
+      }
+    }
+    &:hover {
+      svg {
+        background-color: $white;
+        path {
+          fill: $success-color;
+        }
+        rect {
+          stroke: $success-color!important;
+        }
+      }
+      #infini-status {
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        color: $success-color;
+        &:after {
+          border-color: $success-color;
+        }
+      }
+    }
+  }
 }

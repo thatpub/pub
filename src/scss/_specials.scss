@@ -8,7 +8,9 @@
   -moz-box-shadow: $x $y $blur $spread $color;
   box-shadow: $x $y $blur $spread $color;
 }
-@mixin border-radius($radius) {
+@mixin border-radius($radii) {
+  $radius: 3px;
+  $radius: .2rem;
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
           border-radius: $radius;
@@ -31,7 +33,7 @@
   -o-transition: $property $duration $easing $delay;
   transition: $property $duration $easing $delay;
 }
-@mixin miniButton($bg, $padding: .25rem .375rem, $color: $white) {
+@mixin miniButton($bg, $padding: .4rem .6rem, $color: $white) {
   @include border-radius(4px);
   display: inline;
   font-size: 75%;
@@ -42,7 +44,7 @@
   color: $color;
   position: relative;
 }
-@mixin button($color, $padding: 1.25rem, $font-size: 2.5rem) {
+@mixin pushButton($color, $padding: 1.25rem, $font-size: 2.25rem) {
   @include border-radius(8px);
   display: block;
   color: $white;
@@ -57,7 +59,8 @@
   border-bottom: 1px solid darken($color, 30%); /*#22313F*/
   border-top: 1px solid lighten($color, 50%); /*#C8F7C5*/
   &.content {
-    width: 90%;
+    max-width: 90%;
+    width: 100%;
   }
   &.loading {
     background: none;
@@ -69,7 +72,7 @@
     text-shadow: 0 -1px 0 darken($color, 50%), 0 0 1px darken($color, 50%);
   }
   &:hover {
-    opacity: .8;
+    background-color: rgba(lighten($color, 15%), .75);
   }
 }
 @mixin ribbon($bg: $result-highlight-color) {

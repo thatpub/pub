@@ -6,6 +6,7 @@ h1, h2, h3, h4, h5, h6, label {
   color: $text-color;
   font-weight: $med;
   text-align: center;
+  margin-top: 2rem;
   small {
     color: $shadow-color;
   }
@@ -13,16 +14,14 @@ h1, h2, h3, h4, h5, h6, label {
 .search-title {
   color: $action-color;
   text-shadow: 0 1px 0 $white;
-  font: 1.75rem $readable;
+  font-family: $readable;
+  font-size: 1.25rem;
   margin: 0 auto;
   position: relative;
   width: 100%;
   text-align: center;
-  a {
-    color: $heading-color;
-  }
-  .overlay.search > & div {
-    text-align: center;
+  @media all and (min-width: 480px) {
+    font-size: 1.75rem;
   }
 }
 .no-textshadow {
