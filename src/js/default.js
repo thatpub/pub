@@ -1,6 +1,6 @@
 "use strict";
 
-  var app = App();
+  var app = new App();
 
   app.resultTemplate = document.getElementById("result-template");
   app.relatedTemplate = document.getElementById("related-template");
