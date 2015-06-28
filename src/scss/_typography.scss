@@ -13,7 +13,6 @@ h1, h2, h3, h4, h5, h6, label {
 }
 .search-title {
   color: $action-color;
-  text-shadow: 0 1px 0 $white;
   font-family: $readable;
   font-size: 1.25rem;
   margin: 0 auto;
@@ -22,10 +21,5 @@ h1, h2, h3, h4, h5, h6, label {
   text-align: center;
   @media all and (min-width: 480px) {
     font-size: 1.75rem;
-  }
-}
-.no-textshadow {
-  .search-title {
-    color: $action-highlight-color;
   }
 }

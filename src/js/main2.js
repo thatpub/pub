@@ -224,14 +224,16 @@ var App = function () {
       if ( visibility === "hidden" ) {
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
+          opacity: 0,
+          fromOpacity: 1,
           easing: 'easeOut',
-          duration: 150
+          duration: 250
         });
         snabbt(this.wrap_, {
           opacity: 1,
           fromOpacity: 0.5,
           easing: 'easeOut',
-          delay: 150
+          delay: 250
         });
         swapClass(document.body, "", regEmerge);
         removeEvent(this.searchWrap_, "click", modalClose);
@@ -242,12 +244,15 @@ var App = function () {
         snabbt(this.wrap_, {
           opacity: 0.5,
           fromOpacity: 1,
-          easing: 'easeOut',
+          easing: 'easeIn',
+          duration: 250
         });
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
-          easing: 'easeOut',
-          duration: 150
+          opacity: 1,
+          fromOpacity: 0,
+          easing: 'easeIn',
+          duration: 250
         });
         swapClass(document.body, "emerge", regEmerge);
         addEvent(this.searchWrap_, "click", modalClose);

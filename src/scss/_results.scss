@@ -17,7 +17,7 @@
   position: relative;
   margin: 0 auto;
   padding: 1rem;
-  width: 90%;
+  width: 100%;
   list-style: none;
   flex-direction: row;
   justify-content: center;
@@ -42,6 +42,9 @@
     }
   }*/
   display: none;
+  @media all and (min-width: 480px) {
+    width: 90%;
+  }
   .done & {
     display: flex;
   }
@@ -56,17 +59,25 @@
     color: $result-color;
     font-style: normal;
   }
+  &:nth-child(n) {
+    border-bottom: 1px solid $bg-color;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .related .doc {
   @include border-radius(4px);
   flex-grow: 1;
-  margin: 5px 1rem 5px 0;
   text-align: center;
   border: 1px solid transparent;
-  padding: 3px 5px;
   font-size: 1.25rem;
   font-weight: 200;
+  padding: 3px 5px;
+  @media all and (min-width: 480px) {
+    margin: 5px 1rem 5px 0;
+  }
   /**
    * Turn this off until we can handle
    * the filter on huge amounts of results.
@@ -145,7 +156,9 @@
 
 .number {
   @include ribbon();
+  // @include rightMantel;
   @include rightRibbon;
+  // @include leftRibbon;
   overflow: hidden;
   .climb-up, .look-inside, .do-both {
     display: none;
@@ -167,9 +180,10 @@
   font-family: $font;
   position: relative;
   font-size: 1.2rem;
+  line-height: 1.7;
   clear: both;
   margin-top: 4rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   padding-top: 2rem;
   q {
     &:before {
@@ -230,6 +244,7 @@
   color: $text-highlight-color;
   font-family: $font;
   font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .details {
@@ -280,6 +295,12 @@
   position: absolute;
   bottom: 2rem;
   display: none;
+  &.content {
+    max-width: 90%;
+    width: 100%;
+    left: 5%;
+    right: 5%;
+  }
   .done & {
     display: block;
   }
@@ -293,8 +314,11 @@
   color: $text-highlight-color;
   font-weight: 200;
   text-align: center;
-  margin: 2rem auto;
   display: none;
+  margin: 3rem auto 0;
+  @media all and (min-width: 768px) {
+    margin: 5rem auto 0;
+  }
   .done & {
     display: block;
   }
@@ -328,36 +352,40 @@
 
 #infini-status {
   @include transition(opacity, .075s, ease-out);
+  pointer-events: none;
+  z-index: -1;
+  display: table;
+  opacity: 0;
+  color: $text-on-bg-color;
   max-width: 8rem;
   max-height: 3.2rem;
   width: 100%;
   height: 100%;
-  display: table;
-  color: $success-color;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0;
-  @media all and (min-width: 480px) {
+  @media handheld,tablet and (min-width: 480px) {
     pointer-events: auto;
     z-index: 3;
     opacity: 1;
-  }
-  &:after {
-    display: table-cell;
-    position: absolute;
-    content:'Infinite Scroll';
-    background-color: $white;
-    word-wrap: normal;
-    border: 2px solid;
-    border-left: none;
-    top: 0;
-    left: calc(100% - 2px);
-    padding-left: 1rem;
-    padding-right: 1rem;
+    &:after {
+      display: table-cell;
+      position: absolute;
+      content:'Infinite Scroll';
+      background-color: $white;
+      word-wrap: normal;
+      border: 2px solid;
+      border-left: none;
+      top: 0;
+      left: calc(100% - 2px);
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
+
 .disabled #infini-status {
   color: $shadow-color;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
 }
 
 #infini-label {
@@ -369,18 +397,18 @@
   z-index: 3;
   width: 3.2rem;
   height: 3.2rem;
-  display: table;
+  display: block;
   svg {
     @include transition(all, .075s, ease-out);
     position: absolute;
     left: 0;
     top: 0;
-    background-color: $success-color;
+    background-color: $result-color;
     path {
       fill: $white;
     }
     rect {
-      stroke: $success-color!important;
+      stroke: $result-color!important;
     }
   }
   &:hover {
@@ -393,19 +421,19 @@
         stroke: $shadow-color!important;
       }
     }
-    #infini-status {
+    /* #infini-status {
       color: $shadow-color;
       opacity: 1;
       &:after {
         border-color: $shadow-color;
       }
-    }
+    } */
   }
   &.disabled {
     svg {
       background-color: $white;
       path {
-        fill: $text-highlight-color;
+        fill: $shadow-color;
       }
       rect {
         stroke: transparent!important;
@@ -415,21 +443,26 @@
       svg {
         background-color: $white;
         path {
-          fill: $success-color;
+          fill: $result-color;
         }
         rect {
-          stroke: $success-color!important;
+          stroke: $result-color!important;
         }
       }
       #infini-status {
         z-index: -1;
         pointer-events: none;
         opacity: 0;
-        color: $success-color;
+        color: $result-color;
         &:after {
-          border-color: $success-color;
+          border-color: $result-color;
         }
       }
     }
+  }
+  .emerge & {
+    display: block;
+    z-index: -1;
+    opacity: .5;
   }
 }

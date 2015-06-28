@@ -1,3 +1,22 @@
+html {
+  overflow-y: scroll;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: greyscale;
+  zoom: 1;
+  *zoom: 1;
+  margin:0;
+  padding:0;
+  border:0;
+  font-size: 100%;
+  font:inherit;
+  vertical-align:baseline;
+}
+
+html, body {
+  min-height: 100%;
+  min-width: 100%;
+}
+
 *, :after, :before {
   -webkit-box-sizing: border-box!important;
   -moz-box-sizing: border-box!important;
@@ -14,20 +33,6 @@
   text-shadow: none;
 }
 
-html {
-  overflow-y: scroll;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-osx-font-smoothing: greyscale;
-  zoom: 1;
-  *zoom: 1;
-  font-size: 15px;
-}
-
-html, body {
-  min-height: 100%;
-  min-width: 100%;
-}
-
 html,
 button,
 select,
@@ -35,18 +40,14 @@ input,
 textarea {
   color: $text-color;
   outline: 0;
-  font-weight: 200;
+  font-weight: $med;
 }
 
 body {
   font-family: $readable;
-  /*font-size: 15px;*/
-  font-size: 100%;
+  font-size: 15px;
   line-height: 1.5;
   background: $bg-color;
-  /*background: $bg-color url(../img/t-38_X1.png) right top;
-  background-repeat: repeat;
-  background-attachment: fixed;*/
 }
 
 a {
@@ -126,11 +127,18 @@ textarea {
   top: 0;
   background-color: $white;
   padding: 2rem 2rem 8rem;
-  margin: 5rem auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
   border-right: 1px solid $bg-color;
   border-left: 1px solid $bg-color;
   position: relative;
   display: none;
+  @media all and (min-width: 768px) {
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+  }
   .done & {
     display: block;
   }

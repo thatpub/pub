@@ -12,7 +12,11 @@ var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   regFail = / ?failed/g;
 
 function addEvent ( element, evt, fnc ) {
-  return ((element.addEventListener) ? element.addEventListener(evt, fnc, false) : element.attachEvent("on" + evt, fnc));
+  return element.addEventListener(evt, fnc, false);
+}
+
+function removeEvent ( element, evt, fnc ) {
+  return element.removeEventListener(evt, fnc, false);
 }
 
 function swapClass ( element, string, regex ) {
@@ -24,10 +28,6 @@ function swapClass ( element, string, regex ) {
   else {
     element.className = element.className.replace(regex, "");
   }
-}
-
-function removeEvent ( element, evt, fnc ) {
-  return ((element.removeEventListener) ? element.removeEventListener(evt, fnc, false) : element.detachEvent("on" + evt, fnc));
 }
 
 String.prototype.toTitle = function () {
@@ -59,6 +59,8 @@ String.prototype.toPubName = function() {
 };
 
 window.downloader = function ( el ) {
+  // This is cross-browser but as you can tell, the rest of that.pub
+  // gives 0 fucks.
   var link = document.createElement("a"),
       file = el.href||el.getAttribute("href")||"";
   if ( file === "" ) { return false; }

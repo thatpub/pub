@@ -1,5 +1,5 @@
-$font: Ubuntu, Cantarell, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Open Sans", Helvetica, "Trebuchet MS", Arial, "Lucida Grande", sans-serif;
-$readable: Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif;
+$font: /* Ubuntu, */ Roboto, Ubuntu, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, "Lucida Grande", sans-serif;
+$readable: Cantarell, "Open Sans", $font; /* Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif; */
 $heading: $font;
 /*$heading: Montserrat, Quando, Quicksand, Georgia, Trebuchet MS, serif;*/
 
@@ -18,7 +18,7 @@ $success-color: #63B257;
 $success-highlight-color: #8EFE7C;
 $black: #232323;
 $white: #FEFEFE;
-$bg-color: #FAFAFA;
+$bg-color: #F5F5F5;
 $shadow-color: #AAAAAA;
 
 $result: $result-color;

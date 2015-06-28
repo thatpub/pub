@@ -1,5 +1,4 @@
 "use strict";
-
   var app = new App();
 
   app.resultTemplate = document.getElementById("result-template");
@@ -16,11 +15,7 @@
       this.parentNode.className = this.parentNode.className.replace(regOpened, "");
       this.appendChild(document.createTextNode("expand to full paragraph"));
     }
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
+    event.preventDefault();
     return false;
   }
 
@@ -56,10 +51,10 @@
         /*app.colorize();*/
         window.scroll(0, 0);
         for (; b < currentContent; ++b) {
-          app.scoresContent[b] = content.hits.hits[b]["_score"];
+          app.scoresContent[b] = content.hits.hits[b]._score;
         }
         for (b = 0; b < currentRelatives; ++b) {
-          app.scoresContent[b] = content.aggregations.related_doc.buckets[b]["score"];
+          app.scoresContent[b] = content.aggregations.related_doc.buckets[b].score;
         }
         app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives);
         app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
@@ -88,7 +83,7 @@
          */
         var contentGathered = app.scoresContent.length;
         for (b = 0; b < currentContent; ++b) {
-          app.scoresContent[(b + contentGathered)] = content.hits.hits[b]["_score"];
+          app.scoresContent[(b + contentGathered)] = content.hits.hits[b]._score;
         }
         app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.count_.innerHTML = app.scoresContent.length;
@@ -132,9 +127,9 @@
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
     var httpRequest = new XMLHttpRequest();
-    var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
+    //var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
     /*var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");*/
-
+    var url = "https://that.pub/find/" + type + "/" + action;
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
@@ -200,10 +195,10 @@
       clearTimeout(app.infiniNotify);
     }*/
     app.infiniScroll = this.checked || (!!this.checked);
-    status = (app.infiniScroll) ? "enabled" : "disabled";
+    status = (app.infiniScroll) ? "enable" : "disable";
     /*app.infiniStatus_.innerHTML = status;*/
-    app.infiniLabel_.className = status;
-    app.infiniLabel_.setAttribute("title", "Infinite scroll " + status);
+    app.infiniLabel_.className = status + "d"; // lol I know right
+    app.infiniLabel_.setAttribute("title", status.toTitle() + " infinite scroll");
 
     /*app.infiniNotify = setTimeout(function() {
       app.infiniStatus_.innerHTML = "";
