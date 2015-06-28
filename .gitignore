@@ -3,6 +3,9 @@
 query.txt
 node_modules
 src/css
+src/index.full.html
+src/js/script.js
 dist/css
 dist/js
 dist/img
+dist/index.html
