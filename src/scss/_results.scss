@@ -403,9 +403,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: $result-color;
+    background-color: $white;
     path {
-      fill: $white;
+      fill: $result-color;
     }
     rect {
       stroke: $result-color!important;
@@ -436,7 +436,7 @@
         fill: $shadow-color;
       }
       rect {
-        stroke: transparent!important;
+        stroke: $shadow-color!important;
       }
     }
     &:hover {

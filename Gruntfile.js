@@ -32,8 +32,9 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/css/style.css': 'src/css/style.pure.css',
-          'src/css/style.css': 'src/css/style.pure.css'
+          /*'dist/css/style.css': 'src/css/style.pure.css',
+          'src/css/style.css': 'src/css/style.pure.css'*/
+          'dist/css/style.css': 'src/css/style.css'
         }
       }
     },
@@ -105,14 +106,14 @@ module.exports = function(grunt) {
         }
       }
     },
-    purifycss: {
+    /*purifycss: { // It seems I don't need this yet after all.
       options: {},
       target: {
         src: ['src/index.html', 'src/js/script.js'],
         css: ['src/css/style.css'],
         dest: 'src/css/style.pure.css'
       }
-    },
+    },*/
     imagemin: {
       dynamic: {
         options: {
@@ -169,7 +170,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/**/*'],
-        tasks: ['sass:dev', 'purifycss', 'inline', 'htmlmin']
+        tasks: ['sass:dev', /*'purifycss',*/ 'inline', 'htmlmin']
       },
       gifsvg: {
         options: {
@@ -206,13 +207,13 @@ module.exports = function(grunt) {
           'src/js/events.js',
           'src/lib/**/*.js'
         ],
-        tasks: ['uglify:dev', 'purifycss', 'inline', 'htmlmin']
+        tasks: ['uglify:dev', /*'purifycss',*/ 'inline', 'htmlmin']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-purifycss');
+  /*grunt.loadNpmTasks('grunt-purifycss');*/
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-inline');
@@ -222,6 +223,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
 
-  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin:dist', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
-  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'inline', 'htmlmin']);
+  grunt.registerTask('default', ['sass:dist', 'uglify:dist', /*'purifycss',*/ 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', /*'purifycss',*/ 'inline', 'htmlmin']);
 };

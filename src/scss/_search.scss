@@ -5,10 +5,12 @@
   opacity: 1;
   top: 30%;
   left: 0;
+  right: 0;
+  bottom: 0;
   max-width: 100%;
   margin: 0;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
   @media all and (min-width: 540px) {
     top: 0;
   }
@@ -125,7 +127,8 @@
       fill: $white;
       background-color: $action-color;
     }
-    &:hover svg {
+    &:hover svg,
+    .emerge & svg {
       background-color: $white;
       fill: $action-color;
       stroke: $action-color;

@@ -97,15 +97,6 @@ textarea {
   opacity: 1;
   display: block;
   margin: 0;
-  @media all and (min-width: 768px) {
-    max-width: 864px;
-    width: 90%;
-    margin: 0 auto;
-  }
-  @media all and (min-width: 1140px) {
-    width: 864px; /* 1140px - 10% for margins */
-    margin: 0 auto;
-  }
 }
 
 .full-wrap {
@@ -138,6 +129,12 @@ textarea {
   @media all and (min-width: 768px) {
     margin-bottom: 5rem;
     margin-top: 5rem;
+    max-width: 864px;
+    width: 90%;
+  }
+  @media all and (min-width: 1140px) {
+    width: 100%; /* 1140px - 10% for margins */
+    margin: 0 auto;
   }
   .done & {
     display: block;
