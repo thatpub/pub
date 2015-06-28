@@ -49,14 +49,13 @@
   </a>
 
   <div class="wrapper full-wrap" id="wrap">
-
-    <h2 class="related-label label">
-      Related Documents
+    <div class="page-header" id="page-header">
+      <h2 class="related-label label">Related Documents
       <!-- <br/>
       <small>(click to filter locally, press ESC to reset)</small> -->
-    </h2>
-    <ul class="related" id="related"></ul>
-    <hr/>
+      </h2>
+      <ul class="related" id="related"></ul>
+    </div>
 
     <div class="wrapper summary" id="summary">
       <!-- You searched for -->
@@ -71,12 +70,12 @@
   </div>
 
   <div class="infini-check">
-    <label for="infini-scroll" id="infini-label" title="Infinite scroll enabled">
+    <label for="infini-scroll" class="enabled" id="infini-label" title="Disable infinite scroll">
     <!-- Created with Inkscape (http://www.inkscape.org/) -->
-      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48"><g transform="translate(0,-1004)"><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/></g></svg>
+      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48"><g transform="translate(0,-1004)"><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/></g></svg>
 
       <input type="checkbox" id="infini-scroll" name="infini-scroll" checked data-control="setting" />
-      <span id="infini-status" class="enabled"></span>
+      <span id="infini-status"></span>
     </label>
   </div>
 
@@ -103,15 +102,15 @@
                     <%= parts[0] %><br/>
                   <% } %>
                 <% } %></span>
-            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal">expand to full paragraph</a><% } %>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal">expand</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
-            <a href="#" class="reveal">expand to full paragraph</a>
+            <a href="#" class="reveal">expand</a>
           <% } %>
         </div>
         <h2 class="number">
-          <%= sub %>
+          <p><%= sub %></p>
           <span class="climb-up reveal">climb up</span>
           <span class="look-inside reveal">look inside</span>
           <span class="do-both reveal">do both</span>

@@ -1,10 +1,26 @@
+.page-header {
+  background-color: $result-highlight-color;
+  border-bottom: 2px solid $white;
+  color: $white;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .results {
   position: relative;
 }
 
 .related-label {
-  padding: 1rem;
+  padding: 2rem 1rem 1rem;
+  font-size: 1.4rem;
   display: none;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  @media all and (min-width: 540px) {
+    font-size: 2rem;
+    width: auto;
+  }
   .done & {
     display: block;
   }
@@ -16,8 +32,9 @@
 .related {
   position: relative;
   margin: 0 auto;
-  padding: 1rem;
+  padding-bottom: 1rem;
   width: 100%;
+  max-width: 864px;
   list-style: none;
   flex-direction: row;
   justify-content: center;
@@ -54,10 +71,10 @@
 }
 
 .result {
-  color: $text-highlight-color;
   em {
     color: $result-color;
     font-style: normal;
+    font-weight: $bold;
   }
   &:nth-child(n) {
     border-bottom: 1px solid $bg-color;
@@ -72,11 +89,12 @@
   flex-grow: 1;
   text-align: center;
   border: 1px solid transparent;
-  font-size: 1.25rem;
+  font-size: .8rem;
   font-weight: 200;
   padding: 3px 5px;
   @media all and (min-width: 480px) {
     margin: 5px 1rem 5px 0;
+    font-size: 1rem;
   }
   /**
    * Turn this off until we can handle
@@ -129,7 +147,8 @@
 } */
 
 .content {
-  margin-bottom: 2rem;
+  color: $text-highlight-color;
+  margin-bottom: 1rem;
   position: relative;
   &:hover {
     .info:hover {
@@ -156,11 +175,14 @@
 
 .number {
   @include ribbon();
-  // @include rightMantel;
-  @include rightRibbon;
+  @include rightMantel;
+  // @include rightRibbon;
   // @include leftRibbon;
+  /* position: relative;
   overflow: hidden;
-  .climb-up, .look-inside, .do-both {
+  margin: 0 0 0 2rem;
+  float: right; */
+  .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
     display: none;
   }
   &:hover {
@@ -182,7 +204,7 @@
   font-size: 1.2rem;
   line-height: 1.7;
   clear: both;
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 0;
   padding-top: 2rem;
   q {
@@ -197,6 +219,7 @@
   }
   .reveal {
     @include miniButton($result-color);
+    margin: 1rem 0;
     /*&:hover {
       background-color: transparent;
       color: $action-color;
@@ -312,12 +335,12 @@
 .summary {
   text-rendering: optimizeLegibility;
   color: $text-highlight-color;
-  font-weight: 200;
+  font-weight: $med;
   text-align: center;
   display: none;
-  margin: 3rem auto 0;
+  margin: $sumMargMob auto 0;
   @media all and (min-width: 768px) {
-    margin: 5rem auto 0;
+    margin: $sumMargPC auto 0;
   }
   .done & {
     display: block;
@@ -363,7 +386,7 @@
   height: 100%;
   @media handheld,tablet and (min-width: 480px) {
     pointer-events: auto;
-    z-index: 3;
+    z-index: 2;
     opacity: 1;
     &:after {
       display: table-cell;
@@ -394,7 +417,7 @@
   position: fixed;
   top: 1rem;
   left: 1rem;
-  z-index: 3;
+  z-index: 2;
   width: 3.2rem;
   height: 3.2rem;
   display: block;
@@ -403,21 +426,21 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: $white;
     path {
-      fill: $result-color;
+      fill: $white;
     }
     rect {
+      fill: $result-color!important;
       stroke: $result-color!important;
     }
   }
   &:hover {
     svg {
-      background-color: $white;
       path {
         fill: $shadow-color;
       }
       rect {
+        fill: $white!important;
         stroke: $shadow-color!important;
       }
     }
@@ -431,21 +454,21 @@
   }
   &.disabled {
     svg {
-      background-color: $white;
       path {
-        fill: $shadow-color;
+        fill: $white;
       }
       rect {
+        fill: $shadow-color!important;
         stroke: $shadow-color!important;
       }
     }
     &:hover {
       svg {
-        background-color: $white;
         path {
           fill: $result-color;
         }
         rect {
+          fill: $white!important;
           stroke: $result-color!important;
         }
       }
@@ -463,6 +486,6 @@
   .emerge & {
     display: block;
     z-index: -1;
-    opacity: .5;
+    opacity: 0;
   }
 }

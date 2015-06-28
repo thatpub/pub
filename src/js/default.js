@@ -9,11 +9,11 @@
     this.innerHTML = "";
     if (!open) {
       swapClass(this.parentNode, "opened", regOpened);
-      this.appendChild(document.createTextNode("consolidate results"));
+      this.appendChild(document.createTextNode("collapse"));
     }
     else {
       this.parentNode.className = this.parentNode.className.replace(regOpened, "");
-      this.appendChild(document.createTextNode("expand to full paragraph"));
+      this.appendChild(document.createTextNode("expand"));
     }
     event.preventDefault();
     return false;
@@ -150,7 +150,9 @@
   }
 
   function more ( event ) {
-    event.preventDefault();
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
     swapClass(app.loader_, "loading", regLoad);
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
     return false;
@@ -189,16 +191,17 @@
   }
 
   function infini () {
-    var status;
+    var status, doThis;
     /*if (app.infiniNotify) {
       app.infiniStatus_.innerHTML = "";
       clearTimeout(app.infiniNotify);
     }*/
     app.infiniScroll = this.checked || (!!this.checked);
-    status = (app.infiniScroll) ? "enable" : "disable";
+    status = (app.infiniScroll) ? "enabled" : "disabled";
+    doThis = (app.infiniScroll) ? "Disable" : "Enable";
     /*app.infiniStatus_.innerHTML = status;*/
-    app.infiniLabel_.className = status + "d"; // lol I know right
-    app.infiniLabel_.setAttribute("title", status.toTitle() + " infinite scroll");
+    app.infiniLabel_.className = status;
+    app.infiniLabel_.setAttribute("title", doThis + " infinite scroll");
 
     /*app.infiniNotify = setTimeout(function() {
       app.infiniStatus_.innerHTML = "";

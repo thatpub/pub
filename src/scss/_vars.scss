@@ -1,10 +1,12 @@
-$font: /* Ubuntu, */ Roboto, Ubuntu, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, "Lucida Grande", sans-serif;
-$readable: Cantarell, "Open Sans", $font; /* Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif; */
+$font: /* Ubuntu, */ Georgia, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
+$readable: /* Roboto,  Ubuntu,*/ Cantarell, "Open Sans", $font; /* Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif; */
 $heading: $font;
 /*$heading: Montserrat, Quando, Quicksand, Georgia, Trebuchet MS, serif;*/
 
 $bold: 700;
 $med: 300;
+$sumMargMob: 3rem;
+$sumMargPC: 4rem;
 
 $text-on-bg-color: #082642;
 $result-color: #205A8F;

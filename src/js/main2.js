@@ -25,6 +25,7 @@ var App = function () {
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
     page_ = document.getElementById("page"),
+    pageHeader_ = document.getElementById("page-header"),
     results_ = document.getElementById("results"),
     summary_ = document.getElementById("summary"),
     count_ = document.getElementById("count"),
@@ -81,6 +82,7 @@ var App = function () {
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
     page_: page_,
+    pageHeader_: pageHeader_,
     results_: results_,
     summary_: summary_,
     count_: count_,
@@ -231,7 +233,7 @@ var App = function () {
         });
         snabbt(this.wrap_, {
           opacity: 1,
-          fromOpacity: 0.5,
+          fromOpacity: 0,
           easing: 'easeOut',
           delay: 250
         });
@@ -242,7 +244,7 @@ var App = function () {
       }
       else if ( visibility === "visible" ) {
         snabbt(this.wrap_, {
-          opacity: 0.5,
+          opacity: 0,
           fromOpacity: 1,
           easing: 'easeIn',
           duration: 250

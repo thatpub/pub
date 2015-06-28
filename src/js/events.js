@@ -92,7 +92,7 @@ addEvent(window, "load", function () {
   var l = document.createElement("link"); l.rel = "stylesheet"; l.type = "text/css";
   // l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Ubuntu:300,400,700';
   // l.href = '//fonts.googleapis.com/css?family=Cantarell:400,700|Ubuntu:300,700';
-  l.href = "https://fonts.googleapis.com/css?family=Cantarell:400,700|Roboto:300,700";
+  l.href = "https://fonts.googleapis.com/css?family=Roboto:300,700";
   // var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
   document.getElementsByTagName('head')[0].appendChild(l);
   /*app.colorize();*/
