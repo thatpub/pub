@@ -95,12 +95,6 @@
       <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
         <% if ( type === " content" ) { %>
         <div class="text clearfix">
-          <div class="number">
-            <p><%= sub %></p>
-            <span class="climb-up reveal">climb up</span>
-            <span class="look-inside reveal">look inside</span>
-            <span class="do-both reveal">do both</span>
-          </div>
           <% if ( parts && concatText ) { %>
             <span class="combined"><%= concatText %><br/></span>
             <span class="parts"><%  var i = 0, count = parts.length;
@@ -117,6 +111,12 @@
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
             <a href="#" class="reveal">expand</a>
           <% } %>
+          <div class="number2">
+            <p><%= sub %></p>
+            <span class="climb-up reveal">climb up</span>
+            <span class="look-inside reveal">look inside</span>
+            <span class="do-both reveal">do both</span>
+          </div>
         </div>
         <div class="meta">
           <div class="details">
@@ -125,6 +125,7 @@
             <% } if ( details && details.section && details.sectionTitle ) { %>
             <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
             <% } %>
+            <span class="number"><%= sub %></span>
           </div>
           <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
             <span class="pub"><%= fullPub %></span><br/>

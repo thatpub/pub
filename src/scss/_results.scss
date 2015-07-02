@@ -7,7 +7,7 @@
 }
 
 .summary {
-  font-family: $readable;
+  font-family: $heading;
   text-rendering: optimizeLegibility;
   font-weight: $med;
   text-align: center;
@@ -31,6 +31,7 @@
 }
 
 .related {
+  font-family: $heading;
   padding-bottom: 2rem;
   padding-top: 2rem;
 }
@@ -194,8 +195,8 @@
   }
 }
 
-.number {
-  @include ribbon(transparent, $result-color);
+.number2 {
+  @include ribbon(transparent, $text-highlight-color);
   @include rightMantel;
   cursor: default;
   font-weight: $bold;
@@ -203,14 +204,12 @@
   font-family: $readable;
   font-size: .8em;
   font-style: italic;
+  display: none;
   // @media all and (min-width: 540px) {
   //   font-size: inherit;
   // }
   // @include rightRibbon;
   // @include leftRibbon;
-  .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
-    display: none;
-  }
   // &:hover {
   //   .climb-up, .look-inside, .do-both {
   //     @include miniButton($black, .125rem .375rem);
@@ -222,10 +221,13 @@
   // }
 }
 
+.reveal.climb-up, .reveal.look-inside, .reveal.do-both {
+  display: none;
+}
+
 .text {
   text-rendering: optimizeLegibility;
   color: $text-color;
-  font-family: $font;
   position: relative;
   font-size: 1.2rem;
   line-height: 1.7;
@@ -290,7 +292,7 @@
   color: $text-highlight-color;
   font-family: $heading;
   font-size: 1rem;
-  margin-top: 1rem;
+  // margin-top: 1rem;
 }
 
 .details {
@@ -300,7 +302,7 @@
   margin-left: 0;
   margin-right: 0;
   text-align: left;
-  .chapter, .section {
+  .chapter, .section, .number {
     font-size: .8rem;
   }
 }
@@ -317,12 +319,12 @@
   .pub, .title {
     border-bottom: 1px solid transparent;
     color: $result-color;
-    .filtered & {
-      color: inherit;
-      .selected & {
-        color: $result-color;
-      }
-    }
+    // .filtered & {
+    //   color: inherit;
+    //   .selected & {
+    //     color: $result-color;
+    //   }
+    // }
   }
   .pub, .title {
     font-size: .8rem;
