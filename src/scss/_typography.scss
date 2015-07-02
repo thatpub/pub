@@ -9,15 +9,3 @@ h1, h2, h3, h4, h5, h6, label {
     color: $shadow-color;
   }
 }
-.search-title {
-  color: $action-color;
-  font-family: $heading;
-  font-size: 2rem;
-  margin: 0 auto;
-  position: relative;
-  width: 100%;
-  text-align: center;
-  @media all and (min-width: 480px) {
-    font-size: 2.75rem;
-  }
-}

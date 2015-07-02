@@ -1,10 +1,10 @@
 .search-wrap {
-  @include transition(opacity, .15s, ease-out);
-  @include transform(translate3d(0,0,0));
-  display: table;
+  @include transition(all, $animateSpeed, ease-out);
+  @include transform(translate3d(0,-100%,0));
   position: fixed;
-  z-index: 3;
-  opacity: 1;
+  display: table;
+  z-index: -1;
+  opacity: 0;
   top: 0;
   left: 0;
   right: 0;
@@ -17,26 +17,24 @@
   // @media all and (min-width: 540px) {
   //   top: 0;
   // }
-  .done & {
-    @include transition(all, .15s, ease-out);
-    @include transform(translate3d(0,-100%,0));
-    opacity: 0;
-    z-index: -1;
-    // display: none;
-    // display: block;
-    // margin-top: 0;
-  }
-  .done.emerge & {
-    @include transition(all, .15s, ease-out);
+  // .done & {
+  //   @include transition(all, .15s, ease-out);
+  //   @include transform(translate3d(0,-100%,0));
+  //   opacity: 0;
+  //   z-index: -1;
+  //   display: none;
+  //   display: block;
+  //   margin-top: 0;
+  // }
+  // .done.emerge & {
+  &.emerge {
+    @include transition(all, $animateSpeed, ease-out);
     @include transform(translate3d(0,0,0));
     z-index: 3;
-    display: table;
+    // display: table;
     opacity: 1;
     width: 100%;
     height: 100%;
-  }
-  .failed & {
-    display: none;
   }
 }
 
@@ -44,6 +42,7 @@
   position: relative;
   display: table-cell;
   vertical-align: middle;
+  text-align: left;
   background-color: $white;
   font-family: $heading;
   padding: 1rem;
@@ -54,29 +53,46 @@
     // @include border-radius(4px);
     // width: 28rem;
     // bottom: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
-  @media all and (min-width: 768px) {
+  @media all and (min-width: 540px) {
     // width: 40rem;
     // margin-top: 12rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
-  .failed & {
-    display: none;
+}
+
+.search-title {
+  color: $action-color;
+  font-family: $heading;
+  font-size: 2rem;
+  // margin: 0 auto;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  @media all and (min-width: 480px) {
+    font-size: 2.75rem;
   }
 }
 
 .query, .send {
   position: relative;
-  display: block;
-  float: none;
+  // display: block;
+  // float: none;
   clear: both;
-  margin: 1rem auto;
+  margin: 2rem auto;
   outline: 0;
 }
 
 .query {
   @include border-radius(.2rem);
-  padding: .75rem;
+  padding: .8rem;
+  text-align: left;
+  float: left;
   max-width: 100%;
+  width: 100%;
   outline: 0;
   border: 1px solid $action-color;
   background: transparent;
@@ -91,7 +107,7 @@
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    width: 34rem;
+    // width: 34rem;
   }
   &::-webkit-input-placeholder {
     display: inline;
@@ -99,8 +115,8 @@
     white-space: normal;
     opacity: .5;
     font-size: inherit;
-     /* @media all and (min-width: 768px) {
-     } */
+     // @media all and (min-width: 768px) {
+     // }
    }
   &::-moz-input-placeholder {
     display: inline;
@@ -108,8 +124,8 @@
     white-space: normal;
     opacity: .5;
     font-size: inherit;
-    /* @media all and (min-width: 768px) {
-    } */
+    // @media all and (min-width: 768px) {
+    // }
   }
 }
 
@@ -119,34 +135,36 @@
   // position: absolute;
   // top: 100%;
   // left: 50%;
-  /* text-shadow: 0 1px 0 $shadow-color; */
+  // text-shadow: 0 1px 0 $shadow-color;
   width: 100%;
-  max-width: 14rem; /* 18rem before */
+  // max-width: 14rem; // 18rem before
+  max-width: 100%;
+  font-weight: $bold;
 }
 
 .search-restore {
   @include iconSearch;
-  display: none;
-  .done & {
-    position: fixed;
-    display: block;
-    width: 3.5rem;
-    height: 3.5rem;
-    top: 1rem;
-    right: 1rem;
+  display: block;
+  position: fixed;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  svg {
+    fill: $white;
+    background-color: $action-color;
+  }
+  &:hover svg {
+    background-color: $white;
+    fill: $action-color;
+    stroke: $action-color;
+  }
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+  &.emerge {
     z-index: 3;
-    svg {
-      fill: $white;
-      background-color: $action-color;
-    }
-    &:hover svg {
-      background-color: $white;
-      fill: $action-color;
-      stroke: $action-color;
-    }
-    &:focus,
-    &:active {
-      outline: 0;
-    }
   }
 }

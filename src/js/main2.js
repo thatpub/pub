@@ -1,10 +1,5 @@
-"use strict";
-
-/**
-  * If you don't use block-style comments and strict-mode, you, sir, are wrong.
-  */
-
 var App = function () {
+  "use strict";
   var months = {
     "01": "Jan",
     "02": "Feb",
@@ -27,6 +22,7 @@ var App = function () {
     page_ = document.getElementById("page"),
     pageHeader_ = document.getElementById("page-header"),
     results_ = document.getElementById("results"),
+    noResults_ = document.getElementById("no-results"),
     summary_ = document.getElementById("summary"),
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
@@ -38,7 +34,7 @@ var App = function () {
     related_ = document.getElementById("related"),
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
-    infiniStatus_ = document.getElementById("infini-status"),
+    // infiniStatus_ = document.getElementById("infini-status"),
     loader_ = document.getElementById("loader"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
@@ -84,6 +80,7 @@ var App = function () {
     page_: page_,
     pageHeader_: pageHeader_,
     results_: results_,
+    noResults_: noResults_,
     summary_: summary_,
     count_: count_,
     term_: term_,
@@ -97,10 +94,9 @@ var App = function () {
     placeMeta: placeMeta,
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
-    infiniStatus_: infiniStatus_,
+    // infiniStatus_: infiniStatus_,
     loader_: loader_,
     infiniScroll: true,
-    done: false,
     loading: {
       now: false,
       stillMore: false,
@@ -120,6 +116,9 @@ var App = function () {
     selectedTotal: 0,
     /*colorize: colorize,*/
     colors: {},
+    isSearchOpen: null,
+    isFailure: null,
+    isDone: null,
     dataRender: function ( data, allScores ) {
       var output = {},
           regType = /chapter|section/,
@@ -222,7 +221,7 @@ var App = function () {
       return tmp;
     },
     searchToggle: function ( action ) {
-      var screenHeight = window.innerHeight;
+      // var screenHeight = window.innerHeight;
       if ( action === "close" ) {
         // snabbt(this.searchWrap_, {
         //   position: [0, -screenHeight, 0],
@@ -237,10 +236,13 @@ var App = function () {
         //   easing: 'easeOut',
         //   delay: 250
         // });
-        swapClass(document.body, "", regEmerge);
         // removeEvent(this.searchWrap_, "click", modalClose);
+        this.isSearchOpen = false;
         this.infiniScroll = (this.infiniScroll_) ?
-          this.infiniScroll_.checked || (!!this.infiniScroll_.checked) : true;
+          (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
+          true;
+        swapClass(this.searchWrap_, "", regEmerge);
+        swapClass(this.searchRestore_, "", regEmerge);
       }
       else if ( action === "open" ) {
         // snabbt(this.wrap_, {
@@ -256,30 +258,29 @@ var App = function () {
         //   easing: 'easeOut',
         //   duration: 250
         // });
-        swapClass(document.body, "emerge", regEmerge);
-        // addEvent(this.searchWrap_, "click", modalClose);
+        this.isSearchOpen = true;
         this.infiniScroll = false;
+        // addEvent(this.searchWrap_, "click", modalClose);
+        swapClass(this.searchRestore_, "emerge", regEmerge);
+        swapClass(this.searchWrap_, "emerge", regEmerge);
       }
-    },
-    isDone: function ( done ) {
-      var answer;
-      if ( typeof done === "undefined" ) {
-        /**
-         * Just wants the current state.  So let's give it to em.
-         */
-        answer = this.done;
-      }
-      else if ( done === true ) {
-        swapClass(document.body, "done", regDone);
-        this.done = done;
-        answer = done;
-      }
-      else if ( done === false ) {
-        swapClass(document.body, "failed", regFail);
-        this.done = done;
-        answer = done;
-      }
-      return answer;
     }
+    // isDone: function ( done ) {
+    //   var answer;
+    //   if ( typeof done === "undefined" ) {
+    //     answer = this.done;
+    //   }
+    //   else if ( done === true ) {
+    //     swapClass(document.body, "done", regDone);
+    //     this.done = done;
+    //     answer = done;
+    //   }
+    //   else if ( this.isFailure === true ) {
+    //     swapClass(this.noResults_, "failed", regFail);
+    //     this.done = done;
+    //     answer = done;
+    //   }
+    //   return answer;
+    // }
   };
 };

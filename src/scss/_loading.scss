@@ -8,7 +8,7 @@
   height: 80%;
 } */
 #loader {
-  @include transition(opacity, .15s, ease-out);
+  @include transition(opacity, $animateSpeed, ease-out);
   opacity: 0;
   position: fixed;
   top: 0;
@@ -71,15 +71,17 @@
 #no-results {
   display: none;
 }
-.failed #no-results {
+#no-results.failed {
   @include transform(translate(-50%, -50%));
   @include border-radius(8px);
-  z-index: 4;
+  display: block;
+  position: fixed;
+  background-color: $white;
+  z-index: 6;
+  outline: 99999px solid $white !important;
   font-size: 2.5rem;
   line-height: 1;
   padding: 2rem;
-  display: block;
-  position: absolute;
   width: 75%;
   top: 50%;
   left: 50%;

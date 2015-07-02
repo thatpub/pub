@@ -24,20 +24,23 @@
  */
 
   function dataResponse ( httpRequest, action ) {
-    var response = JSON.parse(httpRequest.responseText);
-    var content = response[0] || null;
-    var meta = response[1] || null;
-    var expires = new Date(Date.now() + 3600000);
+    var response = JSON.parse(httpRequest.responseText),
+      content = response[0] || null,
+      meta = response[1] || null;
+    if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
+      app.isFailure = true;
+      app.infiniScroll = false;
+      app.isDone = true;
+      document.cookie = "placeContent=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      return swapClass(app.noResults_, "failed", regFail);
+    }
     var a = 0,
       b = 0,
       reveals,
       rl;
-    if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
-      return app.isDone(false);
-    }
 
-    /*swapClass(document.body, "emerge", regEmerge);*/
-    app.isDone(true);
+    var expires = new Date(Date.now() + 3600000);
+    app.isDone = true;
     expires = expires.toUTCString();
 
     if ( content ) {
@@ -48,7 +51,7 @@
       document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
       if ( action !== "more" ) {
         var currentRelatives = content.aggregations.related_doc.buckets.length;
-        /*app.colorize();*/
+        // app.colorize();
         window.scroll(0, 0);
         for (; b < currentContent; ++b) {
           app.scoresContent[b] = content.hits.hits[b]._score;
@@ -60,27 +63,25 @@
         app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
         app.count_.innerHTML = currentContent;
 
-        /**
-         * DISABLED
-         *
-         * Until we can handle huge amounts of results, turn this shit off.
-         */
-        /*
-        var docs = document.querySelectorAll("#related .doc");
-        var dl = docs.length;
-        for (; b < dl; ++b) {
-          addEvent(docs[b], "click", filterResults);
-        }
-        */
+        // DISABLED
+        // Until we can handle huge amounts of results, turn this shit off.
+
+        // var docs = document.querySelectorAll("#related .doc");
+        // var dl = docs.length;
+        // for (; b < dl; ++b) {
+        //   addEvent(docs[b], "click", filterResults);
+        // }
+
         app.relatedRect = app.related_.getBoundingClientRect();
         app.bodyRect = document.body.getBoundingClientRect();
         app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
       }
       else {
-        /**
-         * Need to append the scores we just grabbed to the scores we already had.
-         * First get the total available at the time, then use that + loop index to determine real index.
-         */
+
+        // Need to append the scores we just grabbed to the scores we had.
+        // First get the total available at the time, then use that + loop
+        // index to determine real index.
+
         var contentGathered = app.scoresContent.length;
         for (b = 0; b < currentContent; ++b) {
           app.scoresContent[(b + contentGathered)] = content.hits.hits[b]._score;
@@ -89,7 +90,7 @@
         app.count_.innerHTML = app.scoresContent.length;
       }
 
-      reveals = document.querySelectorAll(".text > .reveal");
+      reveals = document.querySelectorAll(".reveal-text");
       rl = reveals.length;
       for (; a < rl; ++a) {
         addEvent(reveals[a], "click", revealText);
@@ -103,18 +104,17 @@
         swapClass(app.moreContent_, "", regHidden);
         app.loading.stillMore = true;
 
-        /**
-         * DISABLED
-         *
-         * Until we can handle huge amounts of results, turn this shit off.
-         */
-        /*app.bodyRect = document.body.getBoundingClientRect();
-        app.related_ = document.querySelector("#related")||document.getElementById("related");
-        app.relatedRect = document.querySelector("#related").getBoundingClientRect();
-        app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);*/
+
+        // DISABLED
+        // Until we can handle huge amounts of results, turn this shit off.
+
+        // app.bodyRect = document.body.getBoundingClientRect();
+        // app.related_ = document.querySelector("#related")||document.getElementById("related");
+        // app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+        // app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
       }
 
-      /*filterResults(action === "more");*/
+      // filterResults(action === "more");
     }
 
     if ( meta ) {
@@ -127,9 +127,9 @@
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
     var httpRequest = new XMLHttpRequest();
-    //var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
-    /*var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");*/
-    var url = "https://that.pub/find/" + type + "/" + action;
+    // var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
+    // var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");
+    var url = "//that.pub/find/" + type + "/" + action;
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
@@ -150,10 +150,12 @@
   }
 
   function more ( event ) {
-    if (event && event.preventDefault) {
+    if ( event && event.preventDefault ) {
       event.preventDefault();
     }
-    swapClass(app.loader_, "loading", regLoad);
+    if ( app.loading.now !== true ) {
+      swapClass(app.loader_, "loading", regLoad);
+    }
     sendData(dataResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
     return false;
   }
@@ -192,20 +194,20 @@
 
   function infini () {
     var status, doThis;
-    /*if (app.infiniNotify) {
-      app.infiniStatus_.innerHTML = "";
-      clearTimeout(app.infiniNotify);
-    }*/
+    // if (app.infiniNotify) {
+    //   app.infiniStatus_.innerHTML = "";
+    //   clearTimeout(app.infiniNotify);
+    // }
     app.infiniScroll = this.checked || (!!this.checked);
     status = (app.infiniScroll) ? "enabled" : "disabled";
     doThis = (app.infiniScroll) ? "Disable" : "Enable";
-    /*app.infiniStatus_.innerHTML = status;*/
+    // app.infiniStatus_.innerHTML = status;
     app.infiniLabel_.className = status;
     app.infiniLabel_.setAttribute("title", doThis + " infinite scroll");
 
-    /*app.infiniNotify = setTimeout(function() {
-      app.infiniStatus_.innerHTML = "";
-    }, 1500);*/
+    // app.infiniNotify = setTimeout(function() {
+    //   app.infiniStatus_.innerHTML = "";
+    // }, 1500);
     if ( !status ) {
       this.removeAttribute("checked");
     }
@@ -217,7 +219,9 @@
 
     swapClass(app.loader_, "", regLoad);
     app.loading.now = false;
-    if ( el == app.send_ ) {
+
+    // if ( el == app.send_ ) {
+    if ( app.isSearchOpen === true ) {
       app.searchToggle("close");
     }
   }

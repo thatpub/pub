@@ -1,13 +1,14 @@
 .page-header {
-  background-color: $text-on-bg-color;
-  border-bottom: 2px solid $white;
-  color: $shadow-color;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  background-color: $action-color;
+  border-bottom: 3px solid $white;
+  color: $bg-color;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  font-size: 1.4rem;
 }
 
 .summary {
-  font-family: $heading;
+  // font-family: $heading;
   text-rendering: optimizeLegibility;
   font-weight: $med;
   text-align: center;
@@ -18,12 +19,18 @@
 }
 
 .term {
-  font-size: 2.5rem;
+  font-size: 2.5em;
 }
 
 .term, .total, .count {
   /*color: $action-color;*/
-  color: $white;
+  text-shadow: 0 1px 1px $shadow-color;
+  color: #FFF;
+  font-weight: $bold;
+}
+
+.total, .count {
+  border-bottom: 1px wavy $white;
 }
 
 .results {
@@ -32,15 +39,17 @@
 
 .related {
   font-family: $heading;
+  font-size: 1rem;
+  font-weight: $med;
   padding-bottom: 2rem;
   padding-top: 2rem;
 }
 
 .related-label {
   display: none;
-  font-size: 1.2rem;
+  // font-size: 1.2rem;
   // width: 60%;
-  text-align: center;
+  // text-align: center;
   // margin-left: auto;
   // margin-right: auto;
   // @media all and (min-width: 540px) {
@@ -50,66 +59,60 @@
 }
 
 .related-list {
-  font-size: 1.6rem;
   position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
   max-width: 864px;
   margin: 0 auto;
   list-style: none;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
   border: none;
-  /**
-   * Turn this off until we can handle
-   * the filter on huge amounts of results.
-   */
-  /*&.sticky {
-    @include box-shadow(0, 1px, 6px, 0, $shadow-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-//    height: 3rem;
-    background-color: $bg-color;
-    //    height: 3rem;
-    z-index: 2;
-    @media all and (min-width: 768px) {
-      padding-right: 5rem;
-    }
-  }*/
-  display: none;
-  @media all and (min-width: 480px) {
-    width: 90%;
-  }
-  .done & {
-    display: flex;
-  }
-  .failed & {
-    display: none;
-  }
+
+  // Turn this off until we can handle
+  // the filter on huge amounts of results.
+
+  // &.sticky {
+  //   @include box-shadow(0, 1px, 6px, 0, $shadow-color);
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   // height: 3rem;
+  //   background-color: $bg-color;
+  //   // height: 3rem;
+  //   z-index: 2;
+  //   @media all and (min-width: 768px) {
+  //     padding-right: 5rem;
+  //   }
+  // }
+
+  // @media all and (min-width: 480px) {
+  //   width: 90%;
+  // }
 }
 
 .related .doc {
   @include border-radius(4px);
-  flex-grow: 1;
+  text-rendering: optimizeLegibility;
+  cursor: default;
+  flex-shrink: 1;
+  background-color: $white;
   text-align: center;
-  border: 1px solid transparent;
-  font-size: .8rem;
-  font-weight: 200;
-  padding: .2rem .333rem;
-  margin: .333rem 1rem .333rem;
+  border: 1px solid;
+  padding: .6rem;
+  margin: .4rem;
   @media all and (min-width: 480px) {
     font-size: 1.2rem;
   }
-  /**
-   * Turn this off until we can handle
-   * the filter on huge amounts of results.
-   */
-  /*cursor: pointer;*/
+  @media all and (min-width: 960px) {
+    font-size: 1.4rem;
+  }
+  // cursor: pointer;
   &.pretty {
     font-weight: $bold;
-    border-width: 3px;
+    // border-width: 3px;
   }
 }
 
@@ -119,10 +122,10 @@
     font-style: normal;
     font-weight: $bold;
   }
-  &:nth-child(n) {
+  &.content:nth-child(n) {
     border-bottom: 1px solid $bg-color;
   }
-  &:last-child {
+  &.content:last-child {
     border-bottom: none;
   }
 }
@@ -172,19 +175,8 @@
   padding-bottom: 2rem;
   padding-top: 2rem;
   position: relative;
-  &:hover {
-    .info:hover {
-      .pub, .title {
-        border-bottom-color: $result-color;
-        /* .filtered & {
-          border-bottom-color: transparent;
-          .selected & {
-            border-bottom-color: $result-color;
-          }
-        } */
-      }
-    }
-  }
+  // &:hover {
+  // }
   &.pretty .text {
     padding-left: 2rem;
     border-left: 3px solid;
@@ -195,64 +187,55 @@
   }
 }
 
-.number2 {
-  @include ribbon(transparent, $text-highlight-color);
-  @include rightMantel;
-  cursor: default;
-  font-weight: $bold;
-  // font-style: italic;
-  font-family: $readable;
-  font-size: .8em;
-  font-style: italic;
-  display: none;
-  // @media all and (min-width: 540px) {
-  //   font-size: inherit;
-  // }
-  // @include rightRibbon;
-  // @include leftRibbon;
-  // &:hover {
-  //   .climb-up, .look-inside, .do-both {
-  //     @include miniButton($black, .125rem .375rem);
-  //     float: left;
-  //     clear: none;
-  //     margin: auto 2rem auto 0;
-  //     cursor: pointer;
-  //   }
-  // }
-}
+// .number2 {
+//   display: none;
+//   // @include ribbon(transparent, $text-highlight-color);
+//   // @include rightMantel;
+//   // cursor: default;
+//   // font-weight: $bold;
+//   // font-style: italic;
+//   // font-family: $readable;
+//   // font-size: .8em;
+//   // font-style: italic;
+//   // @media all and (min-width: 540px) {
+//   //   font-size: inherit;
+//   // }
+//   // @include rightRibbon;
+//   // @include leftRibbon;
+//   // &:hover {
+//   //   .climb-up, .look-inside, .do-both {
+//   //     @include miniButton($black, .125rem .375rem);
+//   //     float: left;
+//   //     clear: none;
+//   //     margin: auto 2rem auto 0;
+//   //     cursor: pointer;
+//   //   }
+//   // }
+// }
 
-.reveal.climb-up, .reveal.look-inside, .reveal.do-both {
-  display: none;
-}
+// .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
+//   display: none;
+// }
 
 .text {
   text-rendering: optimizeLegibility;
-  color: $text-color;
   position: relative;
+  color: $text-color;
   font-size: 1.2rem;
   line-height: 1.7;
   clear: both;
   // margin-top: 1rem;
   // margin-bottom: 0;
-  q {
-    &:before {
-      position: absolute;
-      right: 100%;
-    }
-    &:after {
-      position: absolute;
-      left: 100%;
-    }
-  }
-  .reveal {
-    @include miniButton($result-color);
-    font-family: $heading;
-    margin: 1rem 0;
-    // &:hover {
-    //   background-color: transparent;
-    //   color: $action-color;
-    // }
-  }
+  // q {
+  //   &:before {
+  //     position: absolute;
+  //     right: 100%;
+  //   }
+  //   &:after {
+  //     position: absolute;
+  //     left: 100%;
+  //   }
+  // }
   .combined {
     display: none;
   }
@@ -266,14 +249,6 @@
     .combined {
       display: inline;
     }
-    .reveal {
-      color: $result-color;
-      background-color: transparent;
-      /*&:hover {
-        color: $white;
-        background-color: $action-color;
-      }*/
-    }
   }
   @media all and (min-width:540px) {
     font-size: 1.4rem;
@@ -283,6 +258,25 @@
   @media all and (min-width:1140px) {
     font-size: 1.6rem;
   }
+}
+
+.reveal-text {
+  @include miniButton($white, $result-highlight-color);
+  font-family: $heading;
+  margin: 1rem 0;
+  // &:hover {
+  //   background-color: transparent;
+  //   color: $action-color;
+  // }
+}
+
+.opened .reveal-text {
+  color: $white;
+  background-color: $result-highlight-color;
+  // &:hover {
+  //   color: $white;
+  //   background-color: $action-color;
+  // }
 }
 
 .meta {
@@ -305,6 +299,11 @@
   .chapter, .section, .number {
     font-size: .8rem;
   }
+  .number {
+    // color: $result-color;
+    // font-weight: $bold;
+    font-style: italic;
+  }
 }
 
 .info {
@@ -317,26 +316,21 @@
   margin-right: 0;
   text-align: right;
   .pub, .title {
-    border-bottom: 1px solid transparent;
     color: $result-color;
-    // .filtered & {
-    //   color: inherit;
-    //   .selected & {
-    //     color: $result-color;
-    //   }
-    // }
-  }
-  .pub, .title {
+    border-bottom: 1px solid transparent;
     font-size: .8rem;
   }
-  // .title {
-  //   font-size: .8rem;
-  // }
+  &:hover {
+    .pub, .title {
+      border-bottom-color: $result-color;
+    }
+  }
 }
 
 .more {
-  @include pushButton($result-color);
+  @include pushButton($result-highlight-color);
   position: absolute;
+  font-family: $heading;
   bottom: 2rem;
   &.content {
     max-width: 90%;
@@ -348,25 +342,19 @@
 
 .infini-check {
   position: fixed;
+  display: block;
   top: 1rem;
   left: 1rem;
   input {
     display: none;
   }
-  display: none;
-  .done & {
-    display: block;
-  }
-  .failed & {
-    display: none;
-  }
 }
 
 #infini-label {
-  /* @include iconInfini; */
+  @include iconInfini;
   display: block;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
   width: 3.2rem;
   height: 3.2rem;
   svg {
@@ -379,8 +367,8 @@
       fill: $white;
     }
     rect {
-      fill: $result-color!important;
-      stroke: $result-color!important;
+      fill: $action-color!important;
+      stroke: $action-color!important;
     }
   }
   &:hover {
@@ -393,13 +381,13 @@
         stroke: $shadow-color!important;
       }
     }
-    /* #infini-status {
-      color: $shadow-color;
-      opacity: 1;
-      &:after {
-        border-color: $shadow-color;
-      }
-    } */
+    // #infini-status {
+    //   color: $shadow-color;
+    //   opacity: 1;
+    //   &:after {
+    //     border-color: $shadow-color;
+    //   }
+    // }
   }
   &.disabled {
     svg {
@@ -414,22 +402,22 @@
     &:hover {
       svg {
         path {
-          fill: $result-color;
+          fill: $action-color;
         }
         rect {
           fill: $white!important;
-          stroke: $result-color!important;
+          stroke: $action-color!important;
         }
       }
-      #infini-status {
-        z-index: -1;
-        pointer-events: none;
-        opacity: 0;
-        color: $result-color;
-        &:after {
-          border-color: $result-color;
-        }
-      }
+      // #infini-status {
+      //   z-index: -1;
+      //   pointer-events: none;
+      //   opacity: 0;
+      //   color: $result-color;
+      //   &:after {
+      //     border-color: $result-color;
+      //   }
+      // }
     }
   }
 }

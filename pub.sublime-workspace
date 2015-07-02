@@ -1,0 +1,1421 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"avail",
+				"availableOption〔variable〕"
+			],
+			[
+				"fro",
+				"fromOpacity"
+			],
+			[
+				"def",
+				"defaultOpts"
+			],
+			[
+				"tes",
+				"testmgr"
+			],
+			[
+				"parse",
+				"parseInt〔function〕"
+			],
+			[
+				"com",
+				"componenetWillUpdate"
+			],
+			[
+				"Robo",
+				"RobotoSlab-Regular"
+			],
+			[
+				"getEle",
+				"getElementsByTagName〔function〕"
+			],
+			[
+				"current",
+				"currentCategory"
+			],
+			[
+				"sel",
+				"selectedTotal〔variable〕"
+			],
+			[
+				"pub",
+				"public"
+			],
+			[
+				"more",
+				"moreContent_"
+			],
+			[
+				"issu",
+				"issuingOrganization"
+			],
+			[
+				"sear",
+				"searchWrap_"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"background",
+				"background-repeat"
+			],
+			[
+				"regP",
+				"regPubNumbers"
+			],
+			[
+				"encodeU",
+				"encodeURIComponent(${0:URI})	Window"
+			],
+			[
+				"regQu",
+				"regQueryPubName"
+			],
+			[
+				"filtered",
+				"filteredValues"
+			],
+			[
+				"agg",
+				"aggregations"
+			],
+			[
+				"getElem",
+				"getElementById(${0:id})	Element"
+			],
+			[
+				"infi",
+				"Infinity"
+			],
+			[
+				"re",
+				"removeChild  (function)"
+			],
+			[
+				"webkit-transition-d",
+				"-webkit-transition-duration:   (property)"
+			],
+			[
+				"column-",
+				"column-gap:   (property)"
+			],
+			[
+				"snippetsP",
+				"snippetsPerPage"
+			],
+			[
+				"anim",
+				"anim-	animation: ${1:name} ${2:duration} ${3:timing-function} ${4:delay} ${5:iteration-count} ${6:direction} ${7:fill-mode};"
+			],
+			[
+				"quer",
+				"queryArray"
+			],
+			[
+				"remove",
+				"removePubName"
+			],
+			[
+				"categ",
+				"categories"
+			],
+			[
+				"writeFi",
+				"fs.writeFileSync"
+			],
+			[
+				"d",
+				"document"
+			],
+			[
+				"six",
+				"sixteen"
+			],
+			[
+				"related_",
+				"related_doc"
+			],
+			[
+				"mult",
+				"multi_match"
+			],
+			[
+				"transmi",
+				"transmitCounter"
+			],
+			[
+				"contentP",
+				"contentPageOld"
+			],
+			[
+				"resultS",
+				"resultSummaryTemplate"
+			],
+			[
+				"font-weight",
+				"font-weight-bold"
+			],
+			[
+				"high",
+				"highlights"
+			],
+			[
+				"highli",
+				"highlighted"
+			],
+			[
+				"highlig",
+				"highlighted"
+			],
+			[
+				"n",
+				"normal"
+			],
+			[
+				"regChap",
+				"regChapterGrab"
+			],
+			[
+				"tot",
+				"totalFiles"
+			],
+			[
+				"regSec",
+				"regSectionGrab"
+			],
+			[
+				"regCh",
+				"regChapterGrab"
+			],
+			[
+				"chapt",
+				"chapterInfo"
+			],
+			[
+				"regM",
+				"regMetaGrab"
+			],
+			[
+				"regG",
+				"regPage"
+			],
+			[
+				"regSub",
+				"regSubSeparate"
+			],
+			[
+				"chap",
+				"chapter"
+			],
+			[
+				"regAttach",
+				"regAttachmentSplit"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/js/util.js",
+			"settings":
+			{
+				"buffer_size": 2190,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/js/main2.js",
+			"settings":
+			{
+				"buffer_size": 9466,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/js/default.js",
+			"settings":
+			{
+				"buffer_size": 7959,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/js/events.js",
+			"settings":
+			{
+				"buffer_size": 2868,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_vars.scss",
+			"settings":
+			{
+				"buffer_size": 1090,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_typography.scss",
+			"settings":
+			{
+				"buffer_size": 402,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_specials.scss",
+			"settings":
+			{
+				"buffer_size": 3687,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_helpers.scss",
+			"settings":
+			{
+				"buffer_size": 732,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_icons.scss",
+			"settings":
+			{
+				"buffer_size": 496,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_loading.scss",
+			"settings":
+			{
+				"buffer_size": 2076,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_normalize.scss",
+			"settings":
+			{
+				"buffer_size": 11731,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_main.scss",
+			"settings":
+			{
+				"buffer_size": 2058,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_results.scss",
+			"settings":
+			{
+				"buffer_size": 8596,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scss/_search.scss",
+			"settings":
+			{
+				"buffer_size": 2931,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 5513,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/index.html",
+			"settings":
+			{
+				"buffer_size": 7194,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "pack",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Contr",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: d",
+				"Package Control: Disable Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 148.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/jay/web/pub",
+		"/home/jay/web/pub/src"
+	],
+	"file_history":
+	[
+		"/home/jay/web/pub/src/index.html",
+		"/home/jay/web/pub/src/js/main2.js",
+		"/home/jay/web/pub/src/scss/_results.scss",
+		"/home/jay/web/pub/src/scss/_icons.scss",
+		"/home/jay/web/pub/src/scss/_specials.scss",
+		"/home/jay/web/pub/src/scss/_loading.scss",
+		"/home/jay/web/pub/src/scss/_search.scss",
+		"/home/jay/web/pub/src/scss/_typography.scss",
+		"/home/jay/web/pub/src/scss/_main.scss",
+		"/home/jay/web/pub/src/js/util.js",
+		"/home/jay/web/pub/src/js/default.js",
+		"/home/jay/web/pub/src/js/events.js",
+		"/home/jay/web/pub/Gruntfile.js",
+		"/home/jay/web/pub/src/scss/_vars.scss",
+		"/home/jay/test.css",
+		"/home/jay/Dropbox/airforce/kx/md/style.css",
+		"/home/jay/Dropbox/1linux/.orig.key",
+		"/home/jay/Dropbox/1linux/svrAddr",
+		"/home/jay/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/jay/web/pub/db.js",
+		"/home/jay/web/pub/src/scss/style.scss",
+		"/home/jay/web/pub/src/css/ie.css",
+		"/home/jay/web/pub/src/scss/_normalize.scss",
+		"/home/jay/dawg3/scss/normalize.scss",
+		"/home/jay/web/pub/src/css/style.pure.css",
+		"/home/jay/z/kx/pageview.css",
+		"/home/jay/Dropbox/airforce/kx/pageview.css",
+		"/home/jay/z/kx/markdown-editor-master/main2b2.min.js",
+		"/home/jay/z/kx/manager2b.aspx",
+		"/home/jay/z/kx/old/manager2b2.aspx",
+		"/home/jay/Dropbox/Gruntfile.js.bak",
+		"/home/jay/web/pub/dist/index.html",
+		"/home/jay/web/pub/bower.json",
+		"/home/jay/web/pub/package.json",
+		"/home/jay/web/pub/src/scss/ie.scss",
+		"/home/jay/web/pub/src/scss/_helpers.scss",
+		"/home/jay/Dropbox/career/a.html",
+		"/home/jay/pub/src/js/rainyday.js",
+		"/home/jay/pub/src/js/util.js",
+		"/home/jay/web/pub/src/scss/_palette.scss",
+		"/home/jay/pub/dist/css/style.css",
+		"/home/jay/d/dev/js/instantclick.min.js",
+		"/home/jay/z/kx/old/manager2b.aspx.old2",
+		"/home/jay/d/Drupal Stuff/good/df2/sites/all/themes/rubik/js/rubik.js",
+		"/home/jay/d/Drupal Stuff/good/df2/sites/all/themes/dftheme/scripts/script.js",
+		"/home/jay/d/Drupal Stuff/good/df2/sites/all/themes/austin/js/scripts.js",
+		"/home/jay/d/Drupal Stuff/good/df2/sites/all/themes/dinkinflicka/js/rubik.js",
+		"/home/jay/Dropbox/airforce/kx/pageview.min.css",
+		"/home/jay/d/binke/one.6apr/one/sites/all/themes/binkE/js/demo1.js",
+		"/home/jay/d/binke/one.6apr/one/sites/all/themes/binkE/js/script.js",
+		"/home/jay/d/Drupal Stuff/df2/sites/all/themes/dftheme/scripts/script.js",
+		"/home/jay/z/kx/markdown-editor-master/IE9.js",
+		"/home/jay/z/kx/markdown-editor-master/editor3.js",
+		"/home/jay/Dropbox/airforce/kx/Home.html",
+		"/home/jay/z/repos/leiouts/dist/css/style.css",
+		"/home/jay/z/dawg3/js/data.js",
+		"/home/jay/z/dawg3/js/data2.js",
+		"/home/jay/d/dev/video/react/06. Organization/source-code/src/js/components/cart/app-cart.js",
+		"/home/jay/Dropbox/airforce/kx/manager2.aspx",
+		"/home/jay/z/kx/manager2c.aspx",
+		"/home/jay/Dropbox/airforce/kx/contentManagerTest2.aspx",
+		"/home/jay/Dropbox/airforce/kx/manager2b.js",
+		"/home/jay/z/dawg3/js/util.js",
+		"/home/jay/z/dawg3/js/util2.js",
+		"/home/jay/z/dawg3/js/chart.js",
+		"/home/jay/z/dawg3/js/d3chart.js",
+		"/home/jay/d/dev/frmwk/Gumby-master/css/style.css",
+		"/home/jay/d/dev/frmwk/Gumby-master/README.md",
+		"/home/jay/pub/Gruntfile.js",
+		"/home/jay/pub/Gruntfile.js.bak",
+		"/home/jay/pub/.bowerrc",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/main2b.min.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/markdown-it-4.2.1.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/markdown-it.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/md-it-plus-fnote.min.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/sweetalert.min.css",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/sweetalert.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/markdown-it-footnote.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/md-it-plus-fnote.js",
+		"/home/jay/.config/sublime-text-3/Packages/User/HTML.sublime-settings",
+		"/home/jay/Dropbox/airforce/kx/manager2a.aspx",
+		"/home/jay/Dropbox/airforce/kx/manager2b1.aspx",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/editor3.js",
+		"/home/jay/Dropbox/airforce/kx/manager2b.aspx",
+		"/home/jay/Dropbox/airforce/kx/libs3a.min.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/htmlmixed/htmlmixed.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/javascript/javascript.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/lib/util/continuelist.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/rawinflate.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/rawdeflate.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/css/css.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/markdown/markdown.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/gfm/gfm.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/xml/xml.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/lib/codemirror.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/overlay.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/highlight.pack.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/emojify.js",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/codemirror/lib/codemirror.css",
+		"/home/jay/Dropbox/airforce/kx/markdown-editor-master/default.css",
+		"/home/jay/d/dev/codemirror.js",
+		"/home/jay/z/dawg3/lib/reflux/dist/reflux.js",
+		"/home/jay/Dropbox/sgpm/manage/highlight.pack.js",
+		"/home/jay/.cache/.fr-HZHxmW/js/bootstrap.js",
+		"/home/jay/d/Leiana/files/css/foundation.leiouts.min.css",
+		"/home/jay/z/dawg3/css/gumby.css",
+		"/home/jay/d/Leiana/files/js/vendor/fastclick.js",
+		"/home/jay/d/Leiana/files/js/foundation.min.js",
+		"/home/jay/d/Leiana/files/css/normalize.css",
+		"/home/jay/d/dev/vanilla.js",
+		"/home/jay/Dropbox/airforce/kx/Home_files/sp_002.js",
+		"/home/jay/pub/src/js/default.js",
+		"/home/jay/pub/src/js/main2.js",
+		"/home/jay/pub/src/js/main2x.js",
+		"/home/jay/d/dev/video/react/06. Organization/source-code/src/js/components/app-template.js",
+		"/home/jay/d/dev/video/react/06. Organization/source-code/src/js/main.js",
+		"/home/jay/d/dev/video/react/06. Organization/source-code/src/js/components/app.js",
+		"/home/jay/z/dawg3/js/r.js",
+		"/home/jay/pub/src/lib/randomColor/randomColor.js",
+		"/home/jay/randomColor.min.js",
+		"/home/jay/pub/dist/index.html",
+		"/home/jay/z/dawg3/js/vendor/extensions/js/c3ext.js",
+		"/home/jay/z/dawg3/css/c3.css",
+		"/home/jay/z/Clusterize.js/clusterize.js",
+		"/home/jay/z/Clusterize.js/clusterize2.js",
+		"/home/jay/z/dawg3/lib/d3/package.js",
+		"/home/jay/z/dawg3/lib/gumby/css/style.css",
+		"/home/jay/z/dawg3/js/vendor/JSXTransformer-0.13.3.js"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 95.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"emerge",
+			"searchToggle(\"visible\")",
+			"searchToggle(\"hidden\")",
+			"visibility",
+			"color:",
+			"color",
+			"availableOption",
+			"chapter",
+			"miniB",
+			".text",
+			"line-heigh",
+			"line-height",
+			"text",
+			"$success-color",
+			"hover",
+			"smaller",
+			"font-s",
+			"button(",
+			"'",
+			"will",
+			"results",
+			"label",
+			"snabbt(this.searchWrap_, {\n          position: [0, 0, 0],\n          easing: 'spring',\n          springConstant: 0.3,\n          springDeacceleration: 0.8,\n          duration: 150\n        });",
+			"#wrapper",
+			"#content",
+			"#output",
+			"sweetAlert",
+			"title",
+			"full-page",
+			".full-page",
+			"3",
+			"output",
+			"item.editor",
+			"content",
+			"loadingSomething",
+			"a",
+			"text",
+			"res",
+			"0px",
+			"deletePage",
+			"create",
+			"title",
+			"save",
+			"res",
+			"\\bin\\b",
+			"\\bout\\b",
+			"out",
+			"this",
+			"contentmgr",
+			"char",
+			"font-size",
+			"font-s",
+			"handleSwitch",
+			"editor",
+			"switcher",
+			"toggler",
+			"toggle",
+			"content",
+			"res",
+			"lists/getbytitle('testNav')",
+			"Content",
+			"title",
+			"Title",
+			"title",
+			"Title",
+			"title",
+			"Title",
+			"title",
+			"Title",
+			"val",
+			"char",
+			"metrics",
+			"ie",
+			"content_tag",
+			"tag",
+			"ie",
+			"console",
+			"event",
+			"this.contentElem",
+			"<br>",
+			"class",
+			"item",
+			"src_",
+			"watch",
+			"[9,25,13,3,19]",
+			"\"/test",
+			"getInitialState",
+			"center",
+			"/kj/kx7/PublicHealth/SiteAssets/Fonts",
+			"equipment",
+			"#start",
+			"^(?=[a-zA-Z])",
+			"console.log(.*);",
+			".failed",
+			"this.props.",
+			"that",
+			".current",
+			" .main",
+			"#start.main",
+			"#content .main",
+			"parsed",
+			"#start",
+			"ref",
+			"refs",
+			"pane",
+			"class=",
+			"string",
+			"\" type=\"text/javascript\"></script>",
+			"<script src=\"",
+			"style",
+			"ieCompat",
+			"1) ",
+			"content",
+			"start",
+			"this",
+			"err",
+			"name",
+			"categories",
+			"element",
+			"filtered_",
+			"this.pub",
+			"name",
+			"this.chapters",
+			"this.title",
+			"that",
+			"this.",
+			"pub[ab]",
+			"pub."
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"searchToggle(\"open\")",
+			"searchToggle(\"close\")",
+			"pushButton(",
+			"\"",
+			"#out",
+			"",
+			"#out",
+			"newModal",
+			"fullPage",
+			".fullPage",
+			"input",
+			"output",
+			"glyph",
+			"text",
+			"lists(guid'21f7e2c4-e2a8-490c-9b73-c771e98f1c14')",
+			"token",
+			"<br/>",
+			"className",
+			"http://fleeceitout.com/fonts",
+			"#contentmgr",
+			"#start ",
+			"",
+			".failure",
+			".on-deck",
+			"",
+			"#start .main",
+			"#start.main",
+			"content",
+			"#content .main",
+			"meta.productNo",
+			"chapters",
+			"meta.title",
+			"this",
+			"fileRead",
+			"subSections[p]",
+			"sections[w]",
+			"that.chapters[o]",
+			"section[w]",
+			"sub[p]",
+			"chapter[o]",
+			"_Javascript_",
+			"src/",
+			"src/lib/",
+			"'",
+			"$win",
+			"$doc",
+			"$send",
+			"$searchRestore",
+			"$query",
+			"$moreMeta",
+			"$moreContent",
+			"$relatedTemplate",
+			"$resultTemplate",
+			"$results",
+			"$page",
+			"$searchWrap",
+			"data",
+			"app.term",
+			"app.moreContent_",
+			"app.regMini",
+			"app.searchRestore_",
+			"app.moreMeta_",
+			"app.moreContent_",
+			"app.send_",
+			"app.query_",
+			"JSON.parse",
+			"app.scoresContent",
+			"app.placeContent",
+			"app.placeMeta",
+			"app.scoresRelatives",
+			"app.results_",
+			"app.searchWrap_",
+			"app.page_",
+			"jsonParser",
+			"  ",
+			"sendData(",
+			"\"sendData(",
+			"\"",
+			"\"\\n\"",
+			"'\\n'",
+			"  ",
+			"pub",
+			"true",
+			"searchWrap_",
+			"info",
+			"req.body.t",
+			"req.body.a",
+			"req.body.m",
+			"req.body.c",
+			"$1rem",
+			"[a]",
+			"[i]",
+			"relative",
+			"class=\"btn btn-success\"",
+			"<$1 title=\"$1\" contenteditable value=\"$1\" name=\"$1\" id=\"$1\" class=\"$1\">$1</$1>",
+			"<$1></$1>",
+			"fs.writeFileSync(__dirname + '/splits/",
+			"text",
+			"docPageTotal",
+			"snippetPageTotal",
+			"snippetsPage",
+			"docsPage",
+			"snippetPages",
+			"docPages",
+			"puppy",
+			"kitten",
+			"snippets",
+			"docs",
+			"snippetsArray",
+			"docsArray",
+			"snippetList",
+			"docsList",
+			"snippetsPerPage",
+			"snippetPrevPage",
+			"docPrevPage",
+			"snippetPg",
+			"docPg",
+			"docsPerPage",
+			"$moreDocs",
+			"$lessDocs",
+			"$logoWrap",
+			"$title",
+			"/* $1 */",
+			"$query",
+			"$white",
+			"$white-ish",
+			"},",
+			"\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/js/util.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/js/main2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/js/default.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/js/events.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14,
+								14
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 9,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "src/scss/_vars.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1090,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/scss/_typography.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/scss/_specials.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/scss/_helpers.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/scss/_icons.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 496,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/scss/_loading.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/scss/_normalize.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11731,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/scss/_main.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2058,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/scss/_results.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8596,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "src/scss/_search.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2931,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								179,
+								179
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 14,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1767,
+								1767
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1800.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "src/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7194,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Material-Theme-Darker.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.640133460439,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.5,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pub.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"cfg",
+				"~/web/cfgio/cfgio.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 375.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 378.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 230.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

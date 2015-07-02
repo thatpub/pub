@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>thatPub</title>
+    <title>thatPub - Search USAF regulations</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="//that.pub/humans.txt">
@@ -13,84 +13,81 @@
     <link rel="shortcut icon" href="//that.pub/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="//that.pub/apple-touch-icon.png">
 
+    <!-- Right now this shit makes no difference but later I'll use it. -->
+    <script type="text/javascript">document.documentElement.className = document.documentElement.className.replace(/ ?no\-js/g, "");</script>
+
     <link rel="stylesheet" href="css/style.css?__inline=true" type="text/css">
 
   </head>
   <body>
+    <!--[if lte IE 9]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <script type="text/javascript">
-    document.documentElement.removeAttribute("class");
-  </script>
-  <!--[if lte IE 9]>
-  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div class="loader" id="loader">
-    <div class="spinner">
-      <div class="blob top"></div>
-      <div class="blob bottom"></div>
-      <div class="blob left"></div>
-      <div class="blob move-blob"></div>
-    </div>
-  </div>
-
-  <div class="wrapper search-wrap" id="search-wrap">
-    <div class="search" id="search">
-      <header class="search-title">Find the needle.</header>
-      <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
-      <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
-      <a href="#page" class="send" id="send"><span class="action">go</span></a>
-    </div>
-  </div>
-
-  <a href="#" id="search-restore" class="search-restore" data-control="button">
-    <!-- Created with Inkscape (http://www.inkscape.org/) -->
-    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
-  </a>
-
-  <div class="wrapper full-wrap" id="wrap">
-
-    <div class="page-header" id="page-header">
-      <div class="wrapper summary" id="summary">
-        <!-- You searched for -->
-        <q class="term" id="term"></q>
-        <p>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</p>
+    <div class="loader" id="loader">
+      <div class="spinner">
+        <div class="blob top"></div>
+        <div class="blob bottom"></div>
+        <div class="blob left"></div>
+        <div class="blob move-blob"></div>
       </div>
     </div>
 
-    <div class="related">
-      <h2 class="related-label label">Related Documents</h2>
-      <!-- <br/>
-      <small>(click to filter locally, press ESC to reset)</small> -->
-      <ul class="related-list" id="related"></ul>
+    <a href="/" id="no-results">No results buddy.  Try it again.</a>
+
+    <div class="wrapper search-wrap emerge" id="search-wrap">
+      <div class="search" id="search">
+        <header class="search-title">Find the needle.</header>
+        <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
+        <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
+        <a href="#page" class="send" id="send"><span class="action">go</span></a>
+      </div>
     </div>
 
-    <div class="wrapper page-wrap" id="page">
-      <a href="#" class="more meta hidden" id="more-meta" data-control="button">fetch »</a>
-      <div class="results" id="results"></div>
-      <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
+    <a href="#" id="search-restore" class="search-restore" data-control="button">
+      <!-- Created with Inkscape (http://www.inkscape.org/) -->
+      <svg xmlns="//www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
+    </a>
+
+    <div class="wrapper full-wrap" id="wrap">
+
+      <div class="page-header" id="page-header">
+        <div class="wrapper summary" id="summary">
+          <!-- You searched for -->
+          <q class="term" id="term"></q>
+          <p>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</p>
+        </div>
+      </div>
+
+      <div class="related">
+        <h2 class="related-label label">Related Documents</h2>
+        <!-- <br/>
+        <small>(click to filter locally, press ESC to reset)</small> -->
+        <ul class="related-list" id="related"></ul>
+      </div>
+
+      <div class="wrapper page-wrap" id="page">
+        <a href="#" class="more meta hidden" id="more-meta" data-control="button">fetch »</a>
+        <div class="results" id="results"></div>
+        <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
+      </div>
+
     </div>
 
-  </div>
-
-  <div class="infini-check">
-    <label for="infini-scroll" class="enabled" id="infini-label" title="Disable infinite scroll">
-    <!-- Created with Inkscape (http://www.inkscape.org/) -->
-      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48"><g transform="translate(0,-1004)"><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/></g></svg>
-      <input type="checkbox" id="infini-scroll" name="infini-scroll" checked data-control="setting" />
-      <!-- <span id="infini-status"></span> -->
-    </label>
-  </div>
-
-  <a href="/" id="no-results">No results buddy.  Try it again.</a>
-
+    <div class="infini-check">
+      <label for="infini-scroll" class="enabled" id="infini-label" title="Disable infinite scroll">
+      <!-- Created with Inkscape (http://www.inkscape.org/) -->
+        <svg xmlns:svg="//www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48" id="refresh"><g transform="translate(0,-1004)"><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/></g></svg>
+        <input type="checkbox" id="infini-scroll" name="infini-scroll" checked data-control="setting" />
+        <!-- <span id="infini-status"></span> -->
+      </label>
+    </div>
 
     <script type="text/template" id="related-template">
       <li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
         <%= key %>
       </li>
     </script>
-
     <script type="text/template" id="result-template">
       <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
         <% if ( type === " content" ) { %>
@@ -105,27 +102,28 @@
                     <%= parts[0] %><br/>
                   <% } %>
                 <% } %></span>
-            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal">expand</a><% } %>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">expand</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
-            <a href="#" class="reveal">expand</a>
-          <% } %>
+            <a href="#" class="reveal-text">expand</a>
+          <% } /* %>
           <div class="number2">
             <p><%= sub %></p>
-            <span class="climb-up reveal">climb up</span>
-            <span class="look-inside reveal">look inside</span>
-            <span class="do-both reveal">do both</span>
+            <span class="reveal climb-up">climb up</span>
+            <span class="reveal look-inside">look inside</span>
+            <span class="reveal do-both">do both</span>
           </div>
+          <% */ %>
         </div>
         <div class="meta">
           <div class="details">
+            <span class="number"><%= sub %></span><br/>
             <% if ( details && details.chapter && details.chapterTitle ) { %>
             <span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>
             <% } if ( details && details.section && details.sectionTitle ) { %>
             <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
             <% } %>
-            <span class="number"><%= sub %></span>
           </div>
           <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
             <span class="pub"><%= fullPub %></span><br/>

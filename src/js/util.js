@@ -21,9 +21,9 @@ function removeEvent ( element, evt, fnc ) {
 
 function swapClass ( element, string, regex ) {
   if ( string !== "" ) {
-    element.className = (regex.test(element.className)) ?
-    element.className.replace(regex, "") + " " + string :
-    element.className + " " + string;
+    element.className = ( regex.test(element.className) ) ?
+      element.className.replace(regex, "") + " " + string :
+      element.className + " " + string;
   }
   else {
     element.className = element.className.replace(regex, "");

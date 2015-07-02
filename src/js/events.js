@@ -2,7 +2,7 @@
 
 addEvent(app.send_, "click", function ( event ) {
   event.preventDefault();
-  if ( !_.trim(app.query_.value) ) { /* show notification/input validate here */
+  if ( !_.trim(app.query_.value) ) { // show notification/input validate here
     app.query_.focus();
     snabbt(app.query_, 'attention', {
       rotation: [0, 0, Math.PI/2],
@@ -31,16 +31,14 @@ addEvent(app.query_, "keypress", function ( event ) {
 addEvent(document, "keyup", function ( event ) {
   if ( event.which === 27 ) {
     event.preventDefault();
-    if ( regEmerge.test(document.body.className) ) {
+    if ( app.isSearchOpen === true ) {
       app.searchToggle("close");
     }
     else {
-      /**
-       * DISABLED
-       *
-       * Until we can handle huge amounts of results, turn this shit off.
-       */
-      /*filterResults(false);*/
+      // DISABLED
+      // Until we can handle huge amounts of results, turn this shit off.
+
+      // filterResults(false);
     }
   }
 });
@@ -48,11 +46,7 @@ addEvent(document, "keyup", function ( event ) {
 addEvent(app.moreContent_, "click", more);
 
 addEvent(app.moreMeta_, "click", function ( event ) {
-  if ( event.preventDefault ) {
-    event.preventDefault();
-  } else {
-    event.returnValue = false;
-  }
+  event.preventDefault();
   swapClass(app.loader_, "loading", regLoad);
   sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, endLoading);
   return false;
@@ -60,8 +54,13 @@ addEvent(app.moreMeta_, "click", function ( event ) {
 
 addEvent(app.searchRestore_, "click", function ( event ) {
   event.preventDefault();
-  if ( regEmerge.test(document.body.className) ) {
-    app.searchToggle("close");
+  if ( app.isSearchOpen === true ) {
+    if ( app.isDone === true ) {
+      app.searchToggle("close");
+    }
+    else {
+      return false;
+    }
   }
   else {
     app.searchToggle("open");
@@ -76,6 +75,7 @@ addEvent(app.infiniScroll_, "change", infini);
 addEvent(window, "scroll", scrollWheeler);
 
 addEvent(window, "load", function () {
+  app.isSearchOpen = true;
   app.query_.focus();
   // This was a debugging experiment but could actually use later for direct
   // searching from URL.
@@ -88,8 +88,8 @@ addEvent(window, "load", function () {
   var l = document.createElement("link"); l.rel = "stylesheet"; l.type = "text/css";
   // l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Ubuntu:300,400,700';
   // l.href = '//fonts.googleapis.com/css?family=Cantarell:400,700|Ubuntu:300,700';
-  l.href = "https://fonts.googleapis.com/css?family=Cantarell:400,700";
+  l.href = "//fonts.googleapis.com/css?family=Lato:300,300italic,700";
   // var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
   document.getElementsByTagName('head')[0].appendChild(l);
-  /*app.colorize();*/
+  // app.colorize();
 });

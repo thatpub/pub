@@ -9,7 +9,7 @@ module.exports = function(grunt) {
           trace: false
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss'
+          'src/css/style.pre.css': 'src/scss/style.scss'
         }
       },
       dev: {
@@ -19,14 +19,14 @@ module.exports = function(grunt) {
           trace: true
         },
         files: {
-          'src/css/style.css': 'src/scss/style.scss'
+          'src/css/style.pre.css': 'src/scss/style.scss'
         }
       }
     },
     cssmin: {
       options: {
-        shorthandCompacting: false,
-        roundingPrecision: 3,
+        shorthandCompacting: true,
+        roundingPrecision: 2,
         sourceMap: false,
         compatibility: false,
         processImport: true
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           },
           screwIE8: true,
           wrap: false,
-          mangle: false,
+          mangle: true,
           sourceMap: false
         },
         files: {
@@ -111,7 +111,7 @@ module.exports = function(grunt) {
       options: {},
       target: {
         src: ['src/index.html', 'src/js/script.js'],
-        css: ['src/css/style.css'],
+        css: ['src/css/style.pre.css'],
         dest: 'src/css/style.pure.css'
       }
     },
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/**/*'],
-        tasks: ['sass:dev', 'purifycss', 'inline', 'htmlmin']
+        tasks: ['sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       gifsvg: {
         options: {
@@ -208,7 +208,7 @@ module.exports = function(grunt) {
           'src/js/events.js',
           'src/lib/**/*.js'
         ],
-        tasks: ['uglify:dev', 'purifycss', 'inline', 'htmlmin']
+        tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       }
     }
   });
@@ -225,5 +225,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-tinypng');
 
   grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
-  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'inline', 'htmlmin']);
+  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
 };
