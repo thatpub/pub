@@ -29,7 +29,7 @@ var App = function () {
     total_ = document.getElementById("total"),
     query_ = document.getElementById("query"),
     send_ = document.getElementById("send"),
-    moreMeta_ = document.getElementById("more-meta"),
+    // moreMeta_ = document.getElementById("more-meta"),
     moreContent_ = document.getElementById("more-content"),
     related_ = document.getElementById("related"),
     infiniLabel_ = document.getElementById("infini-label"),
@@ -87,7 +87,7 @@ var App = function () {
     total_: total_,
     query_: query_,
     send_: send_,
-    moreMeta_: moreMeta_,
+    // moreMeta_: moreMeta_,
     moreContent_: moreContent_,
     related_: related_,
     placeContent: placeContent,
@@ -114,7 +114,7 @@ var App = function () {
     scoresRelatives: [],
     selectedResults: [],
     selectedTotal: 0,
-    /*colorize: colorize,*/
+    // colorize: colorize,
     colors: {},
     isSearchOpen: null,
     isFailure: null,
@@ -132,10 +132,8 @@ var App = function () {
           highlights,
           fileFormat;
       if ( !data._source && data.key && data.score ) {
-          /**
-           *  This won't work without more fields in the aggregation to give me
-           *  info to use.  File type is unknown, date, URL, etc.
-           */
+        //  This won't work without more fields in the aggregation to give me
+        //  info to use.  File type is unknown, date, URL, etc.
         index = _.indexOf(allScores, data.score);
         group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
@@ -222,7 +220,7 @@ var App = function () {
     },
     searchToggle: function ( action ) {
       // var screenHeight = window.innerHeight;
-      if ( action === "close" ) {
+      if ( action === "close" && (this.isDone === true && this.isFailure !== true) ) {
         // snabbt(this.searchWrap_, {
         //   position: [0, -screenHeight, 0],
         //   opacity: 0,

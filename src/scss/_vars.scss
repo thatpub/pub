@@ -11,18 +11,15 @@ $sumMargPC: 4rem;
 
 $animateSpeed: .15s;
 
-$text-on-bg-color: #082642;
-$result-color: #205A8F;
-$result-highlight-color: #438ED1;
-
-$action-color: #FF9E00;
-$action-highlight-color: #FFFFCC;
+$result-color: #00D400;
+$result-highlight-color: #80FF80;
+$action-color: #870044;
+$action-highlight-color: #D4006A;
 
 $success-color: #63B257;
 $success-highlight-color: #8EFE7C;
 
 $black: #232323;
-$heading-color: #2e282a;
 $text-color: #666666;
 $text-highlight-color: #7F7F7F;
 $shadow-color: #9F9F9F;
@@ -33,9 +30,11 @@ $white: #FEFEFE;
 $result: $result-color;
 $result-highlight: $result-highlight-color;
 $action: $action-color;
-$action-highlight: $action-highlight-color;
 $text: $text-color;
 $text-highlight: $text-highlight-color;
 $success: $success-color;
 $success-highlight: $success-highlight-color;
 $bg: $bg-color;
+
+// $action-highlight-color: #FFFFCC;
+// $action-highlight: $action-highlight-color;

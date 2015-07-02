@@ -1,25 +1,27 @@
 @mixin box-sizing($method) {
-  -webkit-box-sizing: $method;
-  -moz-box-sizing: $method;
-  box-sizing: $method;
+  -webkit-box-sizing: $method!important;
+  -moz-box-sizing: $method!important;
+  box-sizing: $method!important;
 }
 @mixin box-shadow($x: 0, $y: 0, $blur: 3px, $spread: 0, $color: $shadow-color) {
   -webkit-box-shadow: $x $y $blur $spread $color;
   -moz-box-shadow: $x $y $blur $spread $color;
   box-shadow: $x $y $blur $spread $color;
 }
-@mixin border-radius($radii) {
-  $radius: 4px;
+@mixin border-radius($radius) {
+  // $radius: 4px;
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
           border-radius: $radius;
-  /* WTF Why more?!  Some weird bug on Samsung
-     Galaxy S4 Android 4.2 browsers.
-       Not exactly a high use-case so remove if desired.*/
-          border-left-top-radius: $radius;
-          border-right-top-radius: $radius;
-          border-right-bottom-radius: $radius;
-          border-left-bottom-radius: $radius;
+  // WTF Why more?!  Some weird bug on Samsung
+  //    Galaxy S4 Android 4.2 browsers.
+  //      Not exactly a high use-case so remove if desired.
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
+    border-left-top-radius: $radius;
+    border-right-top-radius: $radius;
+    border-right-bottom-radius: $radius;
+    border-left-bottom-radius: $radius;
+  }
 }
 @mixin transform($action) {
   -ms-transform: $action;
@@ -33,95 +35,37 @@
   transition: $property $duration $easing $delay;
 }
 @mixin miniButton($background: $white, $color: $result-highlight-color, $padding: .2rem .6rem) {
+  position: relative;
   display: inline-block;
+  background-color: $background;
+  color: $color;
   font-size: .8rem;
   border: 1px solid;
   padding: $padding;
-  background-color: $background;
-  color: $color;
-  position: relative;
   font-weight: $bold;
 }
 @mixin pushButton($color, $padding: 1.25rem, $font-size: 2.25rem) {
-  @include border-radius(8px);
+  @include border-radius(4px);
   position: relative;
   display: block;
-  color: $white;
-  clear: both;
-  text-align: center;
   background-color: $color;
+  color: $white;
+  text-align: center;
   border: none;
   font-size: $font-size;
-  margin: 1rem auto 0;
+  margin: .4rem auto 0;
   padding: $padding;
-  border-bottom: 1px solid darken($color, 10%); /*#22313F*/
-  border-top: 1px solid lighten($color, 30%); /*#C8F7C5*/
+  border-bottom: 1px solid darken($color, 10%); // #22313F
+  border-top: 1px solid lighten($color, 30%); // #C8F7C5
   &:active {
     border-bottom-color: transparent;
-    border-top-color: darken($color, 15%);
-    background-color: darken($color, 5%);
-    color: darken($white, 5%);
+    border-top-color: darken($color, 3%);
+    background-color: darken($color, 3%);
+    color: darken($white, 3%);
     // text-shadow: 0 -1px 0 darken($color, 50%), 0 0 1px darken($color, 50%);
   }
 }
-@mixin ribbon($bg: $result-highlight-color, $color: $text-color) {
-  background-color: $bg;
-  color: $color;
-  // border-left: 3px double;
-  margin: 0;
-  // &:after {
-    // border-width: 7px;
-    // border-style: solid;
-    // border-top-color: lighten($bg, 35%);
-    // border-bottom-color: $bg;
-    // bottom: -15px;
-    // content: "";
-    // position: absolute;
-  // }
-}
-@mixin rightRibbon {
-  right: -14px;
-  margin-right: -2rem;
-  &:after {
-    border-width: 7px;
-    border-style: solid;
-    border-top-color: lighten($bg, 35%);
-    border-bottom-color: $bg;
-    bottom: -15px;
-    content: "";
-    position: absolute;
-    right: -1px;
-    border-left-color: $text-highlight-color;
-    border-right-color: transparent;
-  }
-}
-@mixin rightMantel {
-  position: relative;
-  // padding: .2rem 1rem;
-  padding: 0 0 0 1rem;
-  // border-left: 2px solid;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  float: right;
-  // right: .5rem;
-  // top: .75rem;
-  // margin-right: -1rem;
-  @media all and (min-width: 768px) {
-  //   right: 1rem;
-    // margin-right: 2rem;
-    margin-left: 2rem;
-  }
-}
-@mixin leftRibbon {
-  left: -14px;
-  margin-left: -2rem;
-  &:after {
-    left: -1px;
-    border-right-color: $text-highlight-color;
-    border-left-color: transparent;
-  }
-}
+
 @mixin paperShadow {
   &:before, &:after {
     bottom: 26px;
@@ -142,3 +86,62 @@
   }
   box-shadow: 0 0 3px rgba(0,0,0,.25);
 }
+
+// @mixin ribbon($bg: $result-highlight-color, $color: $text-color) {
+//   background-color: $bg;
+//   color: $color;
+//   margin: 0;
+//   // border-left: 3px double;
+//   // &:after {
+//     // border-width: 7px;
+//     // border-style: solid;
+//     // border-top-color: lighten($bg, 35%);
+//     // border-bottom-color: $bg;
+//     // bottom: -15px;
+//     // content: "";
+//     // position: absolute;
+//   // }
+// }
+// @mixin rightRibbon {
+//   right: -14px;
+//   margin-right: -2rem;
+//   &:after {
+//     border-width: 7px;
+//     border-style: solid;
+//     border-top-color: lighten($bg, 35%);
+//     border-bottom-color: $bg;
+//     bottom: -15px;
+//     content: "";
+//     position: absolute;
+//     right: -1px;
+//     border-left-color: $text-highlight-color;
+//     border-right-color: transparent;
+//   }
+// }
+// @mixin rightMantel {
+//   position: relative;
+//   // padding: .2rem 1rem;
+//   padding: 0 0 0 1rem;
+//   // border-left: 2px solid;
+//   margin-left: 1rem;
+//   margin-bottom: 1rem;
+//   margin-top: 1rem;
+//   float: right;
+//   // right: .5rem;
+//   // top: .75rem;
+//   // margin-right: -1rem;
+//   @media all and (min-width: 640px) {
+//   //   right: 1rem;
+//     // margin-right: 2rem;
+//     margin-left: 2rem;
+//   }
+// }
+// @mixin leftRibbon {
+//   left: -14px;
+//   margin-left: -2rem;
+//   &:after {
+//     left: -1px;
+//     border-right-color: $text-highlight-color;
+//     border-left-color: transparent;
+//   }
+// }

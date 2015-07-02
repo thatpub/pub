@@ -61,22 +61,10 @@ q {
   quotes: "“" "”" "‘" "’";
   &:before {
     content: open-quote;
-      position: absolute;
-      right: 100%;
   }
   &:after {
     content: close-quote;
-      position: absolute;
-      left: 100%;
   }
-    // &:before {
-    //   position: absolute;
-    //   right: 100%;
-    // }
-    // &:after {
-    //   position: absolute;
-    //   left: 100%;
-    // }
 }
 
 hr {
@@ -141,7 +129,7 @@ textarea {
   border-left: 1px solid $bg-color;
   position: relative;
   width: 90%;
-  @media all and (min-width: 768px) {
+  @media all and (min-width: 640px) {
     margin-bottom: 4rem;
     // margin-top: 4rem;
     max-width: 864px;

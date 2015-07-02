@@ -19,20 +19,21 @@
     return false;
   }
 
-/**
- * Placeholder for filterResults() definition.
- */
+  // Placeholder for filterResults() definition.
 
   function dataResponse ( httpRequest, action ) {
     var response = JSON.parse(httpRequest.responseText),
       content = response[0] || null,
       meta = response[1] || null;
-    if ( content && content.hits.total === 0 && meta && meta.hits.total === 0 ) {
+    if ( (content && content.hits.total === 0) &&
+          (meta && meta.hits.total === 0) ) {
+      app.isDone = true;
       app.isFailure = true;
       app.infiniScroll = false;
-      app.isDone = true;
-      document.cookie = "placeContent=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      return swapClass(app.noResults_, "failed", regFail);
+      document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      swapClass(app.noResults_, "failed", regFail);
+      return false;
     }
     var a = 0,
       b = 0,
@@ -127,9 +128,12 @@
 
   function sendData ( responder, query, type, action, spot, dot, clbk ) {
     var httpRequest = new XMLHttpRequest();
-    // var url = ('https:' == document.location.protocol ? "https://that.pub/find/" : "http://find.that.pub/") + type + "/" + action;
+    var url = (('https:' === document.location.protocol) ?
+      "https://that.pub/find/" :
+      "http://find.that.pub/") +
+      type + "/" + action;
     // var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");
-    var url = "//that.pub/find/" + type + "/" + action;
+    // var url = "//that.pub/find/" + type + "/" + action;
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {

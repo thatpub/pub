@@ -22,40 +22,52 @@ addEvent(app.query_, "focus", function () {
 });
 
 addEvent(app.query_, "keypress", function ( event ) {
-  if ( event.which === 13 ) {
+  if ( event.which === 13 ) { // ENTER/RETURN key pressed
     app.send_.click();
     return false;
   }
 });
 
 addEvent(document, "keyup", function ( event ) {
-  if ( event.which === 27 ) {
+  if ( event.which === 27 ) { // ESC key pressed
     event.preventDefault();
-    if ( app.isSearchOpen === true ) {
+    if ( app.isSearchOpen === true && app.isFailure !== true ) {
       app.searchToggle("close");
     }
-    else {
+    // else {
       // DISABLED
       // Until we can handle huge amounts of results, turn this shit off.
 
       // filterResults(false);
-    }
+    // }
   }
 });
 
 addEvent(app.moreContent_, "click", more);
 
-addEvent(app.moreMeta_, "click", function ( event ) {
+// addEvent(app.moreMeta_, "click", function ( event ) {
+//   event.preventDefault();
+//   swapClass(app.loader_, "loading", regLoad);
+//   sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, endLoading);
+//   return false;
+// });
+
+addEvent(app.noResults_.getElementsByTagName("a")[0], "click", function ( event ) {
   event.preventDefault();
-  swapClass(app.loader_, "loading", regLoad);
-  sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, endLoading);
-  return false;
+  if ( app.isDone === true && app.isFailure === true ) {
+    app.isFailure = false;
+    app.isDone = false;
+    swapClass(app.noResults_, "", regFail);
+    if ( app.isSearchOpen !== true ) {
+      app.searchToggle("open");
+    }
+  }
 });
 
 addEvent(app.searchRestore_, "click", function ( event ) {
   event.preventDefault();
   if ( app.isSearchOpen === true ) {
-    if ( app.isDone === true ) {
+    if ( app.isDone === true && app.isFailure !== true ) {
       app.searchToggle("close");
     }
     else {

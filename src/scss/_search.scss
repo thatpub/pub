@@ -53,27 +53,30 @@
     // @include border-radius(4px);
     // width: 28rem;
     // bottom: 0;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   @media all and (min-width: 540px) {
     // width: 40rem;
     // margin-top: 12rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 
 .search-title {
-  color: $action-color;
-  font-family: $heading;
-  font-size: 2rem;
-  // margin: 0 auto;
   position: relative;
-  width: 100%;
+  color: $action-color;
   text-align: left;
-  @media all and (min-width: 480px) {
-    font-size: 2.75rem;
+  font-family: $heading;
+  font-size: 4rem;
+  line-height: 1;
+  width: 100%;
+  padding: 1rem 0;
+  @media all and (min-width: 640px) {
+    font-size: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
@@ -82,27 +85,26 @@
   // display: block;
   // float: none;
   clear: both;
-  margin: 2rem auto;
+  margin-left: auto;
+  margin-right: auto;
   outline: 0;
 }
 
 .query {
-  @include border-radius(.2rem);
-  padding: .8rem;
+  @include border-radius(4px);
+  background-color: transparent;
+  padding: 1rem;
   text-align: left;
   float: left;
   max-width: 100%;
   width: 100%;
   outline: 0;
   border: 1px solid $action-color;
-  background: transparent;
   color: $black;
-  font-size: 1.5rem;
-  &:focus,
-  &:active {
-    outline: 0;
-  }
-  @media all and (min-width: 768px) {
+  font-size: 1.2rem;
+  margin-bottom: .5rem;
+  margin-top: 1.5rem;
+  @media all and (min-width: 640px) {
     @include border-radius(0);
     border-left-color: transparent;
     border-right-color: transparent;
@@ -115,7 +117,7 @@
     white-space: normal;
     opacity: .5;
     font-size: inherit;
-     // @media all and (min-width: 768px) {
+     // @media all and (min-width: 640px) {
      // }
    }
   &::-moz-input-placeholder {
@@ -124,22 +126,29 @@
     white-space: normal;
     opacity: .5;
     font-size: inherit;
-    // @media all and (min-width: 768px) {
+    // @media all and (min-width: 640px) {
     // }
   }
 }
 
 .send {
-  @include pushButton($action-color, .5rem);
+  @include pushButton($action-color, .4rem);
+  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: $bold;
+  @media all and (min-width: 640px) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: calc(100% - 2rem);
+  }
   // @include transform(translateX(-50%));
   // position: absolute;
   // top: 100%;
   // left: 50%;
   // text-shadow: 0 1px 0 $shadow-color;
-  width: 100%;
   // max-width: 14rem; // 18rem before
-  max-width: 100%;
-  font-weight: $bold;
 }
 
 .search-restore {
@@ -160,10 +169,10 @@
     fill: $action-color;
     stroke: $action-color;
   }
-  &:focus,
-  &:active {
-    outline: 0;
-  }
+  // &:focus,
+  // &:active {
+  //   outline: 0;
+  // }
   &.emerge {
     z-index: 3;
   }

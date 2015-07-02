@@ -13,7 +13,7 @@
   font-weight: $med;
   text-align: center;
   //margin: $sumMargMob auto 0;
-  // @media all and (min-width: 768px) {
+  // @media all and (min-width: 640px) {
     // margin: $sumMargPC auto 0;
   // }
 }
@@ -39,10 +39,17 @@
 
 .related {
   font-family: $heading;
-  font-size: 1rem;
   font-weight: $med;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: .6rem;
+  padding-top: .6rem;
+  @media all and (min-width: 480px) {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  @media all and (min-width: 640px) {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
 }
 
 .related-label {
@@ -83,7 +90,7 @@
   //   background-color: $bg-color;
   //   // height: 3rem;
   //   z-index: 2;
-  //   @media all and (min-width: 768px) {
+  //   @media all and (min-width: 640px) {
   //     padding-right: 5rem;
   //   }
   // }
@@ -98,16 +105,20 @@
   text-rendering: optimizeLegibility;
   cursor: default;
   flex-shrink: 1;
-  background-color: $white;
+  background-color: $black;
+  color: $white;
   text-align: center;
   border: 1px solid;
-  padding: .6rem;
   margin: .4rem;
+  font-size: 1rem;
+  padding: .2rem .4rem;
   @media all and (min-width: 480px) {
     font-size: 1.2rem;
+    padding: .4rem .6rem;
   }
-  @media all and (min-width: 960px) {
+  @media all and (min-width: 640px) {
     font-size: 1.4rem;
+    padding: .6rem .8rem;
   }
   // cursor: pointer;
   &.pretty {
@@ -127,6 +138,12 @@
   }
   &.content:last-child {
     border-bottom: none;
+  }
+  &.content:first-child {
+    padding-top: 0;
+    @media all and (min-width: 640px) {
+      padding-top: 2rem;
+    }
   }
 }
 
@@ -181,9 +198,10 @@
     padding-left: 2rem;
     border-left: 3px solid;
   }
-  @media all and (min-width: 768px) {
+  @media all and (min-width: 640px) {
     padding-left: 3rem;
     padding-right: 3rem;
+    // padding-top: 2rem;
   }
 }
 
@@ -226,16 +244,16 @@
   clear: both;
   // margin-top: 1rem;
   // margin-bottom: 0;
-  // q {
-  //   &:before {
-  //     position: absolute;
-  //     right: 100%;
-  //   }
-  //   &:after {
-  //     position: absolute;
-  //     left: 100%;
-  //   }
-  // }
+  q {
+    &:before {
+      position: absolute;
+      right: 100%;
+    }
+    &:after {
+      position: absolute;
+      left: 100%;
+    }
+  }
   .combined {
     display: none;
   }
@@ -316,13 +334,16 @@
   margin-right: 0;
   text-align: right;
   .pub, .title {
-    color: $result-color;
+    color: $result-highlight-color;
     border-bottom: 1px solid transparent;
     font-size: .8rem;
   }
+  .pub {
+    font-weight: $bold;
+  }
   &:hover {
     .pub, .title {
-      border-bottom-color: $result-color;
+      border-bottom-color: $result-highlight-color;
     }
   }
 }
