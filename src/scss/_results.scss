@@ -4,7 +4,16 @@
   color: $bg-color;
   padding-top: 4rem;
   padding-bottom: 4rem;
-  font-size: 1.4rem;
+  font-size: 1rem;
+  @media all and (min-width: 480px) {
+    font-size: 1.2rem;
+  }
+  @media all and (min-width: 640px) {
+    font-size: 1.4rem;
+  }
+  @media all and (min-width: 960px) {
+    font-size: 1.8rem;
+  }
 }
 
 .summary {
@@ -23,14 +32,9 @@
 }
 
 .term, .total, .count {
-  /*color: $action-color;*/
   text-shadow: 0 1px 1px $shadow-color;
-  color: #FFF;
+  color: #FFFFFF;
   font-weight: $bold;
-}
-
-.total, .count {
-  border-bottom: 1px wavy $white;
 }
 
 .results {
@@ -38,17 +42,21 @@
 }
 
 .related {
-  font-family: $heading;
-  font-weight: $med;
   padding-bottom: .6rem;
   padding-top: .6rem;
+  font-size: 1rem;
   @media all and (min-width: 480px) {
     padding-bottom: 1rem;
     padding-top: 1rem;
+    font-size: 1.2rem;
   }
   @media all and (min-width: 640px) {
     padding-bottom: 2rem;
     padding-top: 2rem;
+    font-size: 1.4rem;
+  }
+  @media all and (min-width: 960px) {
+    font-size: 1.8rem;
   }
 }
 
@@ -105,20 +113,23 @@
   text-rendering: optimizeLegibility;
   cursor: default;
   flex-shrink: 1;
-  background-color: $black;
-  color: $white;
+  background-color: $white;
+  color: $action-color;
   text-align: center;
+  font-family: $heading;
+  font-weight: $med;
   border: 1px solid;
   margin: .4rem;
-  font-size: 1rem;
+  // font-size: .9rem;
   padding: .2rem .4rem;
-  @media all and (min-width: 480px) {
-    font-size: 1.2rem;
-    padding: .4rem .6rem;
-  }
+  font-size: .8em;
   @media all and (min-width: 640px) {
-    font-size: 1.4rem;
-    padding: .6rem .8rem;
+    // font-size: 1.1rem;
+    padding: .3rem .45rem;
+  }
+  @media all and (min-width: 960px) {
+    // font-size: 1.3rem;
+    padding: .4rem .6rem;
   }
   // cursor: pointer;
   &.pretty {
@@ -126,27 +137,6 @@
     // border-width: 3px;
   }
 }
-
-.result {
-  em {
-    color: $result-highlight-color;
-    font-style: normal;
-    font-weight: $bold;
-  }
-  &.content:nth-child(n) {
-    border-bottom: 1px solid $bg-color;
-  }
-  &.content:last-child {
-    border-bottom: none;
-  }
-  &.content:first-child {
-    padding-top: 0;
-    @media all and (min-width: 640px) {
-      padding-top: 2rem;
-    }
-  }
-}
-
 
 // .filtered {
 //   .doc {
@@ -189,51 +179,37 @@
 
 .content {
   color: $text-highlight-color;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
   position: relative;
   // &:hover {
   // }
+  em {
+    color: $result-highlight-color;
+    font-style: normal!important;
+    font-weight: $bold;
+  }
   &.pretty .text {
     padding-left: 2rem;
     border-left: 3px solid;
   }
+  &:nth-child(n) {
+    border-bottom: 1px solid rgba(200,200,200,.25);
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+  &:first-child {
+    padding-top: 0;
+    @media all and (min-width: 640px) {
+      padding-top: 2rem;
+    }
+  }
   @media all and (min-width: 640px) {
     padding-left: 3rem;
     padding-right: 3rem;
-    // padding-top: 2rem;
   }
 }
-
-// .number2 {
-//   display: none;
-//   // @include ribbon(transparent, $text-highlight-color);
-//   // @include rightMantel;
-//   // cursor: default;
-//   // font-weight: $bold;
-//   // font-style: italic;
-//   // font-family: $readable;
-//   // font-size: .8em;
-//   // font-style: italic;
-//   // @media all and (min-width: 540px) {
-//   //   font-size: inherit;
-//   // }
-//   // @include rightRibbon;
-//   // @include leftRibbon;
-//   // &:hover {
-//   //   .climb-up, .look-inside, .do-both {
-//   //     @include miniButton($black, .125rem .375rem);
-//   //     float: left;
-//   //     clear: none;
-//   //     margin: auto 2rem auto 0;
-//   //     cursor: pointer;
-//   //   }
-//   // }
-// }
-
-// .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
-//   display: none;
-// }
 
 .text {
   text-rendering: optimizeLegibility;
@@ -254,6 +230,9 @@
       left: 100%;
     }
   }
+  .combined, .parts {
+    margin-bottom: 1rem;
+  }
   .combined {
     display: none;
   }
@@ -261,19 +240,19 @@
     display: block;
   }
   &.opened {
+    .combined {
+      display: block;
+    }
     .parts {
       display: none;
     }
-    .combined {
-      display: inline;
-    }
   }
-  @media all and (min-width:540px) {
+  @media all and (min-width:640px) {
     font-size: 1.4rem;
     margin-left: auto;
     margin-right: auto;
   }
-  @media all and (min-width:1140px) {
+  @media all and (min-width:960px) {
     font-size: 1.6rem;
   }
 }
@@ -282,10 +261,11 @@
   @include miniButton($white, $result-highlight-color);
   font-family: $heading;
   margin: 1rem 0;
-  // &:hover {
+  &:hover {
+    text-decoration: underline;
   //   background-color: transparent;
   //   color: $action-color;
-  // }
+  }
 }
 
 .opened .reveal-text {
@@ -298,52 +278,45 @@
 }
 
 .meta {
-  max-width: 100%;
-  width: 100%;
   position: relative;
   color: $text-highlight-color;
   font-family: $heading;
-  font-size: 1rem;
-  // margin-top: 1rem;
+  font-size: .8rem;
+  line-height: 1.7;
+  max-width: 100%;
+  width: 100%;
+  margin-top: 1rem;
+  .content:hover & {
+    .info .pub, .info .title {
+      color: #000000;
+    }
+  }
 }
 
 .details {
+  overflow: hidden;
+  text-align: left;
   float: left;
   max-width: 50%;
-  overflow: hidden;
   margin-left: 0;
   margin-right: 0;
-  text-align: left;
-  .chapter, .section, .number {
-    font-size: .8rem;
-  }
-  .number {
-    // color: $result-color;
-    // font-weight: $bold;
-    font-style: italic;
-  }
 }
 
 .info {
   position: relative;
   color: inherit;
+  overflow: hidden;
+  text-align: right;
   float: right;
   max-width: 50%;
-  overflow: hidden;
   margin-left: 0;
   margin-right: 0;
-  text-align: right;
   .pub, .title {
-    color: $result-highlight-color;
     border-bottom: 1px solid transparent;
-    font-size: .8rem;
-  }
-  .pub {
-    font-weight: $bold;
   }
   &:hover {
     .pub, .title {
-      border-bottom-color: $result-highlight-color;
+      border-bottom-color: #000000;
     }
   }
 }
@@ -389,7 +362,7 @@
     }
     rect {
       fill: $action-color!important;
-      stroke: $action-color!important;
+      stroke: $white!important;
     }
   }
   &:hover {
@@ -402,13 +375,6 @@
         stroke: $shadow-color!important;
       }
     }
-    // #infini-status {
-    //   color: $shadow-color;
-    //   opacity: 1;
-    //   &:after {
-    //     border-color: $shadow-color;
-    //   }
-    // }
   }
   &.disabled {
     svg {
@@ -417,7 +383,7 @@
       }
       rect {
         fill: $shadow-color!important;
-        stroke: $shadow-color!important;
+        stroke: $white!important;
       }
     }
     &:hover {
@@ -430,15 +396,6 @@
           stroke: $action-color!important;
         }
       }
-      // #infini-status {
-      //   z-index: -1;
-      //   pointer-events: none;
-      //   opacity: 0;
-      //   color: $result-color;
-      //   &:after {
-      //     border-color: $result-color;
-      //   }
-      // }
     }
   }
 }

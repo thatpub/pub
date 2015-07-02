@@ -8,7 +8,7 @@ html {
   padding:0;
   border:0;
   font-size: 100%;
-  font:inherit;
+  // font:inherit;
   vertical-align:baseline;
 }
 
@@ -24,12 +24,14 @@ html, body {
 }
 
 ::-moz-selection {
-  background: #b3d4fc;
+  background: $text-highlight-color;
+  color: $white;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: $text-highlight-color;
+  color: $white;
   text-shadow: none;
 }
 

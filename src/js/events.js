@@ -61,6 +61,8 @@ addEvent(app.noResults_.getElementsByTagName("a")[0], "click", function ( event 
     if ( app.isSearchOpen !== true ) {
       app.searchToggle("open");
     }
+    app.query_.value = "";
+    app.query_.focus();
   }
 });
 
@@ -97,10 +99,10 @@ addEvent(window, "load", function () {
   //   app.term = _.trim(app.query_.value);
   //   app.send_.click();
   // }
-  var l = document.createElement("link"); l.rel = "stylesheet"; l.type = "text/css";
+  var l = document.createElement("link"); l.rel = "stylesheet";
   // l.href = '//fonts.googleapis.com/css?family=Droid+Serif:400,700|Ubuntu:300,400,700';
   // l.href = '//fonts.googleapis.com/css?family=Cantarell:400,700|Ubuntu:300,700';
-  l.href = "//fonts.googleapis.com/css?family=Lato:300,300italic,700";
+  l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
   // var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
   document.getElementsByTagName('head')[0].appendChild(l);
   // app.colorize();

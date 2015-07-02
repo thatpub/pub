@@ -16,8 +16,11 @@
   }
   #ico {
     @include border-radius(4px);
-    border: 2px solid $action-color;
+    border: 2px solid $white;
     padding: .5rem;
+  }
+  &:hover #ico {
+    border-color: $action-color;
   }
 
 }

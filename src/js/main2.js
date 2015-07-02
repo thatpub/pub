@@ -219,22 +219,8 @@ var App = function () {
       return tmp;
     },
     searchToggle: function ( action ) {
-      // var screenHeight = window.innerHeight;
-      if ( action === "close" && (this.isDone === true && this.isFailure !== true) ) {
-        // snabbt(this.searchWrap_, {
-        //   position: [0, -screenHeight, 0],
-        //   opacity: 0,
-        //   fromOpacity: 1,
-        //   easing: 'easeOut',
-        //   duration: 250
-        // });
-        // snabbt(this.wrap_, {
-        //   opacity: 1,
-        //   fromOpacity: 0,
-        //   easing: 'easeOut',
-        //   delay: 250
-        // });
-        // removeEvent(this.searchWrap_, "click", modalClose);
+      if ( action === "close" &&
+          (this.isDone === true && this.isFailure !== true) ) {
         this.isSearchOpen = false;
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
@@ -243,42 +229,11 @@ var App = function () {
         swapClass(this.searchRestore_, "", regEmerge);
       }
       else if ( action === "open" ) {
-        // snabbt(this.wrap_, {
-        //   opacity: 0,
-        //   fromOpacity: 1,
-        //   easing: 'easeOut',
-        //   duration: 250
-        // });
-        // snabbt(this.searchWrap_, {
-        //   position: [0, 0, 0],
-        //   opacity: 1,
-        //   fromOpacity: 0,
-        //   easing: 'easeOut',
-        //   duration: 250
-        // });
         this.isSearchOpen = true;
         this.infiniScroll = false;
-        // addEvent(this.searchWrap_, "click", modalClose);
         swapClass(this.searchRestore_, "emerge", regEmerge);
         swapClass(this.searchWrap_, "emerge", regEmerge);
       }
     }
-    // isDone: function ( done ) {
-    //   var answer;
-    //   if ( typeof done === "undefined" ) {
-    //     answer = this.done;
-    //   }
-    //   else if ( done === true ) {
-    //     swapClass(document.body, "done", regDone);
-    //     this.done = done;
-    //     answer = done;
-    //   }
-    //   else if ( this.isFailure === true ) {
-    //     swapClass(this.noResults_, "failed", regFail);
-    //     this.done = done;
-    //     answer = done;
-    //   }
-    //   return answer;
-    // }
   };
 };
