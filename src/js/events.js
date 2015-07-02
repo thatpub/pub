@@ -30,13 +30,9 @@ addEvent(app.query_, "keypress", function ( event ) {
 
 addEvent(document, "keyup", function ( event ) {
   if ( event.which === 27 ) {
-    if ( event.preventDefault ) {
-      event.preventDefault();
-    } else {
-      event.returnValue = false;
-    }
-    if (regEmerge.test(document.body.className)) {
-      app.searchToggle("hidden");
+    event.preventDefault();
+    if ( regEmerge.test(document.body.className) ) {
+      app.searchToggle("close");
     }
     else {
       /**
@@ -65,10 +61,10 @@ addEvent(app.moreMeta_, "click", function ( event ) {
 addEvent(app.searchRestore_, "click", function ( event ) {
   event.preventDefault();
   if ( regEmerge.test(document.body.className) ) {
-    app.searchToggle("hidden");
+    app.searchToggle("close");
   }
   else {
-    app.searchToggle("visible");
+    app.searchToggle("open");
     app.query_.value = app.term||"";
     app.query_.focus();
   }

@@ -7,6 +7,7 @@
 }
 
 .summary {
+  font-family: $readable;
   text-rendering: optimizeLegibility;
   font-weight: $med;
   text-align: center;
@@ -48,7 +49,6 @@
 }
 
 .related-list {
-  font-family: $font;
   font-size: 1.6rem;
   position: relative;
   width: 100%;
@@ -114,7 +114,7 @@
 
 .result {
   em {
-    color: $result-color;
+    color: $result-highlight-color;
     font-style: normal;
     font-weight: $bold;
   }
@@ -127,48 +127,49 @@
 }
 
 
-/* .filtered {
-  .doc {
-    opacity: .35;
-    &.selected {
-      opacity: 1;
-      &:hover {
-        opacity: 1;
-      }
-    }
-    &:hover {
-      opacity: .65;
-    }
-  }
-  .content {
-    display: none;
-    .number {
-      display: none;
-    }
-    .text, .details {
-      display: none;
-    }
-    .info {
-      pointer-events: none;
-    }
-    &.selected {
-      display: block;
-      .number {
-        display: block;
-      }
-      .text, .details {
-        display: block;
-      }
-      .info {
-        pointer-events: all;
-      }
-    }
-  }
-} */
+// .filtered {
+//   .doc {
+//     opacity: .35;
+//     &.selected {
+//       opacity: 1;
+//       &:hover {
+//         opacity: 1;
+//       }
+//     }
+//     &:hover {
+//       opacity: .65;
+//     }
+//   }
+//   .content {
+//     display: none;
+//     .number {
+//       display: none;
+//     }
+//     .text, .details {
+//       display: none;
+//     }
+//     .info {
+//       pointer-events: none;
+//     }
+//     &.selected {
+//       display: block;
+//       .number {
+//         display: block;
+//       }
+//       .text, .details {
+//         display: block;
+//       }
+//       .info {
+//         pointer-events: all;
+//       }
+//     }
+//   }
+// }
 
 .content {
   color: $text-highlight-color;
-  margin-bottom: 1rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
   position: relative;
   &:hover {
     .info:hover {
@@ -194,25 +195,31 @@
 }
 
 .number {
-  @include ribbon($result-color,$white);
+  @include ribbon(transparent, $result-color);
   @include rightMantel;
+  cursor: default;
   font-weight: $bold;
   // font-style: italic;
   font-family: $readable;
+  font-size: .8em;
+  font-style: italic;
+  // @media all and (min-width: 540px) {
+  //   font-size: inherit;
+  // }
   // @include rightRibbon;
   // @include leftRibbon;
   .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
     display: none;
   }
-  &:hover {
-    /*.climb-up, .look-inside, .do-both {
-      @include miniButton($black, .125rem .375rem);
-      float: left;
-      clear: none;
-      margin: auto 2rem auto 0;
-      cursor: pointer;
-    }*/
-  }
+  // &:hover {
+  //   .climb-up, .look-inside, .do-both {
+  //     @include miniButton($black, .125rem .375rem);
+  //     float: left;
+  //     clear: none;
+  //     margin: auto 2rem auto 0;
+  //     cursor: pointer;
+  //   }
+  // }
 }
 
 .text {
@@ -223,9 +230,8 @@
   font-size: 1.2rem;
   line-height: 1.7;
   clear: both;
-  margin-top: 2rem;
-  margin-bottom: 0;
-  padding-top: 2rem;
+  // margin-top: 1rem;
+  // margin-bottom: 0;
   q {
     &:before {
       position: absolute;
@@ -237,7 +243,8 @@
     }
   }
   .reveal {
-    @include miniButton($result-highlight-color);
+    @include miniButton($result-color);
+    font-family: $heading;
     margin: 1rem 0;
     // &:hover {
     //   background-color: transparent;
@@ -258,7 +265,7 @@
       display: inline;
     }
     .reveal {
-      color: $result-highlight-color;
+      color: $result-color;
       background-color: transparent;
       /*&:hover {
         color: $white;
@@ -266,16 +273,13 @@
       }*/
     }
   }
-  @media all and (min-width:480px) {
-    font-size: 1.2rem;
-  }
-  @media all and (min-width:768px) {
-    font-size: 1.6rem;
+  @media all and (min-width:540px) {
+    font-size: 1.4rem;
     margin-left: auto;
     margin-right: auto;
   }
   @media all and (min-width:1140px) {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -284,7 +288,7 @@
   width: 100%;
   position: relative;
   color: $text-highlight-color;
-  font-family: $font;
+  font-family: $heading;
   font-size: 1rem;
   margin-top: 1rem;
 }
@@ -297,23 +301,19 @@
   margin-right: 0;
   text-align: left;
   .chapter, .section {
-    font-size: .75rem;
-    .title {
-      font-size: .875rem;
-    }
+    font-size: .8rem;
   }
 }
 
 .info {
-  float: right;
   position: relative;
+  color: inherit;
+  float: right;
   max-width: 50%;
   overflow: hidden;
   margin-left: 0;
   margin-right: 0;
   text-align: right;
-  color: inherit;
-  display: block;
   .pub, .title {
     border-bottom: 1px solid transparent;
     color: $result-color;
@@ -324,19 +324,18 @@
       }
     }
   }
-  .pub {
-    font-size: 75%;
+  .pub, .title {
+    font-size: .8rem;
   }
-  .title {
-    font-size: .875rem;
-  }
+  // .title {
+  //   font-size: .8rem;
+  // }
 }
 
 .more {
   @include pushButton($result-color);
   position: absolute;
   bottom: 2rem;
-  display: none;
   &.content {
     max-width: 90%;
     width: 100%;
@@ -346,6 +345,9 @@
 }
 
 .infini-check {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
   input {
     display: none;
   }
@@ -360,17 +362,14 @@
 
 #infini-label {
   /* @include iconInfini; */
-  position: fixed;
   display: block;
   cursor: pointer;
-  top: 1rem;
-  left: 1rem;
   z-index: 2;
   width: 3.2rem;
   height: 3.2rem;
   svg {
-    @include transition(all, .25s, ease-out);
-    opacity: 1;
+    // @include transition(all, .25s, ease-out);
+    // opacity: 1;
     position: absolute;
     left: 0;
     top: 0;
@@ -431,13 +430,13 @@
       }
     }
   }
-  .emerge & {
-    display: block;
-    z-index: -1;
-    svg {
-      opacity: 0;
-    }
-  }
+  // .emerge & {
+  //   display: block;
+  //   z-index: -1;
+  //   svg {
+  //     opacity: 0;
+  //   }
+  // }
 }
 
 /* #infini-status {

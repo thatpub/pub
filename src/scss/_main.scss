@@ -101,12 +101,14 @@ textarea {
 
 .full-wrap {
   // opacity: .5;
+  position: relative;
   opacity: 0;
   display: none;
   width: 100%;
   margin: auto;
   .done & {
     display: block;
+    opacity: 1;
   }
   .failed & {
     display: none;

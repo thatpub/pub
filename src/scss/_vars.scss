@@ -1,7 +1,8 @@
-$font: /* Ubuntu, */ "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
-$readable: /* Roboto,  Ubuntu, Cantarell, "Open Sans", */ "Times New Roman", "Times Roman", "Times", "Georgia", serif; /* Droid Serif, Times New Roman, Times Roman, Times, Georgia, serif; */
-$heading: $font;
-/*$heading: Montserrat, Quando, Quicksand, Georgia, Trebuchet MS, serif;*/
+$font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
+// $readable: Cantarell, Ubuntu, Roboto, Open Sans, $font;
+$readable: "Georgia", "Times New Roman", "Times Roman", "Times", serif;
+$heading: Cantarell, Ubuntu, Roboto, Open Sans, $font;
+// $heading: Montserrat, Quando, Quicksand, Georgia, Trebuchet MS, serif;
 
 $bold: 700;
 $med: 300;
@@ -11,17 +12,20 @@ $sumMargPC: 4rem;
 $text-on-bg-color: #082642;
 $result-color: #205A8F;
 $result-highlight-color: #438ED1;
-$heading-color: #2e282a;
+
 $action-color: #FF9E00;
 $action-highlight-color: #FFFFCC;
-$text-color: #666666;
-$text-highlight-color: #7F7F7F;
+
 $success-color: #63B257;
 $success-highlight-color: #8EFE7C;
+
 $black: #232323;
-$white: #FEFEFE;
+$heading-color: #2e282a;
+$text-color: #666666;
+$text-highlight-color: #7F7F7F;
+$shadow-color: #BBBBBB;
 $bg-color: #F5F5F5;
-$shadow-color: #AAAAAA;
+$white: #FEFEFE;
 
 $result: $result-color;
 $result-highlight: $result-highlight-color;

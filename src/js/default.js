@@ -160,7 +160,7 @@
 
   function modalClose ( event ) {
     if ( event.target === event.currentTarget ) {
-      app.searchToggle("hidden");
+      app.searchToggle("close");
     }
   }
 
@@ -218,6 +218,6 @@
     swapClass(app.loader_, "", regLoad);
     app.loading.now = false;
     if ( el == app.send_ ) {
-      app.searchToggle("hidden");
+      app.searchToggle("close");
     }
   }
