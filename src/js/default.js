@@ -9,11 +9,11 @@
     this.innerHTML = "";
     if (!open) {
       swapClass(this.parentNode, "opened", regOpened);
-      this.appendChild(document.createTextNode("collapse"));
+      this.innerHTML = "collapse";
     }
     else {
-      this.parentNode.className = this.parentNode.className.replace(regOpened, "");
-      this.appendChild(document.createTextNode("expand"));
+      swapClass(this.parentNode, "", regOpened);
+      this.innerHTML = "expand";
     }
     event.preventDefault();
     return false;

@@ -4,8 +4,10 @@ module.exports = function(grunt) {
       dist: {
         options: {
           sourcemap: 'none',
-          /*style: 'compressed',*/
-          style: 'expanded',
+          style: 'compressed',
+          precision: 2,
+          debugInfo: true,
+          lineNumbers: true,
           trace: false
         },
         files: {
@@ -20,6 +22,17 @@ module.exports = function(grunt) {
         },
         files: {
           'src/css/style.pre.css': 'src/scss/style.scss'
+        }
+      },
+      trace: {
+        options: {
+          sourcemap: 'auto',
+          style: 'nested',
+          trace: true,
+
+        },
+        files: {
+          'src/css/style.trace.css': 'src/scss/style.scss'
         }
       }
     },

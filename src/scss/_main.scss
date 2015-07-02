@@ -96,25 +96,13 @@ textarea {
 }
 
 .wrapper {
-  // opacity: 1;
-  // display: block;
   margin: 0;
 }
 
 .full-wrap {
-  // opacity: .5;
   position: relative;
-  // opacity: 0;
-  // display: none;
   width: 100%;
   margin: auto;
-  // .done & {
-  //   display: block;
-  //   opacity: 1;
-  // }
-  .failed & {
-    display: none;
-  }
 }
 
 .page-wrap {
@@ -133,10 +121,9 @@ textarea {
   width: 90%;
   @media all and (min-width: 640px) {
     margin-bottom: 4rem;
-    // margin-top: 4rem;
     max-width: 864px;
   }
-  @media all and (min-width: 1140px) {
-    width: 100%; /* 1140px - 10% for margins */
+  @media all and (min-width: 960px) {
+    width: 100%;
   }
 }
