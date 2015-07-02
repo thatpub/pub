@@ -224,18 +224,18 @@ var App = function () {
     searchToggle: function ( visibility ) {
       var screenHeight = window.innerHeight;
       if ( visibility === "hidden" ) {
+        snabbt(this.wrap_, {
+          opacity: 1,
+          fromOpacity: 0,
+          easing: 'easeOut',
+          delay: 250
+        });
         snabbt(this.searchWrap_, {
           position: [0, -screenHeight, 0],
           opacity: 0,
           fromOpacity: 1,
           easing: 'easeOut',
           duration: 250
-        });
-        snabbt(this.wrap_, {
-          opacity: 1,
-          fromOpacity: 0,
-          easing: 'easeOut',
-          delay: 250
         });
         swapClass(document.body, "", regEmerge);
         removeEvent(this.searchWrap_, "click", modalClose);
@@ -246,14 +246,14 @@ var App = function () {
         snabbt(this.wrap_, {
           opacity: 0,
           fromOpacity: 1,
-          easing: 'easeIn',
+          easing: 'easeOut',
           duration: 250
         });
         snabbt(this.searchWrap_, {
           position: [0, 0, 0],
           opacity: 1,
           fromOpacity: 0,
-          easing: 'easeIn',
+          easing: 'easeOut',
           duration: 250
         });
         swapClass(document.body, "emerge", regEmerge);

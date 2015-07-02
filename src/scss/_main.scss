@@ -44,7 +44,7 @@ textarea {
 }
 
 body {
-  font-family: $readable;
+  font-family: $font;
   font-size: 15px;
   line-height: 1.5;
   background: $bg-color;
@@ -122,24 +122,17 @@ textarea {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3rem;
-  margin-top: 3rem;
+  margin-top: 0;
   border-right: 1px solid $bg-color;
   border-left: 1px solid $bg-color;
   position: relative;
-  display: none;
   width: 90%;
   @media all and (min-width: 768px) {
     margin-bottom: 4rem;
-    margin-top: 4rem;
+    // margin-top: 4rem;
     max-width: 864px;
   }
   @media all and (min-width: 1140px) {
     width: 100%; /* 1140px - 10% for margins */
-  }
-  .done & {
-    display: block;
-  }
-  .failed & {
-    display: none;
   }
 }

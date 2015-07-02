@@ -32,10 +32,10 @@
   -o-transition: $property $duration $easing $delay;
   transition: $property $duration $easing $delay;
 }
-@mixin miniButton($bg, $padding: .2rem .4rem, $color: $white) {
+@mixin miniButton($bg, $padding: .2rem .6rem, $color: $white) {
   display: inline-block;
   font-size: .8rem;
-  font-family: $readable;
+  font-family: $font;
   border: 1px solid;
   padding: $padding;
   background-color: $bg;
@@ -65,19 +65,17 @@
 }
 @mixin ribbon($bg: $result-highlight-color, $color: $text-color) {
   background-color: $bg;
-  //background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
+  // background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
   color: $white;
-  font-size: 1.125rem;
-  /*font-weight: bold;*/
- //text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
+  font-size: 1rem;
+  font-weight: bold;
+  // text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
   // border-width: 1px;
-  //border-width: 1px 1px 2px;
-  //box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  // border-width: 1px 1px 2px;
+  // box-shadow: 0 2px 6px rgba(0,0,0,0.5);
   border-bottom: 1px solid $bg;
   margin: 0;
   padding: .25rem 2.5rem;
-  position: absolute;
-  top: .75rem;
   // &:after {
     // border-width: 7px;
     // border-style: solid;
@@ -105,13 +103,17 @@
   }
 }
 @mixin rightMantel {
-  font-size: 1rem;
-  padding: .25rem 2rem;
-  right: 7px;
-  margin-right: -1rem;
+  position: relative;
+  padding: .2rem 1rem;
+  margin-left: 1rem;
+  float: right;
+  // right: .5rem;
+  // top: .75rem;
+  // margin-right: -1rem;
   @media all and (min-width: 768px) {
-    right: 1rem;
-    margin-right: 2rem;
+  //   right: 1rem;
+    // margin-right: 2rem;
+    margin-left: 2rem;
   }
 }
 @mixin leftRibbon {

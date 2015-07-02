@@ -34,9 +34,7 @@
 
   <div class="wrapper search-wrap" id="search-wrap">
     <div class="search" id="search">
-      <header class="search-title">
-        <h1>Find the needle.</h1>
-      </header>
+      <header class="search-title">Find the needle.</header>
       <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
       <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
       <a href="#page" class="send" id="send"><span class="action">go</span></a>
@@ -49,24 +47,28 @@
   </a>
 
   <div class="wrapper full-wrap" id="wrap">
+
     <div class="page-header" id="page-header">
-      <h2 class="related-label label">Related Documents
-      <!-- <br/>
-      <small>(click to filter locally, press ESC to reset)</small> -->
-      </h2>
-      <ul class="related" id="related"></ul>
+      <div class="wrapper summary" id="summary">
+        <!-- You searched for -->
+        <q class="term" id="term"></q>
+        <p>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</p>
+      </div>
     </div>
 
-    <div class="wrapper summary" id="summary">
-      <!-- You searched for -->
-      <h2><q class="term" id="term"></q></h2>
-      <h3>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</h3>
+    <div class="related">
+      <h2 class="related-label label">Related Documents</h2>
+      <!-- <br/>
+      <small>(click to filter locally, press ESC to reset)</small> -->
+      <ul class="related-list" id="related"></ul>
     </div>
+
     <div class="wrapper page-wrap" id="page">
       <a href="#" class="more meta hidden" id="more-meta" data-control="button">fetch »</a>
       <div class="results" id="results"></div>
       <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
     </div>
+
   </div>
 
   <div class="infini-check">
@@ -75,7 +77,7 @@
       <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48"><g transform="translate(0,-1004)"><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/></g></svg>
 
       <input type="checkbox" id="infini-scroll" name="infini-scroll" checked data-control="setting" />
-      <span id="infini-status"></span>
+      <!-- <span id="infini-status"></span> -->
     </label>
   </div>
 
@@ -92,6 +94,12 @@
       <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
         <% if ( type === " content" ) { %>
         <div class="text clearfix">
+          <div class="number">
+            <p><%= sub %></p>
+            <span class="climb-up reveal">climb up</span>
+            <span class="look-inside reveal">look inside</span>
+            <span class="do-both reveal">do both</span>
+          </div>
           <% if ( parts && concatText ) { %>
             <span class="combined"><%= concatText %><br/></span>
             <span class="parts"><%  var i = 0, count = parts.length;
@@ -109,12 +117,6 @@
             <a href="#" class="reveal">expand</a>
           <% } %>
         </div>
-        <h2 class="number">
-          <p><%= sub %></p>
-          <span class="climb-up reveal">climb up</span>
-          <span class="look-inside reveal">look inside</span>
-          <span class="do-both reveal">do both</span>
-        </h2>
         <div class="meta">
           <div class="details">
             <% if ( details && details.chapter && details.chapterTitle ) { %>

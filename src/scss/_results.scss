@@ -1,40 +1,59 @@
 .page-header {
-  background-color: $result-highlight-color;
+  background-color: $text-on-bg-color;
   border-bottom: 2px solid $white;
-  color: $white;
+  color: $shadow-color;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.summary {
+  text-rendering: optimizeLegibility;
+  font-weight: $med;
+  text-align: center;
+  //margin: $sumMargMob auto 0;
+  // @media all and (min-width: 768px) {
+    // margin: $sumMargPC auto 0;
+  // }
+}
+
+.term {
+  font-size: 2.5rem;
+}
+
+.term, .total, .count {
+  /*color: $action-color;*/
+  color: $white;
 }
 
 .results {
   position: relative;
 }
 
-.related-label {
-  padding: 2rem 1rem 1rem;
-  font-size: 1.4rem;
-  display: none;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  @media all and (min-width: 540px) {
-    font-size: 2rem;
-    width: auto;
-  }
-  .done & {
-    display: block;
-  }
-  .failed & {
-    display: none;
-  }
+.related {
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 
-.related {
+.related-label {
+  display: none;
+  font-size: 1.2rem;
+  // width: 60%;
+  text-align: center;
+  // margin-left: auto;
+  // margin-right: auto;
+  // @media all and (min-width: 540px) {
+  //   font-size: 2rem;
+  //   width: auto;
+  // }
+}
+
+.related-list {
+  font-family: $font;
+  font-size: 1.6rem;
   position: relative;
-  margin: 0 auto;
-  padding-bottom: 1rem;
   width: 100%;
   max-width: 864px;
+  margin: 0 auto;
   list-style: none;
   flex-direction: row;
   justify-content: center;
@@ -70,6 +89,29 @@
   }
 }
 
+.related .doc {
+  @include border-radius(4px);
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid transparent;
+  font-size: .8rem;
+  font-weight: 200;
+  padding: .2rem .333rem;
+  margin: .333rem 1rem .333rem;
+  @media all and (min-width: 480px) {
+    font-size: 1.2rem;
+  }
+  /**
+   * Turn this off until we can handle
+   * the filter on huge amounts of results.
+   */
+  /*cursor: pointer;*/
+  &.pretty {
+    font-weight: $bold;
+    border-width: 3px;
+  }
+}
+
 .result {
   em {
     color: $result-color;
@@ -84,28 +126,6 @@
   }
 }
 
-.related .doc {
-  @include border-radius(4px);
-  flex-grow: 1;
-  text-align: center;
-  border: 1px solid transparent;
-  font-size: .8rem;
-  font-weight: 200;
-  padding: 3px 5px;
-  @media all and (min-width: 480px) {
-    margin: 5px 1rem 5px 0;
-    font-size: 1rem;
-  }
-  /**
-   * Turn this off until we can handle
-   * the filter on huge amounts of results.
-   */
-  /*cursor: pointer;*/
-  &.pretty {
-    font-weight: $bold;
-    border-width: 3px;
-  }
-}
 
 /* .filtered {
   .doc {
@@ -174,14 +194,13 @@
 }
 
 .number {
-  @include ribbon();
+  @include ribbon($result-color,$white);
   @include rightMantel;
+  font-weight: $bold;
+  // font-style: italic;
+  font-family: $readable;
   // @include rightRibbon;
   // @include leftRibbon;
-  /* position: relative;
-  overflow: hidden;
-  margin: 0 0 0 2rem;
-  float: right; */
   .reveal.climb-up, .reveal.look-inside, .reveal.do-both {
     display: none;
   }
@@ -218,12 +237,12 @@
     }
   }
   .reveal {
-    @include miniButton($result-color);
+    @include miniButton($result-highlight-color);
     margin: 1rem 0;
-    /*&:hover {
-      background-color: transparent;
-      color: $action-color;
-    }*/
+    // &:hover {
+    //   background-color: transparent;
+    //   color: $action-color;
+    // }
   }
   .combined {
     display: none;
@@ -239,7 +258,7 @@
       display: inline;
     }
     .reveal {
-      color: $result-color;
+      color: $result-highlight-color;
       background-color: transparent;
       /*&:hover {
         color: $white;
@@ -324,40 +343,6 @@
     left: 5%;
     right: 5%;
   }
-  .done & {
-    display: block;
-  }
-  .failed & {
-    display: none;
-  }
-}
-
-.summary {
-  text-rendering: optimizeLegibility;
-  color: $text-highlight-color;
-  font-weight: $med;
-  text-align: center;
-  display: none;
-  margin: $sumMargMob auto 0;
-  @media all and (min-width: 768px) {
-    margin: $sumMargPC auto 0;
-  }
-  .done & {
-    display: block;
-  }
-  .failed & {
-    display: none;
-  }
-}
-
-.term {
-  font-size: 2.5rem;
-  color: $heading-color;
-}
-
-.total, .count {
-  /*color: $action-color;*/
-  color: $heading-color;
 }
 
 .infini-check {
@@ -373,56 +358,19 @@
   }
 }
 
-#infini-status {
-  @include transition(opacity, .075s, ease-out);
-  pointer-events: none;
-  z-index: -1;
-  display: table;
-  opacity: 0;
-  color: $text-on-bg-color;
-  max-width: 8rem;
-  max-height: 3.2rem;
-  width: 100%;
-  height: 100%;
-  @media handheld,tablet and (min-width: 480px) {
-    pointer-events: auto;
-    z-index: 2;
-    opacity: 1;
-    &:after {
-      display: table-cell;
-      position: absolute;
-      content:'Infinite Scroll';
-      background-color: $white;
-      word-wrap: normal;
-      border: 2px solid;
-      border-left: none;
-      top: 0;
-      left: calc(100% - 2px);
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-}
-
-.disabled #infini-status {
-  color: $shadow-color;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0;
-}
-
 #infini-label {
   /* @include iconInfini; */
-  cursor: pointer;
   position: fixed;
+  display: block;
+  cursor: pointer;
   top: 1rem;
   left: 1rem;
   z-index: 2;
   width: 3.2rem;
   height: 3.2rem;
-  display: block;
   svg {
-    @include transition(all, .075s, ease-out);
+    @include transition(all, .25s, ease-out);
+    opacity: 1;
     position: absolute;
     left: 0;
     top: 0;
@@ -486,6 +434,46 @@
   .emerge & {
     display: block;
     z-index: -1;
-    opacity: 0;
+    svg {
+      opacity: 0;
+    }
   }
 }
+
+/* #infini-status {
+  @include transition(opacity, .075s, ease-out);
+  pointer-events: none;
+  z-index: -1;
+  display: table;
+  opacity: 0;
+  color: $text-on-bg-color;
+  max-width: 8rem;
+  max-height: 3.2rem;
+  width: 100%;
+  height: 100%;
+  @media handheld,tablet and (min-width: 480px) {
+    pointer-events: auto;
+    z-index: 2;
+    opacity: 1;
+    &:after {
+      display: table-cell;
+      position: absolute;
+      content:'Infinite Scroll';
+      background-color: $white;
+      word-wrap: normal;
+      border: 2px solid;
+      border-left: none;
+      top: 0;
+      left: calc(100% - 2px);
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
+
+.disabled #infini-status {
+  color: $shadow-color;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+} */

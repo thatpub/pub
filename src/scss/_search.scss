@@ -16,12 +16,12 @@
     top: 0;
   }
   .done & {
-    @include transform(translate3d(0,-100%,0));
+    // @include transform(translate3d(0,-100%,0));
     opacity: 0;
     display: block;
     margin-top: 0;
     .emerge & {
-      @include transform(translate3d(0,0,0));
+      // @include transform(translate3d(0,0,0));
       z-index: 3;
       opacity: 1;
       width: 100%;
@@ -84,10 +84,10 @@
     width: 34rem;
   }
   &::-webkit-input-placeholder {
-     display: inline;
-     width: 100%;
-     white-space: normal;
-     opacity: .5;
+    display: inline;
+    width: 100%;
+    white-space: normal;
+    opacity: .5;
     font-size: inherit;
      /* @media all and (min-width: 768px) {
      } */

@@ -11,13 +11,13 @@ h1, h2, h3, h4, h5, h6, label {
 }
 .search-title {
   color: $action-color;
-  font-family: $readable;
-  font-size: 1.25rem;
+  // font-family: $readable;
+  font-size: 2rem;
   margin: 0 auto;
   position: relative;
   width: 100%;
   text-align: center;
   @media all and (min-width: 480px) {
-    font-size: 1.75rem;
+    font-size: 2.75rem;
   }
 }
