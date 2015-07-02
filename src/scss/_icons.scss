@@ -21,9 +21,10 @@
   }
 
 }
-@mixin iconInfini {
-  &:before {
-    display: block;
-    content: url(../img/refresh.png);
-  }
-}
+
+// @mixin iconInfini {
+//   &:before {
+//     display: block;
+//     content: url(../img/refresh.png);
+//   }
+// }
