@@ -21,19 +21,21 @@
 
   // Placeholder for filterResults() definition.
 
-  function dataResponse ( httpRequest, action ) {
+  function dataResponse ( httpRequest, action, callback ) {
     var response = JSON.parse(httpRequest.responseText),
       content = response[0] || null,
       meta = response[1] || null;
-    if ( (content && content.hits.total === 0) &&
-          (meta && meta.hits.total === 0) ) {
-      app.isDone = true;
+    app.isDone = true;
+    if (
+        (content && content.hits.total === 0) &&
+        (meta && meta.hits.total === 0)
+      ) {
       app.isFailure = true;
       app.infiniScroll = false;
       document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       swapClass(app.noResults_, "failed", regFail);
-      return false;
+      return callback();
     }
     var a = 0,
       b = 0,
@@ -41,7 +43,6 @@
       rl;
 
     var expires = new Date(Date.now() + 3600000);
-    app.isDone = true;
     expires = expires.toUTCString();
 
     if ( content ) {
@@ -124,9 +125,10 @@
     }
     app.resultsRect = app.results_.getBoundingClientRect();
     app.loading.currentHeight = Math.abs(app.resultsRect.height);
+    callback();
   }
 
-  function sendData ( responder, query, type, action, spot, dot, clbk ) {
+  function sendData ( responder, query, type, action, spot, dot, callback ) {
     var httpRequest = new XMLHttpRequest();
     var url = (('https:' === document.location.protocol) ?
       "https://that.pub/find/" :
@@ -137,8 +139,7 @@
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
-          responder(httpRequest, action);
-          clbk((action === "more") ? null : "");
+          responder(httpRequest, action, callback);
         }
       }
     };
@@ -218,14 +219,8 @@
   }
 
   function endLoading ( el ) {
-    el = ( el === null ) ? app.moreContent_ :
-      ( el === "" ) ? app.send_ : null;
-
     swapClass(app.loader_, "", regLoad);
     app.loading.now = false;
-
-    // if ( el == app.send_ ) {
-    if ( app.isSearchOpen === true ) {
-      app.searchToggle("close");
-    }
+    app.loading.init = false;
+    return false;
   }

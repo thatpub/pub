@@ -1,15 +1,15 @@
 "use strict";
 
 var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
+  // regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
+  regFixInput = /[^A-Za-z0-9\s\-\_\.\,\&]/g,
   regEmerge = / ?emerge/g,
   regHidden = / ?hidden/g,
   regLoad = / ?loading/g,
   regSelected = / ?selected/g,
-  /*regSticky = / ?sticky/g,*/
-  regFiltered = / ?filtered/g,
   regOpened = / ?opened/g,
-  regDone = / ?done|$/gm,
-  regFail = / ?failed/g;
+  regFail = / ?failed/g,
+  regValidate = / ?invalidated/g;
 
 function addEvent ( element, evt, fnc ) {
   return element.addEventListener(evt, fnc, false);
@@ -20,7 +20,7 @@ function removeEvent ( element, evt, fnc ) {
 }
 
 function swapClass ( element, string, regex ) {
-  if ( string !== "" ) {
+  if ( string !== "" && typeof string === "string" ) {
     element.className = ( regex.test(element.className) ) ?
       element.className.replace(regex, "") + " " + string :
       element.className + " " + string;

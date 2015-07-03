@@ -39,12 +39,12 @@
   display: inline-block;
   background-color: $background;
   color: $color;
-  font-size: .8rem;
+  font-size: .8em;
   border: 1px solid;
   padding: $padding;
   font-weight: $bold;
 }
-@mixin pushButton($color, $padding: 1.25rem, $font-size: 2.25rem) {
+@mixin pushButton($color, $padding: 1.25rem) {
   @include border-radius(4px);
   position: relative;
   display: block;
@@ -52,7 +52,6 @@
   color: $white;
   text-align: center;
   border: none;
-  font-size: $font-size;
   margin: .4rem auto 0;
   padding: $padding;
   border-bottom: 1px solid darken($color, 10%); // #22313F
@@ -68,13 +67,13 @@
 
 @mixin paperShadow {
   &:before, &:after {
+    position: absolute;
+    z-index: -1;
     bottom: 26px;
     box-shadow: 0 28px 8px rgba(0,0,0,.25);
     content: "";
     height: 28px;
-    position: absolute;
     width: 48%;
-    z-index: -1;
   }
   &:before {
     left: 2%;

@@ -1,4 +1,33 @@
 
+
+  /*regSticky = / ?sticky/g,*/
+  // regFiltered = / ?filtered/g,
+  // regDone = / ?done|$/gm,
+
+
+  // This was a debugging experiment but could actually use later for direct
+  // searching from URL.
+  //
+  // if ( window.location.search !== "" ) {
+  //   app.query_.value = decodeURIComponent(window.location.search.slice(3).replace(/\+(?!\%20)/g, "%20"));
+  //   app.term = _.trim(app.query_.value);
+  //   app.send_.click();
+  // }
+
+
+    // snabbt(app.query_, 'attention', {
+    //   rotation: [0, 0, Math.PI/2],
+    //   springConstant: 1.9,
+    //   springDeacceleration: 0.9
+    // });
+
+// addEvent(app.moreMeta_, "click", function ( event ) {
+//   event.preventDefault();
+//   swapClass(app.loader_, "loading", regLoad);
+//   sendData(dataResponse, ( document.cookie.placeMeta||app.placeMeta ) ? "" : app.term, "meta", "more", null, document.cookie.placeMeta||app.placeMeta, endLoading);
+//   return false;
+// });
+
       // var screenHeight = window.innerHeight;
         // snabbt(this.searchWrap_, {
         //   position: [0, -screenHeight, 0],

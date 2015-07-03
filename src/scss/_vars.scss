@@ -20,12 +20,15 @@ $action-highlight-color1: #FFB14C;
 $success-color: #63B257;
 $success-highlight-color: #8EFE7C;
 
-$black: #232323;
-$text-color: #666666;
-$shadow-color: #888888;
-$text-highlight-color: #9F9F9F;
-$light: #CCCCCC;
-$bg-color: #F5F5F5;
+$failure-color: #6D29CC;
+$failure-highlight-color: #976AD4;
+
+$black: #333;
+$text-color: #666;
+$shadow-color: #888;
+$text-highlight-color: #AAA;
+$light: #CCC;
+$bg-color: #EEE;
 $white: #FEFEFE;
 
 $result: $result-color;

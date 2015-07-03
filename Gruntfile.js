@@ -5,9 +5,7 @@ module.exports = function(grunt) {
         options: {
           sourcemap: 'none',
           style: 'compressed',
-          precision: 2,
-          debugInfo: true,
-          lineNumbers: true,
+          precision: 3,
           trace: false
         },
         files: {
@@ -18,28 +16,19 @@ module.exports = function(grunt) {
         options: {
           sourcemap: 'none',
           style: 'expanded',
-          trace: true
+          trace: true,
+          debugInfo: true,
+          lineNumbers: true
         },
         files: {
           'src/css/style.pre.css': 'src/scss/style.scss'
-        }
-      },
-      trace: {
-        options: {
-          sourcemap: 'auto',
-          style: 'nested',
-          trace: true,
-
-        },
-        files: {
-          'src/css/style.trace.css': 'src/scss/style.scss'
         }
       }
     },
     cssmin: {
       options: {
         shorthandCompacting: true,
-        roundingPrecision: 2,
+        roundingPrecision: 3,
         sourceMap: false,
         compatibility: false,
         processImport: true
@@ -67,7 +56,6 @@ module.exports = function(grunt) {
         },
         files: {
           'src/js/script.js': [
-            'src/lib/snabbt.js/snabbt.js',
             'src/js/lodash.custom.min.js',
             'src/js/util.js',
             'src/js/main2.js',
@@ -87,7 +75,6 @@ module.exports = function(grunt) {
         },
         files: {
           'src/js/script.js': [
-            'src/lib/snabbt.js/snabbt.js',
             'src/js/lodash.custom.min.js',
             'src/js/util.js',
             'src/js/main2.js',
@@ -218,8 +205,8 @@ module.exports = function(grunt) {
           'src/js/util.js',
           'src/js/main2.js',
           'src/js/default.js',
-          'src/js/events.js',
-          'src/lib/**/*.js'
+          'src/js/events.js'
+          //'src/lib/**/*.js'
         ],
         tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       }

@@ -14,8 +14,6 @@ var App = function () {
     "11": "Nov",
     "12": "Dec"
     },
-    /*Result = Backbone.Model.extend({}),
-    Results = Backbone.Collection.extend({ model: Result }),*/
     wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
@@ -27,6 +25,7 @@ var App = function () {
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
     total_ = document.getElementById("total"),
+    message_ = document.getElementById("message"),
     query_ = document.getElementById("query"),
     send_ = document.getElementById("send"),
     // moreMeta_ = document.getElementById("more-meta"),
@@ -67,9 +66,9 @@ var App = function () {
     });
   }
 
-  /**
-   * Placeholder for colorize();
-   */
+
+  // Placeholder for colorize();
+
 
   return {
     /*result: new Result(),
@@ -85,6 +84,7 @@ var App = function () {
     count_: count_,
     term_: term_,
     total_: total_,
+    message_: message_,
     query_: query_,
     send_: send_,
     // moreMeta_: moreMeta_,
@@ -116,6 +116,7 @@ var App = function () {
     selectedTotal: 0,
     // colorize: colorize,
     colors: {},
+    // I'm really not worried about these three.
     isSearchOpen: null,
     isFailure: null,
     isDone: null,
@@ -220,19 +221,26 @@ var App = function () {
     },
     searchToggle: function ( action ) {
       if ( action === "close" &&
-          (this.isDone === true && this.isFailure !== true) ) {
+          (this.loading.init === true ||
+          (this.isDone === true && this.isFailure !== true)
+          )) {
         this.isSearchOpen = false;
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
           true;
+        // swapClass(this.searchRestore_, "", regEmerge);
         swapClass(this.searchWrap_, "", regEmerge);
-        swapClass(this.searchRestore_, "", regEmerge);
       }
       else if ( action === "open" ) {
+        // swapClass(this.searchRestore_, "emerge", regEmerge);
+        swapClass(this.searchWrap_, "emerge", regEmerge);
+        if ( this.isDone === true && this.isFailure === true ) {
+          this.isFailure = false;
+          this.isDone = false;
+          swapClass(app.noResults_, "", regFail);
+        }
         this.isSearchOpen = true;
         this.infiniScroll = false;
-        swapClass(this.searchRestore_, "emerge", regEmerge);
-        swapClass(this.searchWrap_, "emerge", regEmerge);
       }
     }
   };
