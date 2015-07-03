@@ -1,26 +1,13 @@
 var App = function () {
   "use strict";
-  var months = {
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mar",
-    "04": "Apr",
-    "05": "May",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-    "10": "Oct",
-    "11": "Nov",
-    "12": "Dec"
-    },
-    wrap_ = document.getElementById("wrap"),
+  var wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
     searchRestore_ = document.getElementById("search-restore"),
+    searchIcon_ = searchRestore_.getElementsByTagName("svg")[0],
+    xIcon_ = searchRestore_.getElementsByTagName("svg")[1],
     page_ = document.getElementById("page"),
     pageHeader_ = document.getElementById("page-header"),
     results_ = document.getElementById("results"),
-    noResults_ = document.getElementById("no-results"),
     summary_ = document.getElementById("summary"),
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
@@ -28,29 +15,14 @@ var App = function () {
     message_ = document.getElementById("message"),
     query_ = document.getElementById("query"),
     send_ = document.getElementById("send"),
-    // moreMeta_ = document.getElementById("more-meta"),
     moreContent_ = document.getElementById("more-content"),
     related_ = document.getElementById("related"),
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
-    // infiniStatus_ = document.getElementById("infini-status"),
     loader_ = document.getElementById("loader"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
-    bodyRect,
-    relatedRect,
-    resultsRect,
-    relatedOffsetTop,
-    stickyBarPosition;
-
-  CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
-    if ( "insertRule" in this ) {
-      this.insertRule(selector + "{" + rules + "}", index);
-    }
-    else if ( "addRule" in this ) {
-      this.addRule(selector, rules, index);
-    }
-  };
+    bodyRect, relatedRect, resultsRect, relatedOffsetTop, stickyBarPosition;
 
   function filterOutliers ( someArray ) {
     var values = someArray.concat();
@@ -66,20 +38,15 @@ var App = function () {
     });
   }
 
-
-  // Placeholder for colorize();
-
-
   return {
-    /*result: new Result(),
-    results: new Results(),*/
     wrap_: wrap_,
     searchWrap_: searchWrap_,
     searchRestore_: searchRestore_,
+    searchIcon_: searchIcon_,
+    xIcon_: xIcon_,
     page_: page_,
     pageHeader_: pageHeader_,
     results_: results_,
-    noResults_: noResults_,
     summary_: summary_,
     count_: count_,
     term_: term_,
@@ -87,14 +54,12 @@ var App = function () {
     message_: message_,
     query_: query_,
     send_: send_,
-    // moreMeta_: moreMeta_,
     moreContent_: moreContent_,
     related_: related_,
     placeContent: placeContent,
     placeMeta: placeMeta,
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
-    // infiniStatus_: infiniStatus_,
     loader_: loader_,
     infiniScroll: true,
     loading: {
@@ -114,24 +79,17 @@ var App = function () {
     scoresRelatives: [],
     selectedResults: [],
     selectedTotal: 0,
-    // colorize: colorize,
     colors: {},
-    // I'm really not worried about these three.
+    // I'm really not worried about these three.  My makeshift state system.
     isSearchBoxOpen: null,
     isFailure: null,
-    isDone: null,
+    isDone: false,
     dataRender: function ( data, allScores ) {
       var output = {},
           regType = /chapter|section/,
-          index,
-          group,
-          number,
-          fullPub,
-          rawText,
-          text,
-          date,
-          highlights,
-          fileFormat;
+          index, group, number, fullPub, rawText, text, date,
+          highlights, fileFormat;
+
       if ( !data._source && data.key && data.score ) {
         //  This won't work without more fields in the aggregation to give me
         //  info to use.  File type is unknown, date, URL, etc.
@@ -196,18 +154,8 @@ var App = function () {
           fileFormat: fileFormat,
           type: ( rawText ) ? " content" : " doc"
         };
-
       }
       return output || null;
-    },
-    querySetup: function ( term ) {
-      return (function ( name ) {
-        return {
-          term: term,
-          pubName: name.extract,
-          noPubName: name.remove
-        };
-      })(term.toPubName());
     },
     addItem: function ( results, templateCode, allScores ) {
       var tmp = "",
@@ -215,30 +163,33 @@ var App = function () {
         rl = results.length,
         a = 0;
       for (; a < rl; ++a) {
-        tmp += _.template(templateCode)(that.dataRender(results[a], allScores));
+        tmp += _.template(templateCode)(this.dataRender(results[a], allScores));
       }
       return tmp;
     },
     searchBoxToggle: function ( action ) {
       if ( action === "close" &&
           (this.loading.init === true ||
-          (this.isDone === true && this.isFailure !== true)
-          )) {
-        this.isSearchBoxOpen = false;
+          (this.isDone === true && this.isFailure !== true))
+        ) {
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
           true;
-        // swapClass(this.searchRestore_, "", regEmerge);
         swapClass(this.searchWrap_, "", regEmerge);
+        this.searchIcon_.style.display = "";
+        this.xIcon_.style.display = "none";
+        this.isSearchBoxOpen = false;
+        this.message_.innerHTML = null;
       }
-      else if ( action === "open" ) {
-        // swapClass(this.searchRestore_, "emerge", regEmerge);
-        swapClass(this.searchWrap_, "emerge", regEmerge);
+      else {
         if ( this.isDone === true && this.isFailure === true ) {
           this.isFailure = false;
           this.isDone = false;
-          swapClass(app.noResults_, "", regFail);
+          swapClass(this.searchWrap_, "", regFail);
         }
+        swapClass(this.searchWrap_, "emerge", regEmerge);
+        this.searchIcon_.style.display = "none";
+        this.xIcon_.style.display = "";
         this.isSearchBoxOpen = true;
         this.infiniScroll = false;
       }

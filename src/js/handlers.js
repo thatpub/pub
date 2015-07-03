@@ -4,11 +4,11 @@ function revealText ( event ) {
   this.innerHTML = "";
   if (!open) {
     swapClass(this.parentNode, "opened", regOpened);
-    this.innerHTML = "collapse";
+    this.innerHTML = "expand";
   }
   else {
     swapClass(this.parentNode, "", regOpened);
-    this.innerHTML = "expand";
+    this.innerHTML = "consolidate";
   }
   event.preventDefault();
   return false;

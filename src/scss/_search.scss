@@ -18,7 +18,15 @@
   &.emerge {
     @include transition(all, $animateSpeed, ease-out);
     @include transform(translate3d(0,0,0));
-    // @include transform(translate3d(0,0,0));
+    pointer-events: auto;
+    z-index: 3;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+  }
+  &.failure {
+    color: $failure-color;
+    @include transform(translate3d(0,0,0));
     pointer-events: auto;
     z-index: 3;
     opacity: 1;
@@ -158,16 +166,19 @@
   @media all and (min-width: 1076px) {
     right: calc((100% - 864px)/2 - 4.2rem);
   }
-  #ico {
-    background-color: $action-color;
-    fill: $white!important;
-    stroke: $white!important;
-  }
-  &:hover #ico {
+  svg {
     background-color: $white;
     fill: $action-color!important;
     stroke: $action-color!important;
   }
+  &:hover svg#ico,
+  &:hover svg#x {
+    background-color: $action-color;
+    fill: $white!important;
+    stroke: $white!important;
+  }
+  // &:hover #ico {
+  // }
   // &:focus,
   // &:active {
   //   outline: 0;

@@ -65,9 +65,16 @@ String.prototype.toPubName = function() {
   };
 };
 
+CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
+  if ( "insertRule" in this ) {
+    this.insertRule(selector + "{" + rules + "}", index);
+  }
+  else if ( "addRule" in this ) {
+    this.addRule(selector, rules, index);
+  }
+};
+
 window.downloader = function ( el ) {
-  // This is cross-browser but as you can tell, the rest of that.pub
-  // gives 0 fucks.
   var link = document.createElement("a"),
       file = el.href||el.getAttribute("href")||"";
   if ( file === "" ) { return false; }
@@ -84,3 +91,29 @@ window.downloader = function ( el ) {
   return false;
 };
 
+// Like my own calendar hash table.
+var months = {
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
+  "10": "Oct",
+  "11": "Nov",
+  "12": "Dec"
+};
+
+function querySetup ( term ) {
+  // Honestly no idea why I would do something so pointless.
+  return (function ( name ) {
+    return {
+      term: term,
+      pubName: name.extract,
+      noPubName: name.remove
+    };
+  })(term.toPubName());
+}

@@ -74,44 +74,6 @@
   }
 }
 
-#no-results {
-  @include transition(opacity, $animateSpeed, ease-out);
-  // display: none;
-  pointer-events: none;
-  position: fixed;
-  z-index: -1;
-  display: table-cell;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  vertical-align: middle;
-  width: 100%;
-  height: 100%;
-  a {
-    @include transform(translate3d(0, -50%, 0));
-    @include border-radius(.6rem);
-    position: relative;
-    display: block;
-    text-align: center;
-    font-size: 2.5rem;
-    line-height: 1;
-    padding: 2rem;
-    width: 75%;
-    border: 1px solid;
-    margin: 0 auto;
-    top: 50%;
-  }
-  &.failed {
-    // @include transition(opacity, $animateSpeed, ease-out);
-    pointer-events: auto;
-    z-index: 3;
-    opacity: 1;
-    background-color: $white;
-  }
-}
-
 @keyframes blob-bottom {
   25%, 50%, 75% {
     top: 50%;

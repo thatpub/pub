@@ -1,28 +1,30 @@
 @mixin iconSearch {
-  .no-svg & {
-    svg {
-      &#ico {
-        outline: 0;
-        display: none;
-        fill: transparent;
-        stroke: none;
-      }
-    }
-    &:after {
-      display: inline;
-      content: url(../img/search.png);
-      position: relative;
-    }
+  // .no-svg & {
+  //   svg {
+  //     outline: 0;
+  //     display: none;
+  //     fill: transparent;
+  //     stroke: none;
+  //   }
+  //   &:after {
+  //     display: inline;
+  //     content: url(../img/search.png);
+  //     position: relative;
+  //   }
+  // }
+  svg {
+    @include border-radius(4px);
+    border: 2px solid $action-color;
   }
   #ico {
-    @include border-radius(4px);
-    border: 2px solid $white;
     padding: .5rem;
   }
-  &:hover #ico {
-    border-color: $action-color;
+  #x {
+    padding: .2rem;
   }
-
+  &:hover svg {
+    border-color: $white;
+  }
 }
 
 @mixin iconInfini {

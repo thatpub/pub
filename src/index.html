@@ -46,16 +46,16 @@
 
     <a href="#" id="search-restore" class="search-restore" data-control="button">
       <!-- Created with Inkscape (http://www.inkscape.org/) -->
-      <svg xmlns="//www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
+      <svg xmlns="//www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve" style="display:none;"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
+      <svg xmlns:svg="//www.w3.org/2000/svg" xmlns="//www.w3.org/2000/svg" version="1.1" viewBox="0 0 48 48" width="48" height="48" id="x" style="display:none;"><g transform="translate(0,-1004)"><g transform="matrix(1,0,0,0.9991,0.0022,0.9927)"><rect width="44.64" height="21.56" x="731.8" y="693.8" transform="matrix(0.702,0.7121,-0.7173,0.6968,0,0)" class="s0"/><rect width="44.65" height="21.56" x="676.6" y="-759.5" transform="matrix(-0.7119,0.7022,-0.6966,-0.7175,0,0)" class="s0"/></g></g></svg>
     </a>
 
     <div class="wrapper full-wrap" id="wrap">
 
       <div class="page-header" id="page-header">
         <div class="wrapper summary" id="summary">
-          <!-- You searched for -->
+          <p>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results for</p>
           <q class="term" id="term"></q>
-          <p>showing <span class="count" id="count"></span> of <span class="total" id="total"></span> results</p>
         </div>
       </div>
 
@@ -97,16 +97,16 @@
             <span class="parts"><%  var i = 0, count = parts.length;
                 for (; i < count; ++i) {
                   if ( count > 1 || concatText.length > parts[0].length ) { %>
-                    <q>...<%= parts[i] %>...</q><br/>
+                    <q>...<%= parts[i] %>...</q>
                   <% } else { %>
-                    <%= parts[0] %><br/>
+                    <%= parts[0] %>
                   <% } %>
                 <% } %></span>
-            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">expand</a><% } %>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">consolidate</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
-            <a href="#" class="reveal-text">expand</a>
+            <a href="#" class="reveal-text">consolidate</a>
           <% } /* %>
           <div class="number2">
             <p><%= sub %></p>
@@ -138,6 +138,7 @@
         <% } %>
       </div>
     </script>
-    <script src="js/script.js?__inline=true"></script>
+    <script src="js/build/script.js?__inline=true"></script>
+    <script>;(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b;a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)};a[b].l=1*new Date;c=e.createElement(f);d=e.getElementsByTagName(f)[0];c.async=1;c.src=g;d.parentNode.insertBefore(c,d)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-57324413-1","auto");ga("send","pageview");</script>
   </body>
 </html>

@@ -1,4 +1,34 @@
 
+// filter stuff - from handleResponse() - or is it sticky header stuff?
+// DISABLED
+// Until we can handle huge amounts of results, turn this shit off.
+
+// app.bodyRect = document.body.getBoundingClientRect();
+// app.related_ = document.querySelector("#related")||document.getElementById("related");
+// app.relatedRect = document.querySelector("#related").getBoundingClientRect();
+// app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
+
+
+// Scroll wheel stuff:
+
+  /**
+   * DISABLED
+   *
+   * Until we can handle huge amounts of results, turn this shit off.
+   */
+  /*if ( !app.traveling && pos > app.stickyBarPosition ) {
+    swapClass(app.related_, "sticky", regSticky);
+    app.traveling = true;
+  }
+  if ( app.traveling && pos <= app.stickyBarPosition ) {
+    swapClass(app.related_, "", regSticky);
+    app.traveling = false;
+  }*/
+
+
+
+  // var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");
+  // var url = "//that.pub/find/" + type + "/" + action;
 
   /*regSticky = / ?sticky/g,*/
   // regFiltered = / ?filtered/g,

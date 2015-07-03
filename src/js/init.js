@@ -11,6 +11,7 @@ function handleResponse ( httpRequest, action, callback ) {
     a, b, reveals, rl;
 
   app.isDone = true;
+
   if ((content && content.hits.total === 0) &&
       (meta && meta.hits.total === 0)) {
     app.isFailure = true;
@@ -19,10 +20,9 @@ function handleResponse ( httpRequest, action, callback ) {
     document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     app.message_.innerHTML = null;
     app.message_.appendChild(txt("Your search returned no results.\nGive \'er another go."));
-    swapClass(app.search_, "failed", regFail);
+    swapClass(app.searchWrap_, "failed", regFail);
     return callback();
   }
-
 
   var expires = new Date(Date.now() + 3600000);
   expires = expires.toUTCString();
@@ -52,7 +52,6 @@ function handleResponse ( httpRequest, action, callback ) {
       app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
     }
     else {
-
       var contentGathered = app.scoresContent.length;
       for (b = 0; b < currentContent; ++b) {
         app.scoresContent[(b + contentGathered)] = content.hits.hits[b]._score;
@@ -75,18 +74,7 @@ function handleResponse ( httpRequest, action, callback ) {
     else {
       swapClass(app.moreContent_, "", regHidden);
       app.loading.stillMore = true;
-
-
-      // DISABLED
-      // Until we can handle huge amounts of results, turn this shit off.
-
-      // app.bodyRect = document.body.getBoundingClientRect();
-      // app.related_ = document.querySelector("#related")||document.getElementById("related");
-      // app.relatedRect = document.querySelector("#related").getBoundingClientRect();
-      // app.relatedOffsetTop = Math.abs(app.bodyRect.height) - Math.abs(app.bodyRect.top);
     }
-
-    // filterResults(action === "more");
   }
 
   if ( meta ) {
@@ -104,13 +92,11 @@ function submitQuery ( responder, query, type, action, spot, dot, callback ) {
       "https://that.pub/find/" :
       "http://find.that.pub/") + type + "/" + action,
     data = {
-      t:app.querySetup(query),
+      t:querySetup(query),
       g:spot,
       s:dot
     },
     dataString = JSON.stringify(data);
-
-  console.log(data);
 
   request.onreadystatechange = function() {
     if (request.readyState === 4 && request.status === 200) {
@@ -120,12 +106,15 @@ function submitQuery ( responder, query, type, action, spot, dot, callback ) {
 
   request.open("POST", url, true);
   request.setRequestHeader("Content-type", "application/json");
-  request.send(data);
+  request.send(dataString);
 }
 
 function endLoading () {
   swapClass(app.loader_, "", regLoad);
   app.loading.now = false;
   app.loading.init = false;
+  if ( app.isSearchBoxOpen === true ) {
+    app.searchBoxToggle("close");
+  }
   return false;
 }
