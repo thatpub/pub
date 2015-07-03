@@ -1,23 +1,4 @@
-// Scroll wheel stuff:
 
-  /**
-   * DISABLED
-   *
-   * Until we can handle huge amounts of results, turn this shit off.
-   */
-  /*if ( !app.traveling && pos > app.stickyBarPosition ) {
-    swapClass(app.related_, "sticky", regSticky);
-    app.traveling = true;
-  }
-  if ( app.traveling && pos <= app.stickyBarPosition ) {
-    swapClass(app.related_, "", regSticky);
-    app.traveling = false;
-  }*/
-
-
-
-  // var urlHx = url + (action !== "more" ?  "/" + encodeURIComponent(query).replace("%20", "+") : "");
-  // var url = "//that.pub/find/" + type + "/" + action;
 
   /*regSticky = / ?sticky/g,*/
   // regFiltered = / ?filtered/g,

@@ -1,7 +1,7 @@
 "use strict";
 
 var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
-  // regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
+  regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
   regFixInput = /[^A-Za-z0-9\s\-\_\.\,\&]/g,
   regEmerge = / ?emerge/g,
   regHidden = / ?hidden/g,
@@ -27,6 +27,13 @@ function swapClass ( element, string, regex ) {
   }
   else {
     element.className = element.className.replace(regex, "");
+  }
+}
+
+// Because I type it enough to get lazy.
+function txt ( string ) {
+  if (string && typeof string === "string" && string.length > 0) {
+    return document.createTextNode(string);
   }
 }
 

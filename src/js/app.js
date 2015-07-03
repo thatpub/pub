@@ -117,7 +117,7 @@ var App = function () {
     // colorize: colorize,
     colors: {},
     // I'm really not worried about these three.
-    isSearchOpen: null,
+    isSearchBoxOpen: null,
     isFailure: null,
     isDone: null,
     dataRender: function ( data, allScores ) {
@@ -219,12 +219,12 @@ var App = function () {
       }
       return tmp;
     },
-    searchToggle: function ( action ) {
+    searchBoxToggle: function ( action ) {
       if ( action === "close" &&
           (this.loading.init === true ||
           (this.isDone === true && this.isFailure !== true)
           )) {
-        this.isSearchOpen = false;
+        this.isSearchBoxOpen = false;
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
           true;
@@ -239,7 +239,7 @@ var App = function () {
           this.isDone = false;
           swapClass(app.noResults_, "", regFail);
         }
-        this.isSearchOpen = true;
+        this.isSearchBoxOpen = true;
         this.infiniScroll = false;
       }
     }

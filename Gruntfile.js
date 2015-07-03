@@ -55,11 +55,12 @@ module.exports = function(grunt) {
           sourceMap: false
         },
         files: {
-          'src/js/script.js': [
+          'src/js/build/script.js': [
             'src/js/lodash.custom.min.js',
-            'src/js/util.js',
-            'src/js/main2.js',
-            'src/js/default.js',
+            'src/js/helpers.js',
+            'src/js/app.js',
+            'src/js/handlers.js',
+            'src/js/init.js',
             'src/js/events.js'
           ]
         }
@@ -74,11 +75,12 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         files: {
-          'src/js/script.js': [
+          'src/js/build/script.js': [
             'src/js/lodash.custom.min.js',
-            'src/js/util.js',
-            'src/js/main2.js',
-            'src/js/default.js',
+            'src/js/helpers.js',
+            'src/js/app.js',
+            'src/js/handlers.js',
+            'src/js/init.js',
             'src/js/events.js'
           ]
         }
@@ -110,7 +112,7 @@ module.exports = function(grunt) {
     purifycss: {
       options: {},
       target: {
-        src: ['src/index.html', 'src/js/script.js'],
+        src: ['src/index.html', 'src/js/build/script.js'],
         css: ['src/css/style.pre.css'],
         dest: 'src/css/style.pure.css'
       }
@@ -202,11 +204,13 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: [
-          'src/js/util.js',
-          'src/js/main2.js',
-          'src/js/default.js',
+          'src/js/lodash.custom.min.js',
+          'src/js/helpers.js',
+          'src/js/app.js',
+          'src/js/handlers.js',
+          'src/js/init.js',
           'src/js/events.js'
-          //'src/lib/**/*.js'
+          // 'src/lib/**/*.js'
         ],
         tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       }
