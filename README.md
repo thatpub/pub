@@ -1,6 +1,6 @@
 # pub
 
-This is my [US Air Force](http://www.e-publishing.af.mil/) policy and regulation [search engine](https://that.pub).  It exists as the primary "I told you so" tool.
+This is my [US Air Force](http://www.e-publishing.af.mil/) policy and regulation [search engine](http://that.pub).  It exists as the primary "I told you so" tool.
 
 ----
 
