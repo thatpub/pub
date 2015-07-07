@@ -1,16 +1,28 @@
 "use strict";
+
 function revealText ( event ) {
-  var open = regOpened.test(this.parentNode.className);
-  this.innerHTML = "";
+  var that = this,
+    open;
+  event.preventDefault();
+  open = regOpened.test(that.parentNode.className);
   if (!open) {
-    swapClass(this.parentNode, "opened", regOpened);
-    this.innerHTML = "expand";
+    swapClass(that.parentNode, "opened", regOpened);
+    that.innerHTML = "consolidate";
   }
   else {
-    swapClass(this.parentNode, "", regOpened);
-    this.innerHTML = "consolidate";
+    swapClass(that.parentNode, "", regOpened);
+    that.innerHTML = "expand";
   }
-  event.preventDefault();
+  return false;
+}
+
+function endLoading () {
+  if ( app.isSearchBoxOpen === true ) {
+    app.searchBoxToggle("close");
+  }
+  app.loading.now = false;
+  app.loading.init = false;
+  swapClass(app.loader_, "", regLoad);
   return false;
 }
 
@@ -44,11 +56,10 @@ function infini ( event ) {
 }
 
 function scrollWheeler ( event ) {
-  var t = document.documentElement||document.body.parentNode,
-    pos = (t && typeof t.ScrollTop === "number" ? t : document.body).ScrollTop || window.pageYOffset,
+  var pos = (rootElement && typeof rootElement.ScrollTop === "number" ? rootElement : document.body).ScrollTop || window.pageYOffset,
     delta = pos - app.pos;
 
-  if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > app.loading.currentHeight - 1200 ) {
+  if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > (app.loading.currentHeight - 1200) ) {
     app.loading.now = true;
     more();
   }

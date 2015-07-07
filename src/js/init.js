@@ -1,8 +1,4 @@
 "use strict";
-var app = new App();
-
-app.resultTemplate = document.getElementById("result-template");
-app.relatedTemplate = document.getElementById("related-template");
 
 function handleResponse ( httpRequest, action, callback ) {
   var response = JSON.parse(httpRequest.responseText),
@@ -41,10 +37,10 @@ function handleResponse ( httpRequest, action, callback ) {
         app.scoresContent[b] = content.hits.hits[b]._score;
       }
       for (b = 0; b < currentRelatives; ++b) {
-        app.scoresContent[b] = content.aggregations.related_doc.buckets[b].score;
+        app.scoresRelatives[b] = content.aggregations.related_doc.buckets[b].score;
       }
-      app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate.textContent||app.relatedTemplate.innerText, app.scoresRelatives);
-      app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+      app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate, app.scoresRelatives);
+      app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate, app.scoresContent);
       app.count_.innerHTML = currentContent;
 
       app.relatedRect = app.related_.getBoundingClientRect();
@@ -56,15 +52,8 @@ function handleResponse ( httpRequest, action, callback ) {
       for (b = 0; b < currentContent; ++b) {
         app.scoresContent[(b + contentGathered)] = content.hits.hits[b]._score;
       }
-      app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate.textContent||app.resultTemplate.innerText, app.scoresContent);
+      app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate, app.scoresContent);
       app.count_.innerHTML = app.scoresContent.length;
-    }
-
-    reveals = document.querySelectorAll(".reveal-text");
-    rl = reveals.length;
-    a = 0;
-    for (; a < rl; ++a) {
-      addEvent(reveals[a], "click", revealText);
     }
 
     if ( content.hits.hits.length < 20 ) {
@@ -83,6 +72,14 @@ function handleResponse ( httpRequest, action, callback ) {
   }
   app.resultsRect = app.results_.getBoundingClientRect();
   app.loading.currentHeight = Math.abs(app.resultsRect.height);
+
+  reveals = document.querySelectorAll(".reveal-text");
+  rl = reveals.length;
+  a = 0;
+  for (; a < rl; ++a) {
+    addEvent(reveals[a], "click", revealText);
+  }
+
   callback();
 }
 
@@ -107,14 +104,4 @@ function submitQuery ( responder, query, type, action, spot, dot, callback ) {
   request.open("POST", url, true);
   request.setRequestHeader("Content-type", "application/json");
   request.send(dataString);
-}
-
-function endLoading () {
-  swapClass(app.loader_, "", regLoad);
-  app.loading.now = false;
-  app.loading.init = false;
-  if ( app.isSearchBoxOpen === true ) {
-    app.searchBoxToggle("close");
-  }
-  return false;
 }

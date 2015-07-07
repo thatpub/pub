@@ -57,6 +57,7 @@ module.exports = function(grunt) {
         files: {
           'src/js/build/script.js': [
             'src/js/lodash.custom.min.js',
+            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
             'src/js/app.js',
             'src/js/handlers.js',
@@ -77,6 +78,7 @@ module.exports = function(grunt) {
         files: {
           'src/js/build/script.js': [
             'src/js/lodash.custom.min.js',
+            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
             'src/js/app.js',
             'src/js/handlers.js',
@@ -209,8 +211,8 @@ module.exports = function(grunt) {
           'src/js/app.js',
           'src/js/handlers.js',
           'src/js/init.js',
-          'src/js/events.js'
-          // 'src/lib/**/*.js'
+          'src/js/events.js',
+          'src/lib/**/*.js'
         ],
         tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       }

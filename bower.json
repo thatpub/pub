@@ -18,8 +18,8 @@
     "rules",
     "regulations"
   ],
-  "license": "",
-  "homepage": "https://that.pub",
+  "license": "MIT",
+  "homepage": "http://that.pub",
   "private": true,
   "ignore": [
     "**/.*",
@@ -28,8 +28,6 @@
   "dependencies": {
     "lodash": ">=3.2.0",
     "normalize-scss": "~3.0.2",
-    "reqwest": "~1.1.5",
-    "randomColor": "~0.2.0",
-    "snabbt.js": "~0.5.4"
+    "fastdom": "~0.8.6"
   }
 }

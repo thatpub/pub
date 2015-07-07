@@ -1,4 +1,4 @@
-var App = function () {
+var app = (function (window, document, _, undefined) {
   "use strict";
   var wrap_ = document.getElementById("wrap"),
     searchWrap_ = document.getElementById("search-wrap"),
@@ -12,6 +12,7 @@ var App = function () {
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
     total_ = document.getElementById("total"),
+    message = document.createDocumentFragment(),
     message_ = document.getElementById("message"),
     query_ = document.getElementById("query"),
     send_ = document.getElementById("send"),
@@ -20,25 +21,11 @@ var App = function () {
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
     loader_ = document.getElementById("loader"),
+    resultTemplate_ = document.getElementById("result-template"),
+    relatedTemplate_ = document.getElementById("related-template"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect, relatedRect, resultsRect, relatedOffsetTop, stickyBarPosition;
-
-  function filterOutliers ( someArray ) {
-    // Courtesy of http://stackoverflow.com/a/20811670/2780033
-    // thanks jpau
-    var values = someArray.concat();
-    values.sort( function ( a, b ) {
-      return a - b;
-    });
-    var q1 = values[Math.floor((values.length / 4))];
-    var q3 = values[Math.ceil((values.length * (3 / 4)))];
-    var iqr = q3 - q1;
-    var maxValue = q3 + (iqr * 1.5);
-    return values.filter( function ( x ) {
-        return (x > maxValue);
-    });
-  }
 
   return {
     wrap_: wrap_,
@@ -63,6 +50,8 @@ var App = function () {
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
     loader_: loader_,
+    resultTemplate: resultTemplate_.textContent||resultTemplate_.innerText,
+    relatedTemplate: relatedTemplate_.textContent||relatedTemplate_.innerText,
     infiniScroll: true,
     loading: {
       now: false,
@@ -86,7 +75,7 @@ var App = function () {
     isSearchBoxOpen: null,
     isFailure: null,
     isDone: false,
-    organizeData: function ( data, allScores, scoreOutliers ) {
+    organizeData: function ( data, allScores, upperMax ) {
       var output = {},
           regType = /chapter|section/,
           index, group, number, fullPub, rawText, text, date,
@@ -95,18 +84,18 @@ var App = function () {
       if ( !data._source && data.key && data.score ) {
         //  This won't work without more fields in the aggregation to give me
         //  info to use.  File type is unknown, date, URL, etc.
-        index = _.indexOf(allScores, data.score);
+        index = allScores.indexOf(data.score);
         group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
         output = {
-          url: ("https:" == document.location.protocol ? "https://that.pub/get/" : "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
+          url: (("https:" === document.location.protocol) ?
+              "https://that.pub/get/" :
+              "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
           key: data.key,
           score: data.score,
-          gravitas: (
-            _.contains(
-              scoreOutliers, data.score
-            ) || data.score >= 1
-          ) ? " pretty" + group : " boring" + group
+          gravitas: ( upperMax < data.score || data.score >= 1 ) ?
+            " pretty" + group :
+            " boring" + group
         };
       }
       else if ( data._source.text ) {
@@ -130,16 +119,16 @@ var App = function () {
           number = data._type.toTitle() + " " + data._source.number;
         }
         index = app.colors[data._source.productNo||data._source.pubName];
-        group = ( _.isNumber(index) && (index >= 0 || index < 5)) ? " match-" + index : "";
+        group = ( index && typeof index === "number" && (index >= 0 || index < 5)) ? " match-" + index : "";
         output = {
           score: data._score,
-          gravitas: (
-            _.contains(
-              filterOutliers(allScores), data._score
-              ) || data._score >= 1
-            ) ? " pretty" + group : " boring" + group,
+          gravitas: ( upperMax < data.score || data.score >= 1 ) ?
+            " pretty" + group :
+            " boring" + group,
           date: date,
-          url: ("https:" == document.location.protocol ? "https://that.pub/get/" : "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
+          url: (("https:" === document.location.protocol) ?
+            "https://that.pub/get/" :
+            "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
           fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
@@ -151,8 +140,8 @@ var App = function () {
             sectionTitle: data.highlight["section.title"] || data._source.section && data._source.section.title || null
           },
           rawText: rawText,
-          concatText: (data.highlight["text"] && data.highlight["text"][0]) || null,
-          parts: (Array.isArray(text)) ? text : null,
+          concatText: ( data.highlight.text && data.highlight.text[0] ) || null,
+          parts: ( Array.isArray(text) ) ? text : null,
           fileFormat: fileFormat,
           type: ( rawText ) ? " content" : " doc"
         };
@@ -163,16 +152,17 @@ var App = function () {
       var stringToRender = "",
         rl = results.length,
         a = 0,
-        scoreOutliers = filterOutliers(allScores);
+        upperMax = upperOutlier(allScores);
       for (; a < rl; ++a) {
-        stringToRender += _.template(templateCode)(this.organizeData(results[a], allScores, scoreOutliers));
+        stringToRender += _.template(templateCode)(this.organizeData(results[a], allScores, upperMax));
       }
       return stringToRender;
     },
     searchBoxToggle: function ( action ) {
-      if ( action === "close" &&
-          (this.loading.init === true ||
-          (this.isDone === true && this.isFailure !== true))
+      var that = this;
+      if (action === "close" &&
+            (this.loading.init === true ||
+            (this.isDone === true && this.isFailure !== true))
         ) {
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
@@ -197,4 +187,4 @@ var App = function () {
       }
     }
   };
-};
+})(this, this.document, _);

@@ -13,8 +13,10 @@
     <link rel="shortcut icon" href="//that.pub/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="//that.pub/apple-touch-icon.png">
 
-    <!-- Right now this shit makes no difference but later I'll use it. -->
-    <script type="text/javascript">document.documentElement.className = document.documentElement.className.replace(/ ?no\-js/g, "");</script>
+    <script type="text/javascript">
+      rootElement = document.documentElement||document.body.parentNode;
+      rootElement.className = rootElement.className.replace(/ ?no\-js/g, "");
+    </script>
 
     <link rel="stylesheet" href="css/style.css?__inline=true" type="text/css">
 
@@ -102,11 +104,11 @@
                     <%= parts[0] %>
                   <% } %>
                 <% } %></span>
-            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">consolidate</a><% } %>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">expand</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
-            <a href="#" class="reveal-text">consolidate</a>
+            <a href="#" class="reveal-text">expand</a>
           <% } /* %>
           <div class="number2">
             <p><%= sub %></p>
