@@ -324,9 +324,12 @@
     /* new search initiated, kill the old one */
     if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
       var opts = {
-        hostname: "that.pub",
-        port: 443,
-        path: "/reset",
+        //hostname: "that.pub",
+        //port: 443,
+        //path: "/reset",
+        hostname: "reset.that.pub",
+        port: 80,
+        path: "/",
         method: "POST"
       };
       var newReq = http.request(opts, function() {

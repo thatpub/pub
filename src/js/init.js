@@ -85,9 +85,7 @@ function handleResponse ( httpRequest, action, callback ) {
 
 function submitQuery ( responder, query, type, action, spot, dot, callback ) {
   var request = new XMLHttpRequest(),
-    url = (('https:' === document.location.protocol) ?
-      "https://that.pub/find/" :
-      "http://find.that.pub/") + type + "/" + action,
+    url = document.location.protocol + "//that.pub/find/" + type + "/" + action,
     data = {
       t:querySetup(query),
       g:spot,

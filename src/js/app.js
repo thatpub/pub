@@ -88,10 +88,11 @@ var app = (function (window, document, _, undefined) {
         group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
         output = {
-          url: (("https:" === document.location.protocol) ?
-              "https://that.pub/get/" :
-              "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
+//          url: (("https:" === document.location.protocol) ?
+//              "https://that.pub/get/" :
+//              "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
           key: data.key,
+          url: document.location.protocol + "//that.pub/get/" + data.key.toLowerCase() + ".pdf",
           score: data.score,
           gravitas: ( upperMax < data.score || data.score >= 1 ) ?
             " pretty" + group :
@@ -126,9 +127,10 @@ var app = (function (window, document, _, undefined) {
             " pretty" + group :
             " boring" + group,
           date: date,
-          url: (("https:" === document.location.protocol) ?
-            "https://that.pub/get/" :
-            "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
+          url: document.location.protocol + "//that.pub/get/" + data._source.productNo.toLowerCase() + fileFormat,
+//          url: (("https:" === document.location.protocol) ?
+  //          "https://that.pub/get/" :
+    //        "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
           fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
