@@ -25,6 +25,8 @@ var App = function () {
     bodyRect, relatedRect, resultsRect, relatedOffsetTop, stickyBarPosition;
 
   function filterOutliers ( someArray ) {
+    // Courtesy of http://stackoverflow.com/a/20811670/2780033
+    // thanks jpau
     var values = someArray.concat();
     values.sort( function ( a, b ) {
       return a - b;
@@ -84,7 +86,7 @@ var App = function () {
     isSearchBoxOpen: null,
     isFailure: null,
     isDone: false,
-    dataRender: function ( data, allScores ) {
+    organizeData: function ( data, allScores, scoreOutliers ) {
       var output = {},
           regType = /chapter|section/,
           index, group, number, fullPub, rawText, text, date,
@@ -102,7 +104,7 @@ var App = function () {
           score: data.score,
           gravitas: (
             _.contains(
-              filterOutliers(allScores), data.score
+              scoreOutliers, data.score
             ) || data.score >= 1
           ) ? " pretty" + group : " boring" + group
         };
@@ -158,14 +160,14 @@ var App = function () {
       return output || null;
     },
     addItem: function ( results, templateCode, allScores ) {
-      var tmp = "",
-        that = this,
+      var stringToRender = "",
         rl = results.length,
-        a = 0;
+        a = 0,
+        scoreOutliers = filterOutliers(allScores);
       for (; a < rl; ++a) {
-        tmp += _.template(templateCode)(this.dataRender(results[a], allScores));
+        stringToRender += _.template(templateCode)(this.organizeData(results[a], allScores, scoreOutliers));
       }
-      return tmp;
+      return stringToRender;
     },
     searchBoxToggle: function ( action ) {
       if ( action === "close" &&
