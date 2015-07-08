@@ -1,10 +1,10 @@
 "use strict";
 
-function handleResponse ( httpRequest, action, callback ) {
+function handleResponse ( httpRequest, action ) {
   var response = JSON.parse(httpRequest.responseText),
     content = response[0] || null,
     meta = response[1] || null,
-    a, b, reveals, rl;
+    expires, a = 0, b = 0, reveals, rl;
 
   app.isDone = true;
 
@@ -14,19 +14,32 @@ function handleResponse ( httpRequest, action, callback ) {
     app.infiniScroll = false;
     document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    app.message_.innerHTML = null;
-    app.message_.appendChild(txt("Your search returned no results.\nGive \'er another go."));
+    fastdom.write(function() {
+      app.message_.innerHTML = null;
+      app.message_.appendChild(txt("Your search returned no results.  Give \'er another go."));
+    });
+    swapClass(app.loader_, "", regLoad);
     swapClass(app.searchWrap_, "failed", regFail);
-    return callback();
+    return false;
   }
 
-  var expires = new Date(Date.now() + 3600000);
+  // app.searchBoxToggle("close");
+  expires = new Date(Date.now() + 60000)
   expires = expires.toUTCString();
+  fastdom.defer(function() {
+    if ( app.resetSearch ) {
+      clearTimeout(app.resetSearch);
+    }
+    app.resetSearch = setTimeout(function() {
+      // Server is only caching the scroll/page position for 1 minute.
+      // Sorry bucko.
+      swapClass(app.moreContent_, "hidden", regHidden);
+      app.loading.stillMore = false;
+    }, 60000);
+  });
 
   if ( content ) {
     var currentContent = content.hits.hits.length;
-    app.term_.innerHTML = app.term;
-    app.total_.innerHTML = content.hits.total;
     app.placeContent = content._scroll_id;
     document.cookie = "placeContent=" + app.placeContent + "; expires=" + expires;
     if ( action !== "more" ) {
@@ -39,30 +52,48 @@ function handleResponse ( httpRequest, action, callback ) {
       for (b = 0; b < currentRelatives; ++b) {
         app.scoresRelatives[b] = content.aggregations.related_doc.buckets[b].score;
       }
-      app.related_.innerHTML = app.addItem(content.aggregations.related_doc.buckets, app.relatedTemplate, app.scoresRelatives);
-      app.results_.innerHTML = app.addItem(content.hits.hits, app.resultTemplate, app.scoresContent);
-      app.count_.innerHTML = currentContent;
+      fastdom.write(function() {
+        app.term_.innerHTML = app.term;
+        app.count_.innerHTML = content.hits.hits.length;
+        app.total_.innerHTML = content.hits.total;
+        app.related_.innerHTML = app.renderResults("relatives", content.aggregations.related_doc.buckets);
+        app.results_.innerHTML = app.renderResults("results", content.hits.hits);
+      });
 
+      // fastdom.read(function() {
+      // });
+    }
+    else {
+      // var contentReceived = app.scoresContent.length;
+      for (b = 0; b < currentContent; ++b) {
+        // app.scoresContent[(b + contentReceived)] = content.hits.hits[b]._score;
+        app.scoresContent.push(content.hits.hits[b]._score);
+      }
+      fastdom.write(function() {
+        app.count_.innerHTML = app.scoresContent.length;
+        app.results_.innerHTML += app.renderResults("results", content.hits.hits);
+      });
+    }
+
+    fastdom.defer(function() {
       app.relatedRect = app.related_.getBoundingClientRect();
       app.bodyRect = document.body.getBoundingClientRect();
       app.stickyBarPosition = Math.abs(app.relatedRect.top) + Math.abs(app.bodyRect.top) + Math.abs(app.relatedRect.height);
-    }
-    else {
-      var contentGathered = app.scoresContent.length;
-      for (b = 0; b < currentContent; ++b) {
-        app.scoresContent[(b + contentGathered)] = content.hits.hits[b]._score;
+      reveals = document.querySelectorAll(".reveal-text");
+      rl = reveals.length;
+      a = 0;
+      for (; a < rl; ++a) {
+        addEvent(reveals[a], "click", revealText);
       }
-      app.results_.innerHTML += app.addItem(content.hits.hits, app.resultTemplate, app.scoresContent);
-      app.count_.innerHTML = app.scoresContent.length;
-    }
+    });
 
     if ( content.hits.hits.length < 20 ) {
-      swapClass(app.moreContent_, "hidden", regHidden);
       app.loading.stillMore = false;
+      swapClass(app.moreContent_, "hidden", regHidden);
     }
     else {
-      swapClass(app.moreContent_, "", regHidden);
       app.loading.stillMore = true;
+      swapClass(app.moreContent_, "", regHidden);
     }
   }
 
@@ -70,32 +101,30 @@ function handleResponse ( httpRequest, action, callback ) {
     app.placeMeta = meta._scroll_id;
     document.cookie = "placeMeta=" + app.placeMeta + "; expires=" + expires;
   }
-  app.resultsRect = app.results_.getBoundingClientRect();
-  app.loading.currentHeight = Math.abs(app.resultsRect.height);
 
-  reveals = document.querySelectorAll(".reveal-text");
-  rl = reveals.length;
-  a = 0;
-  for (; a < rl; ++a) {
-    addEvent(reveals[a], "click", revealText);
-  }
+  fastdom.defer(function() {
+    app.resultsRect = app.results_.getBoundingClientRect();
+    app.loading.currentHeight = Math.abs(app.resultsRect.height);
+  });
 
-  callback();
+  swapClass(app.loader_, "", regLoad);
+  app.searchBoxToggle("close");
+  //endLoading();
 }
 
-function submitQuery ( responder, query, type, action, spot, dot, callback ) {
+function submitQuery ( type, action, contentPager, metaPager ) {
   var request = new XMLHttpRequest(),
+    query = app.term,
     url = document.location.protocol + "//that.pub/find/" + type + "/" + action,
     data = {
       t:querySetup(query),
-      g:spot,
-      s:dot
+      g:contentPager,
+      s:metaPager
     },
     dataString = JSON.stringify(data);
-
   request.onreadystatechange = function() {
     if (request.readyState === 4 && request.status === 200) {
-      responder(request, action, callback);
+      handleResponse(request, action);
     }
   };
 

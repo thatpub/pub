@@ -5,13 +5,13 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
   font-size: 1rem;
-  @media all and (min-width: 480px) {
+  @media only screen and (min-width: 480px) {
     font-size: 1.2rem;
   }
-  @media all and (min-width: 640px) {
+  @media only screen and (min-width: 640px) {
     font-size: 1.4rem;
   }
-  @media all and (min-width: 960px) {
+  @media only screen and (min-width: 960px) {
     font-size: 1.8rem;
   }
 }
@@ -25,14 +25,14 @@
   margin-right: 4.5rem;
   max-width: calc(100% - 9rem);
   width: 100%;
-  @media all and (min-width: 960px) {
+  @media only screen and (min-width: 960px) {
     margin-left: auto;
     margin-right: auto;
     max-width: 864px;
     width: 100%;
   }
   //margin: $sumMargMob auto 0;
-  // @media all and (min-width: 640px) {
+  // @media only screen and (min-width: 640px) {
     // margin: $sumMargPC auto 0;
   // }
 }
@@ -55,17 +55,17 @@
   padding-bottom: .6rem;
   padding-top: .6rem;
   font-size: 1rem;
-  @media all and (min-width: 480px) {
+  @media only screen and (min-width: 480px) {
     padding-bottom: 1rem;
     padding-top: 1rem;
     font-size: 1.2rem;
   }
-  @media all and (min-width: 640px) {
+  @media only screen and (min-width: 640px) {
     padding-bottom: 2rem;
     padding-top: 2rem;
     // font-size: 1.4rem;
   }
-  // @media all and (min-width: 960px) {
+  // @media only screen and (min-width: 960px) {
   //   font-size: 1.6rem;
   // }
 }
@@ -77,7 +77,7 @@
   // text-align: center;
   // margin-left: auto;
   // margin-right: auto;
-  // @media all and (min-width: 540px) {
+  // @media only screen and (min-width: 540px) {
   //   font-size: 2rem;
   //   width: auto;
   // }
@@ -110,10 +110,10 @@
   border: 1px solid;
   margin: .4rem;
   padding: .2rem .4rem;
-  @media all and (min-width: 640px) {
+  @media only screen and (min-width: 640px) {
     padding: .3rem .45rem;
   }
-  @media all and (min-width: 960px) {
+  @media only screen and (min-width: 960px) {
     padding: .4rem .6rem;
   }
   &.pretty {
@@ -144,26 +144,23 @@
   }
   &:first-child {
     padding-top: 0;
-    @media all and (min-width: 640px) {
+    @media only screen and (min-width: 640px) {
       padding-top: 2rem;
     }
   }
-  @media all and (min-width: 640px) {
+  @media only screen and (min-width: 640px) {
     padding-left: 3rem;
     padding-right: 3rem;
   }
 }
 
 .text {
-  // @include transition(opacity, .075s, ease-out);
   text-rendering: optimizeLegibility;
   position: relative;
   color: $text-color;
   line-height: 1.7;
   clear: both;
   overflow: hidden;
-  // margin-top: 1rem;
-  // margin-bottom: 0;
   q {
     &:before {
       position: relative;
@@ -217,12 +214,12 @@
       z-index: 0;
     }
   }
-  @media all and (min-width:640px) {
+  @media only screen and (min-width:640px) {
     font-size: 1.4rem;
     margin-left: auto;
     margin-right: auto;
   }
-  @media all and (min-width:960px) {
+  @media only screen and (min-width:960px) {
     font-size: 1.6rem;
   }
 }
@@ -306,14 +303,14 @@
   width: 3.2rem;
   height: 3.2rem;
   left: 1rem;
-  // @media all and (min-width: 640px) {
+  // @media only screen and (min-width: 640px) {
   //   left: calc((864px - 90%)/2 + 1rem);
   // }
 
   // Because 960px + 8.4rem = 1076px.
   // 8.4rem from each icon width (so 3.2rem * 2)
   // plus 1rem offset for each.
-  @media all and (min-width: 1076px) {
+  @media only screen and (min-width: 1076px) {
     left: calc((100% - 864px)/2 - 4.2rem);
   }
   input {

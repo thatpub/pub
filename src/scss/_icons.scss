@@ -28,16 +28,18 @@
 }
 
 @mixin iconInfini {
-  .no-svg & {
-    &:before {
-      position: relative;
-      display: inline;
-      content: url(../img/refresh.png);
-    }
-    #refresh {
-      @include border-radius(4px);
-      border: 2px solid $result-color;
-      padding: .5rem;
-    }
-  }
+  // Haven't incorporated this test yet.
+  //
+  // .no-svg & {
+  //   &:before {
+  //     position: relative;
+  //     display: inline;
+  //     content: url(../img/refresh.png);
+  //   }
+  //   #refresh {
+  //     @include border-radius(4px);
+  //     border: 2px solid $result-color;
+  //     padding: .5rem;
+  //   }
+  // }
 }

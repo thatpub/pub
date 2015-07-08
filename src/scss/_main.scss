@@ -1,3 +1,9 @@
+*, :after, :before {
+  -webkit-box-sizing: border-box!important;
+  -moz-box-sizing: border-box!important;
+  box-sizing: border-box!important;
+}
+
 html {
   overflow-y: scroll;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -7,19 +13,13 @@ html {
   margin:0;
   padding:0;
   border:0;
-  font-size: 15px;
+  font-size: 100%;
   vertical-align:baseline;
 }
 
 html, body {
   min-height: 100%;
   min-width: 100%;
-}
-
-*, :after, :before {
-  -webkit-box-sizing: border-box!important;
-  -moz-box-sizing: border-box!important;
-  box-sizing: border-box!important;
 }
 
 ::-moz-selection {
@@ -47,8 +47,8 @@ textarea {
 
 body {
   font-family: $font;
-  font-size: 100%;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.4;
   background: $bg-color;
 }
 
@@ -119,10 +119,10 @@ textarea {
   border-right: 1px solid $bg-color;
   border-left: 1px solid $bg-color;
   width: 80%;
-  @media all and (min-width: 480px) {
+  @media only screen and (min-width: 480px) {
     width: 85%;
   }
-  @media all and (min-width: 640px) {
+  @media only screen and (min-width: 640px) {
     width: 90%;
     margin-bottom: 4rem;
     max-width: 864px;

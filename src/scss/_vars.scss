@@ -1,16 +1,17 @@
-$font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
-$heading: Lato, "Open Sans", Roboto, "Helvetica Neue", sans-serif;
+$font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
+$heading: "Lato", "Open Sans", "Roboto", "Helvetica Neue", sans-serif;
 
 
 $bold: 700;
-$med: 300;
+$med: 400;
 $sumMargMob: 3rem;
 $sumMargPC: 4rem;
 
-$animateSpeed: .1s;
+$animateSpeed: .075s;
 
 $result-color: #0074B2;
 $result-highlight-color: #00A5FF;
+
 $action-color: #FF9000;
 $action-highlight-color: #FFB14C;
 
@@ -19,9 +20,11 @@ $failure-highlight-color: #976AD4;
 
 $black: #333;
 $text-color: #666;
+
 $shadow-color: #888;
 $text-highlight-color: #AAA;
-$light: #CCC;
+
+// $light: #CCC;
 $bg-color: #F5F5F5;
 $white: #FEFEFE;
 

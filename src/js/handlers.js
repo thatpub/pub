@@ -4,25 +4,31 @@ function revealText ( event ) {
   var that = this,
     open;
   event.preventDefault();
-  open = regOpened.test(that.parentNode.className);
-  if (!open) {
-    swapClass(that.parentNode, "opened", regOpened);
-    that.innerHTML = "consolidate";
+  open = that.getAttribute("data-opened");
+  if (open !== "true") {
+    fastdom.write(function() {
+      swapClass(that.parentNode, "opened", regOpened);
+      that.innerHTML = "consolidate";
+      that.setAttribute("data-opened", "true");
+    });
   }
   else {
-    swapClass(that.parentNode, "", regOpened);
-    that.innerHTML = "expand";
+    fastdom.write(function() {
+      swapClass(that.parentNode, "", regOpened);
+      that.innerHTML = "expand";
+      that.setAttribute("data-opened", "false");
+    });
   }
   return false;
 }
 
 function endLoading () {
-  if ( app.isSearchBoxOpen === true ) {
-    app.searchBoxToggle("close");
-  }
   app.loading.now = false;
   app.loading.init = false;
   swapClass(app.loader_, "", regLoad);
+  if (app.isFailure !== true) {
+    app.searchBoxToggle("close");
+  }
   return false;
 }
 
@@ -39,11 +45,12 @@ function more ( event ) {
   if ( app.loading.now !== true ) {
     swapClass(app.loader_, "loading", regLoad);
   }
-  submitQuery(handleResponse, ( document.cookie.placeContent||app.placeContent ) ? "" : app.term, "content", "more", document.cookie.placeContent||app.placeContent, null, endLoading);
+  submitQuery("content", "more", document.cookie.placeContent||app.placeContent, null);
   return false;
 }
 
 function infini ( event ) {
+  // There's clearly something...in excess here.  Just not in the mood to care.
   var status, doThis;
   app.infiniScroll = this.checked || (!!this.checked);
   status = (app.infiniScroll) ? "enabled" : "disabled";
@@ -56,12 +63,38 @@ function infini ( event ) {
 }
 
 function scrollWheeler ( event ) {
-  var pos = (rootElement && typeof rootElement.ScrollTop === "number" ? rootElement : document.body).ScrollTop || window.pageYOffset,
-    delta = pos - app.pos;
+  fastdom.read(function() {
+    var pos = (rootElement && typeof rootElement.ScrollTop === "number" ? rootElement : document.body).ScrollTop || window.pageYOffset,
+      delta = pos - app.pos;
 
-  if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > (app.loading.currentHeight - 1200) ) {
-    app.loading.now = true;
-    more();
+    if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > (app.loading.currentHeight - 1200) ) {
+      app.loading.now = true;
+      more();
+    }
+    app.pos = pos;
+  });
+}
+
+function searchStart ( event ) {
+  ( event &&
+    event.preventDefault &&
+    event.preventDefault());
+  var val = _.trim(app.query_.value);
+  app.isFailure = false;
+  app.isDone = false;
+  if ( !val ) { // show notification/input validate here
+    app.queryInvalidated = true;
+    swapClass(app.query_, "invalidated", regValidate);
+    fastdom.write(function() {
+      app.message_.innerHTML = null;
+      app.message_.appendChild(txt("You gotta type something first."));
+      app.query_.focus();
+    });
+    return false;
   }
-  app.pos = pos;
+  app.term = val;
+  swapClass(app.loader_, "loading", regLoad);
+  // app.searchBoxToggle("close");
+  submitQuery("content", "search", app.placeContent, app.placeMeta);
+  return false;
 }

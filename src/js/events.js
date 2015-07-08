@@ -1,21 +1,6 @@
 ;(function(window, document, _, app, undefined) {
   "use strict";
-  addEvent(app.send_, "click", function ( event ) {
-    event.preventDefault();
-    var val = _.trim(app.query_.value);
-    if ( !val ) { // show notification/input validate here
-      app.queryInvalidated = true;
-      swapClass(app.query_, "invalidated", regValidate);
-      app.message_.innerHTML = null;
-      app.message_.appendChild(txt("You gotta type something first."));
-      app.query_.focus();
-      return false;
-    }
-    swapClass(app.loader_, "loading", regLoad);
-    app.term = val;
-    submitQuery(handleResponse, app.term, "content", "search", app.placeContent, app.placeMeta, endLoading);
-    return false;
-  });
+  addEvent(app.send_, "click", searchStart);
 
   addEvent(app.query_, "focus", function () {
     if (app.queryInvalidated !== true) {
@@ -44,7 +29,7 @@
       app.message_.innerHTML = null;
     }
     if ( event.which === 13 ) { // ENTER/RETURN key pressed
-      app.send_.click();
+      searchStart(event);
       return false;
     }
   });
@@ -72,7 +57,7 @@
     }
     else {
       app.searchBoxToggle("open");
-      app.query_.value = app.term||"";
+      app.query_.value = app.term;
       app.query_.focus();
     }
     return false;
@@ -86,8 +71,8 @@
     app.isSearchBoxOpen = true;
     app.isDone = false;
     app.query_.focus();
-    var l = document.createElement("link"); l.rel = "stylesheet"; l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
-    var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
+    //var l = document.createElement("link"); l.rel = "stylesheet"; l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
+    //var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
   });
 
 })(this, this.document, _, app);

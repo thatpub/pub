@@ -9,7 +9,10 @@ var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   regSelected = / ?selected/g,
   regOpened = / ?opened/g,
   regFail = / ?failed/g,
-  regValidate = / ?invalidated/g;
+  regValidate = / ?invalidated/g,
+  regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,
+  regEOLDashCheck = /[\-\cI\v\0\f]$/m,
+  regPreTitle = /(?:\W?)\w\S*/g;
 
 function addEvent ( element, evt, fnc ) {
   return element.addEventListener(evt, fnc, false);
@@ -21,12 +24,18 @@ function removeEvent ( element, evt, fnc ) {
 
 function swapClass ( element, string, regex ) {
   if ( string !== "" && typeof string === "string" ) {
-    element.className = ( regex.test(element.className) ) ?
-      element.className.replace(regex, "") + " " + string :
-      element.className + " " + string;
+    fastdom.write(function() {
+      var className = element.className;
+      if ( regex.test(className) ) {
+        return false;
+      }
+      element.className += " " + string;
+    });
   }
   else {
-    element.className = element.className.replace(regex, "");
+    fastdom.write(function() {
+      element.className = element.className.replace(regex, "");
+    });
   }
 }
 
@@ -38,7 +47,7 @@ function txt ( string ) {
 }
 
 String.prototype.toTitle = function () {
-  return this.replace(/(?:\W?)\w\S*/g, function( txt ) {
+  return this.replace(regPreTitle, function( txt ) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 };
@@ -46,9 +55,7 @@ String.prototype.toTitle = function () {
 String.prototype.toPubName = function() {
   var removed,
       count = 0,
-      extraction = [],
-      regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,
-      regEOLDashCheck = /[\-\cI\v\0\f]$/m;
+      extraction = [];
   removed = this.replace(regQueryPubName, function( txt ) {
     if ( extraction && (extraction.length > 0) && regEOLDashCheck.test(extraction[count-1]) ) {
       extraction[count-1] += txt.toUpperCase().replace(/\s/g, "");
@@ -60,8 +67,8 @@ String.prototype.toPubName = function() {
     return "";
   });
   return {
-    extract: extraction,
-    remove: removed
+    remove: removed,
+    extract: extraction
   };
 };
 
@@ -108,7 +115,7 @@ var months = {
 };
 
 function querySetup ( term ) {
-  // Honestly no idea why I would do something so pointless.
+  if ( !term ) return {term:"",pubName:"",noPubName:""};
   return (function ( name ) {
     return {
       term: term,

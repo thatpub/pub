@@ -1,15 +1,14 @@
-/* .loader {
-  @include transform(translate(-50%, 50%));
-  display: none;
-  position: relative;
-  top: 70%;
-  left: 50%;
-  width: 80%;
-  height: 80%;
-} */
+// .loader {
+//   @include transform(translate(-50%, 50%));
+//   display: none;
+//   position: relative;
+//   top: 70%;
+//   left: 50%;
+//   width: 80%;
+//   height: 80%;
+// }
 #loader {
-  // will-change: opacity;
-  // opacity: 0;
+  opacity: 0;
   position: fixed;
   display: none;
   z-index: -2;
@@ -25,17 +24,16 @@
   }
 }
 #loader.loading {
+  @include transition(opacity, $animateSpeed, ease-out);
   display: block;
   z-index: 4;
-  // @include transition(opacity, $animateSpeed, ease-out);
-  // opacity: 1;
+  opacity: 1;
   .spinner {
     display: block;
   }
 }
 .spinner {
   @include transform(translate3d(-50%, -50%, 0));
-  will-change: transform;
   position: absolute;
   width: 2rem;
   height: 2rem;

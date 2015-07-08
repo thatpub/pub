@@ -7,17 +7,15 @@ var app = (function (window, document, _, undefined) {
     xIcon_ = searchRestore_.getElementsByTagName("svg")[1],
     page_ = document.getElementById("page"),
     pageHeader_ = document.getElementById("page-header"),
+    related_ = document.getElementById("related"),
     results_ = document.getElementById("results"),
-    summary_ = document.getElementById("summary"),
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
     total_ = document.getElementById("total"),
-    message = document.createDocumentFragment(),
     message_ = document.getElementById("message"),
     query_ = document.getElementById("query"),
     send_ = document.getElementById("send"),
     moreContent_ = document.getElementById("more-content"),
-    related_ = document.getElementById("related"),
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
     loader_ = document.getElementById("loader"),
@@ -35,8 +33,8 @@ var app = (function (window, document, _, undefined) {
     xIcon_: xIcon_,
     page_: page_,
     pageHeader_: pageHeader_,
+    related_: related_,
     results_: results_,
-    summary_: summary_,
     count_: count_,
     term_: term_,
     total_: total_,
@@ -44,7 +42,6 @@ var app = (function (window, document, _, undefined) {
     query_: query_,
     send_: send_,
     moreContent_: moreContent_,
-    related_: related_,
     placeContent: placeContent,
     placeMeta: placeMeta,
     infiniLabel_: infiniLabel_,
@@ -88,11 +85,11 @@ var app = (function (window, document, _, undefined) {
         group = ( index > -1 ) ? " match-" + index : "";
         app.colors[data.key] = index;
         output = {
-//          url: (("https:" === document.location.protocol) ?
-//              "https://that.pub/get/" :
-//              "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
           key: data.key,
-          url: document.location.protocol + "//that.pub/get/" + data.key.toLowerCase() + ".pdf",
+          // url: (("https:" === document.location.protocol) ?
+             // "https://that.pub/get/" :
+             // "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
+          url: document.location.protocol + "//get.that.pub/" + data.key.toLowerCase() + ".pdf",
           score: data.score,
           gravitas: ( upperMax < data.score || data.score >= 1 ) ?
             " pretty" + group :
@@ -127,10 +124,10 @@ var app = (function (window, document, _, undefined) {
             " pretty" + group :
             " boring" + group,
           date: date,
-          url: document.location.protocol + "//that.pub/get/" + data._source.productNo.toLowerCase() + fileFormat,
-//          url: (("https:" === document.location.protocol) ?
-  //          "https://that.pub/get/" :
-    //        "http://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
+          url: document.location.protocol + "//get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
+          // url: (("https:" === document.location.protocol) ?
+            // "http://that.pub/get/" :
+            // "https://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
           fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
@@ -150,40 +147,52 @@ var app = (function (window, document, _, undefined) {
       }
       return output || null;
     },
-    addItem: function ( results, templateCode, allScores ) {
+    renderResults: function ( itemType, results ) {
       var stringToRender = "",
         rl = results.length,
-        a = 0,
-        upperMax = upperOutlier(allScores);
+        a = 0, upperMax, templateCode, scores;
+      if ( itemType === "results" ) {
+        templateCode = this.resultTemplate;
+        scores = this.scoresContent;
+        upperMax = upperOutlier(scores);
+      }
+      else {
+        templateCode = this.relatedTemplate;
+        scores = this.scoresRelatives;
+        upperMax = upperOutlier(scores);
+      }
       for (; a < rl; ++a) {
-        stringToRender += _.template(templateCode)(this.organizeData(results[a], allScores, upperMax));
+        stringToRender += _.template(templateCode)(this.organizeData(results[a], scores, upperMax));
       }
       return stringToRender;
     },
     searchBoxToggle: function ( action ) {
       var that = this;
-      if (action === "close" &&
-            (this.loading.init === true ||
-            (this.isDone === true && this.isFailure !== true))
-        ) {
+      if ( action === "close" ) {
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
           true;
+        this.term = _.trim(this.query_.value);
         swapClass(this.searchWrap_, "", regEmerge);
-        this.searchIcon_.style.display = "";
-        this.xIcon_.style.display = "none";
+        swapClass(this.searchWrap_, "", regFail);
+        fastdom.write(function() {
+          that.searchIcon_.style.display = "";
+          that.xIcon_.style.display = "none";
+          that.message_.innerHTML = null;
+        });
         this.isSearchBoxOpen = false;
-        this.message_.innerHTML = null;
       }
-      else {
-        if ( this.isDone === true && this.isFailure === true ) {
-          this.isFailure = false;
-          this.isDone = false;
-          swapClass(this.searchWrap_, "", regFail);
-        }
+      else if ( action === "open" ) {
+        fastdom.write(function() {
+          that.query_.value = that.term;
+          that.searchIcon_.style.display = "none";
+          that.xIcon_.style.display = "";
+        });
         swapClass(this.searchWrap_, "emerge", regEmerge);
-        this.searchIcon_.style.display = "none";
-        this.xIcon_.style.display = "";
+        if ( this.isFailure === true ) {
+          this.isFailure = false;
+          swapClass(this.searchWrap_, "failed", regFail);
+        }
         this.isSearchBoxOpen = true;
         this.infiniScroll = false;
       }

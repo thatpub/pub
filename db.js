@@ -1,5 +1,5 @@
-"use strict";
-(function() {
+;(function() {
+  "use strict";
   var express = require("express"),
     /**
      * TODO: remove this stupid dependency on the elasticsearch JS api and just use the HTTP module.
@@ -10,7 +10,7 @@
       host: "localhost:9200",
       log: ""
     }),
-    _ = require("lodash-node"),
+    // _ = require("lodash-node"),
     app = express(),
     bp = require("body-parser"),
     cp = require("cookie-parser"),
@@ -91,7 +91,7 @@
     return {
       index: "dept",
       type: "chapter,section,chapter_content,section_content",
-      scroll: "3600s",
+      scroll: "60s",
       body: {
         "size": 20,
         "query": {
@@ -198,7 +198,7 @@
     return {
       index: "dept",
       type: "pub,form",
-      scroll: "3600s",
+      scroll: "60s",
       body: {
         "size": 5,
         "query": {
@@ -281,7 +281,7 @@
   app.post("/find/content/more", function ( req, res ) {
     if ( req.body.g || req.cookies && req.cookies.placeContent ) {
       var qObj = {
-        scroll: "3600s",
+        scroll: "60s",
         scrollId: req.body.g || req.cookies.placeContent
       };
       client.scroll( qObj, function ( error, response ) {
@@ -300,7 +300,7 @@
   app.post("/find/meta/more", function ( req, res ) {
     if ( req.body.s || req.cookies && req.cookies.placeMeta ) {
       var qObj = {
-        scroll: "3600s",
+        scroll: "60s",
         scrollId: req.body.s || req.cookies.placeMeta
       };
       client.scroll( qObj, function ( error, response ) {
@@ -324,9 +324,6 @@
     /* new search initiated, kill the old one */
     if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
       var opts = {
-        //hostname: "that.pub",
-        //port: 443,
-        //path: "/reset",
         hostname: "reset.that.pub",
         port: 80,
         path: "/",
@@ -351,7 +348,6 @@
             });
           }
         });
-
       });
       newReq.write(req.body.g||req.cookies.placeContent);
       newReq.write(req.body.s||req.cookies.placeMeta);
@@ -376,7 +372,6 @@
         }
       });
     }
-
   });
 
   server = app.listen(process.argv[2], function () {
