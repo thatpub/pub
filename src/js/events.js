@@ -26,7 +26,7 @@
     if ( app.queryInvalidated === true ) {
       app.queryInvalidated = false;
       swapClass(app.query_, "", regValidate);
-      app.message_.innerHTML = null;
+      app.message_.innerHTML = "";
     }
     if ( event.which === 13 ) { // ENTER/RETURN key pressed
       searchStart(event);

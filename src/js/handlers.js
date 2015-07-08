@@ -85,8 +85,7 @@ function searchStart ( event ) {
     app.queryInvalidated = true;
     swapClass(app.query_, "invalidated", regValidate);
     fastdom.write(function() {
-      app.message_.innerHTML = null;
-      app.message_.appendChild(txt("You gotta type something first."));
+      app.message_.innerHTML = "You gotta type something first.";
       app.query_.focus();
     });
     return false;

@@ -179,7 +179,7 @@ var app = (function (window, document, _, undefined) {
         fastdom.write(function() {
           that.searchIcon_.style.display = "";
           that.xIcon_.style.display = "none";
-          that.message_.innerHTML = null;
+          that.message_.innerHTML = "";
         });
         this.isSearchBoxOpen = false;
       }

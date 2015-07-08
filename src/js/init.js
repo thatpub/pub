@@ -15,8 +15,7 @@ function handleResponse ( httpRequest, action ) {
     document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     fastdom.write(function() {
-      app.message_.innerHTML = null;
-      app.message_.appendChild(txt("Your search returned no results.  Give \'er another go."));
+      app.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
     });
     swapClass(app.loader_, "", regLoad);
     swapClass(app.searchWrap_, "failed", regFail);
