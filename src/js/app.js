@@ -47,8 +47,8 @@ var app = (function (window, document, _, undefined) {
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
     loader_: loader_,
-    resultTemplate: resultTemplate_.textContent||resultTemplate_.innerText,
-    relatedTemplate: relatedTemplate_.textContent||relatedTemplate_.innerText,
+    resultTemplate: _.template(resultTemplate_.textContent||resultTemplate_.innerText),
+    relatedTemplate: _.template(relatedTemplate_.textContent||relatedTemplate_.innerText),
     infiniScroll: true,
     loading: {
       now: false,
@@ -108,7 +108,6 @@ var app = (function (window, document, _, undefined) {
           fullPub = data.highlight["productNo.exact"] || data.highlight["productNo.raw"] || data.highlight.productNo;
           fullPub = fullPub.shift();
         }
-
         date = ( data._source.releaseDate ) ?
                  data._source.releaseDate.substring(6, 8) + " " + months[data._source.releaseDate.substring(4, 6)] + " " + data._source.releaseDate.substring(0, 4) :
                  data._source.publishedDate.substring(0, 2) + " " + months[data._source.publishedDate.substring(2, 4)] + " " + data._source.publishedDate.substring(4, 8);
@@ -149,6 +148,7 @@ var app = (function (window, document, _, undefined) {
     },
     renderResults: function ( itemType, results ) {
       var stringToRender = "",
+        objWithData = {},
         rl = results.length,
         a = 0, upperMax, templateCode, scores;
       if ( itemType === "results" ) {
@@ -162,7 +162,8 @@ var app = (function (window, document, _, undefined) {
         upperMax = upperOutlier(scores);
       }
       for (; a < rl; ++a) {
-        stringToRender += _.template(templateCode)(this.organizeData(results[a], scores, upperMax));
+        objWithData = this.organizeData(results[a], scores, upperMax);
+        stringToRender += templateCode(objWithData);
       }
       return stringToRender;
     },

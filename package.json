@@ -2,9 +2,9 @@
   "name": "thatPub",
   "version": "1.0.0",
   "description": "DoD policies and regulations search engine",
-  "main": "db.js",
+  "main": "index.html",
   "scripts": {
-    "setup": "npm install && bower install && grunt build",
+    "setup": "npm install && bower install && grunt && npm run db",
     "db": "sh dbinit.sh",
     "watch": "screen -dmS pub-watch grunt watch"
   },
@@ -27,8 +27,7 @@
     "cors": ">=2.5.3",
     "elasticsearch": ">=3.1.1",
     "express": ">=4.0.0",
-    "grunt": ">=0.4.5",
-    "lodash-node": ">=2.4.1"
+    "grunt": ">=0.4.5"
   },
   "devDependencies": {
     "consolidate": ">=0.10.0",

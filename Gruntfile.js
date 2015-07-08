@@ -47,7 +47,7 @@ module.exports = function(grunt) {
           compress: {
             unsafe: true,
             drop_console: true,
-            keep_fargs: true
+            keep_fargs: false
           },
           screwIE8: true,
           wrap: false,

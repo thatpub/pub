@@ -14,7 +14,8 @@
   // }
   svg {
     @include border-radius(4px);
-    border: 2px solid $action-color;
+    // border: 2px solid $action-color;
+    border: 2px solid transparent;
   }
   #ico {
     padding: .5rem;

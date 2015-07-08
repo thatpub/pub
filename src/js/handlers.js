@@ -66,7 +66,6 @@ function scrollWheeler ( event ) {
   fastdom.read(function() {
     var pos = (rootElement && typeof rootElement.ScrollTop === "number" ? rootElement : document.body).ScrollTop || window.pageYOffset,
       delta = pos - app.pos;
-
     if ( app.infiniScroll === true && app.loading.now === false && app.loading.stillMore === true && (delta > 0) && pos > (app.loading.currentHeight - 1200) ) {
       app.loading.now = true;
       more();
