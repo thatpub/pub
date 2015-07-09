@@ -92,7 +92,6 @@ function searchStart ( event ) {
   }
   app.term = val;
   swapClass(app.loader_, "loading", regLoad);
-  // app.searchBoxToggle("close");
   submitQuery("content", "search", app.placeContent, app.placeMeta);
   return false;
 }

@@ -18,6 +18,7 @@ function handleResponse ( httpRequest, action ) {
       app.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
     });
     swapClass(app.loader_, "", regLoad);
+    app.xIcon_.style.display = "none";
     swapClass(app.searchWrap_, "failed", regFail);
     return false;
   }
