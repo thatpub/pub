@@ -228,9 +228,6 @@
   @include miniButton($result-highlight-color, $white);
   font-family: $heading;
   margin: 1rem 0;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .opened .reveal-text {

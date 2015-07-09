@@ -7,19 +7,20 @@
 
     <title>thatPub - Search USAF regulations</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <meta name="author" content="//that.pub/humans.txt">
 
     <link rel="shortcut icon" href="//that.pub/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="//that.pub/apple-touch-icon.png">
 
+    <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700:latin"> -->
     <script type="text/javascript">
       rootElement = document.documentElement||document.body.parentNode;
       // Not prepared for non-JS users yet anyway so why bother right now
       // rootElement.className = rootElement.className.replace(/ ?no\-js/g, "");
+      WebFontConfig={google:{a:["Lato:400,700:latin"]}};var a=document.createElement("script");a.src=("https:"==document.location.protocol?"https":"http")+"://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";a.type="text/javascript";a.async="true";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);
     </script>
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700:latin__inline=true">
     <link rel="stylesheet" href="css/style.css?__inline=true">
 
   </head>
@@ -44,11 +45,11 @@
         <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
         <label for="query" id="message"></label>
         <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
-        <a href="#page" class="send" id="send"><span class="action">go</span></a>
+        <a href="#page" class="send clickable" id="send" role="button"><span class="action">go</span></a>
       </div>
     </div>
 
-    <a href="#" id="search-restore" class="search-restore" data-control="button">
+    <a href="#" id="search-restore" class="search-restore clickable" data-control="button">
       <!-- Created with Inkscape (http://www.inkscape.org/) -->
       <svg xmlns="//www.w3.org/2000/svg" enable-background="new 0 0 512 512" height="48" id="ico" version="1.2" viewBox="0 0 512 512" width="48" xml:space="preserve" style="display:none;"><path d="M498 498c-19 19-49 19-68 0l-85-85c-35 22-76 36-121 36C100 449 0 348 0 224S100 0 224 0c124 0 224 100 224 224 0 45-13 86-36 121l85 85C517 449 517 479 498 498zM224 64c-89 0-160 72-160 160 0 89 72 160 160 160 89 0 160-72 160-160C385 136 313 64 224 64z"/></svg>
       <svg xmlns:svg="//www.w3.org/2000/svg" xmlns="//www.w3.org/2000/svg" version="1.1" viewBox="0 0 48 48" width="48" height="48" id="x" style="display:none;"><g transform="translate(0,-1004)"><g transform="matrix(1,0,0,0.9991,0.0022,0.9927)"><rect width="44.64" height="21.56" x="731.8" y="693.8" transform="matrix(0.702,0.7121,-0.7173,0.6968,0,0)" class="s0"/><rect width="44.65" height="21.56" x="676.6" y="-759.5" transform="matrix(-0.7119,0.7022,-0.6966,-0.7175,0,0)" class="s0"/></g></g></svg>
@@ -71,15 +72,15 @@
       </div>
 
       <div class="wrapper page-wrap" id="page">
-        <!-- <a href="#" class="more meta hidden" id="more-meta" data-control="button">fetch »</a> -->
+        <!-- <a href="#" class="more meta clickable hidden" id="more-meta" data-control="button">fetch »</a> -->
         <div class="results" id="results"></div>
-        <a href="#" class="more content" id="more-content"><span class="action">more, please</span></a>
+        <a href="#" class="more content clickable" role="button" id="more-content"><span class="action">more, please</span></a>
       </div>
 
     </div>
 
     <div class="infini-check">
-      <label for="infini-scroll" class="enabled" id="infini-label" title="Disable infinite scroll">
+      <label for="infini-scroll" class="enabled clickable" id="infini-label" title="Disable infinite scroll">
       <!-- Created with Inkscape (http://www.inkscape.org/) -->
         <svg xmlns:svg="//www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="48" height="48" id="refresh"><g transform="translate(0,-1004)"><rect width="46.2" height="46.06" ry="1.894" x="0.959" y="1005" style="fill:none;stroke-linejoin:round;stroke-width:1.922;stroke:#000"/><path d="m27.17 1045c2.19-3 3.83-7 3.83-11 0-1-0.42-1-2.81-1-3.37 0-3.57-1-0.7-4 0 0 0 0 2.4-3 0 0 1.43-2 2.53-3 1.82-2 1.82-2 3.63 0 1.59 2 3.74 5 4.93 6 2.87 3 2.67 4-0.7 4-2.36 0-2.82 0-2.82 1 0 5-5.34 10-10.11 13-2.35 1-2.35 1-0.18-2zM12.8 1034c-1.44-2-1.54-2-1.54-2-1.24-2-3.112-4-3.112-4-2.871-3-2.671-4 0.697-4 2.365 0 2.825 0 2.825-1 0-5 4.09-10 10.68-13 4.35-1 2.83-1-0.39 2-1.81 3-3.83 7-3.84 11 0 1 0.43 1 2.82 1 3.37 0 3.57 1 0.7 4 0 0 0 0-3.12 4-0.62 1 0 0-1.53 2-0.85 1-1.79 2-2.1 2-0.31 0-1.25-1-2.09-2z" fill="#333"/></g></svg>
         <input type="checkbox" id="infini-scroll" name="infini-scroll" checked data-control="setting" />
@@ -106,11 +107,11 @@
                     <%= parts[0] %>
                   <% } %>
                 <% } %></span>
-            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text">expand</a><% } %>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text clickable">expand</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
             <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
-            <a href="#" class="reveal-text">expand</a>
+            <a href="#" class="reveal-text clickable">expand</a>
           <% } /* %>
           <div class="number2">
             <p><%= sub %></p>
@@ -129,13 +130,13 @@
             <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
             <% } %>
           </div>
-          <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+          <a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
             <span class="pub"><%= fullPub %></span><br/>
             <span class="title"><%= title %></span>
           </a>
         </div>
         <% } else { %>
-        <a class="info" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+        <a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
           <span class="pub"><%= fullPub %></span><br/>
           <span class="title"><%= title %></span>
         </a>

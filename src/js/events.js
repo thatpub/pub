@@ -75,4 +75,8 @@
     //var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
   });
 
+  addEvent(document, "DOMContentLoaded", function() {
+    FastClick.attach(document.body);
+  });
+
 })(this, this.document, _, app);

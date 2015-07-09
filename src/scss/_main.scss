@@ -58,6 +58,11 @@ a {
   border-bottom: 1px solid transparent;
 }
 
+.clickable {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
 q {
   position: relative;
   quotes: "“" "”" "‘" "’";

@@ -27,11 +27,10 @@ module.exports = function(grunt) {
     },
     cssmin: {
       options: {
-        shorthandCompacting: true,
-        roundingPrecision: 3,
-        sourceMap: false,
+        roundingPrecision: -1,
         compatibility: false,
-        processImport: true
+        processImport: true,
+        keepSpecialComments: 0
       },
       dist: {
         files: {
