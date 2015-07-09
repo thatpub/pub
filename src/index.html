@@ -42,8 +42,8 @@
     <div class="wrapper search-wrap emerge" id="search-wrap">
       <div class="search" id="search">
         <header class="search-title">Find the needle.</header>
-        <input type="text" name="query" class="query" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
-        <label for="query" id="message"></label>
+        <input type="text" name="query" class="query needsclick" id="query" placeholder="Ex: dawg msme sgp" autofocus tabindex="0" autocomplete="off" data-control="input" />
+        <label for="query" id="message" class="needsclick"></label>
         <noscript><p>Clicking this button is just gonna disappoint you.</p></noscript>
         <a href="#page" class="send clickable" id="send" role="button"><span class="action">go</span></a>
       </div>
@@ -110,7 +110,7 @@
             <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text clickable">expand</a><% } %>
           <% } else { %>
             <span class="combined"><%= rawText %></span>
-            <span class="parts"><%= _.trunc(rawText, { length: 100 }) %></span>
+            <span class="parts"><% /*_.trunc(rawText, { length: 100 })*/ %></span>
             <a href="#" class="reveal-text clickable">expand</a>
           <% } /* %>
           <div class="number2">

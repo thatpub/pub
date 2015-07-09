@@ -1,11 +1,13 @@
 .idea
 .sass-cache
+*.bak
 query.txt
 node_modules
 src/index.full.html
 src/css
 src/js/build/script.js
 src/js/old
+src/img/old
 dist/css
 dist/js
 dist/img

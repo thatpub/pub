@@ -78,7 +78,7 @@ function searchStart ( event ) {
   ( event &&
     event.preventDefault &&
     event.preventDefault());
-  var val = _.trim(app.query_.value);
+  var val = app.query_.value.trim();
   app.isFailure = false;
   app.isDone = false;
   if ( !val ) { // show notification/input validate here

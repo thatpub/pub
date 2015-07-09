@@ -173,7 +173,7 @@ var app = (function (window, document, _, undefined) {
         this.infiniScroll = (this.infiniScroll_) ?
           (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) :
           true;
-        this.term = _.trim(this.query_.value);
+        this.term = this.query_.value.trim();
         swapClass(this.searchWrap_, "", regEmerge);
         swapClass(this.searchWrap_, "", regFail);
         fastdom.write(function() {
