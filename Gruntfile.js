@@ -246,7 +246,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
 
-  grunt.registerTask('fold', ['sass:dist', 'uglify:dist', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after']);
-  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after', 'newer:imagemin', 'tinypng']);
+  /*grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);*/
   grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
 };

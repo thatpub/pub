@@ -4,7 +4,7 @@
   "description": "DoD policies and regulations search engine",
   "main": "index.html",
   "scripts": {
-    "setup": "npm install && bower install && grunt fold && npm run db",
+    "setup": "npm install && bower install && grunt && npm run db",
     "db": "sh dbinit.sh",
     "watch": "screen -dmS pub-watch grunt watch"
   },
