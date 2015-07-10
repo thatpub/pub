@@ -1,68 +1,3 @@
-*, :after, :before {
-  -webkit-box-sizing: border-box!important;
-  -moz-box-sizing: border-box!important;
-  box-sizing: border-box!important;
-}
-
-html {
-  overflow-y: scroll;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-osx-font-smoothing: greyscale;
-  zoom: 1;
-  *zoom: 1;
-  margin:0;
-  padding:0;
-  border:0;
-  font-size: 100%;
-  vertical-align:baseline;
-}
-
-html, body {
-  min-height: 100%;
-  min-width: 100%;
-}
-
-::-moz-selection {
-  background: $text-highlight-color;
-  color: $white;
-  text-shadow: none;
-}
-
-::selection {
-  background: $text-highlight-color;
-  color: $white;
-  text-shadow: none;
-}
-
-html,
-body,
-button,
-select,
-input,
-textarea {
-  color: $text-color;
-  outline: 0;
-  font-weight: $med;
-}
-
-body {
-  font-family: $font;
-  font-size: 15px;
-  line-height: 1.4;
-  background: $bg-color;
-}
-
-a {
-  color: $result-color;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-
-.clickable {
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-}
-
 q {
   position: relative;
   quotes: "“" "”" "‘" "’";
@@ -83,34 +18,7 @@ hr {
   padding: 0;
 }
 
-audio,
-canvas,
-img,
-video {
-  vertical-align: middle;
-}
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.wrapper {
-  margin: 0;
-}
-
-.full-wrap {
-  position: relative;
-  width: 100%;
-  margin: auto;
-}
-
-.page-wrap {
+#page {
   @include paperShadow;
   @include border-radius(4px);
   position: relative;

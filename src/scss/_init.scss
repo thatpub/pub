@@ -1,0 +1,66 @@
+*, :after, :before {
+  -webkit-box-sizing: border-box!important;
+  -moz-box-sizing: border-box!important;
+  box-sizing: border-box!important;
+}
+
+html {
+  overflow-y: scroll;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: greyscale;
+  zoom: 1;
+  *zoom: 1;
+  font-size: 100%;
+}
+
+html, body {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+::-moz-selection {
+  background: $text-highlight-color;
+  color: $white;
+  text-shadow: none;
+}
+
+::selection {
+  background: $text-highlight-color;
+  color: $white;
+  text-shadow: none;
+}
+
+html,
+body,
+button,
+select,
+input,
+textarea {
+  color: $text-color;
+  outline: 0;
+  font-weight: $med;
+}
+
+body {
+  font-family: $font;
+  font-size: 15px;
+  line-height: 1.4;
+  background: $bg-color;
+}
+
+a {
+  color: $result-color;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.clickable {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+#wrap {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}

@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Search USAF regulations (unofficial)</title>
+    <title>thatPub - Search USAF regulations</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <meta name="author" content="//that.pub/humans.txt">
@@ -13,7 +13,6 @@
     <link rel="shortcut icon" href="//that.pub/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="//that.pub/apple-touch-icon.png">
 
-    <style>@charset "UTF-8";</style>
     <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700:latin"> -->
     <script type="text/javascript">
       rootElement = document.documentElement||document.body.parentNode;
@@ -22,7 +21,7 @@
       WebFontConfig={google:{a:["Lato:400,700:latin"]}};var a=document.createElement("script");a.src=("https:"==document.location.protocol?"https":"http")+"://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";a.type="text/javascript";a.async="true";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);
     </script>
 
-    <link rel="stylesheet" href="css/before.css?__inline=true">
+    <link rel="stylesheet" href="css/style.css?__inline=true">
 
   </head>
   <body>
@@ -88,7 +87,63 @@
         <!-- <span id="infini-status"></span> -->
       </label>
     </div>
+
+    <script type="text/template" id="related-template">
+      <li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">
+        <%= key %>
+      </li>
+    </script>
+    <script type="text/template" id="result-template">
+      <div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">
+        <% if ( type === " content" ) { %>
+        <div class="text clearfix">
+          <% if ( parts && concatText ) { %>
+            <span class="combined"><%= concatText %><br/></span>
+            <span class="parts"><%  var i = 0, count = parts.length;
+                for (; i < count; ++i) {
+                  if ( count > 1 || concatText.length > parts[0].length ) { %>
+                    <q>...<%= parts[i] %>...</q>
+                  <% } else { %>
+                    <%= parts[0] %>
+                  <% } %>
+                <% } %></span>
+            <% if ( count > 1 || concatText.length > parts[0].length ) { %><a href="#" class="reveal-text clickable">expand</a><% } %>
+          <% } else { %>
+            <span class="combined"><%= rawText %></span>
+            <span class="parts"><% /*_.trunc(rawText, { length: 100 })*/ %></span>
+            <a href="#" class="reveal-text clickable">expand</a>
+          <% } /* %>
+          <div class="number2">
+            <p><%= sub %></p>
+            <span class="reveal climb-up">climb up</span>
+            <span class="reveal look-inside">look inside</span>
+            <span class="reveal do-both">do both</span>
+          </div>
+          <% */ %>
+        </div>
+        <div class="meta">
+          <div class="details">
+            <span class="number"><%= sub %></span><br/>
+            <% if ( details && details.chapter && details.chapterTitle ) { %>
+            <span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>
+            <% } if ( details && details.section && details.sectionTitle ) { %>
+            <span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>
+            <% } %>
+          </div>
+          <a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+            <span class="pub"><%= fullPub %></span><br/>
+            <span class="title"><%= title %></span>
+          </a>
+        </div>
+        <% } else { %>
+        <a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">
+          <span class="pub"><%= fullPub %></span><br/>
+          <span class="title"><%= title %></span>
+        </a>
+        <% } %>
+      </div>
+    </script>
     <script src="js/build/script.js?__inline=true"></script>
-    <script>/*;(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b;a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)};a[b].l=1*new Date;c=e.createElement(f);d=e.getElementsByTagName(f)[0];c.async=1;c.src=g;d.parentNode.insertBefore(c,d)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-57324413-1","auto");ga("send","pageview");*/</script>
+    <script>;(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b;a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)};a[b].l=1*new Date;c=e.createElement(f);d=e.getElementsByTagName(f)[0];c.async=1;c.src=g;d.parentNode.insertBefore(c,d)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-57324413-1","auto");ga("send","pageview");</script>
   </body>
 </html>

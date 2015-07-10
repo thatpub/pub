@@ -19,8 +19,8 @@ var app = (function (window, document, _, undefined) {
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
     loader_ = document.getElementById("loader"),
-    resultTemplate_ = document.getElementById("result-template"),
-    relatedTemplate_ = document.getElementById("related-template"),
+    // resultTemplate_ = document.getElementById("result-template"),
+    // relatedTemplate_ = document.getElementById("related-template"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect, relatedRect, resultsRect, relatedOffsetTop, stickyBarPosition;
@@ -47,8 +47,8 @@ var app = (function (window, document, _, undefined) {
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
     loader_: loader_,
-    resultTemplate: _.template(resultTemplate_.textContent||resultTemplate_.innerText),
-    relatedTemplate: _.template(relatedTemplate_.textContent||relatedTemplate_.innerText),
+    resultTemplate: null/*_.template(resultTemplate_.textContent||resultTemplate_.innerText)*/,
+    relatedTemplate: null/*_.template(relatedTemplate_.textContent||relatedTemplate_.innerText)*/,
     infiniScroll: true,
     loading: {
       now: false,

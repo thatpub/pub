@@ -9,7 +9,8 @@ module.exports = function(grunt) {
           trace: false
         },
         files: {
-          'src/css/style.pre.css': 'src/scss/style.scss'
+          'src/css/before.pre.css': 'src/scss/before.scss',
+          'src/css/after.pre.css': 'src/scss/after.scss'
         }
       },
       dev: {
@@ -21,7 +22,9 @@ module.exports = function(grunt) {
           lineNumbers: true
         },
         files: {
-          'src/css/style.pre.css': 'src/scss/style.scss'
+          'src/css/before.pre.css': 'src/scss/before.scss',
+          'src/css/after.pre.css': 'src/scss/after.scss'
+          /*'src/css/style.pre.css': 'src/scss/style.scss'*/
         }
       }
     },
@@ -31,6 +34,16 @@ module.exports = function(grunt) {
         compatibility: false,
         processImport: true,
         keepSpecialComments: 0
+      },
+      before: {
+        files: {
+          'src/css/before.css': 'src/css/before.pure.css',
+        }
+      },
+      after: {
+        files: {
+          'dist/css/after.css': 'src/css/after.pure.css'
+        }
       },
       dist: {
         files: {
@@ -63,7 +76,8 @@ module.exports = function(grunt) {
             'src/js/handlers.js',
             'src/js/init.js',
             'src/js/events.js'
-          ]
+          ],
+          'dist/js/templates.js': ['src/js/templates.js']
         }
       },
       dev: {
@@ -85,7 +99,8 @@ module.exports = function(grunt) {
             'src/js/handlers.js',
             'src/js/init.js',
             'src/js/events.js'
-          ]
+          ],
+          'dist/js/templates.js': ['src/js/templates.js']
         }
       }
     },
@@ -114,10 +129,15 @@ module.exports = function(grunt) {
     },
     purifycss: {
       options: {},
-      target: {
+      before: {
         src: ['src/index.html', 'src/js/build/script.js'],
-        css: ['src/css/style.pre.css'],
-        dest: 'src/css/style.pure.css'
+        css: ['src/css/before.pre.css'],
+        dest: 'src/css/before.pure.css'
+      },
+      after: {
+        src: ['src/index.html', 'src/js/build/script.js'],
+        css: ['src/css/after.pre.css'],
+        dest: 'src/css/after.pure.css'
       }
     },
     imagemin: {
@@ -176,7 +196,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/**/*'],
-        tasks: ['sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['sass:dev', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after']
       },
       gifsvg: {
         options: {
@@ -207,15 +227,10 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: [
-          'src/js/lodash.custom.min.js',
-          'src/js/helpers.js',
-          'src/js/app.js',
-          'src/js/handlers.js',
-          'src/js/init.js',
-          'src/js/events.js',
+          'src/js/*.js',
           'src/lib/**/*.js'
         ],
-        tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['uglify:dev', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after']
       }
     }
   });
@@ -231,6 +246,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
 
+  grunt.registerTask('fold', ['sass:dist', 'uglify:dist', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after']);
   grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
   grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
 };

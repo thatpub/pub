@@ -73,6 +73,17 @@
     app.query_.focus();
     //var l = document.createElement("link"); l.rel = "stylesheet"; l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
     //var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
+
+    var f2 = document.createDocumentFragment();
+    var j = document.createElement("script"); j.src = "/js/templates.js";
+    f2.appendChild(j);
+    document.body.appendChild(f2);
+    fastdom.write(function() {
+      var f1 = document.createDocumentFragment();
+      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "/css/after.css";
+      var h = document.getElementsByTagName("head")[0]; f1.appendChild(l);
+      h.appendChild(f1);
+    });
   });
 
   addEvent(document, "DOMContentLoaded", function() {
