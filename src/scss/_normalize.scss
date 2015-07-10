@@ -23,7 +23,7 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
@@ -34,7 +34,7 @@ body {
 ol, ul {
   list-style: none;
 }
-/* blockquote, q {
+blockquote, q {
   quotes: none;
 }
 blockquote:before, blockquote:after,
@@ -42,10 +42,11 @@ q:before, q:after {
   content: '';
   content: none;
 }
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-} */
+
+// table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+// }
 
 $legacy_browser_support: false !default;
 
@@ -77,24 +78,24 @@ section,
 summary {
   display: block;
 }
-/*
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-  vertical-align: baseline;
-  @if $legacy_browser_support {
-    *display: inline;
-    *zoom: 1;
-  }
-}
 
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
- */
+// audio,
+// canvas,
+// progress,
+// video {
+//   display: inline-block;
+//   vertical-align: baseline;
+//   @if $legacy_browser_support {
+//     *display: inline;
+//     *zoom: 1;
+//   }
+// }
+
+// audio:not([controls]) {
+//   display: none;
+//   height: 0;
+// }
+
 [hidden],
 template {
   display: none;
@@ -106,11 +107,11 @@ a {
     outline: 0;
   }
 }
-/*
+
 abbr[title] {
   border-bottom: 1px dotted;
 }
- */
+
 b,
 strong {
   font-weight: bold;
@@ -248,7 +249,7 @@ hr {
   box-sizing: content-box;
   height: 0;
 }
-/*
+
 pre {
   overflow: auto;
 }
@@ -263,7 +264,7 @@ samp {
   }
   font-size: 1em;
 }
- */
+
 button,
 input,
 optgroup,
@@ -312,7 +313,6 @@ input::-moz-focus-inner {
 input {
   line-height: normal;
 }
-/* I don't use any of this...
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -323,53 +323,52 @@ input[type="radio"] {
   }
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
+// input[type="number"]::-webkit-inner-spin-button,
+// input[type="number"]::-webkit-outer-spin-button {
+//   height: auto;
+// }
 
-input[type="search"] {
-  -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-}
+// input[type="search"] {
+//   -webkit-appearance: textfield;
+//   -moz-box-sizing: content-box;
+//   -webkit-box-sizing: content-box;
+//   box-sizing: content-box;
+// }
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
+// input[type="search"]::-webkit-search-cancel-button,
+// input[type="search"]::-webkit-search-decoration {
+//   -webkit-appearance: none;
+// }
 
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
+// fieldset {
+//   border: 1px solid #c0c0c0;
+//   margin: 0 2px;
+//   padding: 0.35em 0.625em 0.75em;
+// }
 
-legend {
-  border: 0;
-  padding: 0;
-  @if $legacy_browser_support {
-    white-space: normal;
-    *margin-left: -7px;
-  }
-}
+// legend {
+//   border: 0;
+//   padding: 0;
+//   @if $legacy_browser_support {
+//     white-space: normal;
+//     *margin-left: -7px;
+//   }
+// }
 
-textarea {
-  overflow: auto;
-}
+// textarea {
+//   overflow: auto;
+// }
 
-optgroup {
-  font-weight: bold;
-}
+// optgroup {
+//   font-weight: bold;
+// }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+// table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+// }
 
-td,
-th {
-  padding: 0;
-}
- */
+// td,
+// th {
+//   padding: 0;
+// }

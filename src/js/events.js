@@ -1,6 +1,6 @@
-;(function(window, document, _, app, undefined) {
+;(function(window, document, app, FastClick, undefined) {
   "use strict";
-  addEvent(app.send_, "click", searchStart);
+  addEvent(app.send_, "click", app.searchStart);
 
   addEvent(app.query_, "focus", function () {
     if (app.queryInvalidated !== true) {
@@ -28,14 +28,16 @@
       swapClass(app.query_, "", regValidate);
       app.message_.innerHTML = "";
     }
-    if ( event.which === 13 ) { // ENTER/RETURN key pressed
-      searchStart(event);
+    if ( event.which === 13 && app.isSearchBoxOpen === true ) {
+      // ENTER/RETURN key pressed
+      app.searchStart(event);
       return false;
     }
   });
 
   addEvent(document, "keyup", function ( event ) {
-    if ( event.which === 27 ) { // ESC key pressed
+    if ( event.which === 27 ) {
+      // ESC key pressed
       event.preventDefault();
       if ( app.isSearchBoxOpen === true && app.isFailure !== true ) {
         app.searchBoxToggle("close");
@@ -43,7 +45,7 @@
     }
   });
 
-  addEvent(app.moreContent_, "click", more);
+  addEvent(app.moreContent_, "click", app.more);
 
   addEvent(app.searchRestore_, "click", function ( event ) {
     event.preventDefault();
@@ -63,9 +65,9 @@
     return false;
   });
 
-  addEvent(app.infiniScroll_, "change", infini);
+  addEvent(app.infiniScroll_, "change", app.infini);
 
-  addEvent(window, "scroll", scrollWheeler);
+  addEvent(window, "scroll", app.scrollWheeler);
 
   addEvent(window, "load", function () {
     app.isSearchBoxOpen = true;
@@ -73,21 +75,10 @@
     app.query_.focus();
     //var l = document.createElement("link"); l.rel = "stylesheet"; l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
     //var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
-
-    var f2 = document.createDocumentFragment();
-    var j = document.createElement("script"); j.src = "/js/templates.js";
-    f2.appendChild(j);
-    document.body.appendChild(f2);
-    fastdom.write(function() {
-      var f1 = document.createDocumentFragment();
-      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "/css/after.css";
-      var h = document.getElementsByTagName("head")[0]; f1.appendChild(l);
-      h.appendChild(f1);
-    });
   });
 
   addEvent(document, "DOMContentLoaded", function() {
-    FastClick.attach(document.body);
+    FastClick.attach(app.wrap_);
   });
 
-})(this, this.document, _, app);
+})(this, this.document, app, FastClick);

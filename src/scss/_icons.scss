@@ -1,20 +1,20 @@
-@mixin iconSearch {
-  // .no-svg & {
-  //   svg {
-  //     outline: 0;
-  //     display: none;
-  //     fill: transparent;
-  //     stroke: none;
-  //   }
-  //   &:after {
-  //     display: inline;
-  //     content: url(../img/search.png);
-  //     position: relative;
-  //   }
-  // }
+
+#search-restore {
+  display: block;
+  position: fixed;
+  z-index: 3;
+  top: 1rem;
+  width:3.2rem;
+  height:3.2rem;
+  right: 1rem;
+  @media only screen and (min-width: 1076px) {
+    right: calc((100% - 864px)/2 - 4.2rem);
+  }
   svg {
     @include border-radius(4px);
-    // border: 2px solid $action-color;
+    background-color: $white;
+    fill: $action-color!important;
+    stroke: $action-color!important;
   }
   #ico {
     padding: .5rem;
@@ -27,21 +27,78 @@
   &:hover svg {
     border-color: $white;
   }
+  &:hover svg#ico,
+  &:hover svg#x {
+    background-color: $action-color;
+    fill: $white!important;
+    stroke: $white!important;
+  }
 }
 
-@mixin iconInfini {
-  // Haven't incorporated this test yet.
-  //
-  // .no-svg & {
-  //   &:before {
-  //     position: relative;
-  //     display: inline;
-  //     content: url(../img/refresh.png);
-  //   }
-  //   #refresh {
-  //     @include border-radius(4px);
-  //     border: 2px solid $result-color;
-  //     padding: .5rem;
-  //   }
-  // }
+#infini-check {
+  position: fixed;
+  display: block;
+  top: 1rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  left: 1rem;
+  @media only screen and (min-width: 1076px) {
+    left: calc((100% - 864px)/2 - 4.2rem);
+  }
+  input {
+    display: none;
+  }
+}
+
+#infini-label {
+  display: block;
+  cursor: pointer;
+  z-index: 3;
+  width: 3.2rem;
+  height: 3.2rem;
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    path {
+      fill: $action-color;
+    }
+    rect {
+      fill: $white!important;
+      stroke: $action-color!important;
+    }
+  }
+  &:hover {
+    svg {
+      path {
+        fill: $white;
+      }
+      rect {
+        fill: $shadow-color!important;
+        stroke: $white!important;
+      }
+    }
+  }
+  &.disabled {
+    svg {
+      path {
+        fill: $shadow-color;
+      }
+      rect {
+        fill: $white!important;
+        stroke: $shadow-color!important;
+      }
+    }
+    &:hover {
+      svg {
+        path {
+          fill: $white;
+        }
+        rect {
+          fill: $action-color!important;
+          stroke: $white!important;
+        }
+      }
+    }
+  }
 }

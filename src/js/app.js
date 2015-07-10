@@ -1,13 +1,14 @@
 var app = (function (window, document, _, undefined) {
   "use strict";
-  var wrap_ = document.getElementById("wrap"),
+  var loader_ = document.getElementById("loader"),
     searchWrap_ = document.getElementById("search-wrap"),
-    searchRestore_ = document.getElementById("search-restore"),
-    searchIcon_ = searchRestore_.getElementsByTagName("svg")[0],
-    xIcon_ = searchRestore_.getElementsByTagName("svg")[1],
+    wrap_ = document.getElementById("wrap"),
     page_ = document.getElementById("page"),
+    searchRestore_ = document.getElementById("search-restore"),
+    searchIcon_ = document.getElementById("ico"),
+    xIcon_ = document.getElementById("x"),
     pageHeader_ = document.getElementById("page-header"),
-    related_ = document.getElementById("related"),
+    related_ = document.getElementById("related-list"),
     results_ = document.getElementById("results"),
     count_ = document.getElementById("count"),
     term_ = document.getElementById("term"),
@@ -18,20 +19,18 @@ var app = (function (window, document, _, undefined) {
     moreContent_ = document.getElementById("more-content"),
     infiniLabel_ = document.getElementById("infini-label"),
     infiniScroll_ = document.getElementById("infini-scroll"),
-    loader_ = document.getElementById("loader"),
-    // resultTemplate_ = document.getElementById("result-template"),
-    // relatedTemplate_ = document.getElementById("related-template"),
     placeContent = document.cookie.placeContent||"",
     placeMeta = document.cookie.placeMeta||"",
     bodyRect, relatedRect, resultsRect, relatedOffsetTop, stickyBarPosition;
 
   return {
-    wrap_: wrap_,
+    loader_: loader_,
     searchWrap_: searchWrap_,
+    wrap_: wrap_,
+    page_: page_,
     searchRestore_: searchRestore_,
     searchIcon_: searchIcon_,
     xIcon_: xIcon_,
-    page_: page_,
     pageHeader_: pageHeader_,
     related_: related_,
     results_: results_,
@@ -46,9 +45,8 @@ var app = (function (window, document, _, undefined) {
     placeMeta: placeMeta,
     infiniLabel_: infiniLabel_,
     infiniScroll_: infiniScroll_,
-    loader_: loader_,
-    resultTemplate: null/*_.template(resultTemplate_.textContent||resultTemplate_.innerText)*/,
-    relatedTemplate: null/*_.template(relatedTemplate_.textContent||relatedTemplate_.innerText)*/,
+    relatedTemplate: _.template(relatedTemplateString),
+    resultTemplate: _.template(resultTemplateString),
     infiniScroll: true,
     loading: {
       now: false,
@@ -68,7 +66,6 @@ var app = (function (window, document, _, undefined) {
     selectedResults: [],
     selectedTotal: 0,
     colors: {},
-    // I'm really not worried about these three.  My makeshift state system.
     isSearchBoxOpen: null,
     isFailure: null,
     isDone: false,
@@ -86,9 +83,6 @@ var app = (function (window, document, _, undefined) {
         app.colors[data.key] = index;
         output = {
           key: data.key,
-          // url: (("https:" === document.location.protocol) ?
-             // "https://that.pub/get/" :
-             // "http://get.that.pub/") + data.key.toLowerCase() + ".pdf",
           url: document.location.protocol + "//get.that.pub/" + data.key.toLowerCase() + ".pdf",
           score: data.score,
           gravitas: ( upperMax < data.score || data.score >= 1 ) ?
@@ -124,9 +118,6 @@ var app = (function (window, document, _, undefined) {
             " boring" + group,
           date: date,
           url: document.location.protocol + "//get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
-          // url: (("https:" === document.location.protocol) ?
-            // "http://that.pub/get/" :
-            // "https://get.that.pub/") + data._source.productNo.toLowerCase() + fileFormat,
           fullPub: fullPub,
           title: data.highlight.title || data._source.title || null,
           rawTitle: data._source.title,
@@ -198,5 +189,16 @@ var app = (function (window, document, _, undefined) {
         this.infiniScroll = false;
       }
     }
+
+    /*,
+    endLoading: function () {
+      this.loading.now = false;
+      this.loading.init = false;
+      swapClass(this.loader_, "", regLoad);
+      if (this.isFailure !== true) {
+        this.searchBoxToggle("close");
+      }
+      return false;
+    }*/
   };
 })(this, this.document, _);

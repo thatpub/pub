@@ -1,4 +1,4 @@
-.search-wrap {
+#search-wrap {
   // @include transition(all, $animateSpeed, ease-out);
   @include transform(translate3d(0,0,0));
   // @include transform(translate3d(0,-100%,0));
@@ -35,7 +35,7 @@
   }
 }
 
-.search {
+#search {
   position: relative;
   display: table-cell;
   vertical-align: middle;
@@ -46,22 +46,16 @@
   margin-left: auto;
   margin-right: auto;
   @media only screen and (min-width: 480px) {
-    // @include paperShadow;
-    // @include border-radius(4px);
-    // width: 28rem;
-    // bottom: 0;
     padding-left: 4rem;
     padding-right: 4rem;
   }
   @media only screen and (min-width: 640px) {
-    // width: 40rem;
-    // margin-top: 12rem;
     padding-left: 30%;
     padding-right: 30%;
   }
 }
 
-.search-title {
+#search-title {
   position: relative;
   color: $action-color;
   text-align: left;
@@ -70,6 +64,14 @@
   line-height: 1;
   width: 100%;
   padding: 1rem 0;
+  small {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: lighten($action-highlight-color, 25%);
+    font-size: 1rem;
+    text-align: right;
+    float: right;
+  }
   @media only screen and (min-width: 640px) {
     font-size: 5rem;
     padding-left: 1rem;
@@ -85,17 +87,15 @@
   }
 }
 
-.query, .send {
+#query, #send {
   position: relative;
-  // display: block;
-  // float: none;
   clear: both;
   margin-left: auto;
   margin-right: auto;
   outline: 0;
 }
 
-.query {
+#query {
   @include border-radius(4px);
   background-color: transparent;
   text-align: left;
@@ -171,7 +171,7 @@
   }
 }
 
-.send {
+#send {
   @include pushButton($action-color, .4rem);
   max-width: 14rem;
   width: calc(50% - 2rem);
@@ -187,36 +187,3 @@
   }
 }
 
-.search-restore {
-  @include iconSearch;
-  display: block;
-  position: fixed;
-  z-index: 3;
-  top: 1rem;
-  width:3.2rem;
-  height:3.2rem;
-  right: 1rem;
-  @media only screen and (min-width: 1076px) {
-    right: calc((100% - 864px)/2 - 4.2rem);
-  }
-  svg {
-    background-color: $white;
-    fill: $action-color!important;
-    stroke: $action-color!important;
-  }
-  &:hover svg#ico,
-  &:hover svg#x {
-    background-color: $action-color;
-    fill: $white!important;
-    stroke: $white!important;
-  }
-  // &:hover #ico {
-  // }
-  // &:focus,
-  // &:active {
-  //   outline: 0;
-  // }
-  // &.emerge {
-  //   z-index: 3;
-  // }
-}

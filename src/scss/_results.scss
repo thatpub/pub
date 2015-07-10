@@ -1,4 +1,4 @@
-.page-header {
+#page-header {
   background-color: $action-color;
   border-bottom: 2px solid $white;
   color: $white;
@@ -16,8 +16,7 @@
   }
 }
 
-.summary {
-  // font-family: $heading;
+#summary {
   text-rendering: optimizeLegibility;
   font-weight: $med;
   text-align: center;
@@ -31,27 +30,23 @@
     max-width: 864px;
     width: 100%;
   }
-  //margin: $sumMargMob auto 0;
-  // @media only screen and (min-width: 640px) {
-    // margin: $sumMargPC auto 0;
-  // }
 }
 
-.term {
+#term {
   font-size: 2em;
 }
 
-.term, .total, .count {
+#term, #total, #count {
   text-shadow: 0 1px 1px $shadow-color;
   color: $white;
   font-weight: $bold;
 }
 
-.results {
+#results {
   position: relative;
 }
 
-.related {
+#related {
   padding-bottom: .6rem;
   padding-top: .6rem;
   font-size: 1rem;
@@ -70,7 +65,7 @@
   // }
 }
 
-.related-label {
+#related-label {
   display: none;
   // font-size: 1.2rem;
   // width: 60%;
@@ -83,7 +78,7 @@
   // }
 }
 
-.related-list {
+#related-list {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -96,7 +91,7 @@
   border: none;
 }
 
-.related .doc {
+#related .doc {
   @include border-radius(4px);
   text-rendering: optimizeLegibility;
   cursor: default;
@@ -104,7 +99,6 @@
   background-color: $white;
   color: $action-highlight-color;
   text-align: center;
-  // font-family: $heading;
   font-weight: $bold;
   font-size: 1em;
   border: 1px solid;
@@ -181,7 +175,7 @@
     border-left: 4px solid $bg-color;
   }
   .combined, .parts {
-    @include transition(all, .075s, ease-out);
+    @include transition(opacity, .15s, ease-out);
     margin-bottom: 1rem;
     display: block;
   }
@@ -199,7 +193,7 @@
   }
   &.opened {
     .combined, .parts {
-      @include transition(all, .075s, ease-out);
+      @include transition(opacity, .15s, ease-out);
     }
     .combined {
       position: relative;
@@ -279,95 +273,14 @@
   }
 }
 
-.more {
+#more-content {
   @include pushButton($result-highlight-color);
   position: absolute;
   font-family: $heading;
   font-size: 2.5rem;
   bottom: 2rem;
-  &.content {
-    max-width: 90%;
-    width: 100%;
-    left: 5%;
-    right: 5%;
-  }
+  max-width: 90%;
+  width: 100%;
+  left: 5%;
+  right: 5%;
 }
-
-.infini-check {
-  position: fixed;
-  display: block;
-  top: 1rem;
-  width: 3.2rem;
-  height: 3.2rem;
-  left: 1rem;
-  // @media only screen and (min-width: 640px) {
-  //   left: calc((864px - 90%)/2 + 1rem);
-  // }
-
-  // Because 960px + 8.4rem = 1076px.
-  // 8.4rem from each icon width (so 3.2rem * 2)
-  // plus 1rem offset for each.
-  @media only screen and (min-width: 1076px) {
-    left: calc((100% - 864px)/2 - 4.2rem);
-  }
-  input {
-    display: none;
-  }
-}
-
-#infini-label {
-  @include iconInfini;
-  display: block;
-  cursor: pointer;
-  z-index: 3;
-  width: 3.2rem;
-  height: 3.2rem;
-  svg {
-    // @include transition(all, .25s, ease-out);
-    // opacity: 1;
-    position: absolute;
-    left: 0;
-    top: 0;
-    path {
-      fill: $action-color;
-    }
-    rect {
-      fill: $white!important;
-      stroke: $action-color!important;
-    }
-  }
-  &:hover {
-    svg {
-      path {
-        fill: $white;
-      }
-      rect {
-        fill: $shadow-color!important;
-        stroke: $white!important;
-      }
-    }
-  }
-  &.disabled {
-    svg {
-      path {
-        fill: $shadow-color;
-      }
-      rect {
-        fill: $white!important;
-        stroke: $shadow-color!important;
-      }
-    }
-    &:hover {
-      svg {
-        path {
-          fill: $white;
-        }
-        rect {
-          fill: $action-color!important;
-          stroke: $white!important;
-        }
-      }
-    }
-  }
-}
-
