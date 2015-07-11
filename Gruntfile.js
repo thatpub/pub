@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           },
           compress: {
             unsafe: true,
-            drop_console: true,
+            drop_console: false,
             keep_fargs: false,
             join_vars: true,
             if_return: true,
@@ -198,8 +198,8 @@ module.exports = function(grunt) {
           spawn: false,
           atBegin: true
         },
-        files: ['src/js/*.js'],
-        tasks: ['uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        files: ['src/js/*.js', 'src/lib/**/*.js'],
+        tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       sass: {
         options: {
@@ -208,7 +208,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/*.scss'],
-        tasks: ['sass:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       html: {
         options: {

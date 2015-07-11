@@ -23,25 +23,25 @@ var resultTemplateString = '' +
       '<% } else { %>' +
         '<span class="combined"><%= rawText %></span>' +
         '<span class="parts"></span>' +
-        '<a href="#" class="reveal-text clickable">expand</a>' +
+        '<a href="#" class="reveal-text btn clickable">expand</a>' +
       '<% } %>' +
-    '</div>' +
-    '<div class="meta">' +
-      '<div class="details">' +
-        '<span class="number"><%= sub %></span><br/>' +
-        '<% if ( details && details.chapter && details.chapterTitle ) { %>' +
-        '<span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>' +
-        '<% } if ( details && details.section && details.sectionTitle ) { %>' +
-        '<span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>' +
-        '<% } %>' +
       '</div>' +
-      '<a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">' +
-        '<span class="pub"><%= fullPub %></span><br/>' +
-        '<span class="title"><%= title %></span>' +
-      '</a>' +
-    '</div>' +
+      '<div class="meta">' +
+        '<div class="details">' +
+          '<a class="number btn clickable" href="/<%= fullPub %>/<%= sub %>"><%= sub %></a><br/>' +
+          '<% if ( details && details.chapter && details.chapterTitle ) { %>' +
+          '<span class="chapter">Chapter <%= details.chapter %><br/><span class="title"><%= details.chapterTitle %></span></span><br/>' +
+          '<% } if ( details && details.section && details.sectionTitle ) { %>' +
+          '<span class="section">Section <%= details.section %><br/><span class="title"><%= details.sectionTitle %></span></span><br/>' +
+          '<% } %>' +
+        '</div>' +
+        '<a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank" onclick="downloader(this);>' +
+          '<span class="pub"><%= fullPub %></span><br/>' +
+          '<span class="title"><%= title %></span>' +
+        '</a>' +
+      '</div>' +
     '<% } else { %>' +
-    '<a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank">' +
+    '<a class="info clickable" href="<%= url %>" title="<%= date %>" download="<%= fullPub %>.pdf" target="_blank" onclick="downloader(this);">' +
       '<span class="pub"><%= fullPub %></span><br/>' +
       '<span class="title"><%= title %></span>' +
     '</a>' +

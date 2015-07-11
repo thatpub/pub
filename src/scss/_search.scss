@@ -112,30 +112,6 @@
   &.invalidated {
     border-color: $failure-highlight-color;
     color: $failure-color;
-    &::-webkit-input-placeholder {
-      display: inline;
-      width: 100%;
-      white-space: normal;
-      opacity: .5;
-      font-size: inherit;
-      color: $failure-highlight-color;
-     }
-    &::-moz-input-placeholder {
-      display: inline;
-      width: 100%;
-      white-space: normal;
-      opacity: .5;
-      font-size: inherit;
-      color: $failure-highlight-color;
-    }
-    &:-ms-input-placeholder {
-      display: inline;
-      width: 100%;
-      white-space: normal;
-      opacity: .5;
-      font-size: inherit;
-      color: $failure-highlight-color;
-    }
   }
   @media only screen and (min-width: 640px) {
     @include border-radius(0);

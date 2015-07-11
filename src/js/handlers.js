@@ -189,31 +189,39 @@ app.renderResults = function ( itemType, results ) {
   return stringToRender;
 };
 
-app.searchBoxToggle = function ( action ) {
-  if ( action === "open" ) {
+app.searchBoxToggle = function ( event ) {
+  event.preventDefault();
+  event.stopPropagation();
+  /**
+   * OPEN SESAME
+   **/
+  if ( app.isSearchBoxOpen === false ) {
     // Prep the elements before showtime
-    this.query_.value = this.term;
-    this.searchIcon_.style.display = "none";
-    this.xIcon_.style.display = "";
-
-    swapClass(this.searchWrap_, "emerge", regEmerge);
-
-    if ( this.isFailure === true ) {
-      swapClass(this.searchWrap_, "failed", regFail);
+    app.query_.value = app.term;
+    app.searchIcon_.style.display = "none";
+    app.xIcon_.style.display = "";
+    app.query_.focus();
+    if ( app.isFailure === false ) {
+      swapClass(app.searchWrap_, "emerge", regEmerge);
     }
-
-    this.isSearchBoxOpen = true;
-    this.infiniScroll = false;
+    else if ( app.isFailure === true ) {
+      swapClass(app.searchWrap_, "emerge failed", regFail);
+    }
+    app.infiniScroll = false;
+    app.isSearchBoxOpen = true;
   }
-  if ( action === "close" ) {
-    swapClass(this.searchWrap_, "", regEmerge);
-    swapClass(this.searchWrap_, "", regFail);
-    this.infiniScroll = (this.infiniScroll_) ? (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) : true;
-    this.term = this.query_.value.trim();
-    this.searchIcon_.style.display = "";
-    this.xIcon_.style.display = "none";
-    this.message_.innerHTML = "";
-    this.isSearchBoxOpen = false;
+  /**
+   * BE GONE.
+   **/
+  else if ( app.isSearchBoxOpen === true ) {
+    swapClass(app.searchWrap_, "", regEmerge);
+    swapClass(app.searchWrap_, "", regFail);
+    app.term = app.query_.value.trim();
+    app.searchIcon_.style.display = "";
+    app.xIcon_.style.display = "none";
+    app.message_.innerHTML = "";
+    app.infiniScroll = (app.infiniScroll_) ? (app.infiniScroll_.checked||(!!app.infiniScroll_.checked)) : true;
+    app.isSearchBoxOpen = false;
   }
 };
 
@@ -221,7 +229,7 @@ app.closeModal = function ( event ) {
   if (  event.which === 27 &&
         app.isSearchBoxOpen === true &&
         app.isFailure === false ) {
-    event.preventDefault();
+    //event.preventDefault();
     app.searchBoxToggle("close");
   }
 };
@@ -241,7 +249,7 @@ app.handleResponse = function ( httpRequest, action ) {
     this.infiniScroll = false;
     document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    thit.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
+    this.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
     swapClass(this.loader_, "", regLoad);
     this.xIcon_.style.display = "none";
     swapClass(this.searchWrap_, "failed", regFail);
@@ -249,7 +257,7 @@ app.handleResponse = function ( httpRequest, action ) {
   }
 
   this.isFailure = false;
-  expires = new Date(Date.now() + 60000)
+  expires = new Date(Date.now() + 60000);
   expires = expires.toUTCString();
   if ( that.resetSearch ) {
     clearTimeout(that.resetSearch);

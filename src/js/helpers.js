@@ -3,13 +3,13 @@
 var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   //regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
   //regFixInput = /[^A-Za-z0-9\s\-\_\.\,\&]/g,
-  regEmerge = / ?emerge/g,
-  regHidden = / ?hidden/g,
-  regLoad = / ?loading/g,
+  regEmerge = / +?emerge/g,
+  regFail = / +?emerge +?failed/g,
+  regHidden = / +?hidden/g,
+  regLoad = / +?loading/g,
   //regSelected = / ?selected/g,
-  regOpened = / ?opened/g,
-  regFail = / ?failed/g,
-  regValidate = / ?invalidated/g,
+  regOpened = / +?opened/g,
+  regValidate = / +?invalidated/g,
   regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,
   regEOLDashCheck = /[\-\cI\v\0\f]$/m,
   regPreTitle = /(?:\W?)\w\S*/g;
@@ -18,9 +18,9 @@ function addEvent ( element, evt, fnc ) {
   return element.addEventListener(evt, fnc, false);
 }
 
-//function removeEvent ( element, evt, fnc ) {
-//  return element.removeEventListener(evt, fnc, false);
-//}
+function removeEvent ( element, evt, fnc ) {
+  return element.removeEventListener(evt, fnc, false);
+}
 
 function swapClass ( element, string, regex ) {
   var className = element.className;
@@ -35,12 +35,11 @@ function swapClass ( element, string, regex ) {
   }
 }
 
-// Because I type it enough to get lazy.
-//function txt ( string ) {
-//  if (string && typeof string === "string" && string.length > 0) {
-//    return document.createTextNode(string);
-//  }
-//}
+function txt ( string ) {
+  if (string && typeof string === "string" && string.length > 0) {
+    return document.createTextNode(string);
+  }
+}
 
 String.prototype.toTitle = function () {
   return this.replace(regPreTitle, function( txt ) {
@@ -77,22 +76,22 @@ CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
   }
 };
 
-//window.downloader = function ( el ) {
-//  var link = document.createElement("a"),
-//      file = el.href||el.getAttribute("href")||"";
-//  if ( file === "" ) { return false; }
-//  link.download = el.download||el.getAttribute("download");
-//  link.href = file;
-//  link.target = "_blank";
-//  try { link.click(); }
-//  catch (e) {
-//    try { window.open( file ); }
-//    catch (ee) {
-//      window.location.href = file;
-//    }
-//  }
-//  return false;
-//};
+window.downloader = function ( el ) {
+  var link = document.createElement("a"),
+      file = el.href||el.getAttribute("href")||"";
+  if ( file === "" ) { return false; }
+  link.download = el.download||el.getAttribute("download");
+  link.href = file;
+  link.target = "_blank";
+  try { link.click(); }
+  catch (e) {
+    try { window.open( file ); }
+    catch (ee) {
+      window.location.href = file;
+    }
+  }
+  return false;
+};
 
 // Like my own calendar hash table.
 var months = {
