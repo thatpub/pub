@@ -227,15 +227,11 @@ app.searchBoxToggle = function ( action ) {
 };
 
 app.closeModal = function ( event ) {
-  if ( event.which === 27 ||
-      (event.type === "click" && event.target != event.currentTarget)) {
-    // ESC key pressed
-    if (  app.isSearchBoxOpen === true &&
-          app.isDone === false &&
-          app.isFailure === false ) {
-      event.preventDefault();
-      app.searchBoxToggle("close");
-    }
+  if (  event.which === 27 &&
+        app.isSearchBoxOpen === true &&
+        app.isFailure === false ) {
+    event.preventDefault();
+    app.searchBoxToggle("close");
   }
 };
 

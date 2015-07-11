@@ -69,9 +69,10 @@ module.exports = function(grunt) {
         },
         files: {
           'src/js/build/script.js': [
+            'src/lib/event/build/event.min.js',
+            'src/lib/fastdom/index.js',
             'src/lib/fastclick/lib/fastclick.js',
             'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
             'src/js/app.js',
             'src/js/templates.js',
@@ -98,9 +99,10 @@ module.exports = function(grunt) {
         },
         files: {
           'src/js/build/script.js': [
+            'src/lib/event/build/event.min.js',
+            'src/lib/fastdom/index.js',
             'src/lib/fastclick/lib/fastclick.js',
             'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
             'src/js/app.js',
             'src/js/templates.js',
