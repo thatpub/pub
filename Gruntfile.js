@@ -175,7 +175,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/js/*.js'],
-        tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       sass: {
         options: {
@@ -184,7 +184,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/scss/*.scss'],
-        tasks: ['sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['sass:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       html: {
         options: {
