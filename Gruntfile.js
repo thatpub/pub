@@ -39,10 +39,28 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         options: {
+          beautify: {
+            indent_level: 2,
+            width: 80,
+            quote_style: 0,
+            max_line_len: 1000,
+            bracketize: true,
+            semicolons: true
+          },
           compress: {
             unsafe: true,
             drop_console: true,
-            keep_fargs: false
+            keep_fargs: false,
+            join_vars: true,
+            if_return: true,
+            hoist_funs: true,
+            unused: true,
+            negate_iife: true,
+            comparisons: true,
+            conditionals: true,
+            dead_code: true,
+            sequences: true,
+            cascade: true
           },
           screwIE8: true,
           wrap: false,
@@ -51,15 +69,15 @@ module.exports = function(grunt) {
         },
         files: {
           'src/js/build/script.js': [
+            'src/lib/event/build/event.min.js',
+            'src/lib/fastdom/index.js',
             'src/lib/fastclick/lib/fastclick.js',
             'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
-            'src/js/templates.js',
             'src/js/app.js',
+            'src/js/templates.js',
             'src/js/handlers.js',
-            'src/js/init.js',
-            'src/js/events.js'
+            'src/js/init.js'
           ]
         }
       },
@@ -67,22 +85,29 @@ module.exports = function(grunt) {
         options: {
           compress: false,
           screwIE8: true,
-          beautify: true,
+          beautify: {
+            indent_level: 2,
+            width: 80,
+            quote_style: 0,
+            max_line_len: 1000,
+            bracketize: true,
+            semicolons: true
+          },
           mangle: false,
           wrap: false,
           sourceMap: true
         },
         files: {
           'src/js/build/script.js': [
+            'src/lib/event/build/event.min.js',
+            'src/lib/fastdom/index.js',
             'src/lib/fastclick/lib/fastclick.js',
             'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
             'src/js/helpers.js',
-            'src/js/templates.js',
             'src/js/app.js',
+            'src/js/templates.js',
             'src/js/handlers.js',
-            'src/js/init.js',
-            'src/js/events.js'
+            'src/js/init.js'
           ]
         }
       }

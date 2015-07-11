@@ -14,6 +14,7 @@
     display: none;
   }
 }
+
 #loader.loading {
   @include transition(opacity, $animateSpeed, ease-out);
   display: block;
@@ -23,15 +24,14 @@
     display: block;
   }
 }
+
 .spinner {
   @include transform(translate3d(-50%, -50%, 0));
   position: absolute;
   width: 2rem;
   height: 2rem;
-
   top: 50%;
   left: 50%;
-
   .blob {
     @include transform(translate3d(-50%, -50%, 0));
     @include border-radius(50%);
@@ -54,11 +54,9 @@
       animation: blob-left 1s infinite ease-in;
     }
   }
-
   .move-blob {
     background: darken($result-color, 90%);
     top: 0;
-
     animation: blob-spinner-mover 1s infinite ease-in;
   }
 }

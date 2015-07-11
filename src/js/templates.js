@@ -1,7 +1,10 @@
+"use strict";
+
 var relatedTemplateString = '' +
   '<li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">' +
     '<%= key %>' +
   '</li>';
+
 var resultTemplateString = '' +
   '<div class="result<%= type %><%= gravitas %> clearfix" data-score="<%= score %>" data-pub="<%= fullPub %>">' +
     '<% if ( type === " content" ) { %>' +
@@ -22,12 +25,6 @@ var resultTemplateString = '' +
         '<span class="parts"></span>' +
         '<a href="#" class="reveal-text clickable">expand</a>' +
       '<% } %>' +
-      /*'<div class="number2">' +
-        '<p><%= sub %></p>' +
-        '<span class="reveal climb-up">climb up</span>' +
-        '<span class="reveal look-inside">look inside</span>' +
-        '<span class="reveal do-both">do both</span>' +
-      '</div>' +*/
     '</div>' +
     '<div class="meta">' +
       '<div class="details">' +
@@ -50,6 +47,10 @@ var resultTemplateString = '' +
     '</a>' +
     '<% } %>' +
   '</div>';
+
+app.resultTemplate = _.template(resultTemplateString);
+app.relatedTemplate = _.template(relatedTemplateString);
+
 /*
 var loader = function( level ) {
   var loadFrag = document.createDocumentFragment(),
@@ -75,3 +76,10 @@ var loader = function( level ) {
   return loadFrag.appendChild(loader);
 }
 */
+
+/*'<div class="number2">' +
+ '<p><%= sub %></p>' +
+ '<span class="reveal climb-up">climb up</span>' +
+ '<span class="reveal look-inside">look inside</span>' +
+ '<span class="reveal do-both">do both</span>' +
+ '</div>' +*/

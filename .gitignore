@@ -8,5 +8,7 @@
 node_modules
 src/index.full.html
 src/css/*
+src/old
+src/img/old
 src/js/build/*
 

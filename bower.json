@@ -29,6 +29,7 @@
     "lodash": ">=3.2.0",
     "normalize-scss": "~3.0.2",
     "fastdom": "~0.8.6",
-    "fastclick": "~1.0.6"
+    "fastclick": "~1.0.6",
+    "event": "wilsonpage/event#~0.2.2"
   }
 }
