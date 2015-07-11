@@ -6,18 +6,14 @@ app.revealText = function ( event ) {
   event.preventDefault();
   open = that.getAttribute("data-opened");
   if (open !== "true") {
-    fastdom.write(function() {
-      swapClass(that.parentNode, "opened", regOpened);
-      that.innerHTML = "consolidate";
-      that.setAttribute("data-opened", "true");
-    });
+    swapClass(that.parentNode, "opened", regOpened);
+    that.innerHTML = "consolidate";
+    that.setAttribute("data-opened", "true");
   }
   else {
-    fastdom.write(function() {
-      swapClass(that.parentNode, "", regOpened);
-      that.innerHTML = "expand";
-      that.setAttribute("data-opened", "false");
-    });
+    swapClass(that.parentNode, "", regOpened);
+    that.innerHTML = "expand";
+    that.setAttribute("data-opened", "false");
   }
   return false;
 };
