@@ -28,7 +28,7 @@ module.exports = function(grunt) {
       options: {
         roundingPrecision: -1,
         compatibility: false,
-        processImport: true,
+        processImport: false,
         keepSpecialComments: 0
       },
       dist: {
@@ -88,6 +88,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    purifycss: {
+      options: {},
+      dist: {
+        src: ['src/index.html', 'src/js/build/script.js'],
+        css: ['src/css/style.pre.css'],
+        dest: 'src/css/style.pure.css'
+      }
+    },
     inline: {
       dist: {
         options: {
@@ -109,14 +117,6 @@ module.exports = function(grunt) {
         files: {
           'dist/index.html': 'src/index.full.html'
         }
-      }
-    },
-    purifycss: {
-      options: {},
-      dist: {
-        src: ['src/index.html', 'src/js/build/script.js'],
-        css: ['src/css/style.pre.css'],
-        dest: 'src/css/style.pure.css'
       }
     },
     imagemin: {
