@@ -3,11 +3,11 @@
 var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   //regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
   //regFixInput = /[^A-Za-z0-9\s\-\_\.\,\&]/g,
+  //regSelected = / ?selected/g,
   regEmerge = / +?emerge/g,
   regFail = / +?emerge +?failed/g,
   regHidden = / +?hidden/g,
   regLoad = / +?loading/g,
-  //regSelected = / ?selected/g,
   regOpened = / +?opened/g,
   regValidate = / +?invalidated/g,
   regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,
@@ -18,9 +18,9 @@ function addEvent ( element, evt, fnc ) {
   return element.addEventListener(evt, fnc, false);
 }
 
-function removeEvent ( element, evt, fnc ) {
-  return element.removeEventListener(evt, fnc, false);
-}
+//function removeEvent ( element, evt, fnc ) {
+//  return element.removeEventListener(evt, fnc, false);
+//}
 
 function swapClass ( element, string, regex ) {
   var className = element.className;
@@ -35,11 +35,11 @@ function swapClass ( element, string, regex ) {
   }
 }
 
-function txt ( string ) {
-  if (string && typeof string === "string" && string.length > 0) {
-    return document.createTextNode(string);
-  }
-}
+//function txt ( string ) {
+//  if (string && typeof string === "string" && string.length > 0) {
+//    return document.createTextNode(string);
+//  }
+//}
 
 String.prototype.toTitle = function () {
   return this.replace(regPreTitle, function( txt ) {
@@ -78,9 +78,9 @@ CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
 
 window.downloader = function ( el ) {
   var link = document.createElement("a"),
-      file = el.href||el.getAttribute("href")||"";
+      file = el.getAttribute("href") || el.href || "";
   if ( file === "" ) { return false; }
-  link.download = el.download||el.getAttribute("download");
+  link.download = el.getAttribute("download") || el.download;
   link.href = file;
   link.target = "_blank";
   try { link.click(); }
@@ -137,8 +137,11 @@ function querySetup ( term ) {
 //}
 
 function upperOutlier ( someArray ) {
-  // Courtesy of http://stackoverflow.com/a/20811670/2780033
-  // thanks jpau
+  /**
+   * Courtesy of http://stackoverflow.com/a/20811670/2780033
+   *  Thanks, @jpau.
+   */
+
   var values = someArray.concat();
   values.sort( function ( a, b ) {
     return a - b;
@@ -146,6 +149,5 @@ function upperOutlier ( someArray ) {
   var q1 = values[Math.floor((values.length / 4))];
   var q3 = values[Math.ceil((values.length * (3 / 4)))];
   var iqr = q3 - q1;
-  var maxValue = q3 + (iqr * 1.5);
-  return maxValue;
+  return ((iqr * 3 / 2) + q3);
 }

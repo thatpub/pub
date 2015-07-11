@@ -58,25 +58,24 @@ app.searchStart = function ( event ) {
   ( event &&
     event.preventDefault &&
     event.preventDefault());
-  var that = this,
-    val = app.query_.value.trim();
+  app.term = app.query_.value.trim();
   app.isFailure = false;
   app.isDone = false;
-  if ( !val ) { // show notification/input validate here
-    app.queryInvalidated = true;
+  if ( !app.term ) { // show notification/input validate here
     swapClass(app.query_, "invalidated", regValidate);
-      that.message_.innerHTML = "You gotta type something first.";
-      that.query_.focus();
+    app.query_.focus();
+    app.message_.innerHTML = "You gotta type something first.";
+    app.isQueryValid = true;
     return false;
   }
-  app.term = val;
+  //app.term = val;
   swapClass(app.loader_, "loading", regLoad);
   app.submitQuery("content", "search", app.placeContent, app.placeMeta);
   return false;
 };
 
 app.handleFocus = function () {
-  if (app.queryInvalidated !== true) {
+  if ( app.isQueryValid === false ) {
     return false;
   }
 };
@@ -88,8 +87,8 @@ app.handleInput = function ( event ) {
     return false;
   }
   // After error they decide to type something
-  if ( app.queryInvalidated === true && event.which !== 13 ) {
-    app.queryInvalidated = false;
+  if ( app.isQueryValid === true && event.which !== 13 ) {
+    app.isQueryValid = false;
     swapClass(app.query_, "", regValidate);
     app.message_.innerHTML = "";
   }
@@ -189,24 +188,27 @@ app.renderResults = function ( itemType, results ) {
   return stringToRender;
 };
 
-app.searchBoxToggle = function ( event ) {
-  event.preventDefault();
-  event.stopPropagation();
+app.toggleSearch = function ( event ) {
+  if ( event ) {
+    event.preventDefault && event.preventDefault();
+    event.stopPropagation && event.stopPropagation();
+  }
+
   /**
    * OPEN SESAME
    **/
   if ( app.isSearchBoxOpen === false ) {
     // Prep the elements before showtime
-    app.query_.value = app.term;
     app.searchIcon_.style.display = "none";
-    app.xIcon_.style.display = "";
-    app.query_.focus();
     if ( app.isFailure === false ) {
       swapClass(app.searchWrap_, "emerge", regEmerge);
     }
     else if ( app.isFailure === true ) {
       swapClass(app.searchWrap_, "emerge failed", regFail);
     }
+    app.xIcon_.style.display = "";
+    app.query_.value = app.term;
+    app.query_.focus();
     app.infiniScroll = false;
     app.isSearchBoxOpen = true;
   }
@@ -214,23 +216,20 @@ app.searchBoxToggle = function ( event ) {
    * BE GONE.
    **/
   else if ( app.isSearchBoxOpen === true ) {
+    app.xIcon_.style.display = "none";
     swapClass(app.searchWrap_, "", regEmerge);
     swapClass(app.searchWrap_, "", regFail);
     app.term = app.query_.value.trim();
     app.searchIcon_.style.display = "";
-    app.xIcon_.style.display = "none";
-    app.message_.innerHTML = "";
     app.infiniScroll = (app.infiniScroll_) ? (app.infiniScroll_.checked||(!!app.infiniScroll_.checked)) : true;
     app.isSearchBoxOpen = false;
+    app.message_.innerHTML = "";
   }
 };
 
 app.closeModal = function ( event ) {
-  if (  event.which === 27 &&
-        app.isSearchBoxOpen === true &&
-        app.isFailure === false ) {
-    //event.preventDefault();
-    app.searchBoxToggle("close");
+  if ( event.which === 27 && app.isFailure === false ) {
+    app.toggleSearch();
   }
 };
 
@@ -257,6 +256,7 @@ app.handleResponse = function ( httpRequest, action ) {
   }
 
   this.isFailure = false;
+  swapClass(this.searchWrap_, "emerge", regEmerge);
   expires = new Date(Date.now() + 60000);
   expires = expires.toUTCString();
   if ( that.resetSearch ) {
@@ -337,7 +337,7 @@ app.handleResponse = function ( httpRequest, action ) {
     that.loading.now = false;
   });
 
-  this.searchBoxToggle("close");
+  this.toggleSearch();
   swapClass(this.loader_, "", regLoad);
 };
 

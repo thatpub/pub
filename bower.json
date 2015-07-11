@@ -30,6 +30,7 @@
     "normalize-scss": "~3.0.2",
     "fastdom": "~0.8.6",
     "fastclick": "~1.0.6",
-    "event": "wilsonpage/event#~0.2.2"
+    "event": "wilsonpage/event#~0.2.2",
+    "animate.css": "~3.3.0"
   }
 }

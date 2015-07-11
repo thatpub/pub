@@ -39,9 +39,10 @@ function App () {
     scoresContent: [],
     scoresRelatives: [],
     colors: {},
-    isSearchBoxOpen: null,
+    isSearchBoxOpen: true,
     isFailure: null,
-    isDone: false
+    isDone: false,
+    isQueryValid: false
   };
 }
 

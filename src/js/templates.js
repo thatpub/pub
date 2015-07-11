@@ -50,23 +50,21 @@ var resultTemplateString = '' +
 
 app.resultTemplate = _.template(resultTemplateString);
 app.relatedTemplate = _.template(relatedTemplateString);
-
 /*
-var loader = function( level ) {
+function LoaderElement () {
   var loadFrag = document.createDocumentFragment(),
-  loader = document.createElement("div"),
-  spinner = document.createElement("div"),
-  top = document.createElement("div"),
-  bottom = document.createElement("div"),
-  left = document.createElement("div"),
-  moveBlob = document.createElement("div");
+    loader = document.createElement("div"),
+    pulse = document.createElement("div"),
+    block = document.createElement("i");
+
   loader.id = "loader";
-  loader.style.opacity = level;
-  spinner.className = "spinner";
-  top.className = "blob top";
-  bottom.className = "blob bottom";
-  left.className = "blob left";
-  moveBlob.className = "blob move-blob";
+  loader.style.opacity = 0.8;
+
+  pulse.className = "pulse";
+  block.className = "fa fa-square";
+  rect2.className = "rect2";
+  rect3.className = "rect3";
+
   spinner.appendChild(top);
   spinner.appendChild(bottom);
   spinner.appendChild(left);
@@ -74,8 +72,7 @@ var loader = function( level ) {
   loader.appendChild(spinner);
 
   return loadFrag.appendChild(loader);
-}
-*/
+}*/
 
 /*'<div class="number2">' +
  '<p><%= sub %></p>' +

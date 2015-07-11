@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'src/css/style.css': 'src/css/style.pure.css'
+          'src/css/style.css': ['src/lib/animate.css/animate.css', 'src/css/style.pure.css']
         }
       }
     },
@@ -43,13 +43,13 @@ module.exports = function(grunt) {
             indent_level: 2,
             width: 80,
             quote_style: 0,
-            max_line_len: 1000,
+            /*max_line_len: 1000,*/
             bracketize: true,
             semicolons: true
           },
           compress: {
             unsafe: true,
-            drop_console: false,
+            drop_console: true,
             keep_fargs: false,
             join_vars: true,
             if_return: true,
@@ -89,7 +89,6 @@ module.exports = function(grunt) {
             indent_level: 2,
             width: 80,
             quote_style: 0,
-            max_line_len: 1000,
             bracketize: true,
             semicolons: true
           },

@@ -7,11 +7,11 @@
 
   addEvent(app.query_, "keypress", app.handleInput);
 
-  addEvent(app.searchWrap_, "keyup", app.closeModal);
+  addEvent(document, "keyup", app.closeModal);
 
   addEvent(app.moreContent_, "click", app.more);
 
-  addEvent(app.searchRestore_, "click", app.searchBoxToggle);
+  addEvent(app.searchRestore_, "click", app.toggleSearch);
 
   addEvent(app.infiniScroll_, "change", app.infini);
 
