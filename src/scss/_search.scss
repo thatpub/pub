@@ -65,10 +65,10 @@
   width: 100%;
   padding: 1rem 0;
   small {
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
-    color: lighten($action-highlight-color, 25%);
-    font-size: 1rem;
+    color: lighten($result-highlight-color, 35%);
+    font-size: 1.6rem;
     text-align: right;
     float: right;
   }
