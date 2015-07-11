@@ -1,5 +1,6 @@
 .idea
 .sass-cache
+git-notify.js
 /**/*.bak
 /**/.fuse*
 query.txt
