@@ -1,4 +1,4 @@
-var app = (function () {
+function App () {
   "use strict";
   return {
     loader_: document.getElementById("loader"),
@@ -42,4 +42,6 @@ var app = (function () {
     isFailure: false,
     isDone: false
   };
-})();
+};
+
+var app = new App();
