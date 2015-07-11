@@ -1,0 +1,15 @@
+{
+  "name": "event",
+  "homepage": "https://github.com/wilsonpage/event",
+  "version": "0.2.2",
+  "_release": "0.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.2",
+    "commit": "732714c50f6237fe686d516388035f0225b5320b"
+  },
+  "_source": "git://github.com/wilsonpage/event.git",
+  "_target": "~0.2.2",
+  "_originalSource": "wilsonpage/event",
+  "_direct": true
+}

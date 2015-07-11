@@ -1,0 +1,26 @@
+{
+  "name": "event",
+  "version": "0.2.2",
+  "description": "Tiny event emitter",
+  "main": "lib/event.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/buster/bin/buster-test"
+  },
+  "contributors": [
+    "Wilson Page",
+    "Matt Andrews"
+  ],
+  "repository": "",
+  "author": "Wilson Page",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "~2.11.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "buster": "~0.6.2"
+  }
+}
