@@ -1,4 +1,4 @@
-;(function(window, document, app, FastClick, undefined) {
+;(function(window, document, app, undefined) {
   "use strict";
   addEvent(app.send_, "click", app.searchStart);
 
@@ -7,20 +7,6 @@
       return false;
     }
   });
-
-  // addEvent(app.query_, "keydown", function ( event ) {
-    // console.log("code, charCode, keyCode, which, ctrlKey, shiftKey, altKey, metaKey");
-    // console.log(event.code, event.charCode, event.keyCode, event.which, event.ctrlKey, event.shiftKey, event.altKey, event.metaKey)
-    // console.log("value is currently: ", this.value);
-
-    // if ( regCheckInput.test(this.value) ) {
-    //   console.log("good match", event);
-    // }
-    // else {
-    //   console.log("bad match", event);
-    //   this.value = this.value.replace(regFixInput, "");
-    // }
-  // });
 
   addEvent(app.query_, "keypress", function ( event ) {
     if ( app.queryInvalidated === true ) {
@@ -73,12 +59,10 @@
     app.isSearchBoxOpen = true;
     app.isDone = false;
     app.query_.focus();
-    //var l = document.createElement("link"); l.rel = "stylesheet"; l.href = document.location.protocol + "//fonts.googleapis.com/css?family=Lato:300,700,300italic:latin";
-    //var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
   });
 
   addEvent(document, "DOMContentLoaded", function() {
     FastClick.attach(app.wrap_);
   });
 
-})(this, this.document, app, FastClick);
+})(this, this.document, app);

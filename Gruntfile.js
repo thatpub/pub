@@ -5,12 +5,9 @@ module.exports = function(grunt) {
         options: {
           sourcemap: 'none',
           style: 'compressed',
-          precision: 3,
           trace: false
         },
         files: {
-          /*'src/css/before.pre.css': 'src/scss/before.scss',
-          'src/css/after.pre.css': 'src/scss/after.scss',*/
           'src/css/style.pre.css': 'src/scss/style.scss'
         }
       },
@@ -23,8 +20,6 @@ module.exports = function(grunt) {
           lineNumbers: true
         },
         files: {
-          /*'src/css/before.pre.css': 'src/scss/before.scss',
-          'src/css/after.pre.css': 'src/scss/after.scss'*/
           'src/css/style.pre.css': 'src/scss/style.scss'
         }
       }
@@ -35,17 +30,7 @@ module.exports = function(grunt) {
         compatibility: false,
         processImport: true,
         keepSpecialComments: 0
-      },/*
-      before: {
-        files: {
-          'src/css/before.css': 'src/css/before.pure.css',
-        }
       },
-      after: {
-        files: {
-          'dist/css/after.css': 'src/css/after.pure.css'
-        }
-      },*/
       dist: {
         files: {
           'src/css/style.css': 'src/css/style.pure.css'
@@ -132,17 +117,7 @@ module.exports = function(grunt) {
         src: ['src/index.html', 'src/js/build/script.js'],
         css: ['src/css/style.pre.css'],
         dest: 'src/css/style.pure.css'
-      }/*,
-      before: {
-        src: ['src/index.html', 'src/js/build/script.js'],
-        css: ['src/css/before.pre.css'],
-        dest: 'src/css/before.pure.css'
-      },
-      after: {
-        src: ['src/index.html', 'src/js/build/script.js'],
-        css: ['src/css/after.pre.css'],
-        dest: 'src/css/after.pure.css'
-      }*/
+      }
     },
     imagemin: {
       dynamic: {
@@ -188,59 +163,37 @@ module.exports = function(grunt) {
     watch: {
       configFiles: {
         options: {
-          debounceDelay: 25,
+          debounceDelay: 250,
           reload: true
         },
         files: ['Gruntfile.js']
       },
       scripts: {
         options: {
-          debounceDelay: 25,
+          debounceDelay: 250,
           spawn: false,
           atBegin: true
         },
         files: ['src/js/*.js'],
-        tasks: ['uglify:dev', 'purifycss:dist', 'cssmin:dist', 'inline', 'htmlmin']
+        tasks: ['uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       sass: {
         options: {
-          debounceDelay: 25,
+          debounceDelay: 250,
           spawn: false,
           atBegin: true
         },
-        files: ['src/scss/**/*'],
-        tasks: ['sass:dev', 'purifycss:dist', 'cssmin:dist', 'inline', 'htmlmin']
+        files: ['src/scss/*.scss'],
+        tasks: ['sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       html: {
         options: {
-          debounceDelay: 25,
+          debounceDelay: 250,
           spawn: false,
           atBegin: true
         },
         files: ['src/index.html'],
         tasks: ['purifycss:dist', 'cssmin:dist', 'inline', 'htmlmin']
-      },
-      gifsvg: {
-        options: {
-          debounceDelay: 25,
-          spawn: false,
-          atBegin: true
-        },
-        files: [
-          'src/img/*.{gif,svg}'
-        ],
-        tasks: ['newer:imagemin']
-      },
-      pngjpg: {
-        options: {
-          debounceDelay: 25,
-          spawn: false,
-          atBegin: true
-        },
-        files: [
-          'src/img/!*.{png,jpg}'
-        ],
-        tasks: ['tinypng']
       }
     }
   });
@@ -256,7 +209,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
 
-  /*grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss:before', 'cssmin:before', 'inline', 'htmlmin', 'purifycss:after', 'cssmin:after', 'newer:imagemin', 'tinypng']);*/
-  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss:dist', 'cssmin:dist', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
   grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
 };
