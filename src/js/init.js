@@ -113,7 +113,7 @@
     var that = this,
       request = new XMLHttpRequest(),
       query = this.term,
-      url = "/find/" + type + "/" + action,
+      url = "//that.pub/find/" + type + "/" + action,
       data = {
         t:querySetup(query),
         g:contentPager,
