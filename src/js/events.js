@@ -35,13 +35,8 @@
 
   addEvent(app.searchRestore_, "click", function ( event ) {
     event.preventDefault();
-    if ( app.isSearchBoxOpen === true ) {
-      if ( app.isDone === true && app.isFailure !== true ) {
-        app.searchBoxToggle("close");
-      }
-      else {
-        return false;
-      }
+    if ( app.isSearchBoxOpen === true && app.isDone === true && app.isFailure !== true) {
+      app.searchBoxToggle("close");
     }
     else {
       app.searchBoxToggle("open");
