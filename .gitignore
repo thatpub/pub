@@ -3,7 +3,6 @@
 git-notify.js
 *.bak
 *.fuse*
-query.txt
 node_modules
 src/index.full.html
 src/css/*
