@@ -26,4 +26,21 @@
     FastClick.attach(document.body);
   });
 
+  var loaderEvent = new Event();
+  loaderEvent.on("begin", function() {
+    swapClass(app.searchWrap_, "", regEmerge);
+    swapClass(app.loader_, "loading", regLoad);
+  });
+  loaderEvent.on("end", function() {
+    swapClass(app.loader_, "", regLoad);
+
+    if ( app.isFailure === true ) {
+      swapClass(app.searchWrap_, "emerge failed", regFail);
+    }
+    else if ( app.isFailure === false ) {
+      app.wrap_.style.display = "block";
+      app.wrap_.style.opacity = 1;
+    }
+  });
+
 })( app );
