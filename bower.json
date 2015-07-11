@@ -20,15 +20,17 @@
   ],
   "license": "MIT",
   "homepage": "http://that.pub",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
-    "node_modules"
+    "node_modules",
+    "**/old"
   ],
   "dependencies": {
     "lodash": ">=3.2.0",
     "normalize-scss": "~3.0.2",
     "fastdom": "~0.8.6",
-    "fastclick": "~1.0.6"
+    "fastclick": "~1.0.6",
+    "requirejs": "~2.1.18"
   }
 }

@@ -1,5 +1,112 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'src/js',
+          mainConfigFile: "src/js/cfg.js",
+          name: 'init',
+          generateSourceMaps: false,
+          preserveLicenseComments: true,
+          optimize: "none",
+          out: "src/js/build/script.compiled.js",
+          done: function(done, output) {
+            var duplicates = require('rjs-build-analysis').duplicates(output);
+
+            if (Object.keys(duplicates).length > 0) {
+              grunt.log.subhead('Duplicates found in requirejs build:');
+              for (var key in duplicates) {
+                grunt.log.error(duplicates[key] + ": " + key);
+              }
+              return done(new Error('r.js built duplicate modules, please check the excludes option.'));
+            } else {
+              grunt.log.success("No duplicates found!");
+            }
+            done();
+          }
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        options: {
+          beautify: {
+            indent_level: 2,
+            width: 80,
+            quote_style: 0,
+            max_line_len: 1000,
+            bracketize: true,
+            semicolons: true
+          },
+          compress: {
+            unsafe: true,
+            drop_console: true,
+            keep_fargs: false,
+            join_vars: true,
+            if_return: true,
+            hoist_funs: true,
+            unused: true,
+            negate_iife: true,
+            comparisons: true,
+            conditionals: true,
+            dead_code: true,
+            sequences: true,
+            cascade: true
+          },
+          screwIE8: true,
+          wrap: false,
+          mangle: true,
+          sourceMap: false
+        },
+        files: {
+          'src/js/build/script.js': [
+            'src/lib/requirejs/require.js',
+            'src/js/build/script.compiled.js'
+            /*'src/lib/fastclick/lib/fastclick.js',
+            'src/js/lodash.custom.min.js',
+            'src/lib/fastdom/index.js',
+            'src/js/helpers.js',
+            'src/js/templates.js',
+            'src/js/app.js',
+            'src/js/handlers.js',
+            'src/js/init.js',
+            'src/js/events.js'*/
+          ]
+        }
+      },
+      dev: {
+        options: {
+          compress: false,
+          screwIE8: true,
+          beautify: {
+            indent_level: 2,
+            width: 80,
+            quote_style: 0,
+            max_line_len: 1000,
+            bracketize: true,
+            semicolons: true
+          },
+          mangle: false,
+          wrap: false,
+          sourceMap: true
+        },
+        files: {
+          'src/js/build/script.js': [
+            'src/lib/requirejs/require.js',
+            'src/js/build/script.compiled.js'
+            /*'src/lib/fastclick/lib/fastclick.js',
+            'src/js/lodash.custom.min.js',
+            'src/lib/fastdom/index.js',
+            'src/js/helpers.js',
+            'src/js/templates.js',
+            'src/js/app.js',
+            'src/js/handlers.js',
+            'src/js/init.js',
+            'src/js/events.js'*/
+          ]
+        }
+      }
+    },
     sass: {
       dist: {
         options: {
@@ -33,57 +140,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'src/css/style.css': 'src/css/style.pure.css'
-        }
-      }
-    },
-    uglify: {
-      dist: {
-        options: {
-          compress: {
-            unsafe: true,
-            drop_console: true,
-            keep_fargs: false
-          },
-          screwIE8: true,
-          wrap: false,
-          mangle: true,
-          sourceMap: false
-        },
-        files: {
-          'src/js/build/script.js': [
-            'src/lib/fastclick/lib/fastclick.js',
-            'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
-            'src/js/helpers.js',
-            'src/js/templates.js',
-            'src/js/app.js',
-            'src/js/handlers.js',
-            'src/js/init.js',
-            'src/js/events.js'
-          ]
-        }
-      },
-      dev: {
-        options: {
-          compress: false,
-          screwIE8: true,
-          beautify: true,
-          mangle: false,
-          wrap: false,
-          sourceMap: true
-        },
-        files: {
-          'src/js/build/script.js': [
-            'src/lib/fastclick/lib/fastclick.js',
-            'src/js/lodash.custom.min.js',
-            'src/lib/fastdom/index.js',
-            'src/js/helpers.js',
-            'src/js/templates.js',
-            'src/js/app.js',
-            'src/js/handlers.js',
-            'src/js/init.js',
-            'src/js/events.js'
-          ]
         }
       }
     },
@@ -174,7 +230,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/js/*.js'],
-        tasks: ['uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
+        tasks: ['requirejs', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
       },
       sass: {
         options: {
@@ -197,10 +253,11 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-purifycss');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -208,6 +265,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
 
-  grunt.registerTask('default', ['sass:dist', 'uglify:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
-  grunt.registerTask('dev', ['sass:dev', 'uglify:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
+  grunt.registerTask('default', ['requirejs', 'uglify:dist', 'sass:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin', 'newer:imagemin', 'tinypng']);
+  grunt.registerTask('dev', ['requirejs', 'uglify:dev', 'sass:dev', 'purifycss', 'cssmin', 'inline', 'htmlmin']);
 };
