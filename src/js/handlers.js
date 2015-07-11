@@ -349,7 +349,7 @@ app.submitQuery = function ( type, action, contentPager, metaPager ) {
   var that = this,
     request = new XMLHttpRequest(),
     query = this.term,
-    url = "http://that.pub/find/" + type + "/" + action,
+    url = document.location.protocol + "//that.pub/find/" + type + "/" + action,
     data = {
       t:querySetup(query),
       g:contentPager,
