@@ -193,7 +193,7 @@ module.exports = function(grunt) {
           atBegin: true
         },
         files: ['src/index.html'],
-        tasks: ['purifycss:dist', 'cssmin:dist', 'inline', 'htmlmin']
+        tasks: ['purifycss', 'cssmin', 'inline', 'htmlmin']
       }
     }
   });
