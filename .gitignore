@@ -11,6 +11,4 @@ src/img/old
 src/js/build/*
 src/js/old
 src/scss/old
-dist/css/*
-dist/js/*
 
