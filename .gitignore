@@ -1,13 +1,12 @@
 .idea
 .sass-cache
-old
+*.sublime-project
+*.sublime-workspace
+**/old
 *.bak
 *.fuse*
 node_modules
 src/index.full.html
 src/css/*
-src/old
 src/img/old
 src/js/build/*
-src/js/old
-src/scss/old
