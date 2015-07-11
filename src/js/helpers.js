@@ -23,19 +23,15 @@ function addEvent ( element, evt, fnc ) {
 //}
 
 function swapClass ( element, string, regex ) {
-  if ( string !== "" && typeof string === "string" ) {
-    fastdom.write(function() {
-      var className = element.className;
-      if ( regex.test(className) ) {
-        return false;
-      }
-      element.className += " " + string;
-    });
+  var className = element.className;
+  if ( string !== "" ) {
+    if ( regex.test(className) ) {
+      return false;
+    }
+    element.className += " " + string;
   }
   else {
-    fastdom.write(function() {
-      element.className = element.className.replace(regex, "");
-    });
+    element.className = className.replace(regex, "");
   }
 }
 
