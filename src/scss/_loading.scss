@@ -1,4 +1,5 @@
 #loader {
+  @include transition(opacity, $animateSpeed, ease-out);
   opacity: 0;
   position: fixed;
   display: none;

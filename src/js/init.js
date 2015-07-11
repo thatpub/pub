@@ -28,11 +28,12 @@ addEvent(app.infiniScroll_, "change", app.infini);
 addEvent(window, "scroll", app.scrollWheeler);
 
 addEvent(window, "load", function () {
+  console.log("window.onload @ " + performance.now());
   app.isSearchBoxOpen = true;
-  app.isDone = false;
   app.query_.focus();
 });
 
 addEvent(document, "DOMContentLoaded", function() {
-  FastClick.attach(app.wrap_);
+  console.log("DOMContLoad @ " + performance.now());
+  FastClick.attach(document.body);
 });

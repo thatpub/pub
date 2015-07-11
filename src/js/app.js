@@ -1,6 +1,7 @@
 function App () {
   "use strict";
   return {
+    fragment: document.createDocumentFragment(),
     loader_: document.getElementById("loader"),
     searchWrap_: document.getElementById("search-wrap"),
     query_: document.getElementById("query"),
@@ -38,10 +39,10 @@ function App () {
     scoresContent: [],
     scoresRelatives: [],
     colors: {},
-    isSearchBoxOpen: true,
-    isFailure: false,
+    isSearchBoxOpen: null,
+    isFailure: null,
     isDone: false
   };
-};
+}
 
 var app = new App();

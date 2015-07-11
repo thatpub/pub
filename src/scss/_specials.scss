@@ -9,8 +9,6 @@
   box-shadow: $x $y $blur $spread $color;
 }
 @mixin border-radius($radius) {
-  // $radius: 4px;
-  -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
           border-radius: $radius;
   // WTF Why more?!  Some weird bug on Samsung

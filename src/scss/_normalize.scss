@@ -96,10 +96,10 @@ summary {
 //   height: 0;
 // }
 
-[hidden],
-template {
-  display: none;
-}
+//[hidden],
+//template {
+//  display: none;
+//}
 
 a {
   background-color: transparent;
@@ -108,9 +108,9 @@ a {
   }
 }
 
-abbr[title] {
-  border-bottom: 1px dotted;
-}
+//abbr[title] {
+//  border-bottom: 1px dotted;
+//}
 
 b,
 strong {
@@ -229,12 +229,12 @@ sub {
 
 }
 
-img {
-  border: 0;
-  @if $legacy_browser_support {
-    *-ms-interpolation-mode: bicubic;
-  }
-}
+//img {
+//  border: 0;
+//  @if $legacy_browser_support {
+//    *-ms-interpolation-mode: bicubic;
+//  }
+//}
 
 svg:not(:root) {
   overflow: hidden;
@@ -265,10 +265,10 @@ samp {
   font-size: 1em;
 }
 
-button,
+//button,
 input,
 optgroup,
-select,
+//select,
 textarea {
   color: inherit;
   font: inherit;
@@ -279,32 +279,32 @@ textarea {
   }
 }
 
-button {
-  overflow: visible;
-}
+//button {
+//  overflow: visible;
+//}
+//
+//button,
+//select {
+//  text-transform: none;
+//}
 
-button,
-select {
-  text-transform: none;
-}
+//button,
+//html input[type="button"],
+//input[type="reset"],
+//input[type="submit"] {
+//  -webkit-appearance: button;
+//  cursor: pointer;
+//  @if $legacy_browser_support {
+//    *overflow: visible;
+//  }
+//}
 
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-  @if $legacy_browser_support {
-    *overflow: visible;
-  }
-}
-
-button[disabled],
+//button[disabled],
 html input[disabled] {
   cursor: default;
 }
 
-button::-moz-focus-inner,
+//button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;

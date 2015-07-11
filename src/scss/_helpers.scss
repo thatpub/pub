@@ -1,17 +1,17 @@
-
-.ir {
-  background-color: transparent;
-  border: 0;
-  overflow: hidden;
-  *text-indent: -9999px;
-}
-
-.ir:before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 150%;
-}
+//
+//.ir {
+//  background-color: transparent;
+//  border: 0;
+//  overflow: hidden;
+//  *text-indent: -9999px;
+//}
+//
+//.ir:before {
+//  content: "";
+//  display: block;
+//  width: 0;
+//  height: 150%;
+//}
 
 .hidden {
   display: none !important;
@@ -28,16 +28,16 @@
   position: absolute;
   width: 1px;
 }
-
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
-}
+//
+//.visuallyhidden.focusable:active,
+//.visuallyhidden.focusable:focus {
+//  clip: auto;
+//  height: auto;
+//  margin: 0;
+//  overflow: visible;
+//  position: static;
+//  width: auto;
+//}
 
 .invisible {
   visibility: hidden;

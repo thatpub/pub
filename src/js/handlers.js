@@ -65,10 +65,8 @@ app.searchStart = function ( event ) {
   if ( !val ) { // show notification/input validate here
     app.queryInvalidated = true;
     swapClass(app.query_, "invalidated", regValidate);
-    fastdom.write(function() {
       that.message_.innerHTML = "You gotta type something first.";
       that.query_.focus();
-    });
     return false;
   }
   app.term = val;
@@ -97,6 +95,9 @@ app.handleInput = function ( event ) {
   }
 };
 
+/**
+ * I really outta come in and comment this shit at some point.
+ **/
 app.organizeData = function ( data, allScores, upperMax ) {
   var output = {},
     regType = /chapter|section/,
@@ -111,7 +112,7 @@ app.organizeData = function ( data, allScores, upperMax ) {
     app.colors[data.key] = index;
     output = {
       key: data.key,
-      url: document.location.protocol + "//get.that.pub/" + data.key.toLowerCase() + ".pdf",
+      url: document.location.protocol + "//that.pub/get/" + data.key.toLowerCase() + ".pdf",
       score: data.score,
       gravitas: ( upperMax < data.score || data.score >= 1 ) ?
       " pretty" + group :
@@ -145,7 +146,7 @@ app.organizeData = function ( data, allScores, upperMax ) {
       " pretty" + group :
       " boring" + group,
       date: date,
-      url: document.location.protocol + "//get.that.pub/" + data._source.productNo.toLowerCase() + fileFormat,
+      url: document.location.protocol + "//that.pub/get" + data._source.productNo.toLowerCase() + fileFormat,
       fullPub: fullPub,
       title: data.highlight.title || data._source.title || null,
       rawTitle: data._source.title,
@@ -189,36 +190,30 @@ app.renderResults = function ( itemType, results ) {
 };
 
 app.searchBoxToggle = function ( action ) {
-  var that = this;
-
-  if ( action === "close" ) {
-    this.infiniScroll = (this.infiniScroll_) ? (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) : true;
-    this.term = this.query_.value.trim();
-    swapClass(this.searchWrap_, "", regEmerge);
-    swapClass(this.searchWrap_, "", regFail);
-    fastdom.write(function() {
-      that.searchIcon_.style.display = "";
-      that.xIcon_.style.display = "none";
-      that.message_.innerHTML = "";
-    });
-    this.isSearchBoxOpen = false;
-  }
-  else if ( action === "open" ) {
-    fastdom.write(function() {
-      that.query_.value = that.term;
-      that.searchIcon_.style.display = "none";
-      that.xIcon_.style.display = "";
-    });
+  if ( action === "open" ) {
+    // Prep the elements before showtime
+    this.query_.value = this.term;
+    this.searchIcon_.style.display = "none";
+    this.xIcon_.style.display = "";
 
     swapClass(this.searchWrap_, "emerge", regEmerge);
 
     if ( this.isFailure === true ) {
-      this.isFailure = false;
       swapClass(this.searchWrap_, "failed", regFail);
     }
 
     this.isSearchBoxOpen = true;
     this.infiniScroll = false;
+  }
+  if ( action === "close" ) {
+    swapClass(this.searchWrap_, "", regEmerge);
+    swapClass(this.searchWrap_, "", regFail);
+    this.infiniScroll = (this.infiniScroll_) ? (this.infiniScroll_.checked||(!!this.infiniScroll_.checked)) : true;
+    this.term = this.query_.value.trim();
+    this.searchIcon_.style.display = "";
+    this.xIcon_.style.display = "none";
+    this.message_.innerHTML = "";
+    this.isSearchBoxOpen = false;
   }
 };
 
@@ -241,33 +236,30 @@ app.handleResponse = function ( httpRequest, action ) {
   this.isDone = true;
 
   if ((content && content.hits.total === 0) &&
-    (meta && meta.hits.total === 0)) {
+      (meta && meta.hits.total === 0)) {
     this.isFailure = true;
     this.infiniScroll = false;
     document.cookie = "placeContent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     document.cookie = "placeMeta=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    fastdom.write(function() {
-      that.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
-    });
+    thit.message_.innerHTML = "Your search returned no results.  Give \'er another go.";
     swapClass(this.loader_, "", regLoad);
     this.xIcon_.style.display = "none";
     swapClass(this.searchWrap_, "failed", regFail);
     return false;
   }
 
+  this.isFailure = false;
   expires = new Date(Date.now() + 60000)
   expires = expires.toUTCString();
-  fastdom.defer(function() {
-    if ( that.resetSearch ) {
-      clearTimeout(that.resetSearch);
-    }
-    that.resetSearch = setTimeout(function() {
-      // Server is only caching the scroll/page position for 1 minute.
-      // Sorry bucko.
-      swapClass(that.moreContent_, "hidden", regHidden);
-      that.loading.stillMore = false;
-    }, 60000);
-  });
+  if ( that.resetSearch ) {
+    clearTimeout(that.resetSearch);
+  }
+  that.resetSearch = setTimeout(function() {
+    // Server is only caching the scroll/page position for 1 minute.
+    // Sorry bucko.
+    swapClass(that.moreContent_, "hidden", regHidden);
+    that.loading.stillMore = false;
+  }, 60000);
 
   if ( content ) {
     var currentContent = content.hits.hits.length;
