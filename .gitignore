@@ -1,6 +1,6 @@
 .idea
 .sass-cache
-git-notify.js
+old
 *.bak
 *.fuse*
 node_modules
@@ -11,4 +11,3 @@ src/img/old
 src/js/build/*
 src/js/old
 src/scss/old
-
