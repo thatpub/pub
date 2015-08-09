@@ -59,7 +59,7 @@
   position: relative;
   color: $action-color;
   text-align: left;
-  font-family: $heading;
+  font-family: $font;
   font-size: 4rem;
   line-height: 1;
   width: 100%;
@@ -67,7 +67,8 @@
   small {
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: lighten($result-highlight-color, 35%);
+    //color: #558CC6;
+    color:#9CA8AA;
     font-size: 1.6rem;
     text-align: right;
     float: right;
