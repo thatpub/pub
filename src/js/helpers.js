@@ -10,7 +10,7 @@ var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/,
   regOpened = / ?opened/g,
   regFail = / ?failed/g,
   regValidate = / ?invalidated/g,
-  regQueryPubName = /(?:\b[\-_a-zA-Z]{1,3})?[ \t\-]*(?:(?:[\.\-]|[0-9]+)+)+(?:_?(?:sup|SUP)[A-Za-z]*)?/g,
+  regQueryPubName = /\d* ?[-_a-z]+[\s\.\-]*[0-9]+(?:-|\.)[0-9]+(?:_?sup[a-z]*)?/gi,
   regEOLDashCheck = /[\-\cI\v\0\f]$/m,
   regPreTitle = /(?:\W?)\w\S*/g;
 
