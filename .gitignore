@@ -6,10 +6,6 @@
 *.bak
 *.fuse*
 node_modules
-src/index.full.html
-src/css/*
-src/img/old
-src/js/build/*
 src/lib/**/*
 util
 .tmp/css/**/*
