@@ -11,3 +11,4 @@ src/css/*
 src/img/old
 src/js/build/*
 src/lib/**/*
+util
