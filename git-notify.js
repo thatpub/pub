@@ -12,7 +12,7 @@ app.post('/git', function ( req, res ) {
     }
     console.log(`git stash and pull ran at ${new Date()}`);
     cmd('git', [ 'stash' ]);
-    const git = cmd('git', [ 'pull', '-u', 'origin', 'master' ]);
+    const git = cmd('git', [ 'pull', '--all' ]);
     git.stdout.on("data", function ( data ) {
         console.log(`${data}`);
     });
