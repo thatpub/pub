@@ -15,8 +15,6 @@ Download from the [project page](https://github.com/appleboy/normalize.scss).
 
 Install with [Component(1)](https://github.com/component/component/): `component install appleboy/normalize.scss`
 
-Install with [npm](http://npmjs.org/): `npm install --save normalize-scss`
-
 Install with [Bower](http://bower.io/): `bower install --save normalize-scss`
 
 ## What does it do?

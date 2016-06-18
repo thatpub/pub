@@ -30,8 +30,7 @@
     "tag": "0.2.0",
     "commit": "1ee24e69f71e14aa6eb9fcebb6cc8442ef9dfb05"
   },
-  "_source": "git://github.com/davidmerfield/randomColor.git",
+  "_source": "https://github.com/davidmerfield/randomColor.git",
   "_target": "~0.2.0",
-  "_originalSource": "randomColor",
-  "_direct": true
+  "_originalSource": "randomColor"
 }

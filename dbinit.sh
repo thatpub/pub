@@ -1,3 +1,5 @@
+#!/bin/sh
+
 screen -dmS dba node db.js 32551
 screen -dmS dbb node db.js 32552
 screen -dmS dbc node db.js 32553

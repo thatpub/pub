@@ -10,6 +10,5 @@
   },
   "_source": "git://github.com/wilsonpage/event.git",
   "_target": "~0.2.2",
-  "_originalSource": "wilsonpage/event",
-  "_direct": true
+  "_originalSource": "wilsonpage/event"
 }
