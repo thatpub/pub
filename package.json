@@ -4,7 +4,7 @@
   "description": "DoD policies and regulations search engine",
   "main": "index.html",
   "scripts": {
-    "clean": "rm -rf .tmp/{*.html,css/*,js/*} dist/index.html",
+    "clean": "sh clean.sh && dist/index.html",
     "init": "npm install && bower install --force && sh setup-node-sass.sh && npm run dist",
     "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
