@@ -5,6 +5,7 @@ var express = require("express"),
 app.post('/git', function(req, res) {
   var git;
   if (!req.headers["x-hub-signature"]) {
+    console.warn(`Failed attempt to access the /git URL at ${new Date()}`, req.headers);
     res.end();
     return false;
   }
