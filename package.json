@@ -4,11 +4,26 @@
   "description": "DoD policies and regulations search engine",
   "main": "index.html",
   "scripts": {
-    "init": "npm install && bower install --force && grunt && npm run db && npm run git-not",
+    "init": "npm install && bower install --force && sh setup-node-sass.sh && npm run dist",
+    "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
-    "build": "grunt",
     "git-not": "screen -dmS git-notify node git-notify.js",
-    "watch": "screen -dmS pub-watch grunt watch"
+    "dev": "npm run build && grunt",
+    "dist": "npm run build-dist && grunt",
+    "watch": "node ./node_modules/watch/cli.js 'npm run dev' src -d -u",
+    "build": "npm run js && npm run css",
+    "build-dist": "npm run js dist && npm run css-dist",
+    "js": "sh compile-js.sh",
+    "css": "npm run sass && npm run css-build",
+    "css-build": "postcss --use postcss-import --use autoprefixer --output src/css/style.css src/css/style.pre.css",
+    "css-dist": "npm run sass-dist && npm run css-build && npm run css-min",
+    "css-min": "purifycss src/css/style.css src/index.html src/js/build/script.js --out src/css/style.css && cssnano src/css/style.css src/css/style.css",
+    "sass": "node util/node-sass/bin/node-sass src/scss/style.scss src/css/style.pre.css",
+    "sass-dist": "node util/node-sass/bin/node-sass --output-style compressed src/scss/style.scss src/css/style.pre.css",
+    "inline-old": "critical src/index.html --base src/ -H src/index.full.html",
+    "inline-dist-old": "critical src/index.html --minify --extract --base src/ -H src/index.full.html",
+    "htmlmin-old": "html-minifier --collapse-whitespace --collapse-inline-tag-whitespace --html5 --case-sensitive --keep-closing-slash --process-conditional-comments --process-scripts text/template --remove-comments --remove-redundant-attributes --sort-attributes --sort-class-name -o dist/index.html src/index.full.html && npm run copy",
+    "copy": "cp src/css/style.css dist/css/style.css && cp src/js/build/* dist/js/build"
   },
   "keywords": [
     "publications",
@@ -20,6 +35,10 @@
     "rules",
     "regulations"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thatpub/pub"
+  },
   "author": "Deryck Henson",
   "license": "MIT",
   "dependencies": {
@@ -32,19 +51,23 @@
     "grunt": ">=0.4.5"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "bower": "^1.7.9",
     "consolidate": ">=0.10.0",
+    "critical": "^0.7.3",
+    "cssnano": "^3.7.1",
+    "cssnano-cli": "^1.0.4",
     "grunt": "^0.4.5",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-cssmin": "^0.11.0",
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-contrib-imagemin": ">=0.9.2",
-    "grunt-contrib-sass": ">=0.8.1",
-    "grunt-contrib-uglify": ">=0.5.0",
-    "grunt-contrib-watch": ">=0.6.1",
     "grunt-inline": "^0.3.4",
     "grunt-newer": ">=1.1.0",
-    "grunt-purifycss": "^0.1.0",
-    "grunt-tinypng": ">=0.5.3"
+    "grunt-tinypng": ">=0.5.3",
+    "postcss": "^5.0.21",
+    "postcss-cli": "^2.5.2",
+    "postcss-import": "^8.1.2",
+    "purifycss": "^1.1.9",
+    "watch": "^0.18.0"
   }
 }

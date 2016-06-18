@@ -16,18 +16,8 @@ app.post('/git', function ( req, res ) {
     git.stdout.on("data", function ( data ) {
         console.log(`${data}`);
     });
-    console.log(`npm install ran at ${new Date()}`);
-    const npm = cmd('npm', [ 'install' ]);
-    npm.stdout.on("data", function ( data ) {
-        console.log(`${data}`);
-    });
-    console.log(`bower install ran at ${new Date()}`);
-    const bower = cmd('bower', [ 'install', '--force' ]);
-    bower.stdout.on("data", function ( data ) {
-        console.log(`${data}`);
-    });
     console.log(`build ran at ${new Date()}`);
-    const grunt = cmd('npm', [ 'run', 'build' ]);
+    const grunt = cmd('npm', [ 'run', 'init' ]);
     grunt.stdout.on("data", function ( data ) {
         console.log(`${data}`);
     });
