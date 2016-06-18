@@ -19,7 +19,7 @@ COMPRESS_OPTIONS="--compress unsafe,keep_fargs,drop_console,collapse_vars,if_ret
 OTHER_ARGUMENTS="--screw-ie8 --mangle --comments"
 
 if [ "$1" = "dist" ];then
-    uglifyjs ${INPUT} ${COMPRESS_OPTIONS} ${OTHER_ARGUMENTS} --source-map .tmp/js/script.js.map --output .tmp/js/script.js
+    uglifyjs ${INPUT} ${COMPRESS_OPTIONS} ${OTHER_ARGUMENTS} --source-map dist/js/script.js.map --output dist/js/script.js
 else
-    uglifyjs ${INPUT} --beautify --source-map .tmp/js/script.js.map --output .tmp/js/script.js
+    uglifyjs ${INPUT} --beautify --source-map dist/js/script.js.map --output dist/js/script.js
 fi

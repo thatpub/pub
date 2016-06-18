@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         options: {
           tag: ''
         },
-        src: '.tmp/index.html',
+        src: 'dist/index.html',
         dest: '.tmp/index.full.html'
       }
     },
