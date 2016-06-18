@@ -121,11 +121,6 @@
   padding-bottom: 3rem;
   padding-top: 3rem;
   position: relative;
-  em {
-    color: $result-highlight-color;
-    font-style: normal!important;
-    font-weight: $bold;
-  }
   &.pretty .text {
     padding-left: 2rem;
     border-left: 3px solid;
@@ -155,6 +150,11 @@
   line-height: 1.7;
   clear: both;
   overflow: hidden;
+  em {
+    color: $result-highlight-color;
+    font-style: normal !important;
+    font-weight: $bold;
+  }
   q {
     &:before {
       position: relative;
@@ -175,7 +175,7 @@
     border-left: 4px solid $bg-color;
   }
   .combined, .parts {
-    @include transition(opacity, .15s, ease-out);
+    @include transition(opacity, $animateSpeed, ease-out);
     margin-bottom: 1rem;
     display: block;
   }
