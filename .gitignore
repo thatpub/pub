@@ -12,3 +12,4 @@ src/img/old
 src/js/build/*
 src/lib/**/*
 util
+.tmp/**/*

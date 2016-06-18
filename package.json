@@ -4,27 +4,27 @@
   "description": "DoD policies and regulations search engine",
   "main": "index.html",
   "scripts": {
+    "clean": "rm -rf .tmp/* dist/{index.html,css/*,js/*}",
     "init": "npm install && bower install --force && sh setup-node-sass.sh && npm run dist",
     "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
     "git-not": "screen -dmS git-notify node git-notify.js",
-    "dev": "npm run build && grunt",
-    "dist": "npm run build-dist && grunt",
-    "watch": "node ./node_modules/watch/cli.js 'npm run dev' src -d -u",
+    "dev": "npm run clean && npm run build && grunt",
+    "dist": "npm run clean && npm run build-dist && grunt",
+    "watch": "watchy -w src -- npm run dev",
     "build": "npm run js && npm run css",
     "build-dist": "npm run js dist && npm run css-dist",
     "js": "sh compile-js.sh",
-    "css": "npm run sass && npm run css-build",
-    "css-build": "postcss --use postcss-import --use autoprefixer --output src/css/style.css src/css/style.pre.css",
+    "css": "npm run sass && npm run css-build && cp .tmp/style.css dist/css/style.css",
+    "css-build": "postcss --use postcss-import --use autoprefixer --output .tmp/style.css .tmp/style.pre.css",
     "css-dist": "npm run sass-dist && npm run css-build && npm run css-min",
-    "css-pure": "purifycss src/css/style.css src/index.html src/js/build/script.js --out src/css/style.css",
-    "css-min": "cssnano src/css/style.css src/css/style.css",
-    "sass": "node util/node-sass/bin/node-sass src/scss/style.scss src/css/style.pre.css",
-    "sass-dist": "node util/node-sass/bin/node-sass --output-style compressed src/scss/style.scss src/css/style.pre.css",
-    "inline-old": "critical src/index.html --base src/ -H src/index.full.html",
-    "inline-dist-old": "critical src/index.html --minify --extract --base src/ -H src/index.full.html",
-    "htmlmin-old": "html-minifier --collapse-whitespace --collapse-inline-tag-whitespace --html5 --case-sensitive --keep-closing-slash --process-conditional-comments --process-scripts text/template --remove-comments --remove-redundant-attributes --sort-attributes --sort-class-name -o dist/index.html src/index.full.html && npm run copy",
-    "copy": "cp src/css/style.css dist/css/style.css && cp src/js/build/* dist/js/build"
+    "css-min": "cssnano .tmp/style.css dist/css/style.css",
+    "sass": "node util/node-sass/bin/node-sass src/scss/style.scss .tmp/style.pre.css",
+    "sass-dist": "node util/node-sass/bin/node-sass --output-style compressed src/scss/style.scss .tmp/style.pre.css",
+    "css-pure-old": "purifycss .tmp/style.css src/index.html src/js/build/script.js --out .tmp/style.css",
+    "inline-old": "critical src/index.html --base dist/ -H .tmp/index.full.html",
+    "inline-dist-old": "critical src/index.html --minify --extract --base dist/ -H .tmp/index.full.html",
+    "htmlmin-old": "html-minifier --collapse-whitespace --collapse-inline-tag-whitespace --html5 --case-sensitive --keep-closing-slash --process-conditional-comments --process-scripts text/template --remove-comments --remove-redundant-attributes --sort-attributes --sort-class-name -o dist/index.html .tmp/index.full.html"
   },
   "keywords": [
     "publications",
@@ -69,6 +69,6 @@
     "postcss-cli": "^2.5.2",
     "postcss-import": "^8.1.2",
     "purifycss": "^1.1.9",
-    "watch": "^0.18.0"
+    "watchy": "^0.6.6"
   }
 }
