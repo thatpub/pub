@@ -183,7 +183,7 @@ module.exports = function(grunt) {
         src: ['**/*.{png,jpg}'],
         dest: 'dist/img'
       }
-    },
+    }/*,
     watch: {
       configFiles: {
         options: {
@@ -192,7 +192,7 @@ module.exports = function(grunt) {
         },
         files: ['Gruntfile.js']
       },
-      /*scripts: {
+      /!*scripts: {
         options: {
           debounceDelay: 250,
           spawn: false,
@@ -209,7 +209,7 @@ module.exports = function(grunt) {
         },
         files: ['src/scss/!*.scss'],
         tasks: ['sass:dist', 'purifycss', 'cssmin', 'inline', 'htmlmin']
-      },*/
+      },*!/
       html: {
         options: {
           debounceDelay: 250,
@@ -219,7 +219,7 @@ module.exports = function(grunt) {
         files: ['src/index.html'],
         tasks: ['inline', 'htmlmin']
       }
-    }
+    }*/
   });
 
   // grunt.loadNpmTasks('grunt-purifycss');
@@ -227,7 +227,7 @@ module.exports = function(grunt) {
   // grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  // grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-tinypng');
