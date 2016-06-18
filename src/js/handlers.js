@@ -294,7 +294,7 @@ app.handleResponse = function ( httpRequest, action ) {
             that.stickyBarPosition = Math.abs(that.relatedRect.top) + Math.abs(that.bodyRect.top) + Math.abs(that.relatedRect.height);
         });
 
-        fastdom.defer(function () {
+        fastdom.mutate(function () {
             reveals = that.results_.querySelectorAll(".reveal-text");
             rl = reveals.length;
             a = 0;
