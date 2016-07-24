@@ -22,11 +22,13 @@
   }
 }
 @mixin transform($action) {
+  will-change: transform;
   -ms-transform: $action;
   -webkit-transform: $action;
   transform: $action;
 }
 @mixin transition($property, $duration, $easing, $delay...) {
+  will-change: $property;
   -webkit-transition: $property $duration $easing $delay;
   -moz-transition: $property $duration $easing $delay;
   -o-transition: $property $duration $easing $delay;
@@ -59,7 +61,6 @@
     border-top-color: darken($color, 3%);
     background-color: darken($color, 3%);
     color: darken($white, 3%);
-    // text-shadow: 0 -1px 0 darken($color, 50%), 0 0 1px darken($color, 50%);
   }
 }
 
@@ -84,61 +85,3 @@
   box-shadow: 0 0 3px rgba(0,0,0,.25);
 }
 
-// @mixin ribbon($bg: $result-highlight-color, $color: $text-color) {
-//   background-color: $bg;
-//   color: $color;
-//   margin: 0;
-//   // border-left: 3px double;
-//   // &:after {
-//     // border-width: 7px;
-//     // border-style: solid;
-//     // border-top-color: lighten($bg, 35%);
-//     // border-bottom-color: $bg;
-//     // bottom: -15px;
-//     // content: "";
-//     // position: absolute;
-//   // }
-// }
-// @mixin rightRibbon {
-//   right: -14px;
-//   margin-right: -2rem;
-//   &:after {
-//     border-width: 7px;
-//     border-style: solid;
-//     border-top-color: lighten($bg, 35%);
-//     border-bottom-color: $bg;
-//     bottom: -15px;
-//     content: "";
-//     position: absolute;
-//     right: -1px;
-//     border-left-color: $text-highlight-color;
-//     border-right-color: transparent;
-//   }
-// }
-// @mixin rightMantel {
-//   position: relative;
-//   // padding: .2rem 1rem;
-//   padding: 0 0 0 1rem;
-//   // border-left: 2px solid;
-//   margin-left: 1rem;
-//   margin-bottom: 1rem;
-//   margin-top: 1rem;
-//   float: right;
-//   // right: .5rem;
-//   // top: .75rem;
-//   // margin-right: -1rem;
-//   @media only screen and (min-width: 640px) {
-//   //   right: 1rem;
-//     // margin-right: 2rem;
-//     margin-left: 2rem;
-//   }
-// }
-// @mixin leftRibbon {
-//   left: -14px;
-//   margin-left: -2rem;
-//   &:after {
-//     left: -1px;
-//     border-right-color: $text-highlight-color;
-//     border-left-color: transparent;
-//   }
-// }

@@ -1,5 +1,6 @@
 #loader {
   @include transition(opacity, $animateSpeed, ease-out);
+  pointer-events: none;
   opacity: 0;
   position: fixed;
   display: none;
@@ -18,6 +19,7 @@
 
 #loader.loading {
   @include transition(opacity, $animateSpeed, ease-out);
+  pointer-events: auto;
   display: block;
   z-index: 4;
   opacity: 1;

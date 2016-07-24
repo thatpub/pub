@@ -1,71 +1,58 @@
 "use strict";
 
-var regPubMatch = /productNo(?:\.exact|\.raw)?(?=\:|$)/;
-//regCheckInput = /[A-Za-z0-9\s\-\_\.\,\&]/g,
-//regFixInput = /[^A-Za-z0-9\s\-\_\.\,\&]/g,
-var regEmerge = / ?emerge/g;
-var regHidden = / ?hidden/g;
-var regLoad = / ?loading/g;
-//regSelected = / ?selected/g,
-var regOpened = / ?opened/g;
-var regFail = / ?failed/g;
-var regValidate = / ?invalidated/g;
-var regQueryPubName = /\d* ?[-_a-z]+[\s\.\-]*[0-9]+(?:-|\.)[0-9]+(?:_?sup[a-z]*)?/gi;
-var regEOLDashCheck = /[\-\cI\v\0\f]$/m;
-var regPreTitle = /(?:\W?)\w\S*/g;
-
-function addEvent ( element, evt, fnc ) {
+var addEvent = function ( element, evt, fnc ) {
     return element.addEventListener(evt, fnc, false);
-}
+};
 
-//function removeEvent ( element, evt, fnc ) {
-//  return element.removeEventListener(evt, fnc, false);
-//}
+var removeEvent = function ( element, evt, fnc ) {
+    return element.removeEventListener(evt, fnc, false);
+};
 
-function swapClass ( element, string, regex ) {
+var swapClass = function ( element, string, regex ) {
     var className = element.className;
     if ( string !== "" ) {
         if ( regex.test(className) ) {
             return false;
         }
-        element.className += " " + string;
+        fastdom.mutate(function () {
+            this.className += " " + string;
+        }, element);
     }
     else {
-        element.className = className.replace(regex, "");
+        fastdom.mutate(function () {
+            this.className = className.replace(regex, "");
+        }, element);
     }
-}
-
-// Because I type it enough to get lazy.
-//function txt ( string ) {
-//  if (string && typeof string === "string" && string.length > 0) {
-//    return document.createTextNode(string);
-//  }
-//}
+};
 
 String.prototype.toTitle = function () {
+    var regPreTitle = /(?:\W?)\w\S*/g;
     return this.replace(regPreTitle, function ( txt ) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 };
 
 String.prototype.toPubName = function () {
+    var regQueryPubName = /\d* ?[-_a-z]+[\s\.\-]*[0-9]+(?:-|\.)[0-9]+(?:_?sup[a-z]*)?/gi;
+    var regEOLDashCheck = /[\-\cI\v\0\f]$/m;
     var regSpace = /\s/g;
     var removed;
     var count = 0;
     var extraction = [];
     removed = this.replace(regQueryPubName, function ( txt ) {
+        var text = txt.toUpperCase().replace(regSpace, "");
         if ( extraction.length > 0 && regEOLDashCheck.test(extraction[ count - 1 ]) ) {
-            extraction[ count - 1 ] += txt.toUpperCase().replace(regSpace, "");
+            extraction[ count - 1 ] += text;
         }
         else {
-            extraction.push(txt.toUpperCase().replace(regSpace, ""));
+            extraction[ extraction.length ] = text;
         }
         count += 1;
         return "";
     });
     return {
-        removed: removed,
-        extract: extraction
+        "removed": removed,
+        "extract": extraction
     };
 };
 
@@ -78,69 +65,82 @@ CSSStyleSheet.prototype.addCSSRule = function ( selector, rules, index ) {
     }
 };
 
-window.downloader = function ( el ) {
-    var link = document.createElement("a"),
-        file = el.href || el.getAttribute("href") || "";
-    if ( file === "" ) {
-        return false;
-    }
-    link.download = el.download || el.getAttribute("download");
-    link.href = file;
-    link.target = "_blank";
-    try {
-        link.click();
-    }
-    catch ( e ) {
-        try {
-            window.open(file);
-        }
-        catch ( ee ) {
-            window.location.href = file;
-        }
-    }
-    return false;
-};
+// Was originally for IE < OLD so no need for it now.
+/*window.downloader = function ( el ) {
+ var link = document.createElement("a"),
+ file = el.href || el.getAttribute("href") || "";
+ if ( file === "" ) {
+ return false;
+ }
+ link.download = el.download || el.getAttribute("download");
+ link.href = file;
+ link.target = "_blank";
+ if ( typeof link.click === 'function' ) {
+ link.click();
+ }
+ else {
+ window.open(file);
+ }
+ return false;
+ };*/
 
 // Like my own calendar hash table.
-var months = {
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mar",
-    "04": "Apr",
-    "05": "May",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-    "10": "Oct",
-    "11": "Nov",
-    "12": "Dec"
+var months = Object.defineProperties(
+    Object.create(null), {
+        "01": { "value": "Jan" },
+        "02": { "value": "Feb" },
+        "03": { "value": "Mar" },
+        "04": { "value": "Apr" },
+        "05": { "value": "May" },
+        "06": { "value": "Jun" },
+        "07": { "value": "Jul" },
+        "08": { "value": "Aug" },
+        "09": { "value": "Sep" },
+        "10": { "value": "Oct" },
+        "11": { "value": "Nov" },
+        "12": { "value": "Dec" }
+    }
+);
+
+var querySetup = function ( text ) {
+    if ( !text ) {
+        return {
+            "term": "",
+            "pubName": "",
+            "noPubName": ""
+        };
+    }
+    var name = text.toPubName();
+    return {
+        "term": text,
+        "pubName": name.extract,
+        "noPubName": name.removed
+    };
 };
 
-function querySetup ( text ) {
-    if ( !text ) return {
-        term: "",
-        pubName: "",
-        noPubName: ""
-    };
-    return (function ( name ) {
-        return {
-            term: text,
-            pubName: name.extract,
-            noPubName: name.removed
-        };
-    })(text.toPubName());
-}
-
-function upperOutlier ( someArray ) {
+var upperOutlier = function ( someArray ) {
     // Courtesy of http://stackoverflow.com/a/20811670/2780033
     // thanks jpau
-    var values = someArray.concat();
+    var values = someArray.slice();
+    var total = values.length;
     values.sort(function ( a, b ) {
         return a - b;
     });
-    var q1 = values[ Math.floor((values.length / 4)) ];
-    var q3 = values[ Math.ceil((values.length * (3 / 4))) ];
+    var q1 = values[ Math.floor(total / 4) ];
+    var q3 = values[ Math.ceil(total * 3 / 4) ];
     var iqr = q3 - q1;
-    return q3 + (iqr * 1.5);
-}
+    return q3 + (iqr * 3 / 2);
+};
+
+var connect = function ( url, dataString, callback ) {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ( request.readyState === 4 && request.status === 200 ) {
+            callback(request);
+        }
+    };
+
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(dataString);
+};
