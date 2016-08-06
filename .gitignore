@@ -12,5 +12,5 @@ dist/css/*
 .tmp/css/*
 dist/js/*
 .tmp/js/*
-dist/*.html
+dist/index.html
 .tmp/*.html
