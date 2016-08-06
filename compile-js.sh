@@ -15,7 +15,7 @@ LIBS="${JS_EVENT} ${JS_FASTDOM} ${JS_FASTCLICK} ${JS_LODASH}"
 SRC="${JS_HELPERS} ${JS_APP} ${JS_TEMPLATES} ${JS_HANDLERS} ${JS_INIT}"
 
 INPUT="${LIBS} ${SRC}"
-COMPRESS_OPTIONS="--compress unsafe,keep_fargs,drop_console,collapse_vars,if_return,join_vars,cascade,booleans,loops,unused,comparisons,conditionals,drop_debugger,dead_code,properties,sequences"
+COMPRESS_OPTIONS="--compress unsafe,keep_fargs,drop_console,if_return,join_vars,cascade,booleans,loops,unused,comparisons,conditionals,drop_debugger,dead_code,properties,sequences"
 OTHER_ARGUMENTS="--screw-ie8 --mangle --comments"
 
 if [ "$1" = "dist" ];then
