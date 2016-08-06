@@ -9,9 +9,8 @@ var removeEvent = function ( element, evt, fnc ) {
 };
 
 var swapClass = function ( element, string, regex ) {
-    var className = element.className;
     if ( string !== "" ) {
-        if ( regex.test(className) ) {
+        if ( regex.test(element.className) ) {
             return false;
         }
         fastdom.mutate(function () {
@@ -20,7 +19,7 @@ var swapClass = function ( element, string, regex ) {
     }
     else {
         fastdom.mutate(function () {
-            this.className = className.replace(regex, "");
+            this.className = this.className.replace(regex, "");
         }, element);
     }
 };
