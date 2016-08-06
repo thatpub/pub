@@ -290,7 +290,7 @@
             setMap('state', 'isSearchBoxOpen', true);
             setMap('state', 'infiniScroll', false);
         }
-        else if ( state.get('isDone') === true ) {
+        else /*if ( state.get('isDone') === true )*/ {
             swapClass(searchWrap_, "", regEmerge);
             swapClass(searchWrap_, "", regFail);
             var infiniState = state.get('infiniScroll') ?
