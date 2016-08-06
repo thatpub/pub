@@ -426,20 +426,24 @@
 
     var scrollWheeler = function () {
         var state = maps.state;
+        var layout = maps.layout;
         if ( state.get('infiniScroll') !== true ||
             state.get('isLoading') !== false ||
             state.get('moreToLoad') !== true ) {
             return;
         }
+
+        var oldPosition = layout.get('position');
+        if ( layout.get('delta') > 0 && oldPosition > ( layout.get('currentHeight') - 1200 ) ) {
+            return getContent(true);
+        }
+
         fastdom.measure(function ( layout ) {
-            var oldPosition = layout.get('position');
             var position = this.pageYOffset;
             var delta = position - oldPosition;
-            if ( delta > 0 && position > ( layout.get('currentHeight') - 1200 ) ) {
-                getContent(true);
-            }
             setMap('layout', 'position', position);
-        }, this, maps.layout);
+            setMap('layout', 'delta', delta);
+        }, this, layout);
     };
 
     addEvent(window, "scroll", scrollWheeler);
