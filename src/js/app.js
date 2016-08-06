@@ -229,12 +229,14 @@
             document.cookie = "placeMeta=" + placeMeta + "; expires=" + expires;
         }
 
-        fastdom.measure(function () {
-            var rect = this.getBoundingClientRect();
-            setMap('layout', 'resultsRect', rect);
-            setMap('layout', 'currentHeight', Math.abs(rect.height));
-            setMap('state', 'isLoading', false);
-        }, document.getElementById("results"));
+        fastdom.mutate(function () {
+            fastdom.measure(function () {
+                var rect = this.getBoundingClientRect();
+                setMap('layout', 'resultsRect', rect);
+                setMap('layout', 'currentHeight', Math.abs(rect.height));
+                setMap('state', 'isLoading', false);
+            }, this.getElementById("results"));
+        }, document);
 
         searchBoxToggle(false);
         hideLoader();
