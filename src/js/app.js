@@ -464,7 +464,7 @@
         if ( open !== "true" ) {
             swapClass(target.parentNode, "opened", regOpened);
             fastdom.mutate(function () {
-                this.innerHTML = "consolidate";
+                this.innerHTML = "collapse";
                 this.setAttribute("data-opened", "true");
             }, target);
         }
@@ -494,7 +494,7 @@
         setMap('colors', key, index);
         return {
             "key": key,
-            "url": document.location.protocol + "//that.pub/get/" + key.toLowerCase() + ".pdf",
+            "url": document.location.protocol + "\/\/get.that.pub\/" + key.toLowerCase() + ".pdf",
             "score": score,
             "gravitas": ( upperMax < score || score >= 1 ) ?
                         " pretty" + group :
@@ -548,7 +548,7 @@
                             " pretty" + group :
                             " boring" + group,
                 "date": date,
-                "url": document.location.protocol + "//that.pub/get/" + data._source.productNo.toLowerCase() + fileFormat,
+                "url": document.location.protocol + "\/\/get.that.pub\/" + data._source.productNo.toLowerCase() + fileFormat,
                 "fullPub": fullPub,
                 "title": highlight.title || data._source.title || null,
                 "rawTitle": source.title,
