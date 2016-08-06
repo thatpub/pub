@@ -7,7 +7,7 @@ app.revealText = function ( event ) {
     open = that.getAttribute("data-opened");
     if ( open !== "true" ) {
         swapClass(that.parentNode, "opened", regOpened);
-        that.innerHTML = "consolidate";
+        that.innerHTML = "collapse";
         that.setAttribute("data-opened", "true");
     }
     else {
@@ -103,7 +103,7 @@ app.organizeData = function ( data, allScores, upperMax ) {
         app.colors[ data.key ] = index;
         output = {
             key: data.key,
-            url: document.location.protocol + "//that.pub/get/" + data.key.toLowerCase() + ".pdf",
+            url: document.location.protocol + "\/\/get.that.pub\/" + data.key.toLowerCase() + ".pdf",
             score: data.score,
             gravitas: ( upperMax < data.score || data.score >= 1 ) ?
                       " pretty" + group :
@@ -139,7 +139,7 @@ app.organizeData = function ( data, allScores, upperMax ) {
                       " pretty" + group :
                       " boring" + group,
             date: date,
-            url: document.location.protocol + "//that.pub/get" + data._source.productNo.toLowerCase() + fileFormat,
+            url: document.location.protocol + "\/\/get.that.pub\/" + data._source.productNo.toLowerCase() + fileFormat,
             fullPub: fullPub,
             title: data.highlight.title || data._source.title || null,
             rawTitle: data._source.title,
