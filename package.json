@@ -9,7 +9,7 @@
     "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
     "git-not": "screen -dmS git-notify node git-notify.js",
-    "dev": "npm run clean && npm run build && cp src/index.html dist/index.html",
+    "dev": "npm run clean && npm run build",
     "dist": "npm run clean && npm run build-dist && grunt",
     "watch": "watchy -w src -- npm run dev",
     "build": "npm run js && npm run css && cp src/index.html dist/index.html",

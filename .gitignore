@@ -1,7 +1,5 @@
 .idea
 .sass-cache
-*.sublime-project
-*.sublime-workspace
 **/old
 **/*.bak
 *.fuse*
