@@ -29,7 +29,6 @@
     "normalize-scss": "~3.0.2",
     "fastclick": "~1.0.6",
     "event": "wilsonpage/event#~0.2.2",
-    "immutable": "^3.8.1",
-    "fastdom": "dhenson02/fastdom#^1.0.3"
+    "immutable": "^3.8.1"
   }
 }
