@@ -1,5 +1,6 @@
 'use strict';
 const fs = require("fs");
+const http = require("http");
 const es = require("elasticsearch");
 const client = new es.Client({
     "host": "localhost:9200",
