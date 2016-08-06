@@ -71,11 +71,13 @@
     };
 
     var showLoader = function () {
+        setMap('state', 'isLoading', true);
         var regLoad = / ?loading/g;
         swapClass(document.getElementById("loader"), "loading", regLoad);
     };
 
     var hideLoader = function () {
+        setMap('state', 'isLoading', false);
         var regLoad = / ?loading/g;
         swapClass(document.getElementById("loader"), "", regLoad);
     };
@@ -240,6 +242,7 @@
 
         searchBoxToggle(false);
         hideLoader();
+        setMap('state', 'isDone', true);
     };
 
     var submitQuery = function ( type, action, contentPager, metaPager ) {
@@ -251,7 +254,6 @@
             "metaPage": metaPager
         });
         connect(url, dataString, function ( request ) {
-            setMap('state', 'isDone', true);
             handleResponse(JSON.parse(request.responseText), action);
         });
     };
@@ -427,23 +429,34 @@
     var scrollWheeler = function () {
         var state = maps.state;
         var layout = maps.layout;
-        if ( state.get('infiniScroll') !== true ||
-            state.get('isLoading') !== false ||
-            state.get('moreToLoad') !== true ) {
-            return;
-        }
-
         var oldPosition = layout.get('position');
-        if ( layout.get('delta') > 0 && oldPosition > ( layout.get('currentHeight') - 1200 ) ) {
-            return getContent(true);
-        }
 
+        // Still track our layout positioning even if we are excluded cuz of that conditional below
         fastdom.measure(function ( layout ) {
             var position = this.pageYOffset;
             var delta = position - oldPosition;
             setMap('layout', 'position', position);
             setMap('layout', 'delta', delta);
         }, this, layout);
+
+        /**
+         * Ignore if:
+         *      infinite scroll is turned off
+         *      there's already something loading
+         *      if there isn't anything to load anyway
+         *      or if...what's loading isn't done (yeah redundant i know gotta fix that)
+         */
+        if ( state.get('infiniScroll') !== true ||
+            state.get('isLoading') !== false ||
+            state.get('moreToLoad') !== true ||
+            state.get('isDone') !== true ) {
+            return;
+        }
+
+        if ( layout.get('delta') > 0 && oldPosition > ( layout.get('currentHeight') - 1200 ) ) {
+            setMap('state', 'isDone', false);
+            return getContent(true);
+        }
     };
 
     addEvent(window, "scroll", scrollWheeler);
