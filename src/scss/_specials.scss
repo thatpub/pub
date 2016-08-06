@@ -28,7 +28,7 @@
   transform: $action;
 }
 @mixin transition($property, $duration, $easing, $delay...) {
-  will-change: $property;
+  //will-change: $property;
   -webkit-transition: $property $duration $easing $delay;
   -moz-transition: $property $duration $easing $delay;
   -o-transition: $property $duration $easing $delay;
