@@ -120,7 +120,7 @@
         }, document.getElementById("results"), renderResults(hits, template));
     };
 
-    var processMoreContent = function ( hits, templates ) {
+    var processMoreContent = function ( hits, template ) {
         var count = hits.length;
         var scores = new Array(count);
         for ( var b = 0; b < count; ++b ) {
@@ -132,7 +132,7 @@
         }, document.getElementById("count"), count);
         fastdom.mutate(function ( resultsHTML ) {
             this.innerHTML += resultsHTML;
-        }, document.getElementById("results"), renderResults(hits, templates.results));
+        }, document.getElementById("results"), renderResults(hits, template));
     };
 
     var searchReset = function () {
@@ -424,25 +424,20 @@
 
     var scrollWheeler = function () {
         var state = maps.state;
-        var layout = maps.layout;
-        fastdom.measure(function () {
-            var position = (
-                        rootElement && typeof rootElement.ScrollTop === "number" ?
-                        rootElement :
-                        document.body
-                    ).ScrollTop || window.pageYOffset,
-                delta = position - layout.get('position');
-            if (
-                delta > 0 &&
-                state.get('infiniScroll') === true &&
-                state.get('nowLoading') === false &&
-                state.get('moreToLoad') === true &&
-                position > layout.get('currentHeight') - 1200
-            ) {
+        if ( state.get('infiniScroll') !== true ||
+            state.get('nowLoading') !== false ||
+            state.get('moreToLoad') !== true ) {
+            return;
+        }
+        fastdom.measure(function ( layout ) {
+            var oldPosition = layout.get('position');
+            var position = this.pageYOffset;
+            var delta = position - oldPosition;
+            if ( delta > 0 && position > ( layout.get('currentHeight') - 1200 ) ) {
                 getContent(true);
             }
             setMap('layout', 'position', position);
-        });
+        }, this, maps.layout);
     };
 
     addEvent(window, "scroll", scrollWheeler);
