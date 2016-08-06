@@ -3,73 +3,80 @@ const fs = require("fs");
 const es = require("elasticsearch");
 const client = new es.Client({
     "host": "localhost:9200",
-    "log": ""
+    "log": "debug"
 });
 const {
     querySetup,
-    qBody,
-    pBody
+    makeContentQuery,
+    makeMetaQuery
 } = require('./query-setup');
 
-const contentSearch = function ( req, res ) {
-    /* new search initiated, kill the old one */
-    if ( req.body.t && (req.body.g || req.body.s || req.cookies && ( req.cookies.placeMeta || req.cookies.placeContent ) ) ) {
-        let opts = {
-            "hostname": "reset.that.pub",
-            "port": 80,
-            "path": "/",
-            "method": "POST"
-        };
-        let newReq = http.request(opts, function () {
-
-            client.search(qBody(req.body.t, querySetup(req.body.t)), function ( error, content ) {
+const doSearch = function ( res, contentQuery, metaQuery ) {
+    client.search(contentQuery, function ( error, content ) {
+        if ( error ) {
+            let errObj = {
+                "msg": "Error in content search attempt",
+                error
+            };
+            console.error("Error in content search attempt", error);
+            res.status(400).json(errObj);
+        }
+        else {
+            client.search(metaQuery, function ( error, meta ) {
                 if ( error ) {
-                    console.error(error);
-                    res.status(400).json(error);
+                    let errObj = {
+                        "msg": "Error in meta search attempt",
+                        error
+                    };
+                    console.error("Error in meta search attempt", error);
+                    res.status(400).json(errObj);
                 }
                 else {
-                    client.search(pBody(req.body.t, querySetup(req.body.t)), function ( error, meta ) {
-                        if ( error ) {
-                            console.error(error);
-                            res.status(400).json(error);
-                        }
-                        else {
-                            res.json([ content, meta ]);
-                        }
-                    });
+                    res.json([ content, meta ]);
                 }
             });
-        });
-        newReq.write(req.body.g || req.cookies.placeContent);
-        newReq.write(req.body.s || req.cookies.placeMeta);
-        newReq.end();
-    }
-    else {
-        client.search(qBody(req.body.t, querySetup(req.body.t)), function ( error, content ) {
-            if ( error ) {
-                console.error(error);
-                res.status(400).json(error);
-            }
-            else {
-                client.search(pBody(req.body.t, querySetup(req.body.t)), function ( error, meta ) {
-                    if ( error ) {
-                        console.error(error);
-                        res.status(400).json(error);
-                    }
-                    else {
-                        res.json([ content, meta ]);
-                    }
-                });
-            }
-        });
+        }
+    });
+};
+
+const contentSearch = function ( req, res ) {
+    const { body, cookies } = req;
+    const { term, contentPage, metaPage } = body;
+
+    /* new search initiated, kill the old one */
+    if ( term ) {
+        let query = querySetup(term);
+        let contentQuery = makeContentQuery(term, query);
+        let metaQuery = makeMetaQuery(term, query);
+
+        if ( contentPage || metaPage || ( cookies && ( cookies.placeMeta || cookies.placeContent ) ) ) {
+            const resetOpts = {
+                "hostname": "reset.that.pub",
+                "port": 443,
+                "path": "/",
+                "method": "POST"
+            };
+            let newReq = http.request(resetOpts, function () {
+                doSearch(res, contentQuery, metaQuery);
+            });
+            newReq.write(contentPage || cookies.placeContent);
+            newReq.write(metaPage || cookies.placeMeta);
+            newReq.end();
+        }
+        else {
+            doSearch(res, contentQuery, metaQuery);
+        }
     }
 };
 
 const metaMore = function ( req, res ) {
-    if ( req.body.s || req.cookies && req.cookies.placeMeta ) {
+    const { body, cookies } = req;
+    const { metaPage } = body;
+    const page = metaPage || cookies && cookies.placeMeta;
+    if ( page ) {
         var qObj = {
             "scroll": "60s",
-            "scrollId": req.body.s || req.cookies.placeMeta
+            "scrollId": page
         };
         client.scroll(qObj, function ( error, response ) {
             if ( error ) {
@@ -85,10 +92,13 @@ const metaMore = function ( req, res ) {
 };
 
 const contentMore = function ( req, res ) {
-    if ( req.body.g || req.cookies && req.cookies.placeContent ) {
+    const { body, cookies } = req;
+    const { contentPage } = body;
+    const page = contentPage || cookies && cookies.placeContent;
+    if ( page ) {
         var qObj = {
             "scroll": "60s",
-            "scrollId": req.body.g || req.cookies.placeContent
+            "scrollId": page
         };
         client.scroll(qObj, function ( error, response ) {
             if ( error ) {

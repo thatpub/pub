@@ -78,7 +78,7 @@
         swapClass(document.getElementById("loader"), "", regLoad);
     };
 
-    var handleRelated = function ( related, template ) {
+    var processRelated = function ( related, template ) {
         var b = 0;
         var count = related.length;
         var score = new Array(count);
@@ -90,7 +90,7 @@
         }, document.getElementById("related-list"), renderRelated(related, template));
     };
 
-    var handleContent = function ( _hits, template ) {
+    var processContent = function ( _hits, template ) {
         var hits = _hits.hits;
         var count = hits.length;
         var scores = new Array(count);
@@ -117,7 +117,7 @@
         }, document.getElementById("results"), renderResults(hits, template));
     };
 
-    var handleMoreContent = function ( hits, templates ) {
+    var processMoreContent = function ( hits, templates ) {
         var count = hits.length;
         var scores = new Array(count);
         for ( var b = 0; b < count; ++b ) {
@@ -185,11 +185,11 @@
                 fastdom.mutate(function () {
                     this.scroll(0, 0);
                 }, window);
-                handleContent(content, templates.results);
-                handleRelated(content.aggregations.related_doc.buckets, templates.related);
+                processContent(content, templates.results);
+                processRelated(content.aggregations.related_doc.buckets, templates.related);
             }
             else {
-                handleMoreContent(content.hits.hits, templates.results);
+                processMoreContent(content.hits.hits, templates.results);
             }
 
             fastdom.measure(function () {
@@ -238,9 +238,9 @@
         var query = maps.state.get('term');
         var url = document.location.protocol + "//that.pub/find/" + type + "/" + action;
         var dataString = JSON.stringify({
-            "t": querySetup(query),
-            "g": contentPager,
-            "s": metaPager
+            "term": querySetup(query),
+            "contentPage": contentPager,
+            "metaPage": metaPager
         });
         connect(url, dataString, function ( request ) {
             setMap('state', 'isDone', true);

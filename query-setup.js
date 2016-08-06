@@ -1,57 +1,63 @@
 'use strict';
 
-const querySetup = function ( term ) {
-    var termArray = [];
+const makePubName = function ( pubName ) {
+    return [{
+        "terms": {
+            "pubName.exact^2": pubName
+        }
+    }, {
+        "terms": {
+            "productNo.exact^2": pubName
+        }
+    }, {
+        "terms": {
+            "pubName.raw": pubName
+        }
+    }, {
+        "terms": {
+            "productNo.raw": pubName
+        }
+    }];
+};
 
-    if ( term.pubName && term.pubName.length > 0 ) {
-        termArray.push({
-            "terms": {
-                "pubName.exact^2": term.pubName
-            }
-        });
-        termArray.push({
-            "terms": {
-                "productNo.exact^2": term.pubName
-            }
-        });
-        termArray.push({
-            "terms": {
-                "pubName.raw": term.pubName
-            }
-        });
-        termArray.push({
-            "terms": {
-                "productNo.raw": term.pubName
-            }
-        });
+const makeNoPubName = function ( noPubName ) {
+    return [{
+        "term": {
+            "title.english2": noPubName
+        }
+    }, {
+        "term": {
+            "category.english2": noPubName
+        }
+    }];
+};
+
+const querySetup = function ( term ) {
+    const { pubName, noPubName } = term;
+    let termArray = [];
+
+    if ( pubName && pubName.length > 0 ) {
+        termArray = makePubName(pubName);
     }
 
-    if ( term.noPubName && term.noPubName.length > 3 ) {
-        termArray.push({
-            "term": {
-                "title.english2": term.noPubName
-            }
-        });
-        termArray.push({
-            "term": {
-                "category.english2": term.noPubName
-            }
-        });
+    if ( noPubName && noPubName.length > 3 ) {
+        return termArray.concat(makeNoPubName(noPubName));
     }
 
     return termArray;
 };
 
-const qBody = function ( term, termArray ) {
-    if ( term.noPubName && term.noPubName.length > 3 ) {
+const makeContentQuery = function ( termObj, termArray ) {
+    const { noPubName, term } = termObj;
+    if ( noPubName && noPubName.length > 3 ) {
         termArray.push({
             "term": {
-                "section.title.english2": term.noPubName
+                "section.title.english2": noPubName
             }
         });
         termArray.push({
             "term": {
-                "chapter.title.english2": term.noPubName
+                "chapter.title.english2": noPubName
             }
         });
     }
@@ -68,7 +74,7 @@ const qBody = function ( term, termArray ) {
                             "must": [
                                 {
                                     "match": {
-                                        "text.english2": term.term
+                                        "text.english2": term
                                     }
                                 }
                             ],
@@ -151,7 +157,7 @@ const qBody = function ( term, termArray ) {
     };
 };
 
-const pBody = function ( term, termArray ) {
+const makeMetaQuery = function ( term, termArray ) {
     return {
         "index": "dept",
         "type": "pub,form",
@@ -236,6 +242,6 @@ const pBody = function ( term, termArray ) {
 
 module.exports = {
     querySetup,
-    qBody,
-    pBody
+    makeContentQuery,
+    makeMetaQuery
 };
