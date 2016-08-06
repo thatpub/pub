@@ -3,11 +3,14 @@
 *.sublime-project
 *.sublime-workspace
 **/old
-*.bak
+**/*.bak
 *.fuse*
 node_modules
 src/lib/**/*
 util
-.tmp/css/**/*
-.tmp/js/**/*
+dist/css/*
+.tmp/css/*
+dist/js/*
+.tmp/js/*
+dist/*.html
 .tmp/*.html
