@@ -112,7 +112,7 @@
             this.innerHTML = total;
         }, document.getElementById("total"), _hits.total);
         fastdom.mutate(function ( resultsHTML ) {
-            forEach(this.querySelectorAll('.reveal-text'), function ( el ) {
+            forEach.call(this.querySelectorAll('.reveal-text'), function ( el ) {
                 el.parentNode.removeChild(el);
                 el = null;
             });
@@ -595,4 +595,4 @@
         return makeRenderString(results, template, scores);
     };
 
-})(this, this.document, _.template, Array.prototype.forEach.call);
+})(this, this.document, _.template, Array.prototype.forEach);
