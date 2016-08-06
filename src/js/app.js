@@ -92,7 +92,8 @@
         }, document.getElementById("related-list"), renderRelated(related, template));
     };
 
-    var processContent = function ( _hits, template ) {
+    var processContent = function ( content, template ) {
+        var _hits = content.hits;
         var hits = _hits.hits;
         var count = hits.length;
         var scores = new Array(count);
