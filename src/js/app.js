@@ -59,7 +59,7 @@
         var _map = maps[ type ];
         var value = _map.get(key);
         if ( typeof value !== 'undefined' ) {
-            maps[ type ] = _map.set(key, null);
+            maps[ type ] = _map.delete(key, null);
         }
         return setMap(type, key, data);
     };
