@@ -2,18 +2,11 @@
 
 for DIR in "$@"
 do
-    if [ -d "${DIR}/" ];then
-        if [ -d "${DIR}/css" ];then
-            rm -rf ${DIR}/css/*
-        else
-            mkdir ${DIR}/css
-        fi
-        if [ -d "${DIR}/js" ];then
-            rm -rf ${DIR}/js/*
-        else
-            mkdir ${DIR}/js
-        fi
+    if [ -d $DIR ];then
+        [ -f $DIR/index.*html ] && rm $DIR/index.*html
+        [ -d $DIR/css ] && rm -rf $DIR/css/* || mkdir $DIR/css
+        [ -d $DIR/js ] && rm -rf $DIR/js/* || mkdir $DIR/js
     else
-        mkdir -p ${DIR}/css ${DIR}/js
+        mkdir -p $DIR/css $DIR/js
     fi
 done

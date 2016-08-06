@@ -291,7 +291,7 @@
             swapClass(searchWrap_, "", regEmerge);
             swapClass(searchWrap_, "", regFail);
             var infiniState = state.get('infiniScroll') ?
-                              !!this.infiniScroll_.checked :
+                              !!document.getElementById('infini-scroll').checked :
                               true;
             setMap('state', 'infiniScroll', infiniState);
             setMap('state', 'term', query_.value.trim());
