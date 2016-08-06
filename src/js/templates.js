@@ -13,7 +13,7 @@ var makeTemplates = function ( template ) {
         '<% if ( parts && concatText ) { %>',
         '<span class="combined"><%= concatText %><br/></span>',
         '<span class="parts"><%  var i = 0, count = parts.length;',
-        'for (; i < count;,+i) {',
+        'for (; i < count;++i) {',
         'if ( count > 1 || concatText.length > parts[0].length ) { %>',
         '<q>...<%= parts[i] %>...</q>',
         '<% } else { %>',

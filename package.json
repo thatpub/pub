@@ -5,7 +5,7 @@
   "main": "db.js",
   "scripts": {
     "clean": "sh clean.sh .tmp dist && rm -f dist/index.html",
-    "init": "npm install && bower install --force && sh setup-node-sass.sh && npm run dist",
+    "init": "npm install && bower install --force && sh setup-node-sass.sh && sh setup-lodash.sh && npm run dist",
     "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
     "git-not": "screen -dmS git-notify node git-notify.js",
@@ -65,6 +65,7 @@
     "grunt-inline": "^0.3.4",
     "grunt-newer": ">=1.1.0",
     "grunt-tinypng": ">=0.5.3",
+    "lodash-cli": "^4.14.1",
     "postcss": "^5.0.21",
     "postcss-cli": "^2.5.2",
     "postcss-import": "^8.1.2",
