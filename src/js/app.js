@@ -404,7 +404,6 @@
     addEvent(document.getElementById("search-restore"), "click", handleRestore);
 
     var infini = function () {
-        var state = maps.state;
         var infiniScroll = !!this.checked;
         setMap('state', 'infiniScroll', infiniScroll);
         var status = infiniScroll ? "enabled" : "disabled";
