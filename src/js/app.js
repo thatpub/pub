@@ -112,7 +112,7 @@
             this.innerHTML = total;
         }, document.getElementById("total"), _hits.total);
         fastdom.mutate(function ( resultsHTML ) {
-            forEach.call(this.querySelectorAll('.reveal-text'), function ( el ) {
+            forEach(this.querySelectorAll('.reveal-text'), function ( el ) {
                 el.parentNode.removeChild(el);
                 el = null;
             });
@@ -204,12 +204,14 @@
                 setMap('layout', 'stickyBarPosition', Math.abs(rect.top) + Math.abs(bodyRect.top) + Math.abs(rect.height));
             }, document.getElementById("related-list"));
 
-            var reveals = document.getElementById("results").querySelectorAll(".reveal-text");
-            var total = reveals.length;
-            var a = 0;
-            for ( ; a < total; ++a ) {
-                addEvent(reveals[ a ], "click", revealText);
-            }
+            fastdom.mutate(function ( revealText ) {
+                var reveals = document.getElementById("results").querySelectorAll(".reveal-text");
+                var total = reveals.length;
+                var a = 0;
+                for ( ; a < total; ++a ) {
+                    addEvent(reveals[ a ], "click", revealText);
+                }
+            }.bind(null, revealText));
 
             if ( content.hits.hits.length < 20 ) {
                 setMap('state', 'moreToLoad', false);
@@ -324,7 +326,9 @@
             setMap('state', 'queryInvalidated', true);
             swapClass(query_, "invalidated", regValidate);
             showMessage("You gotta type something first.");
-            query_.focus();
+            fastdom.mutate(function () {
+                this.focus();
+            }, query_);
         }
 
         setMap('state', 'term', val);
@@ -389,10 +393,11 @@
             searchBoxToggle(false);
         }
         else {
-            var query_ = document.getElementById("query");
             searchBoxToggle(true);
-            query_.value = state.get('term');
-            query_.focus();
+            fastdom.mutate(function ( term ) {
+                this.value = term;
+                this.focus();
+            }, document.getElementById("query"), state.get('term'));
         }
     };
 
@@ -445,7 +450,9 @@
 
     var handleWindowLoad = function () {
         setMap('state', 'isSearchBoxOpen', true);
-        document.getElementById("query").focus();
+        fastdom.mutate(function () {
+            this.focus();
+        }, document.getElementById("query"));
     };
 
     addEvent(window, "load", handleWindowLoad);
@@ -588,4 +595,4 @@
         return makeRenderString(results, template, scores);
     };
 
-})(this, this.document, _.template, Array.prototype.forEach);
+})(this, this.document, _.template, Array.prototype.forEach.call);
