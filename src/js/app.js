@@ -425,7 +425,7 @@
     var scrollWheeler = function () {
         var state = maps.state;
         if ( state.get('infiniScroll') !== true ||
-            state.get('nowLoading') !== false ||
+            state.get('isLoading') !== false ||
             state.get('moreToLoad') !== true ) {
             return;
         }
