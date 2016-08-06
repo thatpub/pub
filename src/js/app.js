@@ -1,4 +1,4 @@
-(function ( window, document, forEach, undefined ) {
+(function ( window, document, template, forEach, undefined ) {
     "use strict";
     var resetSearch = null;
 
@@ -135,11 +135,12 @@
     var searchReset = function () {
         // Server is only caching the scroll/page position for 1 minute.
         // Sorry bucko.
+        var regHidden = / ?hidden/g;
         swapClass(document.getElementById("more-content"), "hidden", regHidden);
         setMap('state', 'moreToLoad', false);
     };
 
-    var handleTimer = function ( regHidden ) {
+    var handleTimer = function () {
         if ( resetSearch ) {
             clearTimeout(resetSearch);
         }
@@ -149,8 +150,8 @@
     var handleResponse = function ( response, action ) {
         var content = response[ 0 ] || null;
         var meta = response[ 1 ] || null;
-        var regHidden = / ?hidden/g;
         var regFail = / ?failed/g;
+        var regHidden = / ?hidden/g;
 
         if ( (content && content.hits.total === 0) &&
             (meta && meta.hits.total === 0) ) {
@@ -174,10 +175,10 @@
         var expires = new Date(Date.now() + 60000);
         expires = expires.toUTCString();
 
-        handleTimer(regHidden);
+        handleTimer();
 
         if ( content ) {
-            var templates = makeTemplates();
+            var templates = makeTemplates(template);
             var placeContent = content._scroll_id;
             setMap('state', 'placeContent', placeContent);
             document.cookie = "placeContent=" + placeContent + "; expires=" + expires;
@@ -584,4 +585,4 @@
         return makeRenderString(results, template, scores);
     };
 
-})(this, this.document, Array.prototype.forEach);
+})(this, this.document, _.template, Array.prototype.forEach);

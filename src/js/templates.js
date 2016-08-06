@@ -1,5 +1,5 @@
 "use strict";
-var makeTemplates = function () {
+var makeTemplates = function ( template ) {
     var relatedTemplateString = [
         '<li class="result doc<%= gravitas %>" data-score="<%= score %>" id="<%= key %>">',
         '<%= key %>',
@@ -51,7 +51,7 @@ var makeTemplates = function () {
     ];
 
     return {
-        "results": _.template(resultTemplateString.join('')),
-        "related": _.template(relatedTemplateString.join(''))
+        "results": template(resultTemplateString.join('')),
+        "related": template(relatedTemplateString.join(''))
     };
 };
