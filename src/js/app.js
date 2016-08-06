@@ -14,7 +14,9 @@
             "moreToLoad": false,
             "isLoading": false,
             "isDone": false,
-            "isSearchBoxOpen": false
+            "isSearchBoxOpen": false,
+            "placeContent": '',
+            "placeMeta": ''
         })
     };
 
