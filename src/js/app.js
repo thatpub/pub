@@ -65,7 +65,7 @@
     };
 
     var showMessage = function ( message ) {
-        fastdom.mutate(function () {
+        fastdom.mutate(function ( message ) {
             this.innerHTML = message;
         }, document.getElementById("message"), message || '');
     };
