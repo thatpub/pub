@@ -65,6 +65,7 @@
     "grunt-inline": "^0.3.4",
     "grunt-newer": ">=1.1.0",
     "grunt-tinypng": ">=0.5.3",
+    "immutable-devtools": "0.0.7",
     "lodash-cli": "^4.14.1",
     "postcss": "^5.0.21",
     "postcss-cli": "^2.5.2",
