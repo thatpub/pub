@@ -4,7 +4,6 @@
 **/*.bak
 *.fuse*
 node_modules
-src/lib/**/*
 util
 dist/css/*
 .tmp/css/*
