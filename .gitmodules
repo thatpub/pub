@@ -1,0 +1,12 @@
+[submodule "src/lib/normalize.scss"]
+	path = src/lib/normalize.scss
+	url = https://github.com/appleboy/normalize.scss
+[submodule "src/lib/fastdom"]
+	path = src/lib/fastdom
+	url = https://github.com/dhenson02/fastdom
+[submodule "src/lib/immutable-js"]
+	path = src/lib/immutable-js
+	url = https://github.com/facebook/immutable-js
+[submodule "src/lib/fastclick"]
+	path = src/lib/fastclick
+	url = https://github.com/ftlabs/fastclick
