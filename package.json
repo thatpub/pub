@@ -5,7 +5,8 @@
   "main": "db.js",
   "scripts": {
     "clean": "sh clean.sh .tmp dist",
-    "init": "npm install && sh setup-node-sass.sh && sh setup-lodash.sh && npm run dist",
+    "init": "npm install && npm run git-setup && sh setup-node-sass.sh && sh setup-lodash.sh && npm run dist",
+    "git-setup": "git submodule init && git submodule update",
     "server": "npm run db && npm run git-not",
     "db": "sh dbinit.sh",
     "git-not": "screen -dmS git-notify node git-notify.js",
