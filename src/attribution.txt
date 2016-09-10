@@ -1,0 +1,31 @@
+    <!--
+      @ATTRIBUTION
+
+      Credit given where credit is due.  In other words I stole this shit and am very
+      grateful to the author(s) for allowing it.
+     -->
+
+    <!--
+        The loading animation courtesy of Hugo Wiledal
+        Author profile (codepen): http://codepen.io/wiledal/
+            Thanks Hugo.
+            http://codepen.io/wiledal/pen/EcGnI
+    -->
+
+    <!--
+        Snagged this outlier function from a StackOverflow question's answer.
+            Thanks jpau.
+            http://stackoverflow.com/a/20811670/2780033
+    -->
+
+    <!--
+        This is more of a "thanks for reminding me to do this" but nonetheless, credit given.
+            Thanks Walsh.
+            http://davidwalsh.name/add-rules-stylesheets
+    -->
+
+    <!--
+        Handy little find here for getting element position.  Gotta love S.O.
+            Thanks Andy E.
+            http://stackoverflow.com/a/11396681/2780033
+    -->
