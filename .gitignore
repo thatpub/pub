@@ -11,3 +11,4 @@ dist/js/*
 .tmp/js/*
 dist/index.html
 .tmp/*.html
+yarn.lock
